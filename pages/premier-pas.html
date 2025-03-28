@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premiers pas avec Dolibarr - ADT Dolibarr</title>
+    <meta name="description" content="Guide complet pour débutants sur Dolibarr ERP/CRM: interface, configuration et fonctionnalités essentielles pour bien démarrer.">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .tutorial-section {
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1.5rem;
+        }
+        
+        .tutorial-section:last-child {
+            border-bottom: none;
+        }
+        
+        .tutorial-section h4 {
+            margin-bottom: 1rem;
+            color: #4a73ab;
+            font-size: 1.3rem;
+        }
+        
+        .tutorial-image {
+            margin: 1.5rem 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .tutorial-image img {
+            width: 100%;
+            display: block;
+        }
+        
+        .tutorial-step {
+            display: flex;
+            margin-bottom: 1.5rem;
+            align-items: flex-start;
+        }
+        
+        .step-number {
+            background-color: #4a73ab;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .step-content h5 {
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-size: 1.1rem;
+        }
+        
+        .note-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .note-box strong {
+            color: #856404;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .quick-tip {
+            background-color: #e8f4f8;
+            border-left: 4px solid #17a2b8;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .quick-tip strong {
+            color: #17a2b8;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .key-term {
+            font-weight: bold;
+            color: #4a73ab;
+        }
+        
+        .module-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .nav-previous, .nav-next {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-previous i, .nav-next i {
+            font-size: 0.8rem;
+        }
+        
+        .nav-previous {
+            margin-right: auto;
+        }
+        
+        .nav-next {
+            margin-left: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <div style="width: 40px; height: 40px; background-color: #4a73ab; border-radius: 8px; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold">D</div>
+                <h1>ADT Dolibarr</h1>
+            </div>
+            <div class="nav-menu">
+                <a href="pre-opportunite.html"><i class="fas fa-bullhorn"></i> Pré-Opportunité</a>
+                <a href="tiers.html"><i class="fas fa-building"></i> Tiers</a>
+                <a href="projets.html"><i class="fas fa-project-diagram"></i> Projets</a>
+                <a href="commerce.html"><i class="fas fa-suitcase"></i> Commerce</a>
+                <a href="facturation.html"><i class="fas fa-file-invoice-dollar"></i> Facturation</a>
+                <a href="banques.html"><i class="fas fa-university"></i> Banques</a>
+                <a href="produits-services.html"><i class="fas fa-cube"></i> Produits | Services</a>
+                <a href="grh.html"><i class="fas fa-user-tie"></i> GRH</a>
+                <a href="documents.html"><i class="fas fa-folder-open"></i> Documents</a>
+                <a href="agenda.html"><i class="fas fa-calendar-alt"></i> Agenda</a>
+            </div>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Rechercher un tutoriel...">
+            </div>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <div class="page-title">
+            <h2>Premiers pas avec Dolibarr</h2>
+            <p>Guide complet pour démarrer avec le logiciel Dolibarr ERP/CRM</p>
+        </div>
+    </div>
+
+    <main class="page-content">
+        <div class="breadcrumbs">
+            <a href="../index.html">Accueil</a> > Premiers pas avec Dolibarr
+        </div>
+        
+        <section class="module-content">
+            <div class="tutorial-section">
+                <h3>Introduction à Dolibarr</h3>
+                <p>Dolibarr est une suite logicielle de gestion d'entreprise open source qui combine des fonctionnalités d'ERP (Enterprise Resource Planning) et de CRM (Customer Relationship Management). Cette solution intégrée vous permet de gérer l'ensemble de vos processus d'affaires, de la gestion des contacts à la facturation, en passant par la gestion des stocks et des projets.</p>
+                
+                <p>Dans ce guide, nous vous accompagnerons dans vos premiers pas avec Dolibarr pour vous aider à prendre en main rapidement cet outil puissant et flexible.</p>
+                
+                <div class="tutorial-image">
+                    <img src="https://via.placeholder.com/800x400" alt="Interface d'accueil de Dolibarr">
+                </div>
+            </div>
+            
+            <div class="tutorial-section">
+                <h4>1. Connexion et découverte de l'interface</h4>
+                
+                <div class="tutorial-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h5>Connexion à Dolibarr</h5>
+                        <p>Pour accéder à Dolibarr, ouvrez votre navigateur et saisissez l'URL fournie par votre administrateur. Sur l'écran de connexion, entrez vos identifiants (nom d'utilisateur et mot de passe) puis cliquez sur "Connexion".</p>
+                    </div>
+                </div>
+                
+                <div class="tutorial-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h5>La page d'accueil</h5>
+                        <p>Une fois connecté, vous accédez à la page d'accueil de Dolibarr. Cette page vous présente un tableau de bord personnalisable avec vos widgets et raccourcis. Par défaut, vous y trouverez:</p>
+                        <ul>
+                            <li>Les dernières activités commerciales</li>
+                            <li>Les actions à réaliser aujourd'hui</li>
+                            <li>Les commandes et factures en cours</li>
+                            <li>Des statistiques sur votre activité</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="tutorial-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h5>Comprendre la barre de navigation</h5>
+                        <p>La barre de navigation horizontale en haut de l'écran vous donne accès aux principaux modules de Dolibarr. Chaque icône représente un module différent:</p>
+                        <ul>
+                            <li><strong>Accueil</strong>: Retour au tableau de bord</li>
+                            <li><strong>Tiers</strong>: Gestion des clients, prospects et fournisseurs</li>
+                            <li><strong>Produits/Services</strong>: Catalogue de produits et services</li>
+                            <li><strong>Commercial</strong>: Propositions commerciales et commandes</li>
+                            <li><strong>Facturation</strong>: Factures clients et fournisseurs</li>
+                            <li><strong>Banques/Caisses</strong>: Comptes bancaires et opérations financières</li>
+                            <li>Et bien d'autres modules selon votre configuration</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="quick-tip">
+                    <strong>Astuce !</strong> Survolez chaque icône de la barre de navigation pour afficher son nom. Pour personnaliser les modules visibles, accédez à "Accueil > Configuration > Modules".
+                </div>
+            </div>
+            
+            <div class="tutorial-section">
+                <h4>2. Configuration initiale de votre compte</h4>
+                
+                <div class="tutorial-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h5>Accéder à vos paramètres utilisateur</h5>
+                        <p>Cliquez sur votre nom d'utilisateur en haut à droite, puis sélectionnez "Ma fiche" pour accéder à vos paramètres personnels.</p>
+                    </div>
+                </div>
+                
+                <div class="tutorial-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h5>Personnaliser vos préférences</h5>
+                        <p>Dans vos paramètres, vous pouvez:</p>
+                        <ul>
+                            <li>Changer votre mot de passe</li>
+                            <li>Mettre à jour vos informations personnelles</li>
+                            <li>Choisir votre langue d'interface</li>
+                            <li>Définir votre fuseau horaire</li>
+                            <li>Personnaliser l'apparence (thème, nombre d'éléments par page, etc.)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="tutorial-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h5>Configurer vos notifications</h5>
+                        <p>Dolibarr peut vous envoyer des notifications pour certains événements. Configurez vos préférences de notification dans l'onglet "Notifications" de votre fiche utilisateur.</p>
+                    </div>
+                </div>
+                
+                <div class="note-box">
+                    <strong>Note importante</strong> Veillez à renseigner correctement votre adresse email pour recevoir les notifications du système. Certaines fonctionnalités de Dolibarr, comme l'envoi de documents par email, nécessitent une configuration correcte de votre profil.
+                </div>
+            </div>
+            
+            <div class="tutorial-section">
+                <h4>3. Prise en main des fonctionnalités essentielles</h4>
+                
+                <div class="tutorial-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h5>Création d'un tiers (client ou fournisseur)</h5>
+                        <p>Les <span class="key-term">tiers</span> sont au cœur de Dolibarr. Pour créer un nouveau tiers:</p>
+                        <ol>
+                            <li>Cliquez sur l'icône "Tiers" dans la barre de navigation</li>
+                            <li>Sélectionnez "Nouveau tiers" dans le menu</li>
+                            <li>Choisissez le type de tiers (client, prospect, fournisseur, etc.)</li>
+                            <li>Remplissez les informations requises (nom, adresse, contacts, etc.)</li>
+                            <li>Enregistrez le tiers</li>
+                        </ol>
+                        <p>Une fois créé, vous pouvez accéder à la fiche complète du tiers et y associer des contacts, documents et actions commerciales.</p>
+                    </div>
+                </div>
+                
+                <div class="tutorial-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h5>Ajout d'un produit ou service</h5>
+                        <p>Pour ajouter un élément à votre catalogue:</p>
+                        <ol>
+                            <li>Cliquez sur l'icône "Produits/Services"</li>
+                            <li>Choisissez "Nouveau produit" ou "Nouveau service"</li>
+                            <li>Renseignez les informations (référence, désignation, prix, etc.)</li>
+                            <li>Définissez les attributs spécifiques (stock, TVA, comptabilité, etc.)</li>
+                            <li>Enregistrez le produit ou service</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="tutorial-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h5>Création d'une proposition commerciale</h5>
+                        <p>Pour créer une proposition commerciale (devis):</p>
+                        <ol>
+                            <li>Accédez au module "Commercial"</li>
+                            <li>Sélectionnez "Nouvelle proposition"</li>
+                            <li>Choisissez le client concerné</li>
+                            <li>Renseignez les conditions (validité, délai de livraison, etc.)</li>
+                            <li>Ajoutez les produits/services avec leurs quantités et prix</li>
+                            <li>Validez la proposition</li>
+                        </ol>
+                        <p>Vous pourrez ensuite suivre l'état de la proposition (brouillon, validée, signée, etc.) et la convertir en commande si elle est acceptée.</p>
+                    </div>
+                </div>
+                
+                <div class="quick-tip">
+                    <strong>Astuce !</strong> Utilisez la fonction de duplication pour créer rapidement de nouvelles propositions basées sur des propositions existantes. Cela vous fera gagner un temps précieux pour les clients récurrents.
+                </div>
+            </div>
+            
+            <div class="tutorial-section">
+                <h4>4. Navigation et recherche dans Dolibarr</h4>
+                
+                <div class="tutorial-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h5>Utilisation de la barre de recherche</h5>
+                        <p>La barre de recherche globale située en haut à droite vous permet de rechercher rapidement des éléments dans Dolibarr. Vous pouvez y chercher:</p>
+                        <ul>
+                            <li>Des clients ou fournisseurs par nom</li>
+                            <li>Des produits par référence ou désignation</li>
+                            <li>Des factures par numéro</li>
+                            <li>Des commandes par référence</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="tutorial-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h5>Filtres et tri des listes</h5>
+                        <p>Dans chaque module, les listes d'éléments (clients, produits, factures, etc.) peuvent être:</p>
+                        <ul>
+                            <li><strong>Filtrées</strong>: Utilisez les champs de filtrage en haut des colonnes</li>
+                            <li><strong>Triées</strong>: Cliquez sur les en-têtes de colonnes pour trier par ordre croissant ou décroissant</li>
+                            <li><strong>Personnalisées</strong>: Utilisez l'icône d'engrenage pour choisir les colonnes à afficher</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="tutorial-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h5>Navigation entre modules liés</h5>
+                        <p>Dolibarr offre une navigation fluide entre les éléments liés. Par exemple, depuis la fiche d'un client, vous pouvez accéder directement à:</p>
+                        <ul>
+                            <li>Ses contacts</li>
+                            <li>Ses propositions commerciales</li>
+                            <li>Ses commandes</li>
+                            <li>Ses factures</li>
+                            <li>Ses contrats</li>
+                            <li>Etc.</li>
+                        </ul>
+                        <p>Utilisez les onglets présents sur chaque fiche pour naviguer entre ces différentes informations.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tutorial-section">
+                <h4>5. Outils collaboratifs et suivi d'activité</h4>
+                
+                <div class="tutorial-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h5>Utilisation de l'agenda</h5>
+                        <p>L'agenda de Dolibarr vous permet de:</p>
+                        <ul>
+                            <li>Planifier des événements et rendez-vous</li>
+                            <li>Définir des tâches à réaliser</li>
+                            <li>Suivre les échéances importantes (propositions, factures, etc.)</li>
+                            <li>Partager votre calendrier avec d'autres utilisateurs</li>
+                        </ul>
+                        <p>Accédez à l'agenda via l'icône correspondante dans la barre de navigation.</p>
+                    </div>
+                </div>
+                
+                <div class="tutorial-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h5>Création d'actions commerciales</h5>
+                        <p>Pour suivre vos interactions avec un client ou prospect:</p>
+                        <ol>
+                            <li>Accédez à la fiche du tiers concerné</li>
+                            <li>Cliquez sur l'onglet "Actions commerciales"</li>
+                            <li>Sélectionnez "Ajouter un événement"</li>
+                            <li>Choisissez le type d'action (appel, email, rendez-vous, etc.)</li>
+                            <li>Renseignez les détails et la date/heure</li>
+                            <li>Enregistrez l'action</li>
+                        </ol>
+                        <p>Ces actions sont automatiquement ajoutées à votre agenda et peuvent être assignées à différents utilisateurs.</p>
+                    </div>
+                </div>
+                
+                <div class="tutorial-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h5>Gestion des documents</h5>
+                        <p>Dolibarr permet d'associer des documents à pratiquement tous les éléments (tiers, produits, propositions, etc.):</p>
+                        <ol>
+                            <li>Accédez à la fiche de l'élément concerné</li>
+                            <li>Cliquez sur l'onglet "Documents"</li>
+                            <li>Utilisez le bouton "Ajouter un fichier" pour téléverser des documents</li>
+                        </ol>
+                        <p>Vous pouvez également générer automatiquement des documents PDF (devis, factures, bons de livraison, etc.) à partir des modèles configurés.</p>
+                    </div>
+                </div>
+                
+                <div class="note-box">
+                    <strong>Note importante</strong> Pour une collaboration efficace, assurez-vous de bien documenter vos actions et d'attacher les fichiers pertinents aux fiches correspondantes. Cela permettra à tous les utilisateurs ayant accès à ces fiches de disposer des informations nécessaires.
+                </div>
+            </div>
+            
+            <div class="module-navigation">
+                <a href="../index.html" class="nav-previous"><i class="fas fa-arrow-left"></i> Retour à l'accueil</a>
+                <a href="tiers.html" class="nav-next">Gestion des tiers <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </section>
+    </main>
+
+    <section class="cta">
+        <div class="cta-content">
+            <h3>Prêt à approfondir vos connaissances?</h3>
+            <p>Inscrivez-vous à notre plateforme pour accéder à tous nos tutoriels et progresser rapidement.</p>
+            <a href="https://dolibarrvierge19.e-learning-neo-sphere.fr/index.php" class="btn">S'inscrire maintenant</a>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>ADT Dolibarr</h4>
+                <p>Votre ressource complète pour apprendre et maîtriser le logiciel Dolibarr ERP/CRM.</p>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Navigation</h4>
+                <ul class="footer-links">
+                    <li><a href="../index.html">Accueil</a></li>
+                    <li><a href="pre-opportunite.html">Pré-Opportunité</a></li>
+                    <li><a href="tiers.html">Tiers</a></li>
+                    <li><a href="projets.html">Projets</a></li>
+                    <li><a href="commerce.html">Commerce</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Modules</h4>
+                <ul class="footer-links">
+                    <li><a href="facturation.html">Facturation</a></li>
+                    <li><a href="banques.html">Banques</a></li>
+                    <li><a href="produits-services.html">Produits | Services</a></li>
+                    <li><a href="grh.html">GRH</a></li>
+                    <li><a href="documents.html">Documents</a></li>
+                    <li><a href="agenda.html">Agenda</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Ressources</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Téléchargements</a></li>
+                    <li><a href="#">Forum d'entraide</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Contact</h4>
+                <ul class="footer-links">
+                    <li><a href="mailto:contact@adtdolibarr.com">Email</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="#">YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 ADT Dolibarr. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

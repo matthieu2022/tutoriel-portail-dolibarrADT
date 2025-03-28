@@ -86,61 +86,61 @@ header {
 .fa-bullhorn:before {
     content: "\f0a1";
     color: #308dc2;
-    font-size: 1 em;
+    font-size: 0.8 em;
 }
 
 .fa-building:before {
     content: "\f234" !important;
     color: #308dc2 !important;
-    font-size: 1 em;
+    font-size: 0.8 em;
 }
 
 .fa-project-diagram:before {
     content: "\f0eb" !important;
     color: #308dc2;
-    font-size: 1 em;
+    font-size: 0.8 em;
 }
 
 .fa-suitcase:before {
     content: "\f2b5" !important;
     color: #308dc2;
-    font-size: 1 em;
+    font-size: 0.8 em;
 }
 
 .fa-file-invoice-dollar:before {
     content: "\f571";
     color: #308dc2;
-    font-size: 1 em;
+    font-size: 0.8 em;
 }
 
 .fa-university:before {
     content: "\f153" !important;
     color: #308dc2;
-    font-size: 1 em;
+    font-size: 0.8 em;
 }
 
 .fa-cube:before {
     content: "\f290" !important;
     color: #308dc2;
-    font-size: 1 em;
+    font-size: 0.8 em;
 }
 
 .fa-user-tie:before {
     content: "\f0c0" !important;
     color: #308dc2;
-    font-size: 1 em;
+    font-size: 0.8 em;
 }
 
 .fa-folder-open:before {
     content: "\f07c";
     color: #308dc2;
-    font-size: 1 em;
+    font-size: 0.8 em;
 }
 
 .fa-calendar-alt:before {
     content: "\f073";
     color: #eb6d21;
-    font-size: 1 em;
+    font-size: 0.8 em;
 }
 
 .search-box {

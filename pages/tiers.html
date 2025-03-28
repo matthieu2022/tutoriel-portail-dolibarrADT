@@ -3,30 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pré-Opportunité - ADT Dolibarr</title>
+    <title>Gestion des Tiers - ADT Dolibarr</title>
+    <meta name="description" content="Guide complet sur la gestion des tiers (clients, prospects, fournisseurs) et contacts dans Dolibarr ERP/CRM.">
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <header>
         <nav class="navbar">
-                    <div class="logo">
-            <a href="../index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
-                <div style="width: 40px; height: 40px; background-color: #4a73ab; border-radius: 8px; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold">D</div>
-                <h1>ADT Dolibarr</h1>
-            </a>
-        </div>
+            <div class="logo">
+                <a href="../index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                    <div style="width: 40px; height: 40px; background-color: #4a73ab; border-radius: 8px; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold">D</div>
+                    <h1>ADT Dolibarr</h1>
+                </a>
+            </div>
             <div class="nav-menu">
-                <a href="pages/pre-opportunite.html"><i class="fas fa-bullhorn"></i> Pré-Opportunité</a>
-                <a href="pages/tiers.html"><i class="fas fa-building"></i> Tiers</a>
-                <a href="pages/projets.html"><i class="fas fa-project-diagram"></i> Projets</a>
-                <a href="pages/commerce.html"><i class="fas fa-suitcase"></i> Commerce</a>
-                <a href="pages/facturation.html"><i class="fas fa-file-invoice-dollar"></i> Facturation</a>
-                <a href="pages/banques.html"><i class="fas fa-university"></i> Banques</a>
-                <a href="pages/produits-services.html"><i class="fas fa-cube"></i> Services</a>
-                <a href="pages/grh.html"><i class="fas fa-user-tie"></i> GRH</a>
-                <a href="pages/documents.html"><i class="fas fa-folder-open"></i> Documents</a>
-                <a href="pages/agenda.html"><i class="fas fa-calendar-alt"></i> Agenda</a>
+                <a href="pre-opportunite.html"><i class="fas fa-bullhorn"></i> Pré-Opportunité</a>
+                <a href="tiers.html"><i class="fas fa-building"></i> Tiers</a>
+                <a href="projets.html"><i class="fas fa-project-diagram"></i> Projets</a>
+                <a href="commerce.html"><i class="fas fa-suitcase"></i> Commerce</a>
+                <a href="facturation.html"><i class="fas fa-file-invoice-dollar"></i> Facturation</a>
+                <a href="banques.html"><i class="fas fa-university"></i> Banques</a>
+                <a href="produits-services.html"><i class="fas fa-cube"></i> Services</a>
+                <a href="grh.html"><i class="fas fa-user-tie"></i> GRH</a>
+                <a href="documents.html"><i class="fas fa-folder-open"></i> Documents</a>
+                <a href="agenda.html"><i class="fas fa-calendar-alt"></i> Agenda</a>
             </div>
             <div class="search-box">
                 <i class="fas fa-search"></i>
@@ -40,53 +41,286 @@
 
     <div class="page-header">
         <div class="page-title">
-            <h2>Pré-Opportunité</h2>
-            <p>Guides pour gérer vos opportunités commerciales dans Dolibarr</p>
+            <h2>Gestion des Tiers</h2>
+            <p>Maîtrisez la gestion des clients, prospects et fournisseurs dans Dolibarr</p>
         </div>
     </div>
 
     <main class="page-content">
         <div class="breadcrumbs">
-            <a href="../index.html">Accueil</a> > Pré-Opportunité
+            <a href="../index.html">Accueil</a> > Tiers
         </div>
         
         <section class="module-content">
-            <h3>Comprendre le module Pré-Opportunité</h3>
-            <p>Le module Pré-Opportunité dans Dolibarr vous permet de suivre et de gérer les premières étapes de votre processus commercial, avant même que le prospect ne devienne une opportunité qualifiée.</p>
+            <h3>Introduction au module Tiers</h3>
+            <p>Le module Tiers est le cœur de Dolibarr. Il vous permet de gérer l'ensemble de vos relations d'affaires en centralisant les informations sur vos clients, prospects et fournisseurs. Une gestion efficace de vos tiers vous permettra d'optimiser votre relation client et de faciliter votre gestion commerciale.</p>
             
-            <div class="tutorial-section">
-                <h4>Configuration initiale</h4>
-                <p>Découvrez comment configurer le module Pré-Opportunité pour l'adapter à votre cycle de vente.</p>
-                
-                <!-- Tutoriel à compléter ici -->
+            <div class="tutorial-image">
+                <img src="../img/tiers-dashboard.jpg" alt="Interface du module Tiers dans Dolibarr">
+                <p class="image-caption">L'interface principale du module Tiers dans Dolibarr</p>
+            </div>
+
+            <div class="info-box">
+                <h4>Types de tiers dans Dolibarr</h4>
+                <ul>
+                    <li><strong>Client</strong> : Personne ou organisation qui achète vos produits ou services</li>
+                    <li><strong>Prospect</strong> : Client potentiel qui pourrait devenir un client à l'avenir</li>
+                    <li><strong>Fournisseur</strong> : Entreprise qui vous approvisionne en produits ou services</li>
+                </ul>
+                <p>Un même tiers peut avoir plusieurs statuts simultanément (par exemple, être à la fois client et fournisseur).</p>
             </div>
             
             <div class="tutorial-section">
-                <h4>Création d'une pré-opportunité</h4>
-                <p>Apprenez à créer et qualifier une pré-opportunité dans Dolibarr.</p>
+                <h4>1. Accéder au module Tiers</h4>
+                <p>Pour gérer vos tiers dans Dolibarr, il suffit de cliquer sur l'onglet "Tiers" dans le menu principal. L'interface se divise en deux parties :</p>
+                <ul>
+                    <li>Le menu latéral à gauche pour accéder aux différentes fonctionnalités</li>
+                    <li>L'espace de travail principal à droite pour visualiser et modifier les données</li>
+                </ul>
                 
-                <!-- Tutoriel à compléter ici -->
+                <div class="tutorial-image">
+                    <img src="../img/tiers-menu.jpg" alt="Menu de navigation du module Tiers">
+                    <p class="image-caption">Le menu latéral du module Tiers</p>
+                </div>
             </div>
             
             <div class="tutorial-section">
-                <h4>Suivi et qualification</h4>
-                <p>Comment suivre l'évolution de vos pré-opportunités et les qualifier efficacement.</p>
+                <h4>2. Création d'un nouveau tiers</h4>
                 
-                <!-- Tutoriel à compléter ici -->
+                <div class="tutorial-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h5>Choisir le type de tiers à créer</h5>
+                        <p>Dans le menu latéral, vous avez deux options :</p>
+                        <ul>
+                            <li>Cliquer sur "Nouveau tiers" puis sélectionner le type (client, prospect, fournisseur)</li>
+                            <li>Cliquer directement sur "Nouveau client", "Nouveau prospect" ou "Nouveau fournisseur"</li>
+                        </ul>
+                        <div class="tutorial-image">
+                            <img src="../img/tiers-creation-menu.jpg" alt="Menu de création d'un tiers">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tutorial-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h5>Remplir le formulaire de création</h5>
+                        <p>Complétez les informations demandées dans le formulaire :</p>
+                        <ul>
+                            <li><strong>Nom/Raison sociale</strong> : Nom commercial ou raison sociale du tiers</li>
+                            <li><strong>Statut</strong> : Client, prospect, fournisseur (plusieurs choix possibles)</li>
+                            <li><strong>Adresse</strong> : Coordonnées postales complètes</li>
+                            <li><strong>Coordonnées</strong> : Téléphone, email, site web</li>
+                            <li><strong>Informations commerciales</strong> : Conditions de paiement, remises, etc.</li>
+                        </ul>
+                        <div class="tutorial-image">
+                            <img src="../img/tiers-nouveau-form.jpg" alt="Formulaire de création d'un tiers">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tutorial-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h5>Valider la création</h5>
+                        <p>Une fois tous les champs nécessaires remplis, cliquez sur le bouton "Créer tiers" en bas du formulaire.</p>
+                        <div class="quick-tip">
+                            <strong>Astuce !</strong> Renseignez au minimum le nom/raison sociale, l'adresse et un moyen de contact (téléphone ou email) pour faciliter les interactions futures.
+                        </div>
+                    </div>
+                </div>
             </div>
             
             <div class="tutorial-section">
-                <h4>Conversion en opportunité</h4>
-                <p>Le processus pour convertir une pré-opportunité qualifiée en opportunité commerciale.</p>
+                <h4>3. Consultation et modification d'un tiers</h4>
                 
-                <!-- Tutoriel à compléter ici -->
+                <div class="tutorial-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h5>Accéder à la liste des tiers</h5>
+                        <p>Dans le menu latéral, cliquez sur "Listado" (Liste) sous la catégorie qui vous intéresse (clients, prospects, fournisseurs).</p>
+                        <div class="tutorial-image">
+                            <img src="../img/tiers-liste.jpg" alt="Liste des tiers dans Dolibarr">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tutorial-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h5>Consulter la fiche d'un tiers</h5>
+                        <p>Cliquez sur le nom du tiers pour accéder à sa fiche complète. La fiche s'ouvre avec plusieurs onglets :</p>
+                        <ul>
+                            <li><strong>Fiche</strong> : Informations générales du tiers</li>
+                            <li><strong>Client</strong> : Données commerciales spécifiques client</li>
+                            <li><strong>Agenda</strong> : Actions planifiées avec ce tiers</li>
+                            <li><strong>Documents</strong> : Fichiers associés à ce tiers</li>
+                            <li>Et d'autres onglets selon votre configuration</li>
+                        </ul>
+                        <div class="tutorial-image">
+                            <img src="../img/tiers-fiche.jpg" alt="Fiche d'un tiers dans Dolibarr">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tutorial-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h5>Modifier les informations d'un tiers</h5>
+                        <p>Dans l'onglet "Fiche", cliquez sur le bouton "Modifier" pour éditer les informations du tiers. Après avoir effectué vos modifications, cliquez sur "Enregistrer" pour sauvegarder les changements.</p>
+                        <div class="tutorial-image">
+                            <img src="../img/tiers-modification.jpg" alt="Modification d'un tiers">
+                        </div>
+                    </div>
+                </div>
             </div>
             
             <div class="tutorial-section">
-                <h4>Rapports et analyses</h4>
-                <p>Comment générer des rapports pour analyser vos pré-opportunités et optimiser votre prospection.</p>
+                <h4>4. Suppression d'un tiers</h4>
+                <p>Pour supprimer un tiers, accédez à sa fiche comme expliqué précédemment, puis cliquez sur le bouton "Éliminer" ou "Supprimer".</p>
                 
-                <!-- Tutoriel à compléter ici -->
+                <div class="warning-box">
+                    <strong>Attention !</strong> Vous ne pourrez pas supprimer un tiers s'il est associé à d'autres éléments dans Dolibarr (commandes, factures, etc.). Il faudra d'abord supprimer ces éléments liés ou désactiver le tiers plutôt que de le supprimer complètement.
+                </div>
+            </div>
+            
+            <div class="tutorial-section">
+                <h4>5. Gestion des contacts</h4>
+                <p>Les contacts représentent les personnes physiques associées à vos tiers. Ils sont essentiels pour maintenir une communication efficace avec vos partenaires commerciaux.</p>
+                
+                <div class="tutorial-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h5>Accéder à la gestion des contacts</h5>
+                        <p>Dans le menu latéral du module Tiers, cliquez sur "Contacts" pour accéder aux options de gestion des contacts.</p>
+                        <div class="tutorial-image">
+                            <img src="../img/contacts-menu.jpg" alt="Menu des contacts dans Dolibarr">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tutorial-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h5>Créer un nouveau contact</h5>
+                        <p>Cliquez sur "Nouveau contact" et remplissez le formulaire avec les informations de la personne :</p>
+                        <ul>
+                            <li>Nom et prénom</li>
+                            <li>Tiers associé (optionnel, car un contact peut exister sans être lié à un tiers)</li>
+                            <li>Fonction/poste</li>
+                            <li>Coordonnées (téléphone, email, etc.)</li>
+                        </ul>
+                        <p>Cliquez sur "Ajouter" pour créer le contact.</p>
+                        <div class="tutorial-image">
+                            <img src="../img/contacts-creation.jpg" alt="Création d'un contact dans Dolibarr">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tutorial-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h5>Gérer les contacts d'un tiers spécifique</h5>
+                        <p>Vous pouvez également gérer les contacts directement depuis la fiche d'un tiers :</p>
+                        <ol>
+                            <li>Ouvrez la fiche du tiers concerné</li>
+                            <li>Accédez à l'onglet "Contacts/Adresses"</li>
+                            <li>Utilisez le bouton "Ajouter contact" pour associer un contact existant ou en créer un nouveau</li>
+                        </ol>
+                        <div class="tutorial-image">
+                            <img src="../img/contacts-tiers.jpg" alt="Contacts associés à un tiers">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tutorial-section">
+                <h4>6. Recherche de tiers et contacts</h4>
+                
+                <div class="tutorial-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h5>Utiliser la recherche simple</h5>
+                        <p>Dans les listes de tiers ou de contacts, utilisez la barre de recherche en haut pour filtrer par nom, référence, ville, etc.</p>
+                        <div class="tutorial-image">
+                            <img src="../img/tiers-recherche.jpg" alt="Recherche de tiers dans Dolibarr">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tutorial-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h5>Filtrer par critères spécifiques</h5>
+                        <p>Dolibarr permet de filtrer les tiers selon différents critères :</p>
+                        <ul>
+                            <li>Commercial assigné</li>
+                            <li>Pays ou région</li>
+                            <li>Statut (prospect, client, fournisseur)</li>
+                            <li>Date de création</li>
+                        </ul>
+                        <div class="quick-tip">
+                            <strong>Astuce !</strong> Utilisez les en-têtes des colonnes pour trier les résultats par ordre croissant ou décroissant selon ce critère.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tutorial-section">
+                <h4>7. Fonctionnalités avancées</h4>
+                
+                <div class="tutorial-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h5>Catégorisation des tiers</h5>
+                        <p>Dolibarr permet de classer vos tiers par catégories pour mieux les organiser :</p>
+                        <ol>
+                            <li>Accédez à la fiche du tiers</li>
+                            <li>Utilisez l'onglet "Catégories"</li>
+                            <li>Sélectionnez les catégories appropriées</li>
+                        </ol>
+                        <div class="tutorial-image">
+                            <img src="../img/tiers-categories.jpg" alt="Catégorisation des tiers">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tutorial-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h5>Importation et exportation de tiers</h5>
+                        <p>Pour gérer des listes importantes de tiers :</p>
+                        <ul>
+                            <li><strong>Exportation</strong> : Dans la liste des tiers, utilisez l'option "Exporter" pour générer un fichier CSV</li>
+                            <li><strong>Importation</strong> : Utilisez l'outil d'importation pour intégrer des tiers depuis un fichier CSV</li>
+                        </ul>
+                        <div class="tutorial-image">
+                            <img src="../img/tiers-import-export.jpg" alt="Importation/exportation de tiers">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tutorial-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h5>Actions commerciales</h5>
+                        <p>Suivez votre relation avec chaque tiers en enregistrant les interactions :</p>
+                        <ol>
+                            <li>Depuis la fiche d'un tiers, accédez à l'onglet "Agenda"</li>
+                            <li>Utilisez "Ajouter un événement" pour enregistrer appels, réunions, emails, etc.</li>
+                            <li>Consultez l'historique des interactions pour mieux suivre la relation</li>
+                        </ol>
+                        <div class="tutorial-image">
+                            <img src="../img/tiers-actions.jpg" alt="Actions commerciales avec un tiers">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="module-navigation">
+                <a href="pre-opportunite.html" class="nav-previous"><i class="fas fa-arrow-left"></i> Pré-Opportunité</a>
+                <a href="projets.html" class="nav-next">Projets <i class="fas fa-arrow-right"></i></a>
             </div>
         </section>
     </main>

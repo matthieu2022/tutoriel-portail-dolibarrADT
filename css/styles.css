@@ -692,3 +692,122 @@ footer {
 .nav-item.dropdown:hover .dropdown-menu {
     animation: fadeInUp 0.3s ease forwards;
 }
+
+.tutorial-section {
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1.5rem;
+}
+
+.tutorial-section:last-child {
+    border-bottom: none;
+}
+
+.tutorial-section h4 {
+    margin-bottom: 1rem;
+    color: #4a73ab;
+    font-size: 1.3rem;
+}
+
+.tutorial-image {
+    margin: 1.5rem 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tutorial-image img {
+    width: 100%;
+    display: block;
+}
+
+.tutorial-step {
+    display: flex;
+    margin-bottom: 1.5rem;
+    align-items: flex-start;
+}
+
+.step-number {
+    background-color: #4a73ab;
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1rem;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+}
+
+.step-content {
+    flex: 1;
+}
+
+.step-content h5 {
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.note-box {
+    background-color: #f8f9fa;
+    border-left: 4px solid #ffc107;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    border-radius: 0 4px 4px 0;
+}
+
+.note-box strong {
+    color: #856404;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.quick-tip {
+    background-color: #e8f4f8;
+    border-left: 4px solid #17a2b8;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    border-radius: 0 4px 4px 0;
+}
+
+.quick-tip strong {
+    color: #17a2b8;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.key-term {
+    font-weight: bold;
+    color: #4a73ab;
+}
+
+.module-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+}
+
+.nav-previous,
+.nav-next {
+    display: flex;
+    align-items: center;
+}
+
+.nav-previous i,
+.nav-next i {
+    font-size: 0.8rem;
+}
+
+.nav-previous {
+    margin-right: auto;
+}
+
+.nav-next {
+    margin-left: auto;
+}

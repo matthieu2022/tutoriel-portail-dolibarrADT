@@ -811,3 +811,90 @@ footer {
 .nav-next {
     margin-left: auto;
 }
+
+.step-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.step-card {
+    flex: 1;
+    min-width: 250px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.step-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.step-card-image {
+    height: 160px;
+    overflow: hidden;
+}
+
+.step-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.step-card:hover .step-card-image img {
+    transform: scale(1.05);
+}
+
+.step-card-content {
+    padding: 1.25rem;
+}
+
+.step-card-content h5 {
+    color: #4a73ab;
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+}
+
+.step-card-content p {
+    color: #555;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.step-card-link {
+    display: inline-flex;
+    align-items: center;
+    color: #4a73ab;
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.step-card-link i {
+    margin-right: 0.4rem;
+    transition: transform 0.3s ease;
+}
+
+.step-card-link:hover {
+    color: #2c4b7c;
+}
+
+.step-card-link:hover i {
+    transform: translateX(3px);
+}
+
+@media (max-width: 768px) {
+    .step-cards {
+        flex-direction: column;
+    }
+
+    .step-card {
+        width: 100%;
+    }
+}

@@ -510,23 +510,30 @@ footer {
     }
 }
 
+/* HEADER CSS sous navigation*/
+
 .page-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #e9ecef;
+    padding: 1.25rem;
+    background-color: #ffffff;
+    border-bottom: 1px solid #eaeaea;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 
 .page-title h2 {
     margin: 0;
-    color: #343a40;
+    color: #1a1a1a;
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
 }
 
 .page-title p {
     margin: 0.5rem 0 0 0;
-    color: #6c757d;
+    color: #666666;
+    font-size: 0.95rem;
 }
 
 .main-nav {
@@ -543,49 +550,145 @@ footer {
 
 .nav-item {
     position: relative;
-    margin-right: 1.5rem;
+    margin-right: 2.25rem;
 }
 
 .nav-link {
-    display: block;
-    padding: 0.5rem 0;
-    color: #495057;
+    display: flex;
+    align-items: center;
+    padding: 0.7rem 0.3rem;
+    color: #333333;
     text-decoration: none;
     font-weight: 500;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+/* Effet de soulignement au survol */
+.nav-link:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #3b82f6;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover:before {
+    width: 100%;
+}
+
+/* Flèche pour les menus déroulants */
+.dropdown .nav-link:after {
+    content: "";
+    margin-left: 0.5rem;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #666;
+    transition: transform 0.3s ease;
+}
+
+.nav-item:last-child .nav-link:after {
+    display: none;
+}
+
+.nav-item.dropdown:hover .nav-link:after {
+    transform: rotate(180deg);
 }
 
 .nav-link:hover {
-    color: #0d6efd;
+    color: #3b82f6;
 }
 
 .dropdown-menu {
     position: absolute;
-    top: 100%;
-    left: 0;
+    top: calc(100% + 0.75rem);
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
     z-index: 1000;
     display: none;
-    min-width: 10rem;
-    padding: 0.5rem 0;
-    margin: 0.125rem 0 0;
+    min-width: 14rem;
+    padding: 0.75rem 0;
+    margin: 0;
     background-color: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    border-radius: 0.25rem;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border-radius: 0.6rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
     list-style: none;
+    opacity: 0;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+}
+
+.dropdown-menu:before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    margin-left: -6px;
+    width: 12px;
+    height: 12px;
+    background-color: #fff;
+    transform: rotate(45deg);
+    box-shadow: -1px -1px 3px rgba(0, 0, 0, 0.02);
 }
 
 .dropdown-menu a {
-    display: block;
-    padding: 0.25rem 1.5rem;
-    color: #212529;
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    color: #444444;
     text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.dropdown-menu a:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background-color: #3b82f6;
+    transform: scaleY(0);
+    transition: transform 0.2s ease;
+}
+
+.dropdown-menu a:hover:before {
+    transform: scaleY(1);
 }
 
 .dropdown-menu a:hover {
-    background-color: #f8f9fa;
-    color: #0d6efd;
+    background-color: #f8faff;
+    color: #3b82f6;
+    padding-left: 1.8rem;
 }
 
 .nav-item.dropdown:hover .dropdown-menu {
     display: block;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Animation pour l'affichage du menu */
+@keyframes fadeInUp {
+    from {
+        transform: translateX(-50%) translateY(10px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+    animation: fadeInUp 0.3s ease forwards;
 }

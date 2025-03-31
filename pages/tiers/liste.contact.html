@@ -84,6 +84,21 @@
             color: #4a73ab;
             font-size: 1.2rem;
         }
+
+        /* Style pour les boxes d'avertissement et notes */
+        .warning-box, .note-box {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffb300;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .note-box strong, .warning-box strong {
+            color: #e65100;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
         
         /* Responsive design */
         @media (max-width: 992px) {
@@ -155,6 +170,66 @@
                 justify-content: center;
             }
         }
+
+        /* Style pour le menu de navigation principal */
+        .page-navigation {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-item {
+            position: relative;
+            margin-right: 1rem;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: #4a73ab;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(74, 115, 171, 0.1);
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 180px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 4px;
+            z-index: 100;
+            list-style: none;
+            padding: 0.5rem 0;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f8f9fa;
+        }
+
+        .nav-item:hover .dropdown-menu {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -189,33 +264,33 @@
     </header>
 
     <div class="page-header">
-                <div class="page-title">
-                    <h2>Gestion des Tiers</h2>
-                </div>
-                <div class="page-navigation">
-                    <nav class="main-nav">
-                        <ul class="nav-list">
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link">Clients</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="tiers/new.tiers.html">Créer un nouveau tiers</a></li>
-                                    <li><a href="tiers/liste.tiers.html">Liste</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link">Contact Adresse</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="tiers/newcontact.html">Créer un nouveau contact</a></li>
-                                    <li><a href="tiers/liste.contact.html">Liste</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="echanges.html" class="nav-link">Tous les échanges</a>
-                            </li>
+        <div class="page-title">
+            <h2>Gestion des Tiers</h2>
+        </div>
+        <div class="page-navigation">
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link">Clients</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="tiers/new.tiers.html">Créer un nouveau tiers</a></li>
+                            <li><a href="tiers/liste.tiers.html">Liste</a></li>
                         </ul>
-                    </nav>
-                </div>
-            </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link">Contact Adresse</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="tiers/newcontact.html">Créer un nouveau contact</a></li>
+                            <li><a href="tiers/liste.contact.html">Liste</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="echanges.html" class="nav-link">Tous les échanges</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
 
     <main class="page-content">
         <div class="breadcrumbs">
@@ -227,10 +302,11 @@
             <!-- Colonne de contenu (65%) -->
             <div class="content-column">
                 <h3>Introduction au module Tiers</h3>
-                <p>Le module Tiers est le cœur de Dolibarr. Il vous permet de gérer l'ensemble de vos relations d'affaires en centralisant les informations sur vos clients, prospects et fournisseurs. Une gestion efficace de vos tiers vous permettra d'optimiser votre relation client et de faciliter votre gestion commerciale.</p>
+                <p>Le module Tiers est le cœur de Dolibarr. Il vous permet de gérer l'ensemble de vos relations d'affaires en centralisant les informations sur vos clients,
+                    prospects et fournisseurs. Une gestion efficace de vos tiers vous permettra d'optimiser votre relation client et de faciliter votre gestion commerciale.</p>
                 <br>
                 <div class="info-box">
-                    <h4> RAPPEL : Les diffrents Types de tiers dans Dolibarr</h4>
+                    <h4> RAPPEL : Les différents Types de tiers dans Dolibarr</h4>
                     <ul>
                         <li><strong>Client</strong> : Personne ou organisation qui achète vos produits ou services</li>
                         <li><strong>Prospect</strong> : Client potentiel qui pourrait devenir un client à l'avenir</li>
@@ -238,61 +314,62 @@
                     </ul>
                 </div>
                 <br>
-                <div class="tutorial-section">
-                    <h4>1. Accéder au module Tiers</h4>
-                    <p>Pour gérer vos tiers dans Dolibarr, il suffit de cliquer sur l'onglet "Tiers" dans le menu principal. L'interface se divise en deux parties :</p>
-                    <ul>
-                        <li>Le menu latéral à gauche pour accéder aux différentes fonctionnalités</li>
-                        <li>L'espace de travail principal à droite pour visualiser et modifier les données</li>
-                    </ul>
-                </div>
+
                 
                 <div class="tutorial-section">
-                    <h4>2. Création d'un nouveau tiers</h4>
-                    <div class="tutorial-step">
-                        <div class="step-content">
-                            <h5>Choisir le type de tiers à créer</h5>
-                            <p>Dans le menu latéral, vous avez deux options :</p>
-                            <ul>
-                                <li>Cliquer sur "Nouveau tiers" puis sélectionner le type (client, prospect, fournisseur)</li>
-                                <li>Cliquer directement sur "Nouveau client", "Nouveau prospect" ou "Nouveau fournisseur"</li>
-                            </ul>
-                            <p> Consultez la page dédiée à la <a href="tiers/new.tiers.html"> création d'un nouveau tiers</a></p>
-                        </div>
-                    </div>
+                    <h4>2. Choississez votre tutoriel</h4>
                     
-                    <div class="tutorial-step">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h5>Consultez la liste des tiers créer et afiner vos recherches via les filtres presents</h5>
-                            <ul>
-                                <li><strong>Liste des prospects</strong> : Nom commercial ou raison sociale du tiers</li>
-                                <li><strong>Liste des clients</strong> : Client, prospect, fournisseur (plusieurs choix possibles)</li>
-                                <li><strong>Adresse</strong> : Coordonnées postales complètes</li>
-                            </ul>
+                    <div class="step-cards">
+                        <div class="step-card">
+                            <div class="step-card-image">
+                                <img src="../img/tiers/new-tiers.jpg" alt="Création d'un nouveau tiers">
+                            </div>
+                            <div class="step-card-content">
+                                <h5>Création d'un nouveau tiers</h5>
+                                <p>Dans le menu, sélectionnez le type de tiers que vous souhaitez créer (client, prospect, fournisseur).</p>
+                                <a href="tiers/new.tiers.html" class="step-card-link">
+                                    <i class="fas fa-arrow-right"></i> Créer un nouveau tiers
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="tutorial-step">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h5>Tagger/catégoriser les clients/prospects</h5>
-                            <p>Consultez ou créer les tags/catégories dédiés aux tiers.</p>
-                            <div class="quick-tip">
-                                <strong>Astuce !</strong> Renseignez au maximun les formulaires de creation de tiers pour faciliter les interactions futures.
+                        
+                        <div class="step-card">
+                            <div class="step-card-image">
+                                <img src="../img/tiers/liste-tiers.jpg" alt="Liste des tiers">
+                            </div>
+                            <div class="step-card-content">
+                                <h5>Consulter vos tiers via "liste"</h5>
+                                <p>Accédez à la liste complète des tiers et utilisez les filtres pour affiner vos recherches.</p>
+                                <a href="tiers/liste.tiers.html" class="step-card-link">
+                                    <i class="fas fa-arrow-right"></i> Voir la liste des tiers
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="step-card">
+                            <div class="step-card-image">
+                                <img src="../img/tiers/categories.jpg" alt="Catégorisation des tiers">
+                            </div>
+                            <div class="step-card-content">
+                                <h5>Catégoriser vos tiers</h5>
+                                <p>Organisez vos tiers avec des tags pour une gestion plus efficace de votre base clients.</p>
+                                <a href="tiers/categories.html" class="step-card-link">
+                                    <i class="fas fa-arrow-right"></i> Gérer les catégories
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="tutorial-section">
+                <!-- <div class="tutorial-section">
                     <h4>3. Consultation et modification d'un tiers existant</h4>
                     
                     <div class="tutorial-step">
                         <div class="step-number">1</div>
                         <div class="step-content">
                             <h5>Accéder à la liste des tiers</h5>
-                            <p>Dans le menu latéral gauche, cliquez sur <bold>Liste</bold> sous la catégorie qui vous intéresse (clients, prospects, fournisseurs).</p>
+                            <p>Dans le menu latéral gauche, cliquez sur <strong>Liste</strong> sous la catégorie qui vous intéresse (clients, prospects, fournisseurs).</p>
+                            <p><img src="../img/tiers/contact.png " style="width: 500px;" alt="Menu de liste des tiers"> </p>
                         </div>
                     </div>
                     
@@ -324,7 +401,7 @@
                     <h4>4. Suppression d'un tiers</h4>
                     <p>Pour supprimer un tiers, accédez à sa fiche comme expliqué précédemment, puis cliquez sur le bouton "Éliminer" ou "Supprimer".</p>
                     
-                    <div class="note-box">
+                    <div class="warning-box">
                         <strong>Attention !</strong> Vous ne pourrez pas supprimer un tiers s'il est associé à d'autres éléments dans Dolibarr (commandes, factures, etc.). Il faudra d'abord supprimer ces éléments liés ou désactiver le tiers plutôt que de le supprimer complètement.
                     </div>
                 </div>
@@ -439,7 +516,7 @@
                             </ol>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 
                 <div class="module-navigation">
                     <a href="pre-opportunite.html" class="nav-previous"><i class="fas fa-arrow-left"></i> Pré-Opportunité</a>
@@ -468,36 +545,12 @@
                     <img src="../img/tiers/nav_onglet3.png" alt="Fiche d'un tiers dans Dolibarr">
                     <p class="media-caption">Visualisation des différents suivis entre l'ADT et les tiers ou les contacts</p>
                 </div>
-                
-                
-                <div class="media-box">
-                    <h4>Ressources complémentaires</h4>
-                    <a href="#" class="resource-link">
-                        <i class="fas fa-file-pdf"></i>
-                        <span>Guide complet des tiers (PDF)</span>
-                    </a>
-                    <a href="#" class="resource-link">
-                        <i class="fas fa-file-excel"></i>
-                        <span>Modèle d'import de tiers (CSV)</span>
-                    </a>
-                    <a href="#" class="resource-link">
-                        <i class="fas fa-video"></i>
-                        <span>Webinaire : Optimiser votre base client</span>
-                    </a>
-                    <a href="#" class="resource-link">
-                        <i class="fas fa-book"></i>
-                        <span>Bonnes pratiques pour la gestion des tiers</span>
-                    </a>
-                </div>
             </div>
         </div>
     </main>
 
     <section class="cta">
         <div class="cta-content">
-            <h3>Prêt à maîtriser Dolibarr?</h3>
-            <p>Inscrivez-vous à notre plateforme pour accéder à tous nos tutoriels et progresser rapidement.</p>
-            <a href="https://dolibarrvierge19.e-learning-neo-sphere.fr/index.php" class="btn">S'inscrire maintenant</a>
         </div>
     </section>
 
@@ -514,49 +567,8 @@
                     <li><a href="../index.html">Accueil</a></li>
                     <li><a href="pre-opportunite.html">Pré-Opportunité</a></li>
                     <li><a href="tiers.html">Tiers</a></li>
-                    <li><a href="projets.html">Projets</a></li>
-                    <li><a href="commerce.html">Commerce</a></li>
+                    <li><a href="projets.html">Projets
                 </ul>
             </div>
-            
-            <div class="footer-column">
-                <h4>Modules</h4>
-                <ul class="footer-links">
-                    <li><a href="facturation.html">Facturation</a></li>
-                    <li><a href="banques.html">Banques</a></li>
-                    <li><a href="produits-services.html">Produits | Services</a></li>
-                    <li><a href="grh.html">GRH</a></li>
-                    <li><a href="documents.html">Documents</a></li>
-                    <li><a href="agenda.html">Agenda</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-column">
-                <h4>Ressources</h4>
-                <ul class="footer-links">
-                    <li><a href="#">Téléchargements</a></li>
-                    <li><a href="#">Forum d'entraide</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Blog</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-column">
-                <h4>Contact</h4>
-                <ul class="footer-links">
-                    <li><a href="mailto:contact@adtdolibarr.com">Email</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">LinkedIn</a></li>
-                    <li><a href="#">YouTube</a></li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="copyright">
-            <p>&copy; 2025 ADT Dolibarr. Tous droits réservés.</p>
         </div>
     </footer>
-
-    <script src="../js/main.js"></script>
-</body>
-</html>

@@ -265,7 +265,7 @@ body{
 
 /** Header ********************************************************************/
 #header {
-	display:grid;
+	display:none;/*display: grid;*/
 	align-items:center;
 	grid-template-areas:". logo title menu .";
 	grid-template-columns:auto auto 1fr auto auto;
@@ -429,7 +429,7 @@ a.btnAbout:hover{
 	bottom: 0;
 	padding:0 15px;
 	height:30px;
-    display: flex;
+    display:none;/*display: flex;*/
     justify-content: space-between;
     align-items: center;
 }

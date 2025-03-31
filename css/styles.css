@@ -898,3 +898,80 @@ footer {
         width: 100%;
     }
 }
+
+/* Style pour le menu de navigation principal */
+.page-navigation {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 0.5rem;
+    margin-top: 1rem;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-item {
+    position: relative;
+    margin-right: 1rem;
+}
+
+.nav-link {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #4a73ab;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: rgba(74, 115, 171, 0.1);
+}
+
+/* Correction pour le menu déroulant */
+.dropdown-menu {
+    /* Caché par défaut */
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    min-width: 180px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    z-index: 100;
+    list-style: none;
+    padding: 0.5rem 0;
+    margin-top: 0.2rem;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #333;
+    text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f8f9fa;
+}
+
+/* Ajout d'un espace pour la transition de la souris */
+.nav-item.dropdown::after {
+    content: '';
+    position: absolute;
+    height: 20px;
+    /* Ajouter un espace invisible pour faciliter le passage de la souris */
+    width: 100%;
+    top: 100%;
+    left: 0;
+}
+
+/* Afficher le menu déroulant au survol */
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}

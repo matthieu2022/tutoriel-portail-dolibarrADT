@@ -673,3 +673,112 @@ footer {
     visibility: hidden;
     transform: translateY(10px);
 }
+
+/* Styles améliorés pour le tooltip au clic */
+.tooltip {
+    position: fixed;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    max-width: 380px;
+    z-index: 1000;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    transform: translateY(0);
+}
+
+.tooltip.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    pointer-events: none;
+}
+
+/* Ajout d'un en-tête pour le tooltip avec bouton de fermeture */
+.tooltip-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.tooltip-title {
+    font-weight: bold;
+    color: #0c2340;
+    font-size: 16px;
+    flex-grow: 1;
+    padding-right: 10px;
+}
+
+.tooltip-close-btn {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 20px;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+}
+
+.tooltip-close-btn:hover {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+/* Style de la description */
+.tooltip-description {
+    margin: 5px 0 12px 0;
+    font-size: 13px;
+    color: #555;
+    line-height: 1.5;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    text-align: justify;
+}
+
+/* Style pour les grilles d'information */
+.tooltip-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    font-size: 13px;
+}
+
+.tooltip-label {
+    font-weight: 600;
+    color: #555;
+}
+
+/* Curseur pour indiquer que les barres sont cliquables */
+.project-bar,
+.milestone {
+    cursor: pointer;
+}
+
+/* Animation de pulsation pour indiquer l'interaction */
+.project-bar:active,
+.milestone:active {
+    animation: pulse 0.3s ease;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.03);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}

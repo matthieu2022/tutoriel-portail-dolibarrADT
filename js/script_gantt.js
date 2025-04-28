@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Historique Dolibarr",
       cssClass: "dolibarr-crm",
       description:
-        "Mise en place d'un troisième Dolibarr, Intégration de modules de suivi commercial, Intégration des premiers tiers entreprises et des contacts. Il avait été décidé par Romuald de scinder la partie CRM de la partie facturation.",
+        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
     },
     {
       id: 2,
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Historique Dolibarr",
       cssClass: "dolibarr-prospect",
       description:
-        "Mise en place d'un deuxieme Dolibarr. L'équipe Admin de l'epoque utilisait Dolibarr à des fins de prospections et de suivis.",
+        "Système de gestion des prospects et des opportunités commerciales. Permet de suivre le cycle de vente complet, de la prospection initiale à la conversion client.",
     },
     {
       id: 3,
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Historique Dolibarr",
       cssClass: "dolibarr-facturation",
       description:
-        "Mise en place d'un premier Dolibarr pour la gestion de la facturation et des paiements. A l'initiative de Romuald, il permettait par saisie manuelle d'etablir les factures OPCO et particulers",
+        "Module de facturation électronique avec gestion des factures, devis, bons de commande et règlements. Intègre un système de relances automatisées pour les paiements en retard.",
     },
     {
       id: 4,
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Historique Dolibarr",
       cssClass: "dolibarr-campus",
       description:
-        "Mise en place d'un quatrième Dolibarr (on n'est plus à un Dolibarr prêt...) dédiée au campus et géré par les 3 directrices et assistantes.",
+        "Adaptation du système Dolibarr pour la gestion des campus et centres de formation, incluant le suivi des étudiants, des cours et la gestion des ressources pédagogiques.",
     },
     {
       id: 5,
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Historique Dolibarr",
       cssClass: "dolibarr-fusionnee",
       description:
-        "Force est de constater qu'il fallait fusionner les 2 principaux dolibarr. Début de la mise dans la boucle de la Cyber-technique dans l'historique de Dolibarr",
+        "Version fusionnée intégrant tous les modules Dolibarr déployés pour ADT. Centralisation et harmonisation des différents systèmes pour une gestion globale.",
     },
     {
       id: 6,
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Historique Projets Eureka",
       cssClass: "creme",
       description:
-        "Mise en place de Crème pour un usage exclusif par les commerciaux - sollicitation de la Cyber-technique pour des ameliorations de type design et ergonomie.",
+        "Projet Crème développé pour le secteur cosmétique, incluant la gestion des formulations, le suivi de production et la traçabilité des ingrédients.",
     },
     {
       id: 7,
@@ -80,11 +80,11 @@ document.addEventListener("DOMContentLoaded", function () {
       startDate: new Date(2024, 4, 22),
       endDate: new Date(2024, 5, 7),
       duration: "17 jours",
-      resources: "Helenne, Romuald, andré, matthieu,Melina, Olivier Moncoudiol",
+      resources: "",
       section: "Historique Projets Eureka",
       cssClass: "ypareo",
       description:
-        "Choix d'Ypareo posssible - serie de visio et de tests pour valider la solution. Solution vite laisser de coté car trop complexe et pas assez d'ergonomie.",
+        "Intégration avec la plateforme Ypareo pour la gestion et le suivi de l'apprentissage et de la formation professionnelle.",
     },
     {
       id: 8,
@@ -96,19 +96,20 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Historique Projets Eureka",
       cssClass: "pepit",
       description:
-        "Choix de se tourner vers Ppit comme solution à adapter à notre OF - serie de visio et retroplanning évalué sur 9 mois avant décision d'arreter la mise en place.",
+        "Projet Pepit dédié aux startups innovantes, incluant des outils de gestion de projets agiles et de suivi d'avancement.",
     },
     // Ajout du prévisionnel
     {
       id: 9,
       name: "Livraison base test définitive",
-      startDate: new Date(2024, 11, 11),
-      endDate: new Date(2025, 3, 25),
+      startDate: new Date(2025, 3, 21), // 21 avril 2025
+      endDate: new Date(2025, 3, 25), // 25 avril 2025
       duration: "5 jours",
       resources: "Équipe technique",
       section: "Planning de déploiement",
       cssClass: "planning-test",
-      description: "hes et des communications avec les clients.",
+      description:
+        "Finalisation et livraison de la base de test complète pour validation. Cette étape marque le début de la phase de tests approfondis.",
     },
     {
       id: 10,
@@ -120,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Planning de déploiement",
       cssClass: "planning-pretest",
       description:
-        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
+        "Vérification préliminaire des fonctionnalités par une équipe restreinte. Identification des problèmes majeurs avant les tests élargis.",
     },
     {
       id: 11,
@@ -132,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Planning de déploiement",
       cssClass: "planning-debug",
       description:
-        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
+        "Première phase de correction des bugs et d'ajustements suite aux retours des pré-tests. Optimisation des performances et de l'interface utilisateur.",
     },
     {
       id: 12,
@@ -144,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Planning de déploiement",
       cssClass: "planning-test-referents",
       description:
-        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
+        "Tests approfondis menés par les référents d'activité du pôle commercial. Validation des processus métier et de l'expérience utilisateur.",
     },
     {
       id: 13,
@@ -156,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Planning de déploiement",
       cssClass: "planning-debug-v1",
       description:
-        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
+        "Corrections finales des bugs et ajustements avant la version de production V1. Finalisation des fonctionnalités et optimisations de performance.",
     },
     {
       id: 14,
@@ -168,7 +169,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Planning de déploiement",
       cssClass: "planning-formation",
       description:
-        "Mise en place d'un portail de tutoriels dédiées aux équipes de l'ADT. Formation des équipes sur les nouvelles fonctionnalités et processus du CRM.",
+        "Sessions de formation pour les utilisateurs finaux organisées en 4 groupes de 6 personnes. Une journée complète par groupe pour maîtriser l'ensemble des fonctionnalités.",
     },
     {
       id: 15,
@@ -180,7 +181,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Planning de déploiement",
       cssClass: "planning-debug-final",
       description:
-        "Retour UX et UI sur la version 1 du CRM. Intégration des corrections et ajustements nécessaires avant le déploiement final.",
+        "Dernières corrections et optimisations suite aux retours des formations. Préparation finale du système pour le déploiement en production.",
     },
     {
       id: 16,
@@ -192,7 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Planning de déploiement",
       cssClass: "planning-deployment",
       description:
-        " Déploiement prévu pour la version 1 du CRM. Ce jalon marque la fin de la phase de test et le début de l'utilisation en production.",
+        "Mise en production officielle de la version V1. Lancement de la solution en environnement de production et début de la phase de support post-déploiement.",
     },
     //rajout ISP + GESTMAX + API + CSS du dolibarr
     {
@@ -205,7 +206,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Developpement & amélioration",
       cssClass: "dev-cybertechnique",
       description:
-        "Renouvellement et retravail sur les formulaires deu site Web de l'ADT, 20 formulaires ont été retravaillé et les données sont centralisées dans le module Pré-opportunité. Mise en place de liaisons webhook pour la centralisation des données.",
+        "Développement de formulaires web interactifs et mise en place des webhooks pour l'intégration en temps réel avec les systèmes externes.",
     },
     {
       id: 18,
@@ -217,7 +218,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Developpement & amélioration",
       cssClass: "dev-cybertechnique",
       description:
-        "Mise en place et developpement interne du module Pré-opportunité. Ce module est destiné à centraliser les informations de plusieurs formulaires et à faciliter la gestion des prospects.",
+        "Création d'un module spécifique pour la gestion des pré-opportunités commerciales, permettant de qualifier les leads avant leur conversion en opportunités.",
     },
     {
       id: 19,
@@ -229,32 +230,31 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Developpement & amélioration",
       cssClass: "dev-cybertechnique",
       description:
-        "Concertation avec Icademie et l'équipe de Jeremy pour faciliter l'intégration dans ISP l'integration des données issues de Dolibarr. Mise en place de l'API pour la gestion des données ? cela à définir.",
+        "Développement du système d'intégration ISP et mise en place des correspondances de champs entre les différentes plateformes pour assurer la cohérence des données.",
     },
     {
       id: 20,
       name: "Liaisons API GESTMAX + maformation.fr + je-change-de-metier.fr",
       startDate: new Date(2025, 4, 14),
-      endDate: new Date(2025, 6, 14),
+      endDate: new Date(2025, 5, 14),
       duration: "1 mois environ",
       resources: "Équipe technique - André",
       section: "Developpement & amélioration",
       cssClass: "dev-cybertechnique",
       description:
-        "Mise en place des liaisons API avec GESTMAX + maformation.fr + je-change-de-metier.Le but etant de centraliser dans le module Pré-opportunité ou dans un module dédié les informations de ces 3 sites.",
+        "Développement des connecteurs API pour l'intégration avec GESTMAX et les plateformes de formation en ligne, permettant la synchronisation automatique des données.",
     },
-
     {
       id: 21,
       name: "developpement interne dolibarr",
       startDate: new Date(2024, 10, 5),
-      endDate: new Date(2025, 7, 30),
+      endDate: new Date(2025, 5, 14),
       duration: "1 mois environ",
       resources: "Équipe technique - André",
       section: "Developpement & amélioration",
       cssClass: "dev-cybertechnique",
       description:
-        "",
+        "Travaux de personnalisation et d'optimisation du cœur de Dolibarr pour répondre aux besoins spécifiques de l'organisation. Développement de modules sur mesure.",
     },
   ];
 
@@ -421,10 +421,8 @@ document.addEventListener("DOMContentLoaded", function () {
           milestoneLabel.textContent = project.name;
           milestone.appendChild(milestoneLabel);
 
-          // Ajouter les gestionnaires d'événements pour l'interaction au survol
-          milestone.addEventListener("mouseenter", showTooltip);
-          milestone.addEventListener("mouseleave", hideTooltip);
-          milestone.addEventListener("touchstart", showTooltip);
+          // Ajouter le gestionnaire d'événement au clic (au lieu du survol)
+          milestone.addEventListener("click", toggleTooltip);
 
           projectRow.appendChild(milestone);
         } else if (projectExtendsFuture && project.startDate < today) {
@@ -450,14 +448,9 @@ document.addEventListener("DOMContentLoaded", function () {
           futureBar.style.width = `${futureBarPosition.width}%`;
           futureBar.dataset.projectId = project.id;
 
-          // Ajouter les gestionnaires d'événements pour l'interaction au survol
-          pastBar.addEventListener("mouseenter", showTooltip);
-          pastBar.addEventListener("mouseleave", hideTooltip);
-          pastBar.addEventListener("touchstart", showTooltip);
-
-          futureBar.addEventListener("mouseenter", showTooltip);
-          futureBar.addEventListener("mouseleave", hideTooltip);
-          futureBar.addEventListener("touchstart", showTooltip);
+          // Ajouter les gestionnaires d'événements au clic (au lieu du survol)
+          pastBar.addEventListener("click", toggleTooltip);
+          futureBar.addEventListener("click", toggleTooltip);
 
           projectRow.appendChild(pastBar);
           projectRow.appendChild(futureBar);
@@ -475,10 +468,8 @@ document.addEventListener("DOMContentLoaded", function () {
           projectBar.style.width = `${width}%`;
           projectBar.dataset.projectId = project.id;
 
-          // Ajouter les gestionnaires d'événements pour l'interaction au survol
-          projectBar.addEventListener("mouseenter", showTooltip);
-          projectBar.addEventListener("mouseleave", hideTooltip);
-          projectBar.addEventListener("touchstart", showTooltip);
+          // Ajouter le gestionnaire d'événement au clic (au lieu du survol)
+          projectBar.addEventListener("click", toggleTooltip);
 
           projectRow.appendChild(projectBar);
         } else {
@@ -495,10 +486,8 @@ document.addEventListener("DOMContentLoaded", function () {
           projectBar.style.width = `${width}%`;
           projectBar.dataset.projectId = project.id;
 
-          // Ajouter les gestionnaires d'événements pour l'interaction au survol
-          projectBar.addEventListener("mouseenter", showTooltip);
-          projectBar.addEventListener("mouseleave", hideTooltip);
-          projectBar.addEventListener("touchstart", showTooltip);
+          // Ajouter le gestionnaire d'événement au clic (au lieu du survol)
+          projectBar.addEventListener("click", toggleTooltip);
 
           projectRow.appendChild(projectBar);
         }
@@ -514,58 +503,86 @@ document.addEventListener("DOMContentLoaded", function () {
   // Gestion du tooltip
   const tooltip = document.getElementById("tooltip");
 
+  // Variable pour suivre le projet actuellement affiché
+  let currentlyDisplayedProjectId = null;
+
+  // Fonction pour afficher/masquer le tooltip au clic
+  function toggleTooltip(event) {
+    const projectId = parseInt(event.currentTarget.dataset.projectId);
+
+    // Si on clique sur le même projet et que le tooltip est déjà visible, on le cache
+    if (
+      currentlyDisplayedProjectId === projectId &&
+      !tooltip.classList.contains("hidden")
+    ) {
+      hideTooltip();
+      return;
+    }
+
+    // Sinon, on affiche le tooltip pour ce projet
+    currentlyDisplayedProjectId = projectId;
+    showTooltip(event);
+
+    // Empêcher la propagation du clic pour éviter que le document.addEventListener ne se déclenche immédiatement
+    event.stopPropagation();
+  }
+
+  // Fonction modifiée pour afficher le tooltip
   function showTooltip(event) {
     const projectId = parseInt(event.currentTarget.dataset.projectId);
     const project = projects.find((p) => p.id === projectId);
 
     if (!project) return;
 
-    // Remplir le contenu du tooltip
+    // Remplir le contenu du tooltip avec un bouton de fermeture
     tooltip.innerHTML = `
-          <div class="tooltip-title">${project.name}</div>
-          ${
-            project.description
-              ? `<div class="tooltip-description">${project.description}</div>`
-              : ""
-          }
-          <div class="tooltip-grid">
-              <div>
-                  <div><span class="tooltip-label">Début:</span> ${formatDate(
-                    project.startDate
-                  )}</div>
-                  <div><span class="tooltip-label">Fin:</span> ${formatDate(
-                    project.endDate
-                  )}</div>
-                  <div><span class="tooltip-label">Durée approximative:</span> ${
-                    project.duration
-                  }</div>
-              </div>
-              <div>
-                  <div><span class="tooltip-label">Ressources humaines:</span> ${
-                    project.resources || "Non spécifiées"
-                  }</div>
-                  <div><span class="tooltip-label">Catégorie:</span> ${
-                    project.section
-                  }</div>
-              </div>
-          </div>
-      `;
+      <div class="tooltip-header">
+        <div class="tooltip-title">${project.name}</div>
+        <button class="tooltip-close-btn">&times;</button>
+      </div>
+      ${
+        project.description
+          ? `<div class="tooltip-description">${project.description}</div>`
+          : ""
+      }
+      <div class="tooltip-grid">
+        <div>
+          <div><span class="tooltip-label">Début:</span> ${formatDate(
+            project.startDate
+          )}</div>
+          <div><span class="tooltip-label">Fin:</span> ${formatDate(
+            project.endDate
+          )}</div>
+          <div><span class="tooltip-label">Durée approximative:</span> ${
+            project.duration
+          }</div>
+        </div>
+        <div>
+          <div><span class="tooltip-label">Ressources humaines:</span> ${
+            project.resources || "Non spécifiées"
+          }</div>
+          <div><span class="tooltip-label">Catégorie:</span> ${
+            project.section
+          }</div>
+        </div>
+      </div>
+    `;
 
-    // Positionner le tooltip - NOUVELLE POSITION
+    // Positionner le tooltip
     const rect = event.currentTarget.getBoundingClientRect();
 
-    // Le rendre visible pour pouvoir calculer ses dimensions
+    // Rendre le tooltip visible pour pouvoir calculer ses dimensions
     tooltip.classList.remove("hidden");
     tooltip.style.opacity = "1";
     tooltip.style.visibility = "visible";
 
-    // Pour les jalons (qui sont plus petits), ajustez la position
+    // Positionner le tooltip en fonction du type d'élément
     if (event.currentTarget.classList.contains("milestone")) {
       tooltip.style.top = `${rect.top + window.scrollY - 5}px`;
     } else {
-      // Position au-dessus des barres de projet normales
+      // Position relative à l'élément cliqué
       tooltip.style.top = `${
-        rect.top + window.scrollY - tooltip.offsetHeight - 5
+        rect.top + window.scrollY - tooltip.offsetHeight - 10
       }px`;
     }
 
@@ -587,15 +604,32 @@ document.addEventListener("DOMContentLoaded", function () {
       tooltip.style.left = "10px";
     }
 
-    // Gérer le clic en dehors pour les appareils tactiles
+    // Vérifier si le tooltip sort en haut de l'écran
+    const topEdge = tooltip.getBoundingClientRect().top;
+    if (topEdge < 0) {
+      // Placer le tooltip sous l'élément si pas assez d'espace au-dessus
+      tooltip.style.top = `${rect.bottom + window.scrollY + 10}px`;
+    }
+
+    // Ajouter un gestionnaire pour le bouton de fermeture
+    const closeButton = tooltip.querySelector(".tooltip-close-btn");
+    if (closeButton) {
+      closeButton.addEventListener("click", hideTooltip);
+    }
+
+    // Ajouter un gestionnaire pour fermer le tooltip quand on clique ailleurs
     document.addEventListener("click", hideTooltipOnClickOutside);
   }
 
+  // Fonction pour masquer le tooltip
   function hideTooltip() {
     tooltip.classList.add("hidden");
+    currentlyDisplayedProjectId = null;
   }
 
+  // Fonction pour fermer le tooltip quand on clique en dehors
   function hideTooltipOnClickOutside(event) {
+    // Vérifier que le clic n'est pas sur le tooltip ou un élément du projet
     if (
       !tooltip.contains(event.target) &&
       !event.target.classList.contains("project-bar") &&

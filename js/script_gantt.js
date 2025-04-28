@@ -88,6 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const minDate = new Date(2021, 0, 1);
   const maxDate = new Date(2027, 11, 31);
   const totalDuration = maxDate - minDate;
+  const today = new Date(); // Date du jour
 
   // Fonction pour formater les dates
   function formatDate(date) {
@@ -136,8 +137,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Fonction pour ajouter le marqueur de la date du jour
   function addTodayMarker(timelineElement) {
-    const today = new Date(); // Date du jour
-
     // Vérifier si la date du jour est dans la plage du diagramme
     if (today >= minDate && today <= maxDate) {
       const position = ((today - minDate) / totalDuration) * 100;
@@ -198,33 +197,88 @@ document.addEventListener("DOMContentLoaded", function () {
       projectsContainer.className = "projects";
 
       sections[sectionName].forEach((project) => {
-        const { start, width } = calculatePosition(
-          project.startDate,
-          project.endDate
-        );
-
         const projectRow = document.createElement("div");
         projectRow.className = "project-row";
 
-        const projectBar = document.createElement("div");
-        projectBar.className = `project-bar ${project.cssClass}`;
-        projectBar.textContent = project.name;
-        projectBar.style.left = `${start}%`;
-        projectBar.style.width = `${width}%`;
-        projectBar.dataset.projectId = project.id;
+        // Déterminer si le projet s'étend dans le futur
+        const projectExtendsFuture = project.endDate > today;
 
-        // Vérifier si le projet est en cours (la date du jour est entre la date de début et la date de fin)
-        const today = new Date();
-        if (today >= project.startDate && today <= project.endDate) {
-          projectBar.classList.add("current-project");
+        if (projectExtendsFuture && project.startDate < today) {
+          // Cas où le projet est en cours (chevauche la date du jour)
+          // Créer deux barres: une pour la partie passée et une pour la partie future
+
+          // 1. Barre pour la partie passée (jusqu'à aujourd'hui)
+          const pastBarPosition = calculatePosition(project.startDate, today);
+          const pastBar = document.createElement("div");
+          pastBar.className = `project-bar ${project.cssClass} project-past`;
+          pastBar.textContent = project.name;
+          pastBar.style.left = `${pastBarPosition.start}%`;
+          pastBar.style.width = `${pastBarPosition.width}%`;
+          pastBar.dataset.projectId = project.id;
+
+          // 2. Barre pour la partie future (à partir d'aujourd'hui)
+          const futureBarPosition = calculatePosition(today, project.endDate);
+          const futureBar = document.createElement("div");
+          futureBar.className = `project-bar ${project.cssClass} project-future`;
+          futureBar.style.left = `${
+            ((today - minDate) / totalDuration) * 100
+          }%`;
+          futureBar.style.width = `${futureBarPosition.width}%`;
+          futureBar.dataset.projectId = project.id;
+
+          // Ajouter les gestionnaires d'événements pour l'interaction au survol
+          pastBar.addEventListener("mouseenter", showTooltip);
+          pastBar.addEventListener("mouseleave", hideTooltip);
+          pastBar.addEventListener("touchstart", showTooltip);
+
+          futureBar.addEventListener("mouseenter", showTooltip);
+          futureBar.addEventListener("mouseleave", hideTooltip);
+          futureBar.addEventListener("touchstart", showTooltip);
+
+          projectRow.appendChild(pastBar);
+          projectRow.appendChild(futureBar);
+        } else if (project.startDate > today) {
+          // Projet entièrement dans le futur
+          const { start, width } = calculatePosition(
+            project.startDate,
+            project.endDate
+          );
+
+          const projectBar = document.createElement("div");
+          projectBar.className = `project-bar ${project.cssClass} project-future`;
+          projectBar.textContent = project.name;
+          projectBar.style.left = `${start}%`;
+          projectBar.style.width = `${width}%`;
+          projectBar.dataset.projectId = project.id;
+
+          // Ajouter les gestionnaires d'événements pour l'interaction au survol
+          projectBar.addEventListener("mouseenter", showTooltip);
+          projectBar.addEventListener("mouseleave", hideTooltip);
+          projectBar.addEventListener("touchstart", showTooltip);
+
+          projectRow.appendChild(projectBar);
+        } else {
+          // Projet entièrement dans le passé
+          const { start, width } = calculatePosition(
+            project.startDate,
+            project.endDate
+          );
+
+          const projectBar = document.createElement("div");
+          projectBar.className = `project-bar ${project.cssClass} project-past`;
+          projectBar.textContent = project.name;
+          projectBar.style.left = `${start}%`;
+          projectBar.style.width = `${width}%`;
+          projectBar.dataset.projectId = project.id;
+
+          // Ajouter les gestionnaires d'événements pour l'interaction au survol
+          projectBar.addEventListener("mouseenter", showTooltip);
+          projectBar.addEventListener("mouseleave", hideTooltip);
+          projectBar.addEventListener("touchstart", showTooltip);
+
+          projectRow.appendChild(projectBar);
         }
 
-        // Ajouter les gestionnaires d'événements pour l'interaction au survol
-        projectBar.addEventListener("mouseenter", showTooltip);
-        projectBar.addEventListener("mouseleave", hideTooltip);
-        projectBar.addEventListener("touchstart", showTooltip);
-
-        projectRow.appendChild(projectBar);
         projectsContainer.appendChild(projectRow);
       });
 

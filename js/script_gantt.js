@@ -102,98 +102,113 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 9,
       name: "Livraison base test définitive",
-      startDate: new Date(2025, 3, 21), // 21 avril 2025
-      endDate: new Date(2025, 3, 25), // 25 avril 2025
+      startDate: new Date(2025, 3, 15), // 15 mars 2025 – 30 avril 2025
+      endDate: new Date(2025, 4, 30),
       duration: "5 jours",
-      resources: "Équipe technique",
+      resources: "Équipe technique + Admin ADT",
       section: "Planning de déploiement",
       cssClass: "planning-test",
       description:
-        "Finalisation et livraison de la base de test complète pour validation. Cette étape marque le début de la phase de tests approfondis.",
+        "Finalisation et livraison de la base de test complète pour validation sur le dolibarr de test :https://dolibarrvierge19.e-learning-neo-sphere.fr/.Cette étape marque le début de la phase de tests approfondis.",
     },
     {
       id: 10,
       name: "Phase pré-test",
-      startDate: new Date(2025, 4, 5), // 5 mai 2025
-      endDate: new Date(2025, 4, 16), // 16 mai 2025
-      duration: "12 jours",
-      resources: "Hélène, Olivier",
+      startDate: new Date(2025, 4, 5), // 5 mai 2025 – 15 juin 2025
+      endDate: new Date(2025, 6, 15),
+      duration: "1 mois environ",
+      resources: "Hélène, Olivier, Equipe Technique",
       section: "Planning de déploiement",
       cssClass: "planning-pretest",
       description:
-        "Vérification préliminaire des fonctionnalités par une équipe restreinte. Identification des problèmes majeurs avant les tests élargis.",
+        "Vérification préliminaire des fonctionnalités par une équipe restreinte. Identification des problèmes avant les tests élargis et resolution des problèmes critiques.",
     },
     {
       id: 11,
       name: "Débugs et ajustements (1)",
-      startDate: new Date(2025, 4, 19), // 19 mai 2025
-      endDate: new Date(2025, 4, 30), // 30 mai 2025
-      duration: "12 jours",
-      resources: "Équipe technique",
+      startDate: new Date(2025, 6, 15), // 15 juin 2025 – 14 juillet 2025
+      endDate: new Date(2025, 7, 14),
+      duration: "1 mois environ",
+      resources: "Aurélien, Fanny, Caroline, Mélina",
       section: "Planning de déploiement",
       cssClass: "planning-debug",
       description:
-        "Première phase de correction des bugs et d'ajustements suite aux retours des pré-tests. Optimisation des performances et de l'interface utilisateur.",
+        "Première phase de correction des bugs et d'ajustements suite aux retours des pré-tests. Optimisation des performances et de l'Phase de test avec 4 référents d’activité du pôle commercial + Débugs et ajustements pour la V1.",
     },
     {
       id: 12,
       name: "Phase de test avec référents",
       startDate: new Date(2025, 5, 2), // 2 juin 2025
-      endDate: new Date(2025, 5, 13), // 13 juin 2025
-      duration: "12 jours",
-      resources: "Aurélien, Fanny, Caroline, Mélina",
+      endDate: new Date(2025, 5, 2),
+      duration: "1 journée",
+      resources: "Olivier Moncoudiol, André, matthieu, Hélene",
       section: "Planning de déploiement",
       cssClass: "planning-test-referents",
       description:
-        "Tests approfondis menés par les référents d'activité du pôle commercial. Validation des processus métier et de l'expérience utilisateur.",
+        "Demo icademie pour le dolibarvierge et notre CRM. Comparaison éventuelle avec Salesforce",
     },
+
     {
       id: 13,
-      name: "Débugs et ajustements pour la V1",
-      startDate: new Date(2025, 5, 16), // 16 juin 2025
-      endDate: new Date(2025, 5, 27), // 27 juin 2025
-      duration: "12 jours",
-      resources: "Équipe technique",
+      name: "Congès",
+      startDate: new Date(2025, 5, 2), // 14 juillet 2025 – 15 aout 2025
+      endDate: new Date(2025, 5, 13),
+      duration: "1 mois environ",
+      resources: "ADT",
+      section: "Planning de déploiement",
+      cssClass: "planning-test-referents",
+      description:
+        "Période estivale de congés pour l'équipe technique et les référents d'activité mais cette période peut être sujette à des tests ou des développements légers.",
+    },
+
+    {
+      id: 14,
+      name: "Formation des équipes Commerciales et Administratif",
+      startDate: new Date(2025, 8, 18), // 18 aout 2025 –  31 aout 2025
+      endDate: new Date(2025, 8, 31),
+      duration: "12 jours environ",
+      resources: "(8 BtoB + 2 GC + 3 BtoC + 2 admin",
       section: "Planning de déploiement",
       cssClass: "planning-debug-v1",
       description:
-        "Corrections finales des bugs et ajustements avant la version de production V1. Finalisation des fonctionnalités et optimisations de performance.",
+        "Formation des équipes commerciales et administratif (15 personnes) - 1 journée par utilisateur, soit 3 groupes de 5 personnes – mise en place de référents dolibarr qui assureront aide et suivi. Un portail web dédiée sera à disposition.",
     },
+    ,
     {
-      id: 14,
-      name: "Formation des équipes",
-      startDate: new Date(2025, 6, 1), // 1 juillet 2025
-      endDate: new Date(2025, 6, 11), // 11 juillet 2025
-      duration: "11 jours",
-      resources: "24 personnes (4 groupes)",
+      id: 15,
+      name: "Rentrée Septembre - deploiement de la V1",
+      startDate: new Date(2025, 9, 1), // 1 juillet 2025
+      endDate: new Date(2025, 9, 1),
+      duration: "1 journée",
+      resources: "ADT",
       section: "Planning de déploiement",
       cssClass: "planning-formation",
       description:
-        "Sessions de formation pour les utilisateurs finaux organisées en 4 groupes de 6 personnes. Une journée complète par groupe pour maîtriser l'ensemble des fonctionnalités.",
+        "Inauguration officielle de la version V1 du système Dolibarr. Lancement de la solution en environnement de production et début de la phase de support post-déploiement. Notifications tous canaux TEAMS",
     },
     {
-      id: 15,
-      name: "Débugs et ajustements finaux",
-      startDate: new Date(2025, 6, 14), // 14 juillet 2025
-      endDate: new Date(2025, 6, 25), // 25 juillet 2025
-      duration: "12 jours",
+      id: 16,
+      name: "Fusion des systèmes BDD campus et CRM",
+      startDate: new Date(2025, 9, 1), // debut septembre a mi-septembre 2025
+      endDate: new Date(2025, 9, 15),
+      duration: "15 jours",
       resources: "Équipe technique",
       section: "Planning de déploiement",
       cssClass: "planning-debug-final",
       description:
-        "Dernières corrections et optimisations suite aux retours des formations. Préparation finale du système pour le déploiement en production.",
+        "Fusion Bdd Campus avec le dolibarr principal gestion + Concertation avec Mélina pour l’integration par la Cyber-technique",
     },
     {
-      id: 16,
-      name: "Déploiement V1",
-      startDate: new Date(2025, 7, 4), // 4 août 2025
-      endDate: new Date(2025, 7, 4), // 4 août 2025 (1 jour - jalon)
+      id: 17,
+      name: "Formation des équipes Campus et Pédagogie",
+      startDate: new Date(2025, 10, 1), // debut octobre à mi octobre 2025
+      endDate: new Date(2025, 10, 15),
       duration: "1 jour",
       resources: "Équipe technique",
       section: "Planning de déploiement",
       cssClass: "planning-deployment",
       description:
-        "Mise en production officielle de la version V1. Lancement de la solution en environnement de production et début de la phase de support post-déploiement.",
+        "Formation et sensibilisation des équipes campus et pédagogie à l'utilisation du système Dolibarr. Mise en place de sessions de formation pour assurer une transition fluide vers le nouvel outil.",
     },
     //rajout ISP + GESTMAX + API + CSS du dolibarr
     {
@@ -203,7 +218,7 @@ document.addEventListener("DOMContentLoaded", function () {
       endDate: new Date(2025, 4, 14),
       duration: "1 mois environ",
       resources: "Équipe technique - André",
-      section: "Developpement & amélioration",
+      section: "Developpement & améliorations",
       cssClass: "dev-cybertechnique",
       description:
         "Développement de formulaires web interactifs et mise en place des webhooks pour l'intégration en temps réel avec les systèmes externes.",
@@ -226,7 +241,7 @@ document.addEventListener("DOMContentLoaded", function () {
       startDate: new Date(2025, 2, 18),
       endDate: new Date(2025, 6, 1),
       duration: "3 mois environ",
-      resources: "Équipe technique - André & Hélenne",
+      resources: "Équipe technique - André & Hélene",
       section: "Developpement & amélioration",
       cssClass: "dev-cybertechnique",
       description:
@@ -246,7 +261,7 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     {
       id: 21,
-      name: "developpement interne dolibarr",
+      name: "Developpement interne dolibarr : modules personnalisés",
       startDate: new Date(2024, 10, 5),
       endDate: new Date(2025, 5, 14),
       duration: "1 mois environ",
@@ -268,6 +283,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const totalDuration = maxDate - minDate;
   const today = new Date(); // Date du jour
 
+  // Variable pour suivre le projet actuellement sélectionné
+  let currentlySelectedProjectId = null;
+  let currentlySelectedElement = null;
+
   // Fonction pour formater les dates
   function formatDate(date) {
     return `${date
@@ -284,6 +303,121 @@ document.addEventListener("DOMContentLoaded", function () {
     const start = ((startDate - minDate) / totalDuration) * 100;
     const width = ((endDate - startDate) / totalDuration) * 100;
     return { start, width };
+  }
+
+  // Fonction pour créer le panneau latéral pour les détails des projets
+  function createSidePanel() {
+    // Vérifier si le panneau existe déjà
+    if (document.getElementById("project-side-panel")) {
+      return;
+    }
+
+    // Créer l'élément du panneau
+    const sidePanel = document.createElement("div");
+    sidePanel.id = "project-side-panel";
+    sidePanel.className = "side-panel hidden";
+
+    // Structure interne du panneau
+    sidePanel.innerHTML = `
+      <div class="side-panel-header">
+        <h3 class="side-panel-title">Détails du projet</h3>
+        <button id="close-panel-btn" class="close-panel-btn" aria-label="Fermer">✕</button>
+      </div>
+      <div class="side-panel-content">
+        <div class="project-details">
+          <p class="empty-state">Sélectionnez un projet pour voir ses détails</p>
+        </div>
+      </div>
+    `;
+
+    // Ajouter au document
+    document.querySelector(".container").appendChild(sidePanel);
+
+    // Ajouter l'événement de fermeture
+    document
+      .getElementById("close-panel-btn")
+      .addEventListener("click", function () {
+        hideSidePanel();
+        deselectCurrentProject();
+      });
+  }
+
+  // Fonction pour afficher le panneau latéral avec les infos du projet
+  function showProjectDetails(projectId) {
+    const project = projects.find((p) => p.id === projectId);
+
+    if (!project) return;
+
+    // Référence au panneau latéral
+    const sidePanel = document.getElementById("project-side-panel");
+    const projectDetails = sidePanel.querySelector(".project-details");
+
+    // Mettre à jour le contenu
+    projectDetails.innerHTML = `
+      <div class="project-color-indicator ${project.cssClass}"></div>
+      <h2 class="project-title">${project.name}</h2>
+      
+      ${
+        project.description
+          ? `<div class="project-description">${project.description}</div>`
+          : ""
+      }
+      
+      <div class="project-metadata">
+        <div class="metadata-item">
+          <span class="metadata-label">Début:</span>
+          <span class="metadata-value">${formatDate(project.startDate)}</span>
+        </div>
+        <div class="metadata-item">
+          <span class="metadata-label">Fin:</span>
+          <span class="metadata-value">${formatDate(project.endDate)}</span>
+        </div>
+        <div class="metadata-item">
+          <span class="metadata-label">Durée:</span>
+          <span class="metadata-value">${project.duration}</span>
+        </div>
+        
+        <div class="metadata-section">
+          <div class="metadata-item full-width">
+            <span class="metadata-label">Ressources:</span>
+            <span class="metadata-value">${
+              project.resources || "Non spécifiées"
+            }</span>
+          </div>
+        </div>
+        
+        <div class="metadata-item">
+          <span class="metadata-label">Catégorie:</span>
+          <span class="metadata-value">${project.section}</span>
+        </div>
+      </div>
+    `;
+
+    // Afficher le panneau
+    sidePanel.classList.remove("hidden");
+
+    // Ajouter une classe au body pour ajuster la mise en page
+    document.body.classList.add("panel-open");
+  }
+
+  // Fonction pour masquer le panneau latéral
+  function hideSidePanel() {
+    const sidePanel = document.getElementById("project-side-panel");
+
+    if (sidePanel) {
+      sidePanel.classList.add("hidden");
+      document.body.classList.remove("panel-open");
+    }
+
+    currentlySelectedProjectId = null;
+  }
+
+  // Fonction pour désélectionner visuellement le projet actuel
+  function deselectCurrentProject() {
+    if (currentlySelectedElement) {
+      currentlySelectedElement.classList.remove("selected");
+      currentlySelectedElement = null;
+    }
   }
 
   // Génération des trimestres pour l'axe temporel
@@ -358,6 +492,29 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // Fonction pour gérer le clic sur un élément de projet
+  function handleProjectClick(event) {
+    const projectId = parseInt(event.currentTarget.dataset.projectId);
+
+    // Si on reclique sur le même projet, on désactive la sélection
+    if (currentlySelectedProjectId === projectId) {
+      hideSidePanel();
+      deselectCurrentProject();
+      return;
+    }
+
+    // Désélectionner l'élément précédemment sélectionné
+    deselectCurrentProject();
+
+    // Sélectionner le nouveau projet
+    currentlySelectedProjectId = projectId;
+    currentlySelectedElement = event.currentTarget;
+    currentlySelectedElement.classList.add("selected");
+
+    // Afficher les détails du projet
+    showProjectDetails(projectId);
+  }
+
   // Génération des sections et projets
   function generateGanttChart(projectsData, containerId) {
     const sectionsContainer = document.querySelector(
@@ -421,8 +578,8 @@ document.addEventListener("DOMContentLoaded", function () {
           milestoneLabel.textContent = project.name;
           milestone.appendChild(milestoneLabel);
 
-          // Ajouter le gestionnaire d'événement au clic (au lieu du survol)
-          milestone.addEventListener("click", toggleTooltip);
+          // Ajouter le gestionnaire d'événement au clic
+          milestone.addEventListener("click", handleProjectClick);
 
           projectRow.appendChild(milestone);
         } else if (projectExtendsFuture && project.startDate < today) {
@@ -448,9 +605,9 @@ document.addEventListener("DOMContentLoaded", function () {
           futureBar.style.width = `${futureBarPosition.width}%`;
           futureBar.dataset.projectId = project.id;
 
-          // Ajouter les gestionnaires d'événements au clic (au lieu du survol)
-          pastBar.addEventListener("click", toggleTooltip);
-          futureBar.addEventListener("click", toggleTooltip);
+          // Ajouter les gestionnaires d'événements au clic
+          pastBar.addEventListener("click", handleProjectClick);
+          futureBar.addEventListener("click", handleProjectClick);
 
           projectRow.appendChild(pastBar);
           projectRow.appendChild(futureBar);
@@ -468,8 +625,8 @@ document.addEventListener("DOMContentLoaded", function () {
           projectBar.style.width = `${width}%`;
           projectBar.dataset.projectId = project.id;
 
-          // Ajouter le gestionnaire d'événement au clic (au lieu du survol)
-          projectBar.addEventListener("click", toggleTooltip);
+          // Ajouter le gestionnaire d'événement au clic
+          projectBar.addEventListener("click", handleProjectClick);
 
           projectRow.appendChild(projectBar);
         } else {
@@ -486,8 +643,8 @@ document.addEventListener("DOMContentLoaded", function () {
           projectBar.style.width = `${width}%`;
           projectBar.dataset.projectId = project.id;
 
-          // Ajouter le gestionnaire d'événement au clic (au lieu du survol)
-          projectBar.addEventListener("click", toggleTooltip);
+          // Ajouter le gestionnaire d'événement au clic
+          projectBar.addEventListener("click", handleProjectClick);
 
           projectRow.appendChild(projectBar);
         }
@@ -497,176 +654,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
       sectionElement.appendChild(projectsContainer);
       sectionsContainer.appendChild(sectionElement);
-    }
-  }
-
-  // Gestion du tooltip
-  const tooltip = document.getElementById("tooltip");
-
-  // Variable pour suivre le projet actuellement affiché
-  let currentlyDisplayedProjectId = null;
-
-  // Fonction pour afficher/masquer le tooltip au clic
-  function toggleTooltip(event) {
-    const projectId = parseInt(event.currentTarget.dataset.projectId);
-
-    // Si on clique sur le même projet et que le tooltip est déjà visible, on le cache
-    if (
-      currentlyDisplayedProjectId === projectId &&
-      !tooltip.classList.contains("hidden")
-    ) {
-      hideTooltip();
-      return;
-    }
-
-    // Sinon, on affiche le tooltip pour ce projet
-    currentlyDisplayedProjectId = projectId;
-    showTooltip(event);
-
-    // Empêcher la propagation du clic pour éviter que le document.addEventListener ne se déclenche immédiatement
-    event.stopPropagation();
-  }
-
-  // Fonction modifiée pour afficher le tooltip
-  function showTooltip(event) {
-    const projectId = parseInt(event.currentTarget.dataset.projectId);
-    const project = projects.find((p) => p.id === projectId);
-
-    if (!project) return;
-
-    // D'abord masquer tout tooltip existant
-    hideTooltip();
-
-    // Remplir le contenu du tooltip avec un bouton de fermeture rouge
-    tooltip.innerHTML = `
-      <div class="tooltip-header">
-        <div class="tooltip-title">${project.name}</div>
-        <button class="tooltip-close-btn" aria-label="Fermer">&#10005;</button>
-      </div>
-      ${
-        project.description
-          ? `<div class="tooltip-description">${project.description}</div>`
-          : ""
-      }
-      <div class="tooltip-grid">
-        <div>
-          <div><span class="tooltip-label">Début:</span> ${formatDate(
-            project.startDate
-          )}</div>
-          <div><span class="tooltip-label">Fin:</span> ${formatDate(
-            project.endDate
-          )}</div>
-          <div><span class="tooltip-label">Durée approximative:</span> ${
-            project.duration
-          }</div>
-        </div>
-        <div>
-          <div><span class="tooltip-label">Ressources humaines:</span> ${
-            project.resources || "Non spécifiées"
-          }</div>
-          <div><span class="tooltip-label">Catégorie:</span> ${
-            project.section
-          }</div>
-        </div>
-      </div>
-    `;
-
-    // Positionner le tooltip
-    const rect = event.currentTarget.getBoundingClientRect();
-
-    // Rendre le tooltip visible pour pouvoir calculer ses dimensions
-    tooltip.classList.remove("hidden");
-    tooltip.style.opacity = "1";
-    tooltip.style.visibility = "visible";
-
-    // Positionner le tooltip en fonction du type d'élément
-    if (event.currentTarget.classList.contains("milestone")) {
-      tooltip.style.top = `${rect.top + window.scrollY - 5}px`;
-    } else {
-      // Position relative à l'élément cliqué
-      tooltip.style.top = `${
-        rect.top + window.scrollY - tooltip.offsetHeight - 10
-      }px`;
-    }
-
-    // Position horizontale centrée sur l'élément
-    tooltip.style.left = `${
-      rect.left + window.scrollX + rect.width / 2 - tooltip.offsetWidth / 2
-    }px`;
-
-    // Vérifier si le tooltip sort de l'écran à droite
-    const rightEdge = tooltip.getBoundingClientRect().right;
-    const windowWidth = window.innerWidth;
-    if (rightEdge > windowWidth) {
-      tooltip.style.left = `${windowWidth - tooltip.offsetWidth - 10}px`;
-    }
-
-    // Vérifier si le tooltip sort de l'écran à gauche
-    const leftEdge = tooltip.getBoundingClientRect().left;
-    if (leftEdge < 0) {
-      tooltip.style.left = "10px";
-    }
-
-    // Vérifier si le tooltip sort en haut de l'écran
-    const topEdge = tooltip.getBoundingClientRect().top;
-    if (topEdge < 0) {
-      // Placer le tooltip sous l'élément si pas assez d'espace au-dessus
-      tooltip.style.top = `${rect.bottom + window.scrollY + 10}px`;
-    }
-
-    // Ajouter un gestionnaire pour le bouton de fermeture avec priorité élevée
-    const closeButton = tooltip.querySelector(".tooltip-close-btn");
-    if (closeButton) {
-      // Supprimer les gestionnaires précédents pour éviter les doublons
-      closeButton.removeEventListener("click", handleCloseButtonClick);
-      // Ajouter le nouveau gestionnaire
-      closeButton.addEventListener("click", handleCloseButtonClick);
-    }
-
-    // Supprimer tout gestionnaire de clic précédent sur le document pour éviter les doublons
-    document.removeEventListener("click", handleDocumentClick);
-    // Ajouter un gestionnaire pour fermer le tooltip quand on clique ailleurs
-    document.addEventListener("click", handleDocumentClick);
-  }
-
-  // Fonction de gestion du clic sur le bouton de fermeture
-  function handleCloseButtonClick(event) {
-    hideTooltip();
-    event.stopPropagation(); // Empêcher la propagation du clic
-  }
-
-  // Fonction de gestion du clic sur le document
-  function handleDocumentClick(event) {
-    // Vérifier que le clic n'est pas sur le tooltip ou un élément du projet
-    const isTooltipClick = event.target.closest("#tooltip");
-    const isProjectBarClick =
-      event.target.classList.contains("project-bar") ||
-      event.target.classList.contains("milestone");
-
-    if (!isTooltipClick && !isProjectBarClick) {
-      hideTooltip();
-    }
-  }
-
-  // Fonction pour masquer le tooltip
-  function hideTooltip() {
-    tooltip.classList.add("hidden");
-    tooltip.style.opacity = "0";
-    tooltip.style.visibility = "hidden";
-    currentlyDisplayedProjectId = null;
-  }
-
-  // Fonction pour fermer le tooltip quand on clique en dehors
-  function hideTooltipOnClickOutside(event) {
-    // Vérifier que le clic n'est pas sur le tooltip ou un élément du projet
-    const isTooltipClick = event.target.closest("#tooltip");
-    const isProjectBarClick =
-      event.target.classList.contains("project-bar") ||
-      event.target.classList.contains("milestone");
-
-    if (!isTooltipClick && !isProjectBarClick) {
-      hideTooltip();
-      document.removeEventListener("click", hideTooltipOnClickOutside);
     }
   }
 
@@ -684,8 +671,9 @@ document.addEventListener("DOMContentLoaded", function () {
         // Ajouter la classe active au lien cliqué
         this.classList.add("active");
 
-        // Fermer tout tooltip ouvert
-        hideTooltip();
+        // Fermer le panneau latéral et désélectionner tout projet
+        hideSidePanel();
+        deselectCurrentProject();
 
         // Obtenir l'ID cible
         const targetId = this.getAttribute("href").substring(1);
@@ -709,6 +697,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Initialisation
   function initializeGanttCharts() {
+    // Créer le panneau latéral
+    createSidePanel();
+
     // Initialiser le premier diagramme (historique)
     generateTimeline("historic-gantt");
     generateGanttChart(historicProjects, "historic-gantt");
@@ -719,6 +710,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Configurer la navigation
     setupNavigation();
+
+    // Ajouter un gestionnaire d'événement pour fermer le panneau quand on clique ailleurs
+    document.addEventListener("click", function (event) {
+      // Si on clique en dehors du panneau et en dehors d'un élément de projet
+      const isProjectElement =
+        event.target.closest(".project-bar") ||
+        event.target.closest(".milestone");
+      const isSidePanel = event.target.closest("#project-side-panel");
+
+      if (
+        !isProjectElement &&
+        !isSidePanel &&
+        currentlySelectedProjectId !== null
+      ) {
+        hideSidePanel();
+        deselectCurrentProject();
+      }
+    });
   }
 
   // Lancer l'initialisation

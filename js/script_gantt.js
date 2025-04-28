@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Historique Projets Eureka",
       cssClass: "ypareo",
       description:
-        "Choix d'Ypareo posssible - serie de visio et de tests pour valider la solution.",
+        "Choix d'Ypareo posssible - serie de visio et de tests pour valider la solution. Solution vite laisser de coté car trop complexe et pas assez d'ergonomie.",
     },
     {
       id: 8,
@@ -102,14 +102,13 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 9,
       name: "Livraison base test définitive",
-      startDate: new Date(2025, 3, 21), // 21 avril 2025
-      endDate: new Date(2025, 3, 25), // 25 avril 2025
+      startDate: new Date(2024, 11, 11),
+      endDate: new Date(2025, 3, 25),
       duration: "5 jours",
       resources: "Équipe technique",
       section: "Planning de déploiement",
       cssClass: "planning-test",
-      description:
-        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
+      description: "hes et des communications avec les clients.",
     },
     {
       id: 10,
@@ -169,7 +168,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Planning de déploiement",
       cssClass: "planning-formation",
       description:
-        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
+        "Mise en place d'un portail de tutoriels dédiées aux équipes de l'ADT. Formation des équipes sur les nouvelles fonctionnalités et processus du CRM.",
     },
     {
       id: 15,
@@ -181,7 +180,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Planning de déploiement",
       cssClass: "planning-debug-final",
       description:
-        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
+        "Retour UX et UI sur la version 1 du CRM. Intégration des corrections et ajustements nécessaires avant le déploiement final.",
     },
     {
       id: 16,
@@ -193,7 +192,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Planning de déploiement",
       cssClass: "planning-deployment",
       description:
-        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
+        " Déploiement prévu pour la version 1 du CRM. Ce jalon marque la fin de la phase de test et le début de l'utilisation en production.",
     },
     //rajout ISP + GESTMAX + API + CSS du dolibarr
     {
@@ -206,7 +205,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Developpement & amélioration",
       cssClass: "dev-cybertechnique",
       description:
-        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
+        "Renouvellement et retravail sur les formulaires deu site Web de l'ADT, 20 formulaires ont été retravaillé et les données sont centralisées dans le module Pré-opportunité. Mise en place de liaisons webhook pour la centralisation des données.",
     },
     {
       id: 18,
@@ -218,7 +217,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Developpement & amélioration",
       cssClass: "dev-cybertechnique",
       description:
-        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
+        "Mise en place et developpement interne du module Pré-opportunité. Ce module est destiné à centraliser les informations de plusieurs formulaires et à faciliter la gestion des prospects.",
     },
     {
       id: 19,
@@ -230,31 +229,32 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Developpement & amélioration",
       cssClass: "dev-cybertechnique",
       description:
-        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
+        "Concertation avec Icademie et l'équipe de Jeremy pour faciliter l'intégration dans ISP l'integration des données issues de Dolibarr. Mise en place de l'API pour la gestion des données ? cela à définir.",
     },
     {
       id: 20,
       name: "Liaisons API GESTMAX + maformation.fr + je-change-de-metier.fr",
       startDate: new Date(2025, 4, 14),
-      endDate: new Date(2025, 5, 14),
+      endDate: new Date(2025, 6, 14),
       duration: "1 mois environ",
       resources: "Équipe technique - André",
       section: "Developpement & amélioration",
       cssClass: "dev-cybertechnique",
       description:
-        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
+        "Mise en place des liaisons API avec GESTMAX + maformation.fr + je-change-de-metier.Le but etant de centraliser dans le module Pré-opportunité ou dans un module dédié les informations de ces 3 sites.",
     },
+
     {
       id: 21,
       name: "developpement interne dolibarr",
       startDate: new Date(2024, 10, 5),
-      endDate: new Date(2025, 5, 14),
+      endDate: new Date(2025, 7, 30),
       duration: "1 mois environ",
       resources: "Équipe technique - André",
       section: "Developpement & amélioration",
       cssClass: "dev-cybertechnique",
       description:
-        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
+        "",
     },
   ];
 

@@ -662,3 +662,70 @@ footer {
     position: relative;
     z-index: 2;
 }
+/* Correction pour le conteneur du diagramme */
+.gantt-container,
+#gantt-container,
+#historic-gantt,
+#future-gantt {
+    position: relative;
+    overflow-x: auto;
+    /* Permet le défilement horizontal */
+    overflow-y: hidden;
+    /* Supprime le défilement vertical */
+    height: auto !important;
+    /* Hauteur automatique basée sur le contenu */
+    max-height: none !important;
+    /* Supprime toute hauteur maximale */
+}
+
+/* S'assurer que la ligne verticale du jour actuel ne dépasse pas */
+.today-line {
+    height: 100% !important;
+    /* Limiter la hauteur à celle du conteneur */
+    bottom: 0;
+    top: 0;
+}
+
+/* Correction pour les lignes de semaine */
+.week-marker::after {
+    bottom: -40px;
+    height: 500px;
+    /* Réduire la hauteur pour éviter le défilement */
+}
+
+/* Assurer que les sections sont correctement alignées */
+.section {
+    position: relative;
+    clear: both;
+    margin-bottom: 20px;
+}
+
+/* Harmoniser les noms de sections */
+[data-section="Developpement & améliorations"],
+[data-section="Developpement & amélioration"] {
+    /* Appliquer les mêmes styles pour harmoniser l'affichage */
+    font-weight: bold;
+    color: #0c2340;
+}
+
+/* Correction pour le positionnement des barres */
+.project-bar,
+.milestone {
+    /* S'assurer que les positions calculées sont correctes */
+    box-sizing: border-box;
+    position: absolute;
+}
+
+/* Assurer que les conteneurs de barres ont une hauteur suffisante */
+.project-row {
+    position: relative;
+    height: 35px;
+    /* Légèrement plus haut pour éviter les chevauchements */
+    margin-bottom: 5px;
+}
+
+/* Supprimer tout espace supplémentaire sous le diagramme */
+.sections-container {
+    padding-bottom: 0;
+    margin-bottom: 0;
+}

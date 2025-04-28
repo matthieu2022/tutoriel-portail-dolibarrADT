@@ -227,7 +227,7 @@ document.addEventListener("DOMContentLoaded", function () {
       endDate: new Date(2025, 4, 14),
       duration: "2 mois environ",
       resources: "Équipe technique - André",
-      section: "Developpement & amélioration",
+      section: "Developpement & améliorations",
       cssClass: "dev-cybertechnique",
       description:
         "Création d'un module spécifique pour la gestion des pré-opportunités commerciales, permettant de qualifier les leads avant leur conversion en opportunités.",
@@ -239,7 +239,7 @@ document.addEventListener("DOMContentLoaded", function () {
       endDate: new Date(2025, 6, 1),
       duration: "3 mois environ",
       resources: "Équipe technique - André & Hélene",
-      section: "Developpement & amélioration",
+      section: "Developpement & améliorations",
       cssClass: "dev-cybertechnique",
       description:
         "Développement du système d'intégration ISP et mise en place des correspondances de champs entre les différentes plateformes pour assurer la cohérence des données.",
@@ -251,7 +251,7 @@ document.addEventListener("DOMContentLoaded", function () {
       endDate: new Date(2025, 5, 14),
       duration: "1 mois environ",
       resources: "Équipe technique - André",
-      section: "Developpement & amélioration",
+      section: "Developpement & améliorations",
       cssClass: "dev-cybertechnique",
       description:
         "Développement des connecteurs API pour l'intégration avec GESTMAX et les plateformes de formation en ligne, permettant la synchronisation automatique des données.",
@@ -263,7 +263,7 @@ document.addEventListener("DOMContentLoaded", function () {
       endDate: new Date(2025, 5, 14),
       duration: "1 mois environ",
       resources: "Équipe technique - André",
-      section: "Developpement & amélioration",
+      section: "Developpement & améliorations",
       cssClass: "dev-cybertechnique",
       description:
         "Travaux de personnalisation et d'optimisation du cœur de Dolibarr pour répondre aux besoins spécifiques de l'organisation. Développement de modules sur mesure.",
@@ -313,9 +313,15 @@ document.addEventListener("DOMContentLoaded", function () {
       totalDuration = futureTotalDuration;
     }
 
-    const start = ((startDate - minDate) / totalDuration) * 100;
-    const width = ((endDate - startDate) / totalDuration) * 100;
-    return { start, width };
+    // Assurez-vous que les dates sont bien des objets Date
+    const start = startDate instanceof Date ? startDate : new Date(startDate);
+    const end = endDate instanceof Date ? endDate : new Date(endDate);
+
+    // Calculer la position avec une précision maximale
+    const startPos = Math.max(0, ((start - minDate) / totalDuration) * 100);
+    const width = Math.max(0.5, ((end - start) / totalDuration) * 100); // minimum 0.5% pour assurer la visibilité
+
+    return { start: startPos, width: width };
   }
 
   // Noms des mois en français
@@ -415,6 +421,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Créer le marqueur de semaine
         const weekMarker = document.createElement("div");
         weekMarker.className = "week-marker";
+        weekMarker.style.height = "10px"; // Hauteur fixe pour le marqueur
 
         // Afficher le numéro du jour pour le premier jour de chaque semaine
         weekMarker.title = `Semaine du ${weekDate.getDate()} ${
@@ -488,6 +495,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Ajouter une ligne verticale qui traverse tout le diagramme
       addTodayLine(position, containerId);
+      todayLine.style.height = "100%";
     }
   }
 
@@ -531,6 +539,7 @@ document.addEventListener("DOMContentLoaded", function () {
     for (const sectionName in sections) {
       const sectionElement = document.createElement("div");
       sectionElement.className = "section";
+      sectionElement.dataset.section = sectionName;
 
       const sectionTitle = document.createElement("h3");
       sectionTitle.className = "section-title";

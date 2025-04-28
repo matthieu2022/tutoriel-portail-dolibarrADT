@@ -333,3 +333,214 @@ footer {
 .project-future:not(:first-child) {
     color: transparent;
 }
+
+/* Styles de base pour le diagramme de Gantt */
+.gantt-container {
+    position: relative;
+    overflow-x: auto;
+}
+
+.timeline {
+    position: relative;
+    height: 50px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+/* Styles pour les barres de projet */
+.project-bar {
+    position: absolute;
+    height: 25px;
+    text-align: center;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    border-radius: 3px;
+    font-size: 12px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* Style pour les projets passés (avant la date du jour) */
+.project-past {
+    color: white;
+    /* Texte bien visible */
+    opacity: 1;
+    /* Opacité normale */
+    border: none;
+    /* Pas de bordure spéciale */
+}
+
+/* Style pour les projets futurs (après la date du jour) */
+.project-future {
+    color: rgba(255, 255, 255, 0.7);
+    /* Texte légèrement transparent */
+    opacity: 0.6;
+    /* Opacité réduite */
+    background-image: repeating-linear-gradient(45deg,
+            transparent,
+            transparent 5px,
+            rgba(255, 255, 255, 0.2) 5px,
+            rgba(255, 255, 255, 0.2) 10px);
+    /* Motif en diagonale (tirets) */
+    border-left: 2px dashed white;
+    /* Ligne en tirets sur le bord gauche */
+}
+
+/* Styles pour le marqueur de la date du jour */
+.today-marker {
+    position: absolute;
+    height: 25px;
+    width: 2px;
+    background-color: #ff0000;
+    top: 0;
+    z-index: 10;
+}
+
+.today-label {
+    position: absolute;
+    white-space: nowrap;
+    background-color: #ff0000;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.today-line {
+    position: absolute;
+    width: 2px;
+    background-color: #ff0000;
+    top: 0;
+    bottom: 0;
+    z-index: 5;
+    height: 100%;
+    opacity: 0.7;
+}
+
+/* Pour que le texte n'apparaisse que sur la première partie du projet en cours */
+.project-future:not(:first-child) {
+    color: transparent;
+}
+
+/* Styles pour les jalons */
+.milestone {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #333;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    z-index: 15;
+    top: 5px;
+}
+
+.milestone::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #333;
+}
+
+.milestone-label {
+    position: absolute;
+    white-space: nowrap;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    color: #333;
+    font-weight: bold;
+}
+
+.milestone-past {
+    background-color: #333;
+    opacity: 1;
+}
+
+.milestone-future {
+    background-color: #777;
+    opacity: 0.7;
+    border: 2px dotted #333;
+}
+
+/* Styles spécifiques pour chaque type de projet */
+.dolibarr-crm {
+    background-color: #3498db;
+}
+
+.dolibarr-prospect {
+    background-color: #2ecc71;
+}
+
+.dolibarr-facturation {
+    background-color: #f1c40f;
+}
+
+.dolibarr-campus {
+    background-color: #e74c3c;
+}
+
+.dolibarr-fusionnee {
+    background-color: #9b59b6;
+}
+
+.creme {
+    background-color: #1abc9c;
+}
+
+.ypareo {
+    background-color: #d35400;
+}
+
+.pepit {
+    background-color: #8e44ad;
+}
+
+/* Styles pour les nouveaux projets de planification */
+.planning-test {
+    background-color: #16a085;
+}
+
+.planning-pretest {
+    background-color: #27ae60;
+}
+
+.planning-debug {
+    background-color: #2980b9;
+}
+
+.planning-test-referents {
+    background-color: #8e44ad;
+}
+
+.planning-debug-v1 {
+    background-color: #2980b9;
+}
+
+.planning-formation {
+    background-color: #c0392b;
+}
+
+.planning-debug-final {
+    background-color: #2980b9;
+}
+
+.planning-deployment {
+    background-color: #e74c3c;
+}
+
+/* Ajouter une bordure noire autour du jalon de déploiement */
+.planning-deployment.milestone {
+    border: 3px solid black;
+    z-index: 20;
+}

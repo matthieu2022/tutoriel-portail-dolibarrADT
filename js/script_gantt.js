@@ -82,6 +82,87 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Autres Projets Eureka",
       cssClass: "pepit",
     },
+    // Ajout du prévisionnel
+    {
+      id: 9,
+      name: "Livraison base test définitive",
+      startDate: new Date(2025, 3, 21), // 21 avril 2025
+      endDate: new Date(2025, 3, 25), // 25 avril 2025
+      duration: "5 jours",
+      resources: "Équipe technique",
+      section: "Planning de déploiement",
+      cssClass: "planning-test",
+    },
+    {
+      id: 10,
+      name: "Phase pré-test",
+      startDate: new Date(2025, 4, 5), // 5 mai 2025
+      endDate: new Date(2025, 4, 16), // 16 mai 2025
+      duration: "12 jours",
+      resources: "Hélène, Olivier",
+      section: "Planning de déploiement",
+      cssClass: "planning-pretest",
+    },
+    {
+      id: 11,
+      name: "Débugs et ajustements (1)",
+      startDate: new Date(2025, 4, 19), // 19 mai 2025
+      endDate: new Date(2025, 4, 30), // 30 mai 2025
+      duration: "12 jours",
+      resources: "Équipe technique",
+      section: "Planning de déploiement",
+      cssClass: "planning-debug",
+    },
+    {
+      id: 12,
+      name: "Phase de test avec référents",
+      startDate: new Date(2025, 5, 2), // 2 juin 2025
+      endDate: new Date(2025, 5, 13), // 13 juin 2025
+      duration: "12 jours",
+      resources: "Aurélien, Fanny, Caroline, Mélina",
+      section: "Planning de déploiement",
+      cssClass: "planning-test-referents",
+    },
+    {
+      id: 13,
+      name: "Débugs et ajustements pour la V1",
+      startDate: new Date(2025, 5, 16), // 16 juin 2025
+      endDate: new Date(2025, 5, 27), // 27 juin 2025
+      duration: "12 jours",
+      resources: "Équipe technique",
+      section: "Planning de déploiement",
+      cssClass: "planning-debug-v1",
+    },
+    {
+      id: 14,
+      name: "Formation des équipes",
+      startDate: new Date(2025, 6, 1), // 1 juillet 2025
+      endDate: new Date(2025, 6, 11), // 11 juillet 2025
+      duration: "11 jours",
+      resources: "24 personnes (4 groupes)",
+      section: "Planning de déploiement",
+      cssClass: "planning-formation",
+    },
+    {
+      id: 15,
+      name: "Débugs et ajustements finaux",
+      startDate: new Date(2025, 6, 14), // 14 juillet 2025
+      endDate: new Date(2025, 6, 25), // 25 juillet 2025
+      duration: "12 jours",
+      resources: "Équipe technique",
+      section: "Planning de déploiement",
+      cssClass: "planning-debug-final",
+    },
+    {
+      id: 16,
+      name: "Déploiement V1",
+      startDate: new Date(2025, 7, 4), // 4 août 2025
+      endDate: new Date(2025, 7, 4), // 4 août 2025 (1 jour - jalon)
+      duration: "1 jour",
+      resources: "Équipe technique",
+      section: "Planning de déploiement",
+      cssClass: "planning-deployment",
+    },
   ];
 
   // Paramètres du diagramme
@@ -203,7 +284,36 @@ document.addEventListener("DOMContentLoaded", function () {
         // Déterminer si le projet s'étend dans le futur
         const projectExtendsFuture = project.endDate > today;
 
-        if (projectExtendsFuture && project.startDate < today) {
+        // Cas spécial pour les jalons (durée d'un jour)
+        const isMilestone =
+          project.startDate.getTime() === project.endDate.getTime();
+
+        if (isMilestone) {
+          // Traitement spécial pour les jalons
+          const position =
+            ((project.startDate - minDate) / totalDuration) * 100;
+
+          const milestone = document.createElement("div");
+          milestone.className = `milestone ${project.cssClass} ${
+            project.startDate > today ? "milestone-future" : "milestone-past"
+          }`;
+          milestone.title = project.name;
+          milestone.style.left = `${position}%`;
+          milestone.dataset.projectId = project.id;
+
+          // Ajouter une étiquette de jalon
+          const milestoneLabel = document.createElement("span");
+          milestoneLabel.className = "milestone-label";
+          milestoneLabel.textContent = project.name;
+          milestone.appendChild(milestoneLabel);
+
+          // Ajouter les gestionnaires d'événements pour l'interaction au survol
+          milestone.addEventListener("mouseenter", showTooltip);
+          milestone.addEventListener("mouseleave", hideTooltip);
+          milestone.addEventListener("touchstart", showTooltip);
+
+          projectRow.appendChild(milestone);
+        } else if (projectExtendsFuture && project.startDate < today) {
           // Cas où le projet est en cours (chevauche la date du jour)
           // Créer deux barres: une pour la partie passée et une pour la partie future
 
@@ -343,7 +453,8 @@ document.addEventListener("DOMContentLoaded", function () {
   function hideTooltipOnClickOutside(event) {
     if (
       !tooltip.contains(event.target) &&
-      !event.target.classList.contains("project-bar")
+      !event.target.classList.contains("project-bar") &&
+      !event.target.classList.contains("milestone")
     ) {
       hideTooltip();
       document.removeEventListener("click", hideTooltipOnClickOutside);

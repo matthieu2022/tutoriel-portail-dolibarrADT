@@ -98,11 +98,10 @@ document.addEventListener("DOMContentLoaded", function () {
       description:
         "Projet Pepit dédié aux startups innovantes, incluant des outils de gestion de projets agiles et de suivi d'avancement.",
     },
-    // Ajout du prévisionnel
     {
       id: 9,
       name: "Livraison base test définitive",
-      startDate: new Date(2025, 3, 15), // 15 mars 2025 – 30 avril 2025
+      startDate: new Date(2025, 3, 15),
       endDate: new Date(2025, 4, 30),
       duration: "5 jours",
       resources: "Équipe technique + Admin ADT",
@@ -114,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 10,
       name: "Phase pré-test",
-      startDate: new Date(2025, 4, 5), // 5 mai 2025 – 15 juin 2025
+      startDate: new Date(2025, 4, 5),
       endDate: new Date(2025, 6, 15),
       duration: "1 mois environ",
       resources: "Hélène, Olivier, Equipe Technique",
@@ -126,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 11,
       name: "Débugs et ajustements (1)",
-      startDate: new Date(2025, 6, 15), // 15 juin 2025 – 14 juillet 2025
+      startDate: new Date(2025, 6, 15),
       endDate: new Date(2025, 7, 14),
       duration: "1 mois environ",
       resources: "Aurélien, Fanny, Caroline, Mélina",
@@ -138,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 12,
       name: "Phase de test avec référents",
-      startDate: new Date(2025, 5, 2), // 2 juin 2025
+      startDate: new Date(2025, 5, 2),
       endDate: new Date(2025, 5, 2),
       duration: "1 journée",
       resources: "Olivier Moncoudiol, André, matthieu, Hélene",
@@ -150,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 13,
       name: "Congès",
-      startDate: new Date(2025, 5, 2), // 14 juillet 2025 – 15 aout 2025
+      startDate: new Date(2025, 5, 2),
       endDate: new Date(2025, 5, 13),
       duration: "1 mois environ",
       resources: "ADT",
@@ -162,7 +161,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 14,
       name: "Formation des équipes Commerciales et Administratif",
-      startDate: new Date(2025, 8, 18), // 18 aout 2025 –  31 aout 2025
+      startDate: new Date(2025, 8, 18),
       endDate: new Date(2025, 8, 31),
       duration: "12 jours environ",
       resources: "(8 BtoB + 2 GC + 3 BtoC + 2 admin",
@@ -174,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 15,
       name: "Rentrée Septembre - deploiement de la V1",
-      startDate: new Date(2025, 9, 1), // 1 juillet 2025
+      startDate: new Date(2025, 9, 1),
       endDate: new Date(2025, 9, 1),
       duration: "1 journée",
       resources: "ADT",
@@ -186,7 +185,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 16,
       name: "Fusion des systèmes BDD campus et CRM",
-      startDate: new Date(2025, 9, 1), // debut septembre a mi-septembre 2025
+      startDate: new Date(2025, 9, 1),
       endDate: new Date(2025, 9, 15),
       duration: "15 jours",
       resources: "Équipe technique",
@@ -198,7 +197,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 17,
       name: "Formation des équipes Campus et Pédagogie",
-      startDate: new Date(2025, 10, 1), // debut octobre à mi octobre 2025
+      startDate: new Date(2025, 10, 1),
       endDate: new Date(2025, 10, 15),
       duration: "1 jour",
       resources: "Équipe technique",
@@ -207,9 +206,8 @@ document.addEventListener("DOMContentLoaded", function () {
       description:
         "Formation et sensibilisation des équipes campus et pédagogie à l'utilisation du système Dolibarr. Mise en place de sessions de formation pour assurer une transition fluide vers le nouvel outil.",
     },
-    //rajout ISP + GESTMAX + API + CSS du dolibarr
     {
-      id: 22, // Corrigé l'ID dupliqué (17 -> 22)
+      id: 22,
       name: "Formulaires Web et liaisons webhook",
       startDate: new Date(2025, 3, 24),
       endDate: new Date(2025, 4, 14),
@@ -274,55 +272,17 @@ document.addEventListener("DOMContentLoaded", function () {
   const historicProjects = projects.filter((project) => project.id <= 8);
   const upcomingProjects = projects.filter((project) => project.id >= 9);
 
-  // Paramètres du diagramme pour le premier diagramme (historique)
-  const historicMinDate = new Date(2021, 0, 1); // 1er janvier 2021
-  const historicMaxDate = new Date(2027, 11, 31); // 31 décembre 2027
+  // Paramètres du diagramme
+  const historicMinDate = new Date(2021, 0, 1);
+  const historicMaxDate = new Date(2027, 11, 31);
   const historicTotalDuration = historicMaxDate - historicMinDate;
 
-  // Paramètres du diagramme pour le second diagramme (futur)
-  const futureMinDate = new Date(2025, 1, 1); // 1er février 2025
-  const futureMaxDate = new Date(2025, 11, 31); // 31 décembre 2025
+  const futureMinDate = new Date(2025, 0, 1);
+  const futureMaxDate = new Date(2025, 11, 31);
   const futureTotalDuration = futureMaxDate - futureMinDate;
 
-  const today = new Date(); // Date du jour
-
-  // Variable pour suivre le projet actuellement affiché
+  const today = new Date();
   let currentlyDisplayedProjectId = null;
-
-  // Fonction pour formater les dates
-  function formatDate(date) {
-    return `${date
-      .getDate()
-      .toString()
-      .padStart(
-        2,
-        "0"
-      )}/${(date.getMonth() + 1).toString().padStart(2, "0")}/${date.getFullYear()}`;
-  }
-
-  // Fonction pour calculer position et largeur des barres selon le diagramme
-  function calculatePosition(startDate, endDate, containerId) {
-    // Utiliser les paramètres appropriés selon le diagramme
-    let minDate, totalDuration;
-
-    if (containerId === "historic-gantt") {
-      minDate = historicMinDate;
-      totalDuration = historicTotalDuration;
-    } else {
-      minDate = futureMinDate;
-      totalDuration = futureTotalDuration;
-    }
-
-    // Assurez-vous que les dates sont bien des objets Date
-    const start = startDate instanceof Date ? startDate : new Date(startDate);
-    const end = endDate instanceof Date ? endDate : new Date(endDate);
-
-    // Calculer la position avec une précision maximale
-    const startPos = Math.max(0, ((start - minDate) / totalDuration) * 100);
-    const width = Math.max(0.5, ((end - start) / totalDuration) * 100); // minimum 0.5% pour assurer la visibilité
-
-    return { start: startPos, width: width };
-  }
 
   // Noms des mois en français
   const monthNames = [
@@ -340,7 +300,41 @@ document.addEventListener("DOMContentLoaded", function () {
     "Décembre",
   ];
 
-  // Génération des trimestres pour l'axe temporel du premier diagramme
+  function formatDate(date) {
+    return `${date
+      .getDate()
+      .toString()
+      .padStart(
+        2,
+        "0"
+      )}/${(date.getMonth() + 1).toString().padStart(2, "0")}/${date.getFullYear()}`;
+  }
+
+  function calculatePosition(startDate, endDate, containerId) {
+    let minDate, totalDuration;
+
+    if (containerId === "historic-gantt") {
+      minDate = historicMinDate;
+      totalDuration = historicTotalDuration;
+    } else {
+      minDate = futureMinDate;
+      totalDuration = futureTotalDuration;
+    }
+
+    const start = startDate instanceof Date ? startDate : new Date(startDate);
+    const end = endDate instanceof Date ? endDate : new Date(endDate);
+
+    const startPos = Math.max(0, ((start - minDate) / totalDuration) * 100);
+    let width = Math.max(0.5, ((end - start) / totalDuration) * 100);
+
+    // Ajuster la largeur si elle dépasse 100%
+    if (startPos + width > 100) {
+      width = 100 - startPos;
+    }
+
+    return { start: startPos, width: width };
+  }
+
   function generateQuarterTimeline(timelineElement) {
     let currentDate = new Date(historicMinDate);
 
@@ -358,39 +352,27 @@ document.addEventListener("DOMContentLoaded", function () {
       markerElement.style.left = `${position}%`;
 
       timelineElement.appendChild(markerElement);
-
-      // Avancer au trimestre suivant
       currentDate = new Date(year, month + 3, 1);
     }
   }
 
-  // Génération des mois et semaines pour l'axe temporel du second diagramme
   function generateDetailedTimeline(timelineElement) {
-    // Créer une barre horizontale supérieure pour les mois
     const monthsBar = document.createElement("div");
     monthsBar.className = "months-bar";
     timelineElement.appendChild(monthsBar);
 
-    // Créer une barre horizontale inférieure pour les semaines
     const weeksBar = document.createElement("div");
     weeksBar.className = "weeks-bar";
     timelineElement.appendChild(weeksBar);
 
-    // Parcourir tous les mois de février à décembre 2025
-    for (let month = 1; month <= 11; month++) {
+    for (let month = 0; month <= 11; month++) {
       const monthStart = new Date(2025, month, 1);
       const nextMonthStart = new Date(2025, month + 1, 1);
-      const monthEnd = new Date(nextMonthStart - 1); // Dernier jour du mois
-
-      // Position du marqueur de mois (au début du mois)
       const monthPosition =
         ((monthStart - futureMinDate) / futureTotalDuration) * 100;
-
-      // Largeur du mois par rapport à la largeur totale
       const monthWidth =
         ((nextMonthStart - monthStart) / futureTotalDuration) * 100;
 
-      // Créer le marqueur de mois
       const monthMarker = document.createElement("div");
       monthMarker.className = "month-marker";
       monthMarker.textContent = monthNames[month];
@@ -398,72 +380,42 @@ document.addEventListener("DOMContentLoaded", function () {
       monthMarker.style.width = `${monthWidth}%`;
       monthsBar.appendChild(monthMarker);
 
-      // Générer des marqueurs pour chaque semaine du mois
+      // Génération des semaines
       let weekDate = new Date(monthStart);
+      const monthEnd = new Date(nextMonthStart - 1);
 
-      // Reculer au premier lundi du mois (ou à la date de début si c'est après)
-      const firstDayOfMonth = weekDate.getDay(); // 0 = dimanche, 1 = lundi, ...
-      weekDate.setDate(
-        weekDate.getDate() - (firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1)
-      );
-
-      // Si le premier lundi est avant le début du mois, avancer au début du mois
-      if (weekDate < monthStart) {
-        weekDate = new Date(monthStart);
-      }
-
-      // Parcourir toutes les semaines du mois
       while (weekDate <= monthEnd) {
-        // Position du marqueur de semaine
         const weekPosition =
           ((weekDate - futureMinDate) / futureTotalDuration) * 100;
 
-        // Créer le marqueur de semaine
-        const weekMarker = document.createElement("div");
-        weekMarker.className = "week-marker";
-        weekMarker.style.height = "10px"; // Hauteur fixe pour le marqueur
+        if (weekPosition >= 0 && weekPosition <= 100) {
+          const weekMarker = document.createElement("div");
+          weekMarker.className = "week-marker";
+          weekMarker.style.left = `${weekPosition}%`;
+          weeksBar.appendChild(weekMarker);
+        }
 
-        // Afficher le numéro du jour pour le premier jour de chaque semaine
-        weekMarker.title = `Semaine du ${weekDate.getDate()} ${
-          monthNames[weekDate.getMonth()]
-        }`;
-        weekMarker.style.left = `${weekPosition}%`;
-        weeksBar.appendChild(weekMarker);
-
-        // Avancer d'une semaine
         weekDate.setDate(weekDate.getDate() + 7);
       }
     }
   }
 
-  // Fonction principale pour générer la timeline appropriée
   function generateTimeline(containerId) {
     const timelineElement = document.querySelector(`#${containerId} .timeline`);
+    if (!timelineElement) return;
 
-    if (!timelineElement) {
-      console.error(`Timeline dans #${containerId} non trouvée`);
-      return;
-    }
-
-    // Vider la timeline (pour éviter les doublons en cas de régénération)
     timelineElement.innerHTML = "";
 
-    // Générer la timeline appropriée selon le diagramme
     if (containerId === "historic-gantt") {
-      // Timeline par trimestres pour le diagramme historique
       generateQuarterTimeline(timelineElement);
     } else {
-      // Timeline détaillée par mois et semaines pour le diagramme futur
       generateDetailedTimeline(timelineElement);
     }
 
-    // Ajouter le marqueur pour la date du jour si elle est dans la plage du diagramme
     addTodayMarker(timelineElement, containerId);
   }
 
-  // Fonction pour ajouter le marqueur de la date du jour
   function addTodayMarker(timelineElement, containerId) {
-    // Déterminer les dates limites selon le diagramme
     let minDate, maxDate, totalDuration;
 
     if (containerId === "historic-gantt") {
@@ -476,67 +428,56 @@ document.addEventListener("DOMContentLoaded", function () {
       totalDuration = futureTotalDuration;
     }
 
-    // Vérifier si la date du jour est dans la plage du diagramme
     if (today >= minDate && today <= maxDate) {
       const position = ((today - minDate) / totalDuration) * 100;
 
-      // Créer le marqueur de la date du jour
       const todayMarker = document.createElement("div");
       todayMarker.className = "today-marker";
       todayMarker.style.left = `${position}%`;
 
-      // Ajouter une étiquette avec la date
       const todayLabel = document.createElement("div");
       todayLabel.className = "today-label";
       todayLabel.textContent = `Aujourd'hui (${formatDate(today)})`;
       todayMarker.appendChild(todayLabel);
 
       timelineElement.appendChild(todayMarker);
-
-      // Ajouter une ligne verticale qui traverse tout le diagramme
       addTodayLine(position, containerId);
-      todayLine.style.height = "100%";
     }
   }
 
-  // Fonction pour ajouter une ligne verticale pour la date du jour
   function addTodayLine(position, containerId) {
     const ganttContainer = document.getElementById(containerId);
+    if (!ganttContainer) return;
 
-    if (ganttContainer) {
-      const todayLine = document.createElement("div");
-      todayLine.className = "today-line";
-      todayLine.style.left = `${position}%`;
-      todayLine.style.zIndex = "1"; // S'assurer que la ligne est sous les barres
-
-      ganttContainer.appendChild(todayLine);
-    } else {
-      console.error(`Élément #${containerId} non trouvé dans le DOM`);
+    const existingLine = ganttContainer.querySelector(".today-line");
+    if (existingLine) {
+      existingLine.remove();
     }
+
+    const todayLine = document.createElement("div");
+    todayLine.className = "today-line";
+    todayLine.style.left = `${position}%`;
+    todayLine.style.height = "100%";
+    ganttContainer.appendChild(todayLine);
   }
 
-  // Génération des sections et projets
   function generateGanttChart(projectsData, containerId) {
     const sectionsContainer = document.querySelector(
       `#${containerId} .sections-container`
     );
+    if (!sectionsContainer) return;
 
-    if (!sectionsContainer) {
-      console.error(`Conteneur #${containerId} .sections-container non trouvé`);
-      return;
-    }
+    sectionsContainer.innerHTML = "";
 
-    // Regrouper les projets par section
-    const sections = {};
-    projectsData.forEach((project) => {
-      if (!sections[project.section]) {
-        sections[project.section] = [];
+    const sections = projectsData.reduce((acc, project) => {
+      if (!acc[project.section]) {
+        acc[project.section] = [];
       }
-      sections[project.section].push(project);
-    });
+      acc[project.section].push(project);
+      return acc;
+    }, {});
 
-    // Créer les sections et les projets
-    for (const sectionName in sections) {
+    Object.entries(sections).forEach(([sectionName, sectionProjects]) => {
       const sectionElement = document.createElement("div");
       sectionElement.className = "section";
       sectionElement.dataset.section = sectionName;
@@ -549,25 +490,20 @@ document.addEventListener("DOMContentLoaded", function () {
       const projectsContainer = document.createElement("div");
       projectsContainer.className = "projects";
 
-      sections[sectionName].forEach((project) => {
+      sectionProjects.forEach((project) => {
         const projectRow = document.createElement("div");
         projectRow.className = "project-row";
 
-        // Déterminer si le projet s'étend dans le futur
-        const projectExtendsFuture = project.endDate > today;
-
-        // Cas spécial pour les jalons (durée d'un jour)
         const isMilestone =
           project.startDate.getTime() === project.endDate.getTime();
+        const projectExtendsFuture = project.endDate > today;
 
         if (isMilestone) {
-          // Traitement spécial pour les jalons
           const position = calculatePosition(
             project.startDate,
             project.startDate,
             containerId
           ).start;
-
           const milestone = document.createElement("div");
           milestone.className = `milestone ${project.cssClass} ${
             project.startDate > today ? "milestone-future" : "milestone-past"
@@ -576,21 +512,15 @@ document.addEventListener("DOMContentLoaded", function () {
           milestone.style.left = `${position}%`;
           milestone.dataset.projectId = project.id;
 
-          // Ajouter une étiquette de jalon
           const milestoneLabel = document.createElement("span");
           milestoneLabel.className = "milestone-label";
           milestoneLabel.textContent = project.name;
           milestone.appendChild(milestoneLabel);
 
-          // Ajouter le gestionnaire d'événement au clic
           milestone.addEventListener("click", toggleTooltip);
-
           projectRow.appendChild(milestone);
         } else if (projectExtendsFuture && project.startDate < today) {
-          // Cas où le projet est en cours (chevauche la date du jour)
-          // Créer deux barres: une pour la partie passée et une pour la partie future
-
-          // 1. Barre pour la partie passée (jusqu'à aujourd'hui)
+          // Partie passée
           const pastBarPosition = calculatePosition(
             project.startDate,
             today,
@@ -603,67 +533,49 @@ document.addEventListener("DOMContentLoaded", function () {
           pastBar.style.width = `${pastBarPosition.width}%`;
           pastBar.dataset.projectId = project.id;
 
-          // 2. Barre pour la partie future (à partir d'aujourd'hui)
-          let minDate =
-            containerId === "historic-gantt" ? historicMinDate : futureMinDate;
-          let totalDuration =
-            containerId === "historic-gantt"
-              ? historicTotalDuration
-              : futureTotalDuration;
-
+          // Partie future
           const futureBar = document.createElement("div");
           futureBar.className = `project-bar ${project.cssClass} project-future`;
-          futureBar.style.left = `${
-            ((today - minDate) / totalDuration) * 100
-          }%`;
-          futureBar.style.width = `${
-            calculatePosition(today, project.endDate, containerId).width
-          }%`;
+          const futureStart =
+            ((today -
+              (containerId === "historic-gantt"
+                ? historicMinDate
+                : futureMinDate)) /
+              (containerId === "historic-gantt"
+                ? historicTotalDuration
+                : futureTotalDuration)) *
+            100;
+          const futureWidth = calculatePosition(
+            today,
+            project.endDate,
+            containerId
+          ).width;
+
+          futureBar.style.left = `${futureStart}%`;
+          futureBar.style.width = `${futureWidth}%`;
           futureBar.dataset.projectId = project.id;
 
-          // Ajouter les gestionnaires d'événements au clic
           pastBar.addEventListener("click", toggleTooltip);
           futureBar.addEventListener("click", toggleTooltip);
 
           projectRow.appendChild(pastBar);
           projectRow.appendChild(futureBar);
-        } else if (project.startDate > today) {
-          // Projet entièrement dans le futur
-          const { start, width } = calculatePosition(
-            project.startDate,
-            project.endDate,
-            containerId
-          );
-
-          const projectBar = document.createElement("div");
-          projectBar.className = `project-bar ${project.cssClass} project-future`;
-          projectBar.textContent = project.name;
-          projectBar.style.left = `${start}%`;
-          projectBar.style.width = `${width}%`;
-          projectBar.dataset.projectId = project.id;
-
-          // Ajouter le gestionnaire d'événement au clic
-          projectBar.addEventListener("click", toggleTooltip);
-
-          projectRow.appendChild(projectBar);
         } else {
-          // Projet entièrement dans le passé
           const { start, width } = calculatePosition(
             project.startDate,
             project.endDate,
             containerId
           );
-
           const projectBar = document.createElement("div");
-          projectBar.className = `project-bar ${project.cssClass} project-past`;
+          projectBar.className = `project-bar ${project.cssClass} ${
+            project.startDate > today ? "project-future" : "project-past"
+          }`;
           projectBar.textContent = project.name;
           projectBar.style.left = `${start}%`;
           projectBar.style.width = `${width}%`;
           projectBar.dataset.projectId = project.id;
 
-          // Ajouter le gestionnaire d'événement au clic
           projectBar.addEventListener("click", toggleTooltip);
-
           projectRow.appendChild(projectBar);
         }
 
@@ -672,50 +584,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
       sectionElement.appendChild(projectsContainer);
       sectionsContainer.appendChild(sectionElement);
-    }
+    });
   }
 
-  // Fonction pour afficher/masquer le tooltip au clic
   function toggleTooltip(event) {
     const projectId = parseInt(event.currentTarget.dataset.projectId);
 
-    // Si on clique sur le même projet et que le tooltip est déjà visible, on le cache
     if (
       currentlyDisplayedProjectId === projectId &&
-      !tooltip.classList.contains("hidden")
+      !document.getElementById("tooltip").classList.contains("hidden")
     ) {
       hideTooltip();
       return;
     }
 
-    // Sinon, on affiche le tooltip pour ce projet
     currentlyDisplayedProjectId = projectId;
     showTooltip(projectId);
-
-    // Empêcher la propagation du clic pour éviter que le document.addEventListener ne se déclenche immédiatement
     event.stopPropagation();
   }
 
-  // Fonction modifiée pour afficher le tooltip
   function showTooltip(projectId) {
     const project = projects.find((p) => p.id === projectId);
-
     if (!project) return;
 
-    // Création d'un overlay pour l'arrière-plan
-    let overlay = document.getElementById("tooltip-overlay");
-    if (!overlay) {
-      overlay = document.createElement("div");
-      overlay.id = "tooltip-overlay";
-      overlay.className = "tooltip-overlay";
-      document.body.appendChild(overlay);
-    }
-    overlay.classList.add("visible");
-
-    // Récupérer le tooltip
     const tooltip = document.getElementById("tooltip");
 
-    // Remplir le contenu du tooltip avec un bouton de fermeture
     tooltip.innerHTML = `
       <div class="tooltip-header">
         <div class="tooltip-title">${project.name}</div>
@@ -749,17 +642,13 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
     `;
 
-    // Position fixe dans la page - au centre
     tooltip.classList.remove("hidden");
     tooltip.style.opacity = "1";
     tooltip.style.visibility = "visible";
-
-    // Position centrale fixe
     tooltip.style.top = "50%";
     tooltip.style.left = "50%";
     tooltip.style.transform = "translate(-50%, -50%)";
 
-    // Si on est en mode mobile, ajuster la largeur
     if (window.innerWidth < 768) {
       tooltip.style.width = "90%";
       tooltip.style.maxWidth = "none";
@@ -768,7 +657,6 @@ document.addEventListener("DOMContentLoaded", function () {
       tooltip.style.maxWidth = "380px";
     }
 
-    // Ajouter un gestionnaire pour le bouton de fermeture
     const closeButton = tooltip.querySelector(".tooltip-close-btn");
     if (closeButton) {
       closeButton.addEventListener("click", function (e) {
@@ -777,12 +665,9 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
 
-    // Ajouter un gestionnaire pour fermer le tooltip quand on clique ailleurs
     document.addEventListener("click", handleOutsideClick);
-    overlay.addEventListener("click", hideTooltip);
   }
 
-  // Gestionnaire de clic en dehors du tooltip
   function handleOutsideClick(e) {
     const tooltip = document.getElementById("tooltip");
     if (
@@ -791,11 +676,9 @@ document.addEventListener("DOMContentLoaded", function () {
       !e.target.classList.contains("milestone")
     ) {
       hideTooltip();
-      document.removeEventListener("click", handleOutsideClick);
     }
   }
 
-  // Fonction pour masquer le tooltip
   function hideTooltip() {
     const tooltip = document.getElementById("tooltip");
     tooltip.classList.add("hidden");
@@ -803,37 +686,20 @@ document.addEventListener("DOMContentLoaded", function () {
     tooltip.style.visibility = "hidden";
     currentlyDisplayedProjectId = null;
 
-    // Masquer aussi l'overlay
-    const overlay = document.getElementById("tooltip-overlay");
-    if (overlay) {
-      overlay.classList.remove("visible");
-    }
-
-    // Supprimer l'écouteur d'événement
     document.removeEventListener("click", handleOutsideClick);
   }
 
-  // Ajout de la gestion de la navigation
   function setupNavigation() {
     const navLinks = document.querySelectorAll(".gantt-nav a");
 
     navLinks.forEach((link) => {
       link.addEventListener("click", function (e) {
         e.preventDefault();
-
-        // Supprimer la classe active de tous les liens
         navLinks.forEach((l) => l.classList.remove("active"));
-
-        // Ajouter la classe active au lien cliqué
         this.classList.add("active");
-
-        // Masquer tout tooltip ouvert
         hideTooltip();
 
-        // Obtenir l'ID cible
         const targetId = this.getAttribute("href").substring(1);
-
-        // Faire défiler jusqu'à la cible
         const targetElement = document.getElementById(targetId);
         if (targetElement) {
           window.scrollTo({
@@ -844,26 +710,18 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 
-    // Activer le premier lien par défaut
     if (navLinks.length > 0) {
       navLinks[0].classList.add("active");
     }
   }
 
-  // Initialisation
   function initializeGanttCharts() {
-    // Initialiser le premier diagramme (historique)
     generateTimeline("historic-gantt");
     generateGanttChart(historicProjects, "historic-gantt");
-
-    // Initialiser le second diagramme (futur)
     generateTimeline("future-gantt");
     generateGanttChart(upcomingProjects, "future-gantt");
-
-    // Configurer la navigation
     setupNavigation();
   }
 
-  // Lancer l'initialisation
   initializeGanttCharts();
 });

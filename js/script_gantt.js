@@ -276,7 +276,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Paramètres du diagramme
   const minDate = new Date(2021, 0, 1);
-  const maxDate = new Date(2027, 11, 31);
+  const maxDate = new Date(2026, 11, 31);
   const totalDuration = maxDate - minDate;
   const today = new Date(); // Date du jour
 

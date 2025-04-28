@@ -11,6 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
         "Mélina, Lauryn, laetitia, maeva sur https://crm-neo-sphere.fr/",
       section: "Historique Dolibarr",
       cssClass: "dolibarr-crm",
+      description:
+        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
     },
     {
       id: 2,
@@ -21,6 +23,8 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Mélina, Lauryn, laetitia, maeva",
       section: "Historique Dolibarr",
       cssClass: "dolibarr-prospect",
+      description:
+        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
     },
     {
       id: 3,
@@ -31,6 +35,8 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Romuald, maeva",
       section: "Historique Dolibarr",
       cssClass: "dolibarr-facturation",
+      description:
+        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
     },
     {
       id: 4,
@@ -41,6 +47,8 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Melina, sabine, charlotte",
       section: "Historique Dolibarr",
       cssClass: "dolibarr-campus",
+      description:
+        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
     },
     {
       id: 5,
@@ -51,6 +59,8 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "ADT - https://gestion.academie-tourisme.fr/",
       section: "Historique Dolibarr",
       cssClass: "dolibarr-fusionnee",
+      description:
+        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
     },
     {
       id: 6,
@@ -61,6 +71,8 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "",
       section: "Historique Projets Eureka",
       cssClass: "creme",
+      description:
+        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
     },
     {
       id: 7,
@@ -71,6 +83,8 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "",
       section: "Historique Projets Eureka",
       cssClass: "ypareo",
+      description:
+        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
     },
     {
       id: 8,
@@ -81,6 +95,8 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "",
       section: "Historique Projets Eureka",
       cssClass: "pepit",
+      description:
+        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
     },
     // Ajout du prévisionnel
     {
@@ -92,6 +108,8 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Équipe technique",
       section: "Planning de déploiement",
       cssClass: "planning-test",
+      description:
+        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
     },
     {
       id: 10,
@@ -102,6 +120,8 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Hélène, Olivier",
       section: "Planning de déploiement",
       cssClass: "planning-pretest",
+      description:
+        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
     },
     {
       id: 11,
@@ -112,6 +132,8 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Équipe technique",
       section: "Planning de déploiement",
       cssClass: "planning-debug",
+      description:
+        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
     },
     {
       id: 12,
@@ -122,6 +144,8 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Aurélien, Fanny, Caroline, Mélina",
       section: "Planning de déploiement",
       cssClass: "planning-test-referents",
+      description:
+        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
     },
     {
       id: 13,
@@ -132,6 +156,8 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Équipe technique",
       section: "Planning de déploiement",
       cssClass: "planning-debug-v1",
+      description:
+        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
     },
     {
       id: 14,
@@ -142,6 +168,8 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "24 personnes (4 groupes)",
       section: "Planning de déploiement",
       cssClass: "planning-formation",
+      description:
+        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
     },
     {
       id: 15,
@@ -152,6 +180,8 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Équipe technique",
       section: "Planning de déploiement",
       cssClass: "planning-debug-final",
+      description:
+        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
     },
     {
       id: 16,
@@ -162,6 +192,8 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Équipe technique",
       section: "Planning de déploiement",
       cssClass: "planning-deployment",
+      description:
+        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
     },
     //rajout ISP + GESTMAX + API + CSS du dolibarr
     {
@@ -173,6 +205,8 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Équipe technique - André",
       section: "Developpement & amélioration",
       cssClass: "dev-cybertechnique",
+      description:
+        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
     },
     {
       id: 18,
@@ -183,6 +217,8 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Équipe technique - André",
       section: "Developpement & amélioration",
       cssClass: "dev-cybertechnique",
+      description:
+        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
     },
     {
       id: 19,
@@ -193,6 +229,8 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Équipe technique - André & Hélenne",
       section: "Developpement & amélioration",
       cssClass: "dev-cybertechnique",
+      description:
+        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
     },
     {
       id: 20,
@@ -203,6 +241,8 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Équipe technique - André",
       section: "Developpement & amélioration",
       cssClass: "dev-cybertechnique",
+      description:
+        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
     },
     {
       id: 21,
@@ -213,6 +253,8 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Équipe technique - André",
       section: "Developpement & amélioration",
       cssClass: "dev-cybertechnique",
+      description:
+        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
     },
   ];
 
@@ -480,29 +522,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Remplir le contenu du tooltip
     tooltip.innerHTML = `
-            <div class="tooltip-title">${project.name}</div>
-            <div class="tooltip-grid">
-                <div>
-                    <div><span class="tooltip-label">Début:</span> ${formatDate(
-                      project.startDate
-                    )}</div>
-                    <div><span class="tooltip-label">Fin:</span> ${formatDate(
-                      project.endDate
-                    )}</div>
-                    <div><span class="tooltip-label">Durée approximative:</span> ${
-                      project.duration
-                    }</div>
-                </div>
-                <div>
-                    <div><span class="tooltip-label">Ressources humaines:</span> ${
-                      project.resources || "Non spécifiées"
-                    }</div>
-                    <div><span class="tooltip-label">Catégorie:</span> ${
-                      project.section
-                    }</div>
-                </div>
-            </div>
-        `;
+          <div class="tooltip-title">${project.name}</div>
+          ${
+            project.description
+              ? `<div class="tooltip-description">${project.description}</div>`
+              : ""
+          }
+          <div class="tooltip-grid">
+              <div>
+                  <div><span class="tooltip-label">Début:</span> ${formatDate(
+                    project.startDate
+                  )}</div>
+                  <div><span class="tooltip-label">Fin:</span> ${formatDate(
+                    project.endDate
+                  )}</div>
+                  <div><span class="tooltip-label">Durée approximative:</span> ${
+                    project.duration
+                  }</div>
+              </div>
+              <div>
+                  <div><span class="tooltip-label">Ressources humaines:</span> ${
+                    project.resources || "Non spécifiées"
+                  }</div>
+                  <div><span class="tooltip-label">Catégorie:</span> ${
+                    project.section
+                  }</div>
+              </div>
+          </div>
+      `;
 
     // Positionner le tooltip - NOUVELLE POSITION
     const rect = event.currentTarget.getBoundingClientRect();

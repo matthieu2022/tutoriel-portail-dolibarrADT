@@ -605,6 +605,7 @@ footer {
     overflow-x: auto;
     width: 100%;
     min-height: 150px;
+    width: 1500px;
 }
 
 /* Nouveaux styles pour le développement */

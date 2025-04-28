@@ -274,8 +274,8 @@ document.addEventListener("DOMContentLoaded", function () {
   ];
 
   // Création des deux ensembles de données
-  const historicProjects = projects.filter((project) => project.id <= 8);
-  const upcomingProjects = projects.filter((project) => project.id >= 9);
+  const historicProjects = projects.filter(project => project.id <= 8);
+  const upcomingProjects = projects.filter(project => project.id >= 9);
 
   // Paramètres du diagramme
   const minDate = new Date(2021, 0, 1);
@@ -308,15 +308,15 @@ document.addEventListener("DOMContentLoaded", function () {
   // Fonction pour créer le panneau latéral pour les détails des projets
   function createSidePanel() {
     // Vérifier si le panneau existe déjà
-    if (document.getElementById("project-side-panel")) {
+    if (document.getElementById('project-side-panel')) {
       return;
     }
 
     // Créer l'élément du panneau
-    const sidePanel = document.createElement("div");
-    sidePanel.id = "project-side-panel";
-    sidePanel.className = "side-panel hidden";
-
+    const sidePanel = document.createElement('div');
+    sidePanel.id = 'project-side-panel';
+    sidePanel.className = 'side-panel hidden';
+    
     // Structure interne du panneau
     sidePanel.innerHTML = `
       <div class="side-panel-header">
@@ -329,39 +329,33 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
       </div>
     `;
-
+    
     // Ajouter au document
-    document.querySelector(".container").appendChild(sidePanel);
-
+    document.querySelector('.container').appendChild(sidePanel);
+    
     // Ajouter l'événement de fermeture
-    document
-      .getElementById("close-panel-btn")
-      .addEventListener("click", function () {
-        hideSidePanel();
-        deselectCurrentProject();
-      });
+    document.getElementById('close-panel-btn').addEventListener('click', function() {
+      hideSidePanel();
+      deselectCurrentProject();
+    });
   }
 
   // Fonction pour afficher le panneau latéral avec les infos du projet
   function showProjectDetails(projectId) {
-    const project = projects.find((p) => p.id === projectId);
-
+    const project = projects.find(p => p.id === projectId);
+    
     if (!project) return;
-
+    
     // Référence au panneau latéral
-    const sidePanel = document.getElementById("project-side-panel");
-    const projectDetails = sidePanel.querySelector(".project-details");
-
+    const sidePanel = document.getElementById('project-side-panel');
+    const projectDetails = sidePanel.querySelector('.project-details');
+    
     // Mettre à jour le contenu
     projectDetails.innerHTML = `
       <div class="project-color-indicator ${project.cssClass}"></div>
       <h2 class="project-title">${project.name}</h2>
       
-      ${
-        project.description
-          ? `<div class="project-description">${project.description}</div>`
-          : ""
-      }
+      ${project.description ? `<div class="project-description">${project.description}</div>` : ''}
       
       <div class="project-metadata">
         <div class="metadata-item">
@@ -380,9 +374,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="metadata-section">
           <div class="metadata-item full-width">
             <span class="metadata-label">Ressources:</span>
-            <span class="metadata-value">${
-              project.resources || "Non spécifiées"
-            }</span>
+            <span class="metadata-value">${project.resources || "Non spécifiées"}</span>
           </div>
         </div>
         
@@ -392,30 +384,30 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
       </div>
     `;
-
+    
     // Afficher le panneau
-    sidePanel.classList.remove("hidden");
-
+    sidePanel.classList.remove('hidden');
+    
     // Ajouter une classe au body pour ajuster la mise en page
-    document.body.classList.add("panel-open");
+    document.body.classList.add('panel-open');
   }
 
   // Fonction pour masquer le panneau latéral
   function hideSidePanel() {
-    const sidePanel = document.getElementById("project-side-panel");
-
+    const sidePanel = document.getElementById('project-side-panel');
+    
     if (sidePanel) {
-      sidePanel.classList.add("hidden");
-      document.body.classList.remove("panel-open");
+      sidePanel.classList.add('hidden');
+      document.body.classList.remove('panel-open');
     }
-
+    
     currentlySelectedProjectId = null;
   }
 
   // Fonction pour désélectionner visuellement le projet actuel
   function deselectCurrentProject() {
     if (currentlySelectedElement) {
-      currentlySelectedElement.classList.remove("selected");
+      currentlySelectedElement.classList.remove('selected');
       currentlySelectedElement = null;
     }
   }
@@ -423,12 +415,12 @@ document.addEventListener("DOMContentLoaded", function () {
   // Génération des trimestres pour l'axe temporel
   function generateTimeline(containerId) {
     const timelineElement = document.querySelector(`#${containerId} .timeline`);
-
+    
     if (!timelineElement) {
       console.error(`Timeline dans #${containerId} non trouvée`);
       return;
     }
-
+    
     let currentDate = new Date(minDate);
 
     while (currentDate < maxDate) {
@@ -495,37 +487,35 @@ document.addEventListener("DOMContentLoaded", function () {
   // Fonction pour gérer le clic sur un élément de projet
   function handleProjectClick(event) {
     const projectId = parseInt(event.currentTarget.dataset.projectId);
-
+    
     // Si on reclique sur le même projet, on désactive la sélection
     if (currentlySelectedProjectId === projectId) {
       hideSidePanel();
       deselectCurrentProject();
       return;
     }
-
+    
     // Désélectionner l'élément précédemment sélectionné
     deselectCurrentProject();
-
+    
     // Sélectionner le nouveau projet
     currentlySelectedProjectId = projectId;
     currentlySelectedElement = event.currentTarget;
-    currentlySelectedElement.classList.add("selected");
-
+    currentlySelectedElement.classList.add('selected');
+    
     // Afficher les détails du projet
     showProjectDetails(projectId);
   }
 
   // Génération des sections et projets
   function generateGanttChart(projectsData, containerId) {
-    const sectionsContainer = document.querySelector(
-      `#${containerId} .sections-container`
-    );
-
+    const sectionsContainer = document.querySelector(`#${containerId} .sections-container`);
+    
     if (!sectionsContainer) {
       console.error(`Conteneur #${containerId} .sections-container non trouvé`);
       return;
     }
-
+  
     // Regrouper les projets par section
     const sections = {};
     projectsData.forEach((project) => {
@@ -534,36 +524,36 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       sections[project.section].push(project);
     });
-
+  
     // Créer les sections et les projets
     for (const sectionName in sections) {
       const sectionElement = document.createElement("div");
       sectionElement.className = "section";
-
+  
       const sectionTitle = document.createElement("h3");
       sectionTitle.className = "section-title";
       sectionTitle.textContent = sectionName;
       sectionElement.appendChild(sectionTitle);
-
+  
       const projectsContainer = document.createElement("div");
       projectsContainer.className = "projects";
-
+  
       sections[sectionName].forEach((project) => {
         const projectRow = document.createElement("div");
         projectRow.className = "project-row";
-
+  
         // Déterminer si le projet s'étend dans le futur
         const projectExtendsFuture = project.endDate > today;
-
+  
         // Cas spécial pour les jalons (durée d'un jour)
         const isMilestone =
           project.startDate.getTime() === project.endDate.getTime();
-
+  
         if (isMilestone) {
           // Traitement spécial pour les jalons
           const position =
             ((project.startDate - minDate) / totalDuration) * 100;
-
+  
           const milestone = document.createElement("div");
           milestone.className = `milestone ${project.cssClass} ${
             project.startDate > today ? "milestone-future" : "milestone-past"
@@ -571,21 +561,21 @@ document.addEventListener("DOMContentLoaded", function () {
           milestone.title = project.name;
           milestone.style.left = `${position}%`;
           milestone.dataset.projectId = project.id;
-
+  
           // Ajouter une étiquette de jalon
           const milestoneLabel = document.createElement("span");
           milestoneLabel.className = "milestone-label";
           milestoneLabel.textContent = project.name;
           milestone.appendChild(milestoneLabel);
-
+  
           // Ajouter le gestionnaire d'événement au clic
           milestone.addEventListener("click", handleProjectClick);
-
+  
           projectRow.appendChild(milestone);
         } else if (projectExtendsFuture && project.startDate < today) {
           // Cas où le projet est en cours (chevauche la date du jour)
           // Créer deux barres: une pour la partie passée et une pour la partie future
-
+  
           // 1. Barre pour la partie passée (jusqu'à aujourd'hui)
           const pastBarPosition = calculatePosition(project.startDate, today);
           const pastBar = document.createElement("div");
@@ -594,7 +584,7 @@ document.addEventListener("DOMContentLoaded", function () {
           pastBar.style.left = `${pastBarPosition.start}%`;
           pastBar.style.width = `${pastBarPosition.width}%`;
           pastBar.dataset.projectId = project.id;
-
+  
           // 2. Barre pour la partie future (à partir d'aujourd'hui)
           const futureBarPosition = calculatePosition(today, project.endDate);
           const futureBar = document.createElement("div");
@@ -604,11 +594,11 @@ document.addEventListener("DOMContentLoaded", function () {
           }%`;
           futureBar.style.width = `${futureBarPosition.width}%`;
           futureBar.dataset.projectId = project.id;
-
+  
           // Ajouter les gestionnaires d'événements au clic
           pastBar.addEventListener("click", handleProjectClick);
           futureBar.addEventListener("click", handleProjectClick);
-
+  
           projectRow.appendChild(pastBar);
           projectRow.appendChild(futureBar);
         } else if (project.startDate > today) {
@@ -617,17 +607,17 @@ document.addEventListener("DOMContentLoaded", function () {
             project.startDate,
             project.endDate
           );
-
+  
           const projectBar = document.createElement("div");
           projectBar.className = `project-bar ${project.cssClass} project-future`;
           projectBar.textContent = project.name;
           projectBar.style.left = `${start}%`;
           projectBar.style.width = `${width}%`;
           projectBar.dataset.projectId = project.id;
-
+  
           // Ajouter le gestionnaire d'événement au clic
           projectBar.addEventListener("click", handleProjectClick);
-
+  
           projectRow.appendChild(projectBar);
         } else {
           // Projet entièrement dans le passé
@@ -635,23 +625,23 @@ document.addEventListener("DOMContentLoaded", function () {
             project.startDate,
             project.endDate
           );
-
+  
           const projectBar = document.createElement("div");
           projectBar.className = `project-bar ${project.cssClass} project-past`;
           projectBar.textContent = project.name;
           projectBar.style.left = `${start}%`;
           projectBar.style.width = `${width}%`;
           projectBar.dataset.projectId = project.id;
-
+  
           // Ajouter le gestionnaire d'événement au clic
           projectBar.addEventListener("click", handleProjectClick);
-
+  
           projectRow.appendChild(projectBar);
         }
-
+  
         projectsContainer.appendChild(projectRow);
       });
-
+  
       sectionElement.appendChild(projectsContainer);
       sectionsContainer.appendChild(sectionElement);
     }
@@ -659,39 +649,39 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Ajout de la gestion de la navigation
   function setupNavigation() {
-    const navLinks = document.querySelectorAll(".gantt-nav a");
-
-    navLinks.forEach((link) => {
-      link.addEventListener("click", function (e) {
+    const navLinks = document.querySelectorAll('.gantt-nav a');
+    
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
         e.preventDefault();
-
+        
         // Supprimer la classe active de tous les liens
-        navLinks.forEach((l) => l.classList.remove("active"));
-
+        navLinks.forEach(l => l.classList.remove('active'));
+        
         // Ajouter la classe active au lien cliqué
-        this.classList.add("active");
-
+        this.classList.add('active');
+        
         // Fermer le panneau latéral et désélectionner tout projet
         hideSidePanel();
         deselectCurrentProject();
-
+        
         // Obtenir l'ID cible
-        const targetId = this.getAttribute("href").substring(1);
-
+        const targetId = this.getAttribute('href').substring(1);
+        
         // Faire défiler jusqu'à la cible
         const targetElement = document.getElementById(targetId);
         if (targetElement) {
           window.scrollTo({
             top: targetElement.offsetTop - 20,
-            behavior: "smooth",
+            behavior: 'smooth'
           });
         }
       });
     });
-
+    
     // Activer le premier lien par défaut
     if (navLinks.length > 0) {
-      navLinks[0].classList.add("active");
+      navLinks[0].classList.add('active');
     }
   }
 
@@ -699,31 +689,25 @@ document.addEventListener("DOMContentLoaded", function () {
   function initializeGanttCharts() {
     // Créer le panneau latéral
     createSidePanel();
-
+    
     // Initialiser le premier diagramme (historique)
     generateTimeline("historic-gantt");
     generateGanttChart(historicProjects, "historic-gantt");
-
+    
     // Initialiser le second diagramme (futur)
     generateTimeline("future-gantt");
     generateGanttChart(upcomingProjects, "future-gantt");
-
+    
     // Configurer la navigation
     setupNavigation();
-
+    
     // Ajouter un gestionnaire d'événement pour fermer le panneau quand on clique ailleurs
-    document.addEventListener("click", function (event) {
+    document.addEventListener('click', function(event) {
       // Si on clique en dehors du panneau et en dehors d'un élément de projet
-      const isProjectElement =
-        event.target.closest(".project-bar") ||
-        event.target.closest(".milestone");
-      const isSidePanel = event.target.closest("#project-side-panel");
-
-      if (
-        !isProjectElement &&
-        !isSidePanel &&
-        currentlySelectedProjectId !== null
-      ) {
+      const isProjectElement = event.target.closest('.project-bar') || event.target.closest('.milestone');
+      const isSidePanel = event.target.closest('#project-side-panel');
+      
+      if (!isProjectElement && !isSidePanel && currentlySelectedProjectId !== null) {
         hideSidePanel();
         deselectCurrentProject();
       }

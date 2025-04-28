@@ -1,13 +1,4 @@
-/* Reset et styles de base */
-:root {
-    --primary-color: #0c2340;
-    --red-color: #ff0000;
-    --text-color: #333;
-    --bg-color: #f5f7fa;
-    --border-color: #eee;
-    --shadow-color: rgba(0, 0, 0, 0.1);
-}
-
+/* Styles généraux */
 * {
     margin: 0;
     padding: 0;
@@ -16,31 +7,29 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
+    background-color: #f5f7fa;
+    color: #333;
     line-height: 1.6;
 }
 
-/* Layout */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
 }
 
-/* Header styles */
 header {
     margin-bottom: 30px;
     text-align: center;
 }
 
 h1 {
-    color: var(--primary-color);
+    color: #0c2340;
     margin-bottom: 10px;
-    font-size: 1.75rem;
+    font-size: 28px;
 }
 
-/* Navigation */
+/* Navigation des diagrammes */
 .gantt-nav {
     margin: 20px 0;
 }
@@ -49,14 +38,18 @@ h1 {
     display: flex;
     justify-content: center;
     list-style: none;
-    gap: 15px;
+    padding: 0;
+}
+
+.gantt-nav li {
+    margin: 0 15px;
 }
 
 .gantt-nav a {
     display: block;
     padding: 10px 20px;
     text-decoration: none;
-    color: var(--primary-color);
+    color: #0c2340;
     background-color: #f0f4f8;
     border-radius: 5px;
     transition: all 0.3s ease;
@@ -65,165 +58,153 @@ h1 {
 
 .gantt-nav a:hover,
 .gantt-nav a.active {
-    background-color: var(--primary-color);
+    background-color: #0c2340;
     color: white;
     transform: translateY(-3px);
-    box-shadow: 0 4px 8px var(--shadow-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Gantt Chart Container */
+/* Sections des diagrammes */
+.gantt-section {
+    margin-bottom: 60px;
+}
+
+.gantt-section h2 {
+    color: #0c2340;
+    margin-bottom: 20px;
+    font-size: 24px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #eee;
+}
+
+/* Styles de base pour le diagramme de Gantt */
 .gantt-container,
-#gantt-container,
-#historic-gantt,
-#future-gantt {
+#gantt-container {
     position: relative;
     background-color: white;
     border-radius: 8px;
-    box-shadow: 0 2px 10px var(--shadow-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin-bottom: 30px;
     overflow-x: auto;
-    overflow-y: hidden;
     width: 1500px;
-    height: auto !important;
-    max-height: none !important;
+    min-height: 150px;
 }
 
 /* Timeline */
 .timeline {
     position: relative;
-    height: 80px;
+    height: 50px;
     border-bottom: 1px solid #ccc;
     margin-bottom: 20px;
 }
 
-.months-bar {
+.quarter-marker {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 30px;
-    border-bottom: 1px solid var(--border-color);
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: #666;
 }
 
-.month-marker {
-    position: absolute;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.813rem;
-    font-weight: 600;
-    color: var(--primary-color);
-    border-right: 1px solid var(--border-color);
-    padding-left: 5px;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-.month-marker:first-child {
-    border-left: 1px solid var(--border-color);
-}
-
-/* Week markers */
-.weeks-bar {
-    position: absolute;
-    top: 30px;
-    left: 0;
-    right: 0;
-    height: 20px;
-}
-
-.week-marker {
-    position: absolute;
-    width: 1px;
-    height: 10px;
-    background-color: #ccc;
-    top: 0;
-}
-
-.week-marker::after {
+.quarter-marker::after {
     content: '';
     position: absolute;
-    bottom: -40px;
-    left: 0;
+    top: 20px;
+    left: 50%;
+    height: 8px;
     width: 1px;
-    height: 500px;
-    background-color: rgba(204, 204, 204, 0.2);
-    z-index: 0;
-    pointer-events: none;
+    background-color: #ddd;
 }
 
-/* Today marker */
-.today-marker,
-.today-line {
-    position: absolute;
-    width: 2px;
-    background-color: var(--red-color);
-    z-index: 10;
+/* Sections et projets */
+.section {
+    margin-bottom: 30px;
 }
 
+.section-title {
+    font-weight: bold;
+    color: #0c2340;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.projects {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.project-row {
+    position: relative;
+    height: 30px;
+    margin-bottom: 5px;
+}
+
+/* Styles pour le marqueur de la date du jour */
 .today-marker {
-    height: 80px;
+    position: absolute;
+    height: 25px;
+    width: 2px;
+    background-color: #ff0000;
     top: 0;
-}
-
-.today-line {
-    height: 100% !important;
-    top: 0;
-    bottom: 0;
-    opacity: 0.7;
+    z-index: 10;
 }
 
 .today-label {
     position: absolute;
     white-space: nowrap;
-    background-color: var(--red-color);
+    background-color: #ff0000;
     color: white;
     padding: 2px 6px;
     border-radius: 3px;
-    font-size: 0.75rem;
-    top: 5px;
+    font-size: 12px;
+    top: 25px;
     left: 50%;
     transform: translateX(-50%);
 }
 
-/* Project bars */
-.project-row {
-    position: relative;
-    height: 35px;
-    margin-bottom: 5px;
+.today-line {
+    position: absolute;
+    width: 2px;
+    background-color: #ff0000;
+    top: 0;
+    bottom: 0;
+    z-index: 5;
+    height: 100%;
+    opacity: 0.7;
 }
 
+/* Styles pour les barres de projet */
 .project-bar {
     position: absolute;
     height: 25px;
     text-align: center;
     padding: 5px 10px;
+    box-sizing: border-box;
     border-radius: 3px;
-    font-size: 0.75rem;
+    font-size: 12px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     cursor: pointer;
-    transition: all 0.2s ease;
-    z-index: 2;
+    transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .project-bar:hover {
     opacity: 0.9;
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px var(--shadow-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 10;
 }
 
-/* Project states */
+/* Style pour les projets passés (avant la date du jour) */
 .project-past {
     color: white;
     opacity: 1;
     border: none;
 }
 
+/* Style pour les projets futurs (après la date du jour) */
 .project-future {
     color: rgba(255, 255, 255, 0.7);
     opacity: 0.6;
@@ -235,16 +216,18 @@ h1 {
     border-left: 2px dashed white;
 }
 
+/* Pour que le texte n'apparaisse que sur la première partie du projet en cours */
 .project-future:not(:first-child) {
     color: transparent;
 }
 
+/* Style pour mettre en évidence les projets en cours */
 .current-project {
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
-    border: 2px solid var(--red-color);
+    border: 2px solid #ff0000;
 }
 
-/* Milestones */
+/* Styles pour les jalons */
 .milestone {
     position: absolute;
     width: 24px;
@@ -264,8 +247,11 @@ h1 {
     top: -5px;
     left: 50%;
     transform: translateX(-50%);
-    border: 10px solid transparent;
-    border-bottom-color: #333;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #333;
 }
 
 .milestone-label {
@@ -274,7 +260,7 @@ h1 {
     top: 25px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 0.75rem;
+    font-size: 12px;
     color: #333;
     font-weight: bold;
     background-color: rgba(255, 255, 255, 0.9);
@@ -283,7 +269,38 @@ h1 {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-/* Tooltip */
+.milestone-past {
+    background-color: #333;
+    opacity: 1;
+}
+
+.milestone-future {
+    background-color: #777;
+    opacity: 0.7;
+    border: 2px dotted #333;
+}
+
+/* Animation de pulsation pour indiquer l'interaction */
+.project-bar:active,
+.milestone:active {
+    animation: pulse 0.3s ease;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.03);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Styles pour le tooltip */
 .tooltip {
     position: fixed;
     background-color: white;
@@ -294,7 +311,8 @@ h1 {
     max-width: 380px;
     min-width: 280px;
     z-index: 1000;
-    transition: all 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    transform: translateY(0);
 }
 
 .tooltip.hidden {
@@ -304,28 +322,29 @@ h1 {
     pointer-events: none;
 }
 
+/* Ajout d'un en-tête pour le tooltip avec bouton de fermeture */
 .tooltip-header {
     display: flex;
     position: relative;
     padding-right: 30px;
     margin-bottom: 12px;
     padding-bottom: 5px;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid #eee;
 }
 
 .tooltip-title {
     font-weight: bold;
-    color: var(--primary-color);
-    font-size: 1rem;
+    color: #0c2340;
+    font-size: 16px;
     width: 100%;
 }
 
+/* Style amélioré pour le bouton de fermeture du tooltip */
 .tooltip-close-btn {
-    position: absolute;
-    right: 8px;
-    top: 8px;
     background-color: #ff3333;
     color: white;
+    font-size: 16px;
+    font-weight: bold;
     width: 26px;
     height: 26px;
     border: none;
@@ -334,8 +353,14 @@ h1 {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.2s ease;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    transition: all 0.2s ease;
 }
 
 .tooltip-close-btn:hover {
@@ -344,39 +369,130 @@ h1 {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-/* Project colors */
-.project-colors {
-    --dolibarr-crm: #3498db;
-    --dolibarr-prospect: #2ecc71;
-    --dolibarr-facturation: #f1c40f;
-    --dolibarr-campus: #e74c3c;
-    --dolibarr-fusionnee: #9b59b6;
-    --creme: #1abc9c;
-    --ypareo: #d35400;
-    --pepit: #8e44ad;
-    --planning-test: #16a085;
-    --planning-pretest: #27ae60;
-    --planning-debug: #2980b9;
-    --planning-test-referents: #8e44ad;
-    --planning-formation: #c0392b;
-    --planning-deployment: #e74c3c;
-    --dev-cybertechnique: #34495e;
+/* Style de la description */
+.tooltip-description {
+    margin: 5px 0 12px 0;
+    font-size: 13px;
+    color: #555;
+    line-height: 1.5;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    text-align: justify;
 }
 
-[class*="dolibarr-"],
-[class*="planning-"],
-.creme,
-.ypareo,
-.pepit,
-.dev-cybertechnique {
-    background-color: var(--project-colors);
+/* Style pour les grilles d'information */
+.tooltip-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    font-size: 13px;
 }
 
+.tooltip-label {
+    font-weight: 600;
+    color: #555;
+}
+
+/* Animation pour rendre la fermeture plus fluide */
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+}
+
+/* Couleurs des projets */
+.dolibarr-crm {
+    background-color: #3498db;
+}
+
+.dolibarr-prospect {
+    background-color: #2ecc71;
+}
+
+.dolibarr-facturation {
+    background-color: #f1c40f;
+}
+
+.dolibarr-campus {
+    background-color: #e74c3c;
+}
+
+.dolibarr-fusionnee {
+    background-color: #9b59b6;
+}
+
+.creme {
+    background-color: #1abc9c;
+}
+
+.ypareo {
+    background-color: #d35400;
+}
+
+.pepit {
+    background-color: #8e44ad;
+}
+
+/* Styles pour les nouveaux projets de planification */
+.planning-test {
+    background-color: #16a085;
+}
+
+.planning-pretest {
+    background-color: #27ae60;
+}
+
+.planning-debug {
+    background-color: #2980b9;
+}
+
+.planning-test-referents {
+    background-color: #8e44ad;
+}
+
+.planning-debug-v1 {
+    background-color: #2980b9;
+}
+
+.planning-formation {
+    background-color: #c0392b;
+}
+
+.planning-debug-final {
+    background-color: #2980b9;
+}
+
+.planning-deployment {
+    background-color: #e74c3c;
+}
+
+/* Nouveaux styles pour le développement */
 .dev-cybertechnique {
+    background-color: #34495e;
     background-image: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
 }
 
-/* Responsive design */
+/* Ajouter une bordure noire autour du jalon de déploiement */
+.planning-deployment.milestone {
+    border: 3px solid black;
+    z-index: 20;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+/* Responsive */
 @media screen and (max-width: 768px) {
     .container {
         padding: 10px;
@@ -388,7 +504,7 @@ h1 {
     }
 
     .project-bar {
-        font-size: 0.688rem;
+        font-size: 11px;
         padding-left: 5px;
     }
 
@@ -406,4 +522,212 @@ h1 {
         width: 100%;
         text-align: center;
     }
+
+}
+
+/* Styles pour la timeline détaillée */
+.timeline {
+    position: relative;
+    height: 80px;
+    /* Plus haute pour accommoder les mois et semaines */
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+/* Styles pour les marqueurs trimestriels (premier diagramme) */
+.quarter-marker {
+    position: absolute;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: #666;
+    top: 5px;
+}
+
+.quarter-marker::after {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    height: 8px;
+    width: 1px;
+    background-color: #ddd;
+}
+
+/* Styles pour la barre des mois */
+.months-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Styles pour les marqueurs de mois */
+.month-marker {
+    position: absolute;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: #0c2340;
+    border-right: 1px solid #eee;
+    padding-left: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.month-marker:first-child {
+    border-left: 1px solid #eee;
+}
+
+/* Styles pour la barre des semaines */
+.weeks-bar {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    right: 0;
+    height: 20px;
+}
+
+/* Styles pour les marqueurs de semaine */
+.week-marker {
+    position: absolute;
+    width: 1px;
+    height: 10px;
+    background-color: #ccc;
+    top: 0;
+}
+
+.week-marker::after {
+    content: '';
+    position: absolute;
+    bottom: -40px;
+    /* Étendre les lignes de semaine à travers le diagramme */
+    left: 0;
+    width: 1px;
+    height: 1000px;
+    /* Assez haut pour traverser tout le diagramme */
+    background-color: rgba(204, 204, 204, 0.2);
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Style pour le marqueur du jour actuel */
+.today-marker {
+    position: absolute;
+    height: 80px;
+    /* Même hauteur que la timeline */
+    width: 2px;
+    background-color: #ff0000;
+    top: 0;
+    z-index: 10;
+}
+
+.today-label {
+    position: absolute;
+    white-space: nowrap;
+    background-color: #ff0000;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.today-line {
+    position: absolute;
+    width: 2px;
+    background-color: #ff0000;
+    top: 0;
+    bottom: 0;
+    z-index: 5;
+    height: 2000px;
+    /* Assez haut pour traverser tout le contenu */
+    opacity: 0.7;
+}
+
+/* Ajuster la position des sections pour la nouvelle timeline */
+#future-gantt .sections-container {
+    margin-top: 50px;
+    /* Espace pour la timeline plus haute */
+}
+
+/* S'assurer que les barres de projet sont au-dessus des lignes de semaine */
+.project-bar,
+.milestone {
+    position: relative;
+    z-index: 2;
+}
+
+/* Correction pour le conteneur du diagramme */
+.gantt-container,
+#gantt-container,
+#historic-gantt,
+#future-gantt {
+    position: relative;
+    overflow-x: auto;
+    /* Permet le défilement horizontal */
+    overflow-y: hidden;
+    /* Supprime le défilement vertical */
+    height: auto !important;
+    /* Hauteur automatique basée sur le contenu */
+    max-height: none !important;
+    /* Supprime toute hauteur maximale */
+}
+
+/* S'assurer que la ligne verticale du jour actuel ne dépasse pas */
+.today-line {
+    height: 100% !important;
+    /* Limiter la hauteur à celle du conteneur */
+    bottom: 0;
+    top: 0;
+}
+
+/* Correction pour les lignes de semaine */
+.week-marker::after {
+    bottom: -40px;
+    height: 500px;
+    /* Réduire la hauteur pour éviter le défilement */
+}
+
+/* Assurer que les sections sont correctement alignées */
+.section {
+    position: relative;
+    clear: both;
+    margin-bottom: 20px;
+}
+
+/* Harmoniser les noms de sections */
+[data-section="Developpement & améliorations"],
+[data-section="Developpement & amélioration"] {
+    /* Appliquer les mêmes styles pour harmoniser l'affichage */
+    font-weight: bold;
+    color: #0c2340;
+}
+
+/* Correction pour le positionnement des barres */
+.project-bar,
+.milestone {
+    /* S'assurer que les positions calculées sont correctes */
+    box-sizing: border-box;
+    position: absolute;
+}
+
+/* Assurer que les conteneurs de barres ont une hauteur suffisante */
+.project-row {
+    position: relative;
+    height: 35px;
+    /* Légèrement plus haut pour éviter les chevauchements */
+    margin-bottom: 5px;
+}
+
+/* Supprimer tout espace supplémentaire sous le diagramme */
+.sections-container {
+    padding-bottom: 0;
+    margin-bottom: 0;
 }

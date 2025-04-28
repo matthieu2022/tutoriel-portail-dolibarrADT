@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Planning de déploiement",
       cssClass: "planning-debug",
       description:
-        "Première phase de correction des bugs et d'ajustements suite aux retours des pré-tests. Optimisation des performances et de l'Phase de test avec 4 référents d’activité du pôle commercial + Débugs et ajustements pour la V1.",
+        "Première phase de correction des bugs et d'ajustements suite aux retours des pré-tests. Optimisation des performances et de l'Phase de test avec 4 référents d'activité du pôle commercial + Débugs et ajustements pour la V1.",
     },
     {
       id: 12,
@@ -147,7 +147,6 @@ document.addEventListener("DOMContentLoaded", function () {
       description:
         "Demo icademie pour le dolibarvierge et notre CRM. Comparaison éventuelle avec Salesforce",
     },
-
     {
       id: 13,
       name: "Congès",
@@ -160,7 +159,6 @@ document.addEventListener("DOMContentLoaded", function () {
       description:
         "Période estivale de congés pour l'équipe technique et les référents d'activité mais cette période peut être sujette à des tests ou des développements légers.",
     },
-
     {
       id: 14,
       name: "Formation des équipes Commerciales et Administratif",
@@ -173,7 +171,6 @@ document.addEventListener("DOMContentLoaded", function () {
       description:
         "Formation des équipes commerciales et administratif (15 personnes) - 1 journée par utilisateur, soit 3 groupes de 5 personnes – mise en place de référents dolibarr qui assureront aide et suivi. Un portail web dédiée sera à disposition.",
     },
-    ,
     {
       id: 15,
       name: "Rentrée Septembre - deploiement de la V1",
@@ -196,7 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Planning de déploiement",
       cssClass: "planning-debug-final",
       description:
-        "Fusion Bdd Campus avec le dolibarr principal gestion + Concertation avec Mélina pour l’integration par la Cyber-technique",
+        "Fusion Bdd Campus avec le dolibarr principal gestion + Concertation avec Mélina pour l'integration par la Cyber-technique",
     },
     {
       id: 17,
@@ -212,7 +209,7 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     //rajout ISP + GESTMAX + API + CSS du dolibarr
     {
-      id: 17,
+      id: 22, // Corrigé l'ID dupliqué (17 -> 22)
       name: "Formulaires Web et liaisons webhook",
       startDate: new Date(2025, 3, 24),
       endDate: new Date(2025, 4, 14),
@@ -274,8 +271,8 @@ document.addEventListener("DOMContentLoaded", function () {
   ];
 
   // Création des deux ensembles de données
-  const historicProjects = projects.filter(project => project.id <= 8);
-  const upcomingProjects = projects.filter(project => project.id >= 9);
+  const historicProjects = projects.filter((project) => project.id <= 8);
+  const upcomingProjects = projects.filter((project) => project.id >= 9);
 
   // Paramètres du diagramme
   const minDate = new Date(2021, 0, 1);
@@ -283,9 +280,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const totalDuration = maxDate - minDate;
   const today = new Date(); // Date du jour
 
-  // Variable pour suivre le projet actuellement sélectionné
-  let currentlySelectedProjectId = null;
-  let currentlySelectedElement = null;
+  // Variable pour suivre le projet actuellement affiché
+  let currentlyDisplayedProjectId = null;
 
   // Fonction pour formater les dates
   function formatDate(date) {
@@ -305,122 +301,15 @@ document.addEventListener("DOMContentLoaded", function () {
     return { start, width };
   }
 
-  // Fonction pour créer le panneau latéral pour les détails des projets
-  function createSidePanel() {
-    // Vérifier si le panneau existe déjà
-    if (document.getElementById('project-side-panel')) {
-      return;
-    }
-
-    // Créer l'élément du panneau
-    const sidePanel = document.createElement('div');
-    sidePanel.id = 'project-side-panel';
-    sidePanel.className = 'side-panel hidden';
-    
-    // Structure interne du panneau
-    sidePanel.innerHTML = `
-      <div class="side-panel-header">
-        <h3 class="side-panel-title">Détails du projet</h3>
-        <button id="close-panel-btn" class="close-panel-btn" aria-label="Fermer">✕</button>
-      </div>
-      <div class="side-panel-content">
-        <div class="project-details">
-          <p class="empty-state">Sélectionnez un projet pour voir ses détails</p>
-        </div>
-      </div>
-    `;
-    
-    // Ajouter au document
-    document.querySelector('.container').appendChild(sidePanel);
-    
-    // Ajouter l'événement de fermeture
-    document.getElementById('close-panel-btn').addEventListener('click', function() {
-      hideSidePanel();
-      deselectCurrentProject();
-    });
-  }
-
-  // Fonction pour afficher le panneau latéral avec les infos du projet
-  function showProjectDetails(projectId) {
-    const project = projects.find(p => p.id === projectId);
-    
-    if (!project) return;
-    
-    // Référence au panneau latéral
-    const sidePanel = document.getElementById('project-side-panel');
-    const projectDetails = sidePanel.querySelector('.project-details');
-    
-    // Mettre à jour le contenu
-    projectDetails.innerHTML = `
-      <div class="project-color-indicator ${project.cssClass}"></div>
-      <h2 class="project-title">${project.name}</h2>
-      
-      ${project.description ? `<div class="project-description">${project.description}</div>` : ''}
-      
-      <div class="project-metadata">
-        <div class="metadata-item">
-          <span class="metadata-label">Début:</span>
-          <span class="metadata-value">${formatDate(project.startDate)}</span>
-        </div>
-        <div class="metadata-item">
-          <span class="metadata-label">Fin:</span>
-          <span class="metadata-value">${formatDate(project.endDate)}</span>
-        </div>
-        <div class="metadata-item">
-          <span class="metadata-label">Durée:</span>
-          <span class="metadata-value">${project.duration}</span>
-        </div>
-        
-        <div class="metadata-section">
-          <div class="metadata-item full-width">
-            <span class="metadata-label">Ressources:</span>
-            <span class="metadata-value">${project.resources || "Non spécifiées"}</span>
-          </div>
-        </div>
-        
-        <div class="metadata-item">
-          <span class="metadata-label">Catégorie:</span>
-          <span class="metadata-value">${project.section}</span>
-        </div>
-      </div>
-    `;
-    
-    // Afficher le panneau
-    sidePanel.classList.remove('hidden');
-    
-    // Ajouter une classe au body pour ajuster la mise en page
-    document.body.classList.add('panel-open');
-  }
-
-  // Fonction pour masquer le panneau latéral
-  function hideSidePanel() {
-    const sidePanel = document.getElementById('project-side-panel');
-    
-    if (sidePanel) {
-      sidePanel.classList.add('hidden');
-      document.body.classList.remove('panel-open');
-    }
-    
-    currentlySelectedProjectId = null;
-  }
-
-  // Fonction pour désélectionner visuellement le projet actuel
-  function deselectCurrentProject() {
-    if (currentlySelectedElement) {
-      currentlySelectedElement.classList.remove('selected');
-      currentlySelectedElement = null;
-    }
-  }
-
   // Génération des trimestres pour l'axe temporel
   function generateTimeline(containerId) {
     const timelineElement = document.querySelector(`#${containerId} .timeline`);
-    
+
     if (!timelineElement) {
       console.error(`Timeline dans #${containerId} non trouvée`);
       return;
     }
-    
+
     let currentDate = new Date(minDate);
 
     while (currentDate < maxDate) {
@@ -484,38 +373,17 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Fonction pour gérer le clic sur un élément de projet
-  function handleProjectClick(event) {
-    const projectId = parseInt(event.currentTarget.dataset.projectId);
-    
-    // Si on reclique sur le même projet, on désactive la sélection
-    if (currentlySelectedProjectId === projectId) {
-      hideSidePanel();
-      deselectCurrentProject();
-      return;
-    }
-    
-    // Désélectionner l'élément précédemment sélectionné
-    deselectCurrentProject();
-    
-    // Sélectionner le nouveau projet
-    currentlySelectedProjectId = projectId;
-    currentlySelectedElement = event.currentTarget;
-    currentlySelectedElement.classList.add('selected');
-    
-    // Afficher les détails du projet
-    showProjectDetails(projectId);
-  }
-
   // Génération des sections et projets
   function generateGanttChart(projectsData, containerId) {
-    const sectionsContainer = document.querySelector(`#${containerId} .sections-container`);
-    
+    const sectionsContainer = document.querySelector(
+      `#${containerId} .sections-container`
+    );
+
     if (!sectionsContainer) {
       console.error(`Conteneur #${containerId} .sections-container non trouvé`);
       return;
     }
-  
+
     // Regrouper les projets par section
     const sections = {};
     projectsData.forEach((project) => {
@@ -524,36 +392,36 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       sections[project.section].push(project);
     });
-  
+
     // Créer les sections et les projets
     for (const sectionName in sections) {
       const sectionElement = document.createElement("div");
       sectionElement.className = "section";
-  
+
       const sectionTitle = document.createElement("h3");
       sectionTitle.className = "section-title";
       sectionTitle.textContent = sectionName;
       sectionElement.appendChild(sectionTitle);
-  
+
       const projectsContainer = document.createElement("div");
       projectsContainer.className = "projects";
-  
+
       sections[sectionName].forEach((project) => {
         const projectRow = document.createElement("div");
         projectRow.className = "project-row";
-  
+
         // Déterminer si le projet s'étend dans le futur
         const projectExtendsFuture = project.endDate > today;
-  
+
         // Cas spécial pour les jalons (durée d'un jour)
         const isMilestone =
           project.startDate.getTime() === project.endDate.getTime();
-  
+
         if (isMilestone) {
           // Traitement spécial pour les jalons
           const position =
             ((project.startDate - minDate) / totalDuration) * 100;
-  
+
           const milestone = document.createElement("div");
           milestone.className = `milestone ${project.cssClass} ${
             project.startDate > today ? "milestone-future" : "milestone-past"
@@ -561,21 +429,21 @@ document.addEventListener("DOMContentLoaded", function () {
           milestone.title = project.name;
           milestone.style.left = `${position}%`;
           milestone.dataset.projectId = project.id;
-  
+
           // Ajouter une étiquette de jalon
           const milestoneLabel = document.createElement("span");
           milestoneLabel.className = "milestone-label";
           milestoneLabel.textContent = project.name;
           milestone.appendChild(milestoneLabel);
-  
+
           // Ajouter le gestionnaire d'événement au clic
-          milestone.addEventListener("click", handleProjectClick);
-  
+          milestone.addEventListener("click", toggleTooltip);
+
           projectRow.appendChild(milestone);
         } else if (projectExtendsFuture && project.startDate < today) {
           // Cas où le projet est en cours (chevauche la date du jour)
           // Créer deux barres: une pour la partie passée et une pour la partie future
-  
+
           // 1. Barre pour la partie passée (jusqu'à aujourd'hui)
           const pastBarPosition = calculatePosition(project.startDate, today);
           const pastBar = document.createElement("div");
@@ -584,7 +452,7 @@ document.addEventListener("DOMContentLoaded", function () {
           pastBar.style.left = `${pastBarPosition.start}%`;
           pastBar.style.width = `${pastBarPosition.width}%`;
           pastBar.dataset.projectId = project.id;
-  
+
           // 2. Barre pour la partie future (à partir d'aujourd'hui)
           const futureBarPosition = calculatePosition(today, project.endDate);
           const futureBar = document.createElement("div");
@@ -594,11 +462,11 @@ document.addEventListener("DOMContentLoaded", function () {
           }%`;
           futureBar.style.width = `${futureBarPosition.width}%`;
           futureBar.dataset.projectId = project.id;
-  
+
           // Ajouter les gestionnaires d'événements au clic
-          pastBar.addEventListener("click", handleProjectClick);
-          futureBar.addEventListener("click", handleProjectClick);
-  
+          pastBar.addEventListener("click", toggleTooltip);
+          futureBar.addEventListener("click", toggleTooltip);
+
           projectRow.appendChild(pastBar);
           projectRow.appendChild(futureBar);
         } else if (project.startDate > today) {
@@ -607,17 +475,17 @@ document.addEventListener("DOMContentLoaded", function () {
             project.startDate,
             project.endDate
           );
-  
+
           const projectBar = document.createElement("div");
           projectBar.className = `project-bar ${project.cssClass} project-future`;
           projectBar.textContent = project.name;
           projectBar.style.left = `${start}%`;
           projectBar.style.width = `${width}%`;
           projectBar.dataset.projectId = project.id;
-  
+
           // Ajouter le gestionnaire d'événement au clic
-          projectBar.addEventListener("click", handleProjectClick);
-  
+          projectBar.addEventListener("click", toggleTooltip);
+
           projectRow.appendChild(projectBar);
         } else {
           // Projet entièrement dans le passé
@@ -625,93 +493,215 @@ document.addEventListener("DOMContentLoaded", function () {
             project.startDate,
             project.endDate
           );
-  
+
           const projectBar = document.createElement("div");
           projectBar.className = `project-bar ${project.cssClass} project-past`;
           projectBar.textContent = project.name;
           projectBar.style.left = `${start}%`;
           projectBar.style.width = `${width}%`;
           projectBar.dataset.projectId = project.id;
-  
+
           // Ajouter le gestionnaire d'événement au clic
-          projectBar.addEventListener("click", handleProjectClick);
-  
+          projectBar.addEventListener("click", toggleTooltip);
+
           projectRow.appendChild(projectBar);
         }
-  
+
         projectsContainer.appendChild(projectRow);
       });
-  
+
       sectionElement.appendChild(projectsContainer);
       sectionsContainer.appendChild(sectionElement);
     }
   }
 
+  // Fonction pour afficher/masquer le tooltip au clic
+  function toggleTooltip(event) {
+    const projectId = parseInt(event.currentTarget.dataset.projectId);
+
+    // Si on clique sur le même projet et que le tooltip est déjà visible, on le cache
+    if (
+      currentlyDisplayedProjectId === projectId &&
+      !tooltip.classList.contains("hidden")
+    ) {
+      hideTooltip();
+      return;
+    }
+
+    // Sinon, on affiche le tooltip pour ce projet
+    currentlyDisplayedProjectId = projectId;
+    showTooltip(projectId);
+
+    // Empêcher la propagation du clic pour éviter que le document.addEventListener ne se déclenche immédiatement
+    event.stopPropagation();
+  }
+
+  // Fonction modifiée pour afficher le tooltip
+  function showTooltip(projectId) {
+    const project = projects.find((p) => p.id === projectId);
+
+    if (!project) return;
+
+    // Création d'un overlay pour l'arrière-plan
+    let overlay = document.getElementById("tooltip-overlay");
+    if (!overlay) {
+      overlay = document.createElement("div");
+      overlay.id = "tooltip-overlay";
+      overlay.className = "tooltip-overlay";
+      document.body.appendChild(overlay);
+    }
+    overlay.classList.add("visible");
+
+    // Récupérer le tooltip
+    const tooltip = document.getElementById("tooltip");
+
+    // Remplir le contenu du tooltip avec un bouton de fermeture
+    tooltip.innerHTML = `
+      <div class="tooltip-header">
+        <div class="tooltip-title">${project.name}</div>
+        <button class="tooltip-close-btn" aria-label="Fermer">&#10005;</button>
+      </div>
+      ${
+        project.description
+          ? `<div class="tooltip-description">${project.description}</div>`
+          : ""
+      }
+      <div class="tooltip-grid">
+        <div>
+          <div><span class="tooltip-label">Début:</span> ${formatDate(
+            project.startDate
+          )}</div>
+          <div><span class="tooltip-label">Fin:</span> ${formatDate(
+            project.endDate
+          )}</div>
+          <div><span class="tooltip-label">Durée approximative:</span> ${
+            project.duration
+          }</div>
+        </div>
+        <div>
+          <div><span class="tooltip-label">Ressources humaines:</span> ${
+            project.resources || "Non spécifiées"
+          }</div>
+          <div><span class="tooltip-label">Catégorie:</span> ${
+            project.section
+          }</div>
+        </div>
+      </div>
+    `;
+
+    // Position fixe dans la page - au centre
+    tooltip.classList.remove("hidden");
+    tooltip.style.opacity = "1";
+    tooltip.style.visibility = "visible";
+
+    // Position centrale fixe
+    tooltip.style.top = "50%";
+    tooltip.style.left = "50%";
+    tooltip.style.transform = "translate(-50%, -50%)";
+
+    // Si on est en mode mobile, ajuster la largeur
+    if (window.innerWidth < 768) {
+      tooltip.style.width = "90%";
+      tooltip.style.maxWidth = "none";
+    } else {
+      tooltip.style.width = "380px";
+      tooltip.style.maxWidth = "380px";
+    }
+
+    // Ajouter un gestionnaire pour le bouton de fermeture
+    const closeButton = tooltip.querySelector(".tooltip-close-btn");
+    if (closeButton) {
+      closeButton.addEventListener("click", function (e) {
+        hideTooltip();
+        e.stopPropagation();
+      });
+    }
+
+    // Ajouter un gestionnaire pour fermer le tooltip quand on clique ailleurs
+    document.addEventListener("click", handleOutsideClick);
+    overlay.addEventListener("click", hideTooltip);
+  }
+
+  // Gestionnaire de clic en dehors du tooltip
+  function handleOutsideClick(e) {
+    const tooltip = document.getElementById("tooltip");
+    if (
+      !tooltip.contains(e.target) &&
+      !e.target.classList.contains("project-bar") &&
+      !e.target.classList.contains("milestone")
+    ) {
+      hideTooltip();
+      document.removeEventListener("click", handleOutsideClick);
+    }
+  }
+
+  // Fonction pour masquer le tooltip
+  function hideTooltip() {
+    const tooltip = document.getElementById("tooltip");
+    tooltip.classList.add("hidden");
+    tooltip.style.opacity = "0";
+    tooltip.style.visibility = "hidden";
+    currentlyDisplayedProjectId = null;
+
+    // Masquer aussi l'overlay
+    const overlay = document.getElementById("tooltip-overlay");
+    if (overlay) {
+      overlay.classList.remove("visible");
+    }
+
+    // Supprimer l'écouteur d'événement
+    document.removeEventListener("click", handleOutsideClick);
+  }
+
   // Ajout de la gestion de la navigation
   function setupNavigation() {
-    const navLinks = document.querySelectorAll('.gantt-nav a');
-    
-    navLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
+    const navLinks = document.querySelectorAll(".gantt-nav a");
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", function (e) {
         e.preventDefault();
-        
+
         // Supprimer la classe active de tous les liens
-        navLinks.forEach(l => l.classList.remove('active'));
-        
+        navLinks.forEach((l) => l.classList.remove("active"));
+
         // Ajouter la classe active au lien cliqué
-        this.classList.add('active');
-        
-        // Fermer le panneau latéral et désélectionner tout projet
-        hideSidePanel();
-        deselectCurrentProject();
-        
+        this.classList.add("active");
+
+        // Masquer tout tooltip ouvert
+        hideTooltip();
+
         // Obtenir l'ID cible
-        const targetId = this.getAttribute('href').substring(1);
-        
+        const targetId = this.getAttribute("href").substring(1);
+
         // Faire défiler jusqu'à la cible
         const targetElement = document.getElementById(targetId);
         if (targetElement) {
           window.scrollTo({
             top: targetElement.offsetTop - 20,
-            behavior: 'smooth'
+            behavior: "smooth",
           });
         }
       });
     });
-    
+
     // Activer le premier lien par défaut
     if (navLinks.length > 0) {
-      navLinks[0].classList.add('active');
+      navLinks[0].classList.add("active");
     }
   }
 
   // Initialisation
   function initializeGanttCharts() {
-    // Créer le panneau latéral
-    createSidePanel();
-    
     // Initialiser le premier diagramme (historique)
     generateTimeline("historic-gantt");
     generateGanttChart(historicProjects, "historic-gantt");
-    
+
     // Initialiser le second diagramme (futur)
     generateTimeline("future-gantt");
     generateGanttChart(upcomingProjects, "future-gantt");
-    
+
     // Configurer la navigation
     setupNavigation();
-    
-    // Ajouter un gestionnaire d'événement pour fermer le panneau quand on clique ailleurs
-    document.addEventListener('click', function(event) {
-      // Si on clique en dehors du panneau et en dehors d'un élément de projet
-      const isProjectElement = event.target.closest('.project-bar') || event.target.closest('.milestone');
-      const isSidePanel = event.target.closest('#project-side-panel');
-      
-      if (!isProjectElement && !isSidePanel && currentlySelectedProjectId !== null) {
-        hideSidePanel();
-        deselectCurrentProject();
-      }
-    });
   }
 
   // Lancer l'initialisation

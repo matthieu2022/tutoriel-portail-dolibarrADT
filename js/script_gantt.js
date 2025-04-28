@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { 
             id: 2, 
             name: 'Dolibarr Prospect', 
-            startDate: new Date(2022, 2, 1), 
+            startDate: new Date(2021, 6, 1), 
             endDate: new Date(2025, 0, 10), 
             duration: '1047 jours', 
             resources: 'Mélina, Lauryn, laetitia, maeva', 
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         { 
             id: 5, 
-            name: 'Dolibarr fusionnée', 
+            name: 'Dolibarr fusionné', 
             startDate: new Date(2025, 0, 13), 
             endDate: new Date(2025, 3, 26), 
             duration: '104 jours', 

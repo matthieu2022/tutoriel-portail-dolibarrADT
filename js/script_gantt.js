@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
       endDate: new Date(2025, 0, 10),
       duration: "600 jours",
       resources: "Romuald, maeva",
-      section: "Projets Dolibarr",
+      section: "Historique Dolibarr",
       cssClass: "dolibarr-facturation",
     },
     {
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
       endDate: new Date(2025, 3, 25),
       duration: "237 jours",
       resources: "Melina, sabine, charlotte",
-      section: "Projets Dolibarr",
+      section: "Historique Dolibarr",
       cssClass: "dolibarr-campus",
     },
     {
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
       endDate: new Date(2026, 3, 26),
       duration: "104 jours",
       resources: "ADT - https://gestion.academie-tourisme.fr/",
-      section: "Projets Dolibarr",
+      section: "Historique Dolibarr",
       cssClass: "dolibarr-fusionnee",
     },
     {
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
       endDate: new Date(2022, 7, 15),
       duration: "351 jours",
       resources: "",
-      section: "Autres Projets Eureka",
+      section: "Historique Projets Eureka",
       cssClass: "creme",
     },
     {
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
       endDate: new Date(2024, 5, 7),
       duration: "17 jours",
       resources: "",
-      section: "Autres Projets Eureka",
+      section: "Historique Projets Eureka",
       cssClass: "ypareo",
     },
     {
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
       endDate: new Date(2024, 1, 6),
       duration: "205 jours",
       resources: "",
-      section: "Autres Projets Eureka",
+      section: "Historique Projets Eureka",
       cssClass: "pepit",
     },
     // Ajout du prévisionnel
@@ -421,12 +421,12 @@ function addTodayLine(position) {
                     <div><span class="tooltip-label">Fin:</span> ${formatDate(
                       project.endDate
                     )}</div>
-                    <div><span class="tooltip-label">Durée:</span> ${
+                    <div><span class="tooltip-label">Durée approximative:</span> ${
                       project.duration
                     }</div>
                 </div>
                 <div>
-                    <div><span class="tooltip-label">Ressources:</span> ${
+                    <div><span class="tooltip-label">Ressources humaines:</span> ${
                       project.resources || "Non spécifiées"
                     }</div>
                     <div><span class="tooltip-label">Catégorie:</span> ${

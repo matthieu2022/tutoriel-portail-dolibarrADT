@@ -534,11 +534,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!project) return;
 
-    // Remplir le contenu du tooltip avec un bouton de fermeture
+    // D'abord masquer tout tooltip existant
+    hideTooltip();
+
+    // Remplir le contenu du tooltip avec un bouton de fermeture rouge
     tooltip.innerHTML = `
       <div class="tooltip-header">
         <div class="tooltip-title">${project.name}</div>
-        <button class="tooltip-close-btn">&times;</button>
+        <button class="tooltip-close-btn" aria-label="Fermer">&#10005;</button>
       </div>
       ${
         project.description
@@ -611,30 +614,57 @@ document.addEventListener("DOMContentLoaded", function () {
       tooltip.style.top = `${rect.bottom + window.scrollY + 10}px`;
     }
 
-    // Ajouter un gestionnaire pour le bouton de fermeture
+    // Ajouter un gestionnaire pour le bouton de fermeture avec priorité élevée
     const closeButton = tooltip.querySelector(".tooltip-close-btn");
     if (closeButton) {
-      closeButton.addEventListener("click", hideTooltip);
+      // Supprimer les gestionnaires précédents pour éviter les doublons
+      closeButton.removeEventListener("click", handleCloseButtonClick);
+      // Ajouter le nouveau gestionnaire
+      closeButton.addEventListener("click", handleCloseButtonClick);
     }
 
+    // Supprimer tout gestionnaire de clic précédent sur le document pour éviter les doublons
+    document.removeEventListener("click", handleDocumentClick);
     // Ajouter un gestionnaire pour fermer le tooltip quand on clique ailleurs
-    document.addEventListener("click", hideTooltipOnClickOutside);
+    document.addEventListener("click", handleDocumentClick);
+  }
+
+  // Fonction de gestion du clic sur le bouton de fermeture
+  function handleCloseButtonClick(event) {
+    hideTooltip();
+    event.stopPropagation(); // Empêcher la propagation du clic
+  }
+
+  // Fonction de gestion du clic sur le document
+  function handleDocumentClick(event) {
+    // Vérifier que le clic n'est pas sur le tooltip ou un élément du projet
+    const isTooltipClick = event.target.closest("#tooltip");
+    const isProjectBarClick =
+      event.target.classList.contains("project-bar") ||
+      event.target.classList.contains("milestone");
+
+    if (!isTooltipClick && !isProjectBarClick) {
+      hideTooltip();
+    }
   }
 
   // Fonction pour masquer le tooltip
   function hideTooltip() {
     tooltip.classList.add("hidden");
+    tooltip.style.opacity = "0";
+    tooltip.style.visibility = "hidden";
     currentlyDisplayedProjectId = null;
   }
 
   // Fonction pour fermer le tooltip quand on clique en dehors
   function hideTooltipOnClickOutside(event) {
     // Vérifier que le clic n'est pas sur le tooltip ou un élément du projet
-    if (
-      !tooltip.contains(event.target) &&
-      !event.target.classList.contains("project-bar") &&
-      !event.target.classList.contains("milestone")
-    ) {
+    const isTooltipClick = event.target.closest("#tooltip");
+    const isProjectBarClick =
+      event.target.classList.contains("project-bar") ||
+      event.target.classList.contains("milestone");
+
+    if (!isTooltipClick && !isProjectBarClick) {
       hideTooltip();
       document.removeEventListener("click", hideTooltipOnClickOutside);
     }
@@ -653,6 +683,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Ajouter la classe active au lien cliqué
         this.classList.add("active");
+
+        // Fermer tout tooltip ouvert
+        hideTooltip();
 
         // Obtenir l'ID cible
         const targetId = this.getAttribute("href").substring(1);

@@ -7,9 +7,10 @@ document.addEventListener('DOMContentLoaded', function() {
         startDate: new Date(2022, 8, 2),
         endDate: new Date(2025, 0, 10),
         duration: "600 jours",
-        resources: "Mélina, Lauryn, laetitia, maeva",
+        resources:
+          "Mélina, Lauryn, laetitia, maeva sur https://crm-neo-sphere.fr/",
         section: "Projets Dolibarr",
-        cssClass: "dolibarr-crm https://crm-neo-sphere.fr/",
+        cssClass: "dolibarr-crm",
       },
       {
         id: 2,
@@ -47,9 +48,9 @@ document.addEventListener('DOMContentLoaded', function() {
         startDate: new Date(2025, 0, 13),
         endDate: new Date(2026, 3, 26),
         duration: "104 jours",
-        resources: "ADT",
+        resources: "ADT - https://gestion.academie-tourisme.fr/",
         section: "Projets Dolibarr",
-        cssClass: "dolibarr-actuel https://gestion.academie-tourisme.fr/",
+        cssClass: "dolibarr-fusionnee",
       },
       {
         id: 6,

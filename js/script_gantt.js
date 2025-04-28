@@ -436,15 +436,43 @@ function addTodayLine(position) {
             </div>
         `;
 
-    // Positionner le tooltip
+    // Positionner le tooltip - NOUVELLE POSITION
     const rect = event.currentTarget.getBoundingClientRect();
-    tooltip.style.top = `${rect.bottom + window.scrollY + 10}px`;
+
+    // Pour les jalons (qui sont plus petits), ajustez la position
+    if (event.currentTarget.classList.contains("milestone")) {
+      tooltip.style.top = `${rect.top + window.scrollY - 5}px`;
+    } else {
+      // Position pour les barres de projet normales
+      tooltip.style.top = `${
+        rect.top + window.scrollY - tooltip.offsetHeight - 5
+      }px`;
+    }
+
+    // Position horizontale centrée sur l'élément
     tooltip.style.left = `${
-      rect.left + window.scrollX + rect.width / 2 - 175
+      rect.left + window.scrollX + rect.width / 2 - tooltip.offsetWidth / 2
     }px`;
+
+    // Vérifier si le tooltip sort de l'écran à droite
+    const rightEdge = tooltip.getBoundingClientRect().right;
+    const windowWidth = window.innerWidth;
+    if (rightEdge > windowWidth) {
+      tooltip.style.left = `${windowWidth - tooltip.offsetWidth - 10}px`;
+    }
+
+    // Vérifier si le tooltip sort de l'écran à gauche
+    const leftEdge = tooltip.getBoundingClientRect().left;
+    if (leftEdge < 0) {
+      tooltip.style.left = "10px";
+    }
 
     // Afficher le tooltip
     tooltip.classList.remove("hidden");
+
+    // Le rendre visible pour pouvoir calculer ses dimensions
+    tooltip.style.opacity = "1";
+    tooltip.style.visibility = "visible";
 
     // Gérer le clic en dehors pour les appareils tactiles
     document.addEventListener("click", hideTooltipOnClickOutside);

@@ -247,7 +247,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 20,
       name: "Liaisons API GESTMAX + maformation.fr + je-change-de-metier.fr",
-      startDate: new Date(2025, 4, 14),
+      startDate: new Date(2025, 3, 14),
       endDate: new Date(2025, 5, 14),
       duration: "1 mois environ",
       resources: "Équipe technique - André",

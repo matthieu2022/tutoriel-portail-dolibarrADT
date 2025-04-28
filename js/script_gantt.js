@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { 
             id: 1, 
             name: 'Dolibarr CRM', 
-            startDate: new Date(2023, 4, 22), 
+            startDate: new Date(2022, 4, 22), 
             endDate: new Date(2025, 0, 10), 
             duration: '600 jours', 
             resources: 'Mélina, Lauryn, laetitia, maeva', 
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { 
             id: 3, 
             name: 'Dolibarr facturation', 
-            startDate: new Date(2021, 12, 22), 
+            startDate: new Date(2021, 1, 22), 
             endDate: new Date(2025, 0, 10), 
             duration: '600 jours', 
             resources: 'Romuald, maeva', 
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Paramètres du diagramme
     const minDate = new Date(2021, 0, 1);
-    const maxDate = new Date(2025, 11, 31);
+    const maxDate = new Date(2027, 11, 31);
     const totalDuration = maxDate - minDate;
     
     // Fonction pour formater les dates

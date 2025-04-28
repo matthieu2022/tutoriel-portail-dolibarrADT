@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
       duration: "600 jours",
       resources:
         "Mélina, Lauryn, laetitia, maeva sur https://crm-neo-sphere.fr/",
-      section: "Projets Dolibarr",
+      section: "Historique Dolibarr",
       cssClass: "dolibarr-crm",
     },
     {
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
       endDate: new Date(2025, 0, 10),
       duration: "1047 jours",
       resources: "Mélina, Lauryn, laetitia, maeva",
-      section: "Projets Dolibarr",
+      section: "Historique Dolibarr",
       cssClass: "dolibarr-prospect",
     },
     {
@@ -163,7 +163,62 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Planning de déploiement",
       cssClass: "planning-deployment",
     },
+    //rajout ISP + GESTMAX + API + CSS du dolibarr
+    {
+      id: 17,
+      name: "Formulaires Web et liaisons webhook",
+      startDate: new Date(2025, 3, 24),
+      endDate: new Date(2025, 4, 14),
+      duration: "1 mois environ",
+      resources: "Équipe technique - André",
+      section: "Developpement & amélioration",
+      cssClass: "dev-cybertechnique",
+    },
+    {
+      id: 18,
+      name: "Module Pré-opportunité",
+      startDate: new Date(2025, 2, 1),
+      endDate: new Date(2025, 4, 14),
+      duration: "2 mois environ",
+      resources: "Équipe technique - André",
+      section: "Developpement & amélioration",
+      cssClass: "dev-cybertechnique",
+    },
+    {
+      id: 19,
+      name: "ISP et correspondance des champs",
+      startDate: new Date(2025, 2, 18),
+      endDate: new Date(2025, 6, 1),
+      duration: "3 mois environ",
+      resources: "Équipe technique - André & Hélenne",
+      section: "Developpement & amélioration",
+      cssClass: "dev-cybertechnique",
+    },
+    {
+      id: 20,
+      name: "Liaisons API GESTMAX + maformation.fr + je-change-de-metier.fr",
+      startDate: new Date(2025, 4, 14),
+      endDate: new Date(2025, 5, 14),
+      duration: "1 mois environ",
+      resources: "Équipe technique - André",
+      section: "Developpement & amélioration",
+      cssClass: "dev-cybertechnique",
+    },
+    {
+      id: 21,
+      name: "developpement interne dolibarr",
+      startDate: new Date(2024, 10, 5),
+      endDate: new Date(2025, 5, 14),
+      duration: "1 mois environ",
+      resources: "Équipe technique - André",
+      section: "Developpement & amélioration",
+      cssClass: "dev-cybertechnique",
+    },
   ];
+
+  // Création des deux ensembles de données
+  const historicProjects = projects.filter((project) => project.id <= 8);
+  const upcomingProjects = projects.filter((project) => project.id >= 9);
 
   // Paramètres du diagramme
   const minDate = new Date(2021, 0, 1);
@@ -190,8 +245,14 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Génération des trimestres pour l'axe temporel
-  function generateTimeline() {
-    const timelineElement = document.querySelector(".timeline");
+  function generateTimeline(containerId) {
+    const timelineElement = document.querySelector(`#${containerId} .timeline`);
+
+    if (!timelineElement) {
+      console.error(`Timeline dans #${containerId} non trouvée`);
+      return;
+    }
+
     let currentDate = new Date(minDate);
 
     while (currentDate < maxDate) {
@@ -213,11 +274,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Ajouter le marqueur pour la date du jour
-    addTodayMarker(timelineElement);
+    addTodayMarker(timelineElement, containerId);
   }
 
   // Fonction pour ajouter le marqueur de la date du jour
-  function addTodayMarker(timelineElement) {
+  function addTodayMarker(timelineElement, containerId) {
     // Vérifier si la date du jour est dans la plage du diagramme
     if (today >= minDate && today <= maxDate) {
       const position = ((today - minDate) / totalDuration) * 100;
@@ -236,32 +297,39 @@ document.addEventListener("DOMContentLoaded", function () {
       timelineElement.appendChild(todayMarker);
 
       // Ajouter une ligne verticale qui traverse tout le diagramme
-      addTodayLine(position);
+      addTodayLine(position, containerId);
     }
   }
 
   // Fonction pour ajouter une ligne verticale pour la date du jour
-function addTodayLine(position) {
-  const ganttContainer = document.getElementById("gantt-container");
+  function addTodayLine(position, containerId) {
+    const ganttContainer = document.getElementById(containerId);
 
-  if (ganttContainer) {
-    const todayLine = document.createElement("div");
-    todayLine.className = "today-line";
-    todayLine.style.left = `${position}%`;
+    if (ganttContainer) {
+      const todayLine = document.createElement("div");
+      todayLine.className = "today-line";
+      todayLine.style.left = `${position}%`;
 
-    ganttContainer.appendChild(todayLine);
-  } else {
-    console.error("Élément #gantt-container non trouvé dans le DOM");
+      ganttContainer.appendChild(todayLine);
+    } else {
+      console.error(`Élément #${containerId} non trouvé dans le DOM`);
+    }
   }
-}
 
   // Génération des sections et projets
-  function generateGanttChart() {
-    const sectionsContainer = document.querySelector(".sections-container");
+  function generateGanttChart(projectsData, containerId) {
+    const sectionsContainer = document.querySelector(
+      `#${containerId} .sections-container`
+    );
+
+    if (!sectionsContainer) {
+      console.error(`Conteneur #${containerId} .sections-container non trouvé`);
+      return;
+    }
 
     // Regrouper les projets par section
     const sections = {};
-    projects.forEach((project) => {
+    projectsData.forEach((project) => {
       if (!sections[project.section]) {
         sections[project.section] = [];
       }
@@ -439,11 +507,16 @@ function addTodayLine(position) {
     // Positionner le tooltip - NOUVELLE POSITION
     const rect = event.currentTarget.getBoundingClientRect();
 
+    // Le rendre visible pour pouvoir calculer ses dimensions
+    tooltip.classList.remove("hidden");
+    tooltip.style.opacity = "1";
+    tooltip.style.visibility = "visible";
+
     // Pour les jalons (qui sont plus petits), ajustez la position
     if (event.currentTarget.classList.contains("milestone")) {
       tooltip.style.top = `${rect.top + window.scrollY - 5}px`;
     } else {
-      // Position pour les barres de projet normales
+      // Position au-dessus des barres de projet normales
       tooltip.style.top = `${
         rect.top + window.scrollY - tooltip.offsetHeight - 5
       }px`;
@@ -467,13 +540,6 @@ function addTodayLine(position) {
       tooltip.style.left = "10px";
     }
 
-    // Afficher le tooltip
-    tooltip.classList.remove("hidden");
-
-    // Le rendre visible pour pouvoir calculer ses dimensions
-    tooltip.style.opacity = "1";
-    tooltip.style.visibility = "visible";
-
     // Gérer le clic en dehors pour les appareils tactiles
     document.addEventListener("click", hideTooltipOnClickOutside);
   }
@@ -493,7 +559,54 @@ function addTodayLine(position) {
     }
   }
 
+  // Ajout de la gestion de la navigation
+  function setupNavigation() {
+    const navLinks = document.querySelectorAll(".gantt-nav a");
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        // Supprimer la classe active de tous les liens
+        navLinks.forEach((l) => l.classList.remove("active"));
+
+        // Ajouter la classe active au lien cliqué
+        this.classList.add("active");
+
+        // Obtenir l'ID cible
+        const targetId = this.getAttribute("href").substring(1);
+
+        // Faire défiler jusqu'à la cible
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 20,
+            behavior: "smooth",
+          });
+        }
+      });
+    });
+
+    // Activer le premier lien par défaut
+    if (navLinks.length > 0) {
+      navLinks[0].classList.add("active");
+    }
+  }
+
   // Initialisation
-  generateTimeline();
-  generateGanttChart();
+  function initializeGanttCharts() {
+    // Initialiser le premier diagramme (historique)
+    generateTimeline("historic-gantt");
+    generateGanttChart(historicProjects, "historic-gantt");
+
+    // Initialiser le second diagramme (futur)
+    generateTimeline("future-gantt");
+    generateGanttChart(upcomingProjects, "future-gantt");
+
+    // Configurer la navigation
+    setupNavigation();
+  }
+
+  // Lancer l'initialisation
+  initializeGanttCharts();
 });

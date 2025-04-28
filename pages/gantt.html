@@ -3,31 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diagramme de Gantt Interactif</title>
+    <title>Diagrammes de Gantt - Projets Dolibarr</title>
     <link rel="stylesheet" href="../css/styles_gantt.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>RetroPlanning & projection des actions CRM/ERP</h1>
+            <h1>Projets Dolibarr</h1>
+            <nav class="gantt-nav">
+                <ul>
+                    <li><a href="#historic-gantt">Historique des projets</a></li>
+                    <li><a href="#future-gantt">Déploiement & Développement</a></li>
+                </ul>
+            </nav>
         </header>
         
-        <main id="gantt-container">
-            <!-- Timeline -->
-            <div class="timeline">
-                <!-- Les trimestres seront générés ici par JS -->
+        <section class="gantt-section">
+            <h2 id="historic-section">Historique des projets</h2>
+            <div id="historic-gantt" class="gantt-container">
+                <!-- Timeline -->
+                <div class="timeline">
+                    <!-- Les trimestres seront générés ici par JS -->
+                </div>
+                
+                <!-- Sections de projets -->
+                <div class="sections-container">
+                    <!-- Les sections et projets seront générés ici par JS -->
+                </div>
             </div>
-            
-            <!-- Sections de projets -->
-            <div class="sections-container">
-                <!-- Les sections et projets seront générés ici par JS -->
+        </section>
+        
+        <section class="gantt-section">
+            <h2 id="future-section">Déploiement & Développement</h2>
+            <div id="future-gantt" class="gantt-container">
+                <!-- Timeline -->
+                <div class="timeline">
+                    <!-- Les trimestres seront générés ici par JS -->
+                </div>
+                
+                <!-- Sections de projets -->
+                <div class="sections-container">
+                    <!-- Les sections et projets seront générés ici par JS -->
+                </div>
             </div>
-            
-            <!-- Info-bulle pour les détails au survol -->
-            <div id="tooltip" class="tooltip hidden">
-                <!-- Contenu dynamique -->
-            </div>
-        </main>
+        </section>
+        
+        <!-- Info-bulle pour les détails au survol -->
+        <div id="tooltip" class="tooltip hidden">
+            <!-- Contenu dynamique -->
+        </div>
         
         <footer>
             <p>© 2025 - Gantt ADT - CRM & ERP</p>

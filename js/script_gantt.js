@@ -241,15 +241,19 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Fonction pour ajouter une ligne verticale pour la date du jour
-  function addTodayLine(position) {
-    const ganttContainer = document.querySelector(".gantt-container");
+function addTodayLine(position) {
+  const ganttContainer = document.getElementById("gantt-container");
 
+  if (ganttContainer) {
     const todayLine = document.createElement("div");
     todayLine.className = "today-line";
     todayLine.style.left = `${position}%`;
 
     ganttContainer.appendChild(todayLine);
+  } else {
+    console.error("Élément #gantt-container non trouvé dans le DOM");
   }
+}
 
   // Génération des sections et projets
   function generateGanttChart() {

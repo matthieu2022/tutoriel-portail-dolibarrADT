@@ -274,10 +274,16 @@ document.addEventListener("DOMContentLoaded", function () {
   const historicProjects = projects.filter((project) => project.id <= 8);
   const upcomingProjects = projects.filter((project) => project.id >= 9);
 
-  // Paramètres du diagramme
-  const minDate = new Date(2021, 0, 1);
-  const maxDate = new Date(2026, 11, 31);
-  const totalDuration = maxDate - minDate;
+  // Paramètres du diagramme pour le premier diagramme (historique)
+  const historicMinDate = new Date(2021, 0, 1); // 1er janvier 2021
+  const historicMaxDate = new Date(2027, 11, 31); // 31 décembre 2027
+  const historicTotalDuration = historicMaxDate - historicMinDate;
+
+  // Paramètres du diagramme pour le second diagramme (futur)
+  const futureMinDate = new Date(2025, 1, 1); // 1er février 2025
+  const futureMaxDate = new Date(2025, 11, 31); // 31 décembre 2025
+  const futureTotalDuration = futureMaxDate - futureMinDate;
+
   const today = new Date(); // Date du jour
 
   // Variable pour suivre le projet actuellement affiché
@@ -294,8 +300,19 @@ document.addEventListener("DOMContentLoaded", function () {
       )}/${(date.getMonth() + 1).toString().padStart(2, "0")}/${date.getFullYear()}`;
   }
 
-  // Fonction pour calculer position et largeur des barres
-  function calculatePosition(startDate, endDate) {
+  // Fonction pour calculer position et largeur des barres selon le diagramme
+  function calculatePosition(startDate, endDate, containerId) {
+    // Utiliser les paramètres appropriés selon le diagramme
+    let minDate, totalDuration;
+
+    if (containerId === "historic-gantt") {
+      minDate = historicMinDate;
+      totalDuration = historicTotalDuration;
+    } else {
+      minDate = futureMinDate;
+      totalDuration = futureTotalDuration;
+    }
+
     const start = ((startDate - minDate) / totalDuration) * 100;
     const width = ((endDate - startDate) / totalDuration) * 100;
     return { start, width };
@@ -310,6 +327,17 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
+    // Utiliser les paramètres appropriés selon le diagramme
+    let minDate, maxDate;
+
+    if (containerId === "historic-gantt") {
+      minDate = historicMinDate;
+      maxDate = historicMaxDate;
+    } else {
+      minDate = futureMinDate;
+      maxDate = futureMaxDate;
+    }
+
     let currentDate = new Date(minDate);
 
     while (currentDate < maxDate) {
@@ -317,7 +345,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const month = currentDate.getMonth();
       const quarter = Math.floor(month / 3) + 1;
 
-      const position = ((currentDate - minDate) / totalDuration) * 100;
+      const position = ((currentDate - minDate) / (maxDate - minDate)) * 100;
 
       const markerElement = document.createElement("div");
       markerElement.className = "quarter-marker";
@@ -330,12 +358,25 @@ document.addEventListener("DOMContentLoaded", function () {
       currentDate = new Date(year, month + 3, 1);
     }
 
-    // Ajouter le marqueur pour la date du jour
+    // Ajouter le marqueur pour la date du jour si elle est dans la plage du diagramme
     addTodayMarker(timelineElement, containerId);
   }
 
   // Fonction pour ajouter le marqueur de la date du jour
   function addTodayMarker(timelineElement, containerId) {
+    // Déterminer les dates limites selon le diagramme
+    let minDate, maxDate, totalDuration;
+
+    if (containerId === "historic-gantt") {
+      minDate = historicMinDate;
+      maxDate = historicMaxDate;
+      totalDuration = historicTotalDuration;
+    } else {
+      minDate = futureMinDate;
+      maxDate = futureMaxDate;
+      totalDuration = futureTotalDuration;
+    }
+
     // Vérifier si la date du jour est dans la plage du diagramme
     if (today >= minDate && today <= maxDate) {
       const position = ((today - minDate) / totalDuration) * 100;
@@ -419,8 +460,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (isMilestone) {
           // Traitement spécial pour les jalons
-          const position =
-            ((project.startDate - minDate) / totalDuration) * 100;
+          const position = calculatePosition(
+            project.startDate,
+            project.startDate,
+            containerId
+          ).start;
 
           const milestone = document.createElement("div");
           milestone.className = `milestone ${project.cssClass} ${
@@ -445,7 +489,11 @@ document.addEventListener("DOMContentLoaded", function () {
           // Créer deux barres: une pour la partie passée et une pour la partie future
 
           // 1. Barre pour la partie passée (jusqu'à aujourd'hui)
-          const pastBarPosition = calculatePosition(project.startDate, today);
+          const pastBarPosition = calculatePosition(
+            project.startDate,
+            today,
+            containerId
+          );
           const pastBar = document.createElement("div");
           pastBar.className = `project-bar ${project.cssClass} project-past`;
           pastBar.textContent = project.name;
@@ -454,7 +502,20 @@ document.addEventListener("DOMContentLoaded", function () {
           pastBar.dataset.projectId = project.id;
 
           // 2. Barre pour la partie future (à partir d'aujourd'hui)
-          const futureBarPosition = calculatePosition(today, project.endDate);
+          const futureBarPosition = calculatePosition(
+            today,
+            project.endDate,
+            containerId
+          );
+
+          // Déterminer minDate selon le conteneur
+          let minDate =
+            containerId === "historic-gantt" ? historicMinDate : futureMinDate;
+          let totalDuration =
+            containerId === "historic-gantt"
+              ? historicTotalDuration
+              : futureTotalDuration;
+
           const futureBar = document.createElement("div");
           futureBar.className = `project-bar ${project.cssClass} project-future`;
           futureBar.style.left = `${
@@ -473,7 +534,8 @@ document.addEventListener("DOMContentLoaded", function () {
           // Projet entièrement dans le futur
           const { start, width } = calculatePosition(
             project.startDate,
-            project.endDate
+            project.endDate,
+            containerId
           );
 
           const projectBar = document.createElement("div");
@@ -491,7 +553,8 @@ document.addEventListener("DOMContentLoaded", function () {
           // Projet entièrement dans le passé
           const { start, width } = calculatePosition(
             project.startDate,
-            project.endDate
+            project.endDate,
+            containerId
           );
 
           const projectBar = document.createElement("div");

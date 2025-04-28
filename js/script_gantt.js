@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Historique Dolibarr",
       cssClass: "dolibarr-crm",
       description:
-        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
+        "Mise en place d'un troisième Dolibarr, Intégration de modules de suivi commercial, Intégration des premiers tiers entreprises et des contacts. Il avait été décidé par Romuald de scinder la partie CRM de la partie facturation.",
     },
     {
       id: 2,
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Historique Dolibarr",
       cssClass: "dolibarr-prospect",
       description:
-        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
+        "Mise en place d'un deuxieme Dolibarr. L'équipe Admin de l'epoque utilisait Dolibarr à des fins de prospections et de suivis.",
     },
     {
       id: 3,
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Historique Dolibarr",
       cssClass: "dolibarr-facturation",
       description:
-        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
+        "Mise en place d'un premier Dolibarr pour la gestion de la facturation et des paiements. A l'initiative de Romuald, il permettait par saisie manuelle d'etablir les factures OPCO et particulers",
     },
     {
       id: 4,
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Historique Dolibarr",
       cssClass: "dolibarr-campus",
       description:
-        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
+        "Mise en place d'un quatrième Dolibarr (on n'est plus à un Dolibarr prêt...) dédiée au campus et géré par les 3 directrices et assistantes.",
     },
     {
       id: 5,
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Historique Dolibarr",
       cssClass: "dolibarr-fusionnee",
       description:
-        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
+        "Force est de constater qu'il fallait fusionner les 2 principaux dolibarr. Début de la mise dans la boucle de la Cyber-technique dans l'historique de Dolibarr",
     },
     {
       id: 6,
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Historique Projets Eureka",
       cssClass: "creme",
       description:
-        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
+        "Mise en place de Crème pour un usage exclusif par les commerciaux - sollicitation de la Cyber-technique pour des ameliorations de type design et ergonomie.",
     },
     {
       id: 7,
@@ -80,11 +80,11 @@ document.addEventListener("DOMContentLoaded", function () {
       startDate: new Date(2024, 4, 22),
       endDate: new Date(2024, 5, 7),
       duration: "17 jours",
-      resources: "",
+      resources: "Helenne, Romuald, andré, matthieu,Melina, Olivier Moncoudiol",
       section: "Historique Projets Eureka",
       cssClass: "ypareo",
       description:
-        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
+        "Choix d'Ypareo posssible - serie de visio et de tests pour valider la solution.",
     },
     {
       id: 8,
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Historique Projets Eureka",
       cssClass: "pepit",
       description:
-        "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
+        "Choix de se tourner vers Ppit comme solution à adapter à notre OF - serie de visio et retroplanning évalué sur 9 mois avant décision d'arreter la mise en place.",
     },
     // Ajout du prévisionnel
     {

@@ -507,7 +507,164 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Le reste des fonctions reste inchangé...
+  // Génération des sections et projets
+  function generateGanttChart(projectsData, containerId) {
+    const sectionsContainer = document.querySelector(
+      `#${containerId} .sections-container`
+    );
+
+    if (!sectionsContainer) {
+      console.error(`Conteneur #${containerId} .sections-container non trouvé`);
+      return;
+    }
+
+    // Regrouper les projets par section
+    const sections = {};
+    projectsData.forEach((project) => {
+      if (!sections[project.section]) {
+        sections[project.section] = [];
+      }
+      sections[project.section].push(project);
+    });
+
+    // Créer les sections et les projets
+    for (const sectionName in sections) {
+      const sectionElement = document.createElement("div");
+      sectionElement.className = "section";
+
+      const sectionTitle = document.createElement("h3");
+      sectionTitle.className = "section-title";
+      sectionTitle.textContent = sectionName;
+      sectionElement.appendChild(sectionTitle);
+
+      const projectsContainer = document.createElement("div");
+      projectsContainer.className = "projects";
+
+      sections[sectionName].forEach((project) => {
+        const projectRow = document.createElement("div");
+        projectRow.className = "project-row";
+
+        // Déterminer si le projet s'étend dans le futur
+        const projectExtendsFuture = project.endDate > today;
+
+        // Cas spécial pour les jalons (durée d'un jour)
+        const isMilestone =
+          project.startDate.getTime() === project.endDate.getTime();
+
+        if (isMilestone) {
+          // Traitement spécial pour les jalons
+          const position = calculatePosition(
+            project.startDate,
+            project.startDate,
+            containerId
+          ).start;
+
+          const milestone = document.createElement("div");
+          milestone.className = `milestone ${project.cssClass} ${
+            project.startDate > today ? "milestone-future" : "milestone-past"
+          }`;
+          milestone.title = project.name;
+          milestone.style.left = `${position}%`;
+          milestone.dataset.projectId = project.id;
+
+          // Ajouter une étiquette de jalon
+          const milestoneLabel = document.createElement("span");
+          milestoneLabel.className = "milestone-label";
+          milestoneLabel.textContent = project.name;
+          milestone.appendChild(milestoneLabel);
+
+          // Ajouter le gestionnaire d'événement au clic
+          milestone.addEventListener("click", toggleTooltip);
+
+          projectRow.appendChild(milestone);
+        } else if (projectExtendsFuture && project.startDate < today) {
+          // Cas où le projet est en cours (chevauche la date du jour)
+          // Créer deux barres: une pour la partie passée et une pour la partie future
+
+          // 1. Barre pour la partie passée (jusqu'à aujourd'hui)
+          const pastBarPosition = calculatePosition(
+            project.startDate,
+            today,
+            containerId
+          );
+          const pastBar = document.createElement("div");
+          pastBar.className = `project-bar ${project.cssClass} project-past`;
+          pastBar.textContent = project.name;
+          pastBar.style.left = `${pastBarPosition.start}%`;
+          pastBar.style.width = `${pastBarPosition.width}%`;
+          pastBar.dataset.projectId = project.id;
+
+          // 2. Barre pour la partie future (à partir d'aujourd'hui)
+          let minDate =
+            containerId === "historic-gantt" ? historicMinDate : futureMinDate;
+          let totalDuration =
+            containerId === "historic-gantt"
+              ? historicTotalDuration
+              : futureTotalDuration;
+
+          const futureBar = document.createElement("div");
+          futureBar.className = `project-bar ${project.cssClass} project-future`;
+          futureBar.style.left = `${
+            ((today - minDate) / totalDuration) * 100
+          }%`;
+          futureBar.style.width = `${
+            calculatePosition(today, project.endDate, containerId).width
+          }%`;
+          futureBar.dataset.projectId = project.id;
+
+          // Ajouter les gestionnaires d'événements au clic
+          pastBar.addEventListener("click", toggleTooltip);
+          futureBar.addEventListener("click", toggleTooltip);
+
+          projectRow.appendChild(pastBar);
+          projectRow.appendChild(futureBar);
+        } else if (project.startDate > today) {
+          // Projet entièrement dans le futur
+          const { start, width } = calculatePosition(
+            project.startDate,
+            project.endDate,
+            containerId
+          );
+
+          const projectBar = document.createElement("div");
+          projectBar.className = `project-bar ${project.cssClass} project-future`;
+          projectBar.textContent = project.name;
+          projectBar.style.left = `${start}%`;
+          projectBar.style.width = `${width}%`;
+          projectBar.dataset.projectId = project.id;
+
+          // Ajouter le gestionnaire d'événement au clic
+          projectBar.addEventListener("click", toggleTooltip);
+
+          projectRow.appendChild(projectBar);
+        } else {
+          // Projet entièrement dans le passé
+          const { start, width } = calculatePosition(
+            project.startDate,
+            project.endDate,
+            containerId
+          );
+
+          const projectBar = document.createElement("div");
+          projectBar.className = `project-bar ${project.cssClass} project-past`;
+          projectBar.textContent = project.name;
+          projectBar.style.left = `${start}%`;
+          projectBar.style.width = `${width}%`;
+          projectBar.dataset.projectId = project.id;
+
+          // Ajouter le gestionnaire d'événement au clic
+          projectBar.addEventListener("click", toggleTooltip);
+
+          projectRow.appendChild(projectBar);
+        }
+
+        projectsContainer.appendChild(projectRow);
+      });
+
+      sectionElement.appendChild(projectsContainer);
+      sectionsContainer.appendChild(sectionElement);
+    }
+  }
 
   // Fonction pour afficher/masquer le tooltip au clic
   function toggleTooltip(event) {
@@ -647,14 +804,41 @@ document.addEventListener("DOMContentLoaded", function () {
     document.removeEventListener("click", handleOutsideClick);
   }
 
-  // Génération des sections et projets
-  function generateGanttChart(projectsData, containerId) {
-    // ... Le code de cette fonction reste inchangé ...
-  }
-
   // Ajout de la gestion de la navigation
   function setupNavigation() {
-    // ... Le code de cette fonction reste inchangé ...
+    const navLinks = document.querySelectorAll(".gantt-nav a");
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        // Supprimer la classe active de tous les liens
+        navLinks.forEach((l) => l.classList.remove("active"));
+
+        // Ajouter la classe active au lien cliqué
+        this.classList.add("active");
+
+        // Masquer tout tooltip ouvert
+        hideTooltip();
+
+        // Obtenir l'ID cible
+        const targetId = this.getAttribute("href").substring(1);
+
+        // Faire défiler jusqu'à la cible
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 20,
+            behavior: "smooth",
+          });
+        }
+      });
+    });
+
+    // Activer le premier lien par défaut
+    if (navLinks.length > 0) {
+      navLinks[0].classList.add("active");
+    }
   }
 
   // Initialisation

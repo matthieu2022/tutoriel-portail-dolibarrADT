@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 1,
       name: "Dolibarr CRM",
-      startDate: new Date(2022, 8, 2),
+      startDate: new Date(2022, 7, 2),
       endDate: new Date(2025, 0, 10),
       duration: "600 jours",
       resources:
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 2,
       name: "Dolibarr Prospect",
-      startDate: new Date(2021, 6, 1),
+      startDate: new Date(2021, 5, 1),
       endDate: new Date(2025, 0, 10),
       duration: "1047 jours",
       resources: "Mélina, Lauryn, laetitia, maeva",
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
       name: "Dolibarr facturation",
       startDate: new Date(2021, 1, 22),
       endDate: new Date(2025, 0, 10),
-      duration: "600 jours",
+      duration: "600 jours environ",
       resources: "Romuald, maeva",
       section: "Historique Dolibarr",
       cssClass: "dolibarr-facturation",
@@ -41,8 +41,8 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 4,
       name: "Dolibarr Campus",
-      startDate: new Date(2024, 8, 1),
-      endDate: new Date(2025, 3, 25),
+      startDate: new Date(2024, 7, 1),
+      endDate: new Date(2025, 2, 25),
       duration: "237 jours",
       resources: "Melina, sabine, charlotte",
       section: "Historique Dolibarr",
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
       id: 5,
       name: "Dolibarr fusionné",
       startDate: new Date(2025, 0, 13),
-      endDate: new Date(2026, 3, 26),
+      endDate: new Date(2026, 2, 26),
       duration: "104 jours",
       resources: "ADT - https://gestion.academie-tourisme.fr/",
       section: "Historique Dolibarr",
@@ -65,8 +65,8 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 6,
       name: "Crème",
-      startDate: new Date(2021, 7, 30),
-      endDate: new Date(2022, 7, 15),
+      startDate: new Date(2021, 6, 30),
+      endDate: new Date(2022, 6, 15),
       duration: "351 jours",
       resources: "",
       section: "Historique Projets Eureka",
@@ -77,8 +77,8 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 7,
       name: "Ypareo",
-      startDate: new Date(2024, 4, 22),
-      endDate: new Date(2024, 5, 7),
+      startDate: new Date(2024, 3, 22),
+      endDate: new Date(2024, 4, 7),
       duration: "17 jours",
       resources: "",
       section: "Historique Projets Eureka",
@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 8,
       name: "Pepit",
-      startDate: new Date(2023, 6, 17),
+      startDate: new Date(2023, 5, 17),
       endDate: new Date(2024, 1, 6),
       duration: "205 jours",
       resources: "",
@@ -102,8 +102,8 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 9,
       name: "Livraison base test définitive",
-      startDate: new Date(2025, 3, 15), // 15 mars 2025 – 30 avril 2025
-      endDate: new Date(2025, 4, 30),
+      startDate: new Date(2025, 2, 15), // 15 mars 2025 – 30 avril 2025
+      endDate: new Date(2025, 3, 30),
       duration: "5 jours",
       resources: "Équipe technique + Admin ADT",
       section: "Planning de déploiement",
@@ -114,8 +114,8 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 10,
       name: "Phase pré-test",
-      startDate: new Date(2025, 4, 5), // 5 mai 2025 – 15 juin 2025
-      endDate: new Date(2025, 6, 15),
+      startDate: new Date(2025, 3, 5), // 5 mai 2025 – 15 juin 2025
+      endDate: new Date(2025, 5, 15),
       duration: "1 mois environ",
       resources: "Hélène, Olivier, Equipe Technique",
       section: "Planning de déploiement",
@@ -126,8 +126,8 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 11,
       name: "Débugs et ajustements (1)",
-      startDate: new Date(2025, 6, 15), // 15 juin 2025 – 14 juillet 2025
-      endDate: new Date(2025, 7, 14),
+      startDate: new Date(2025, 5, 15), // 15 juin 2025 – 14 juillet 2025
+      endDate: new Date(2025, 6, 14),
       duration: "1 mois environ",
       resources: "Aurélien, Fanny, Caroline, Mélina",
       section: "Planning de déploiement",
@@ -138,8 +138,8 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 12,
       name: "Phase de test avec référents",
-      startDate: new Date(2025, 5, 2), // 2 juin 2025
-      endDate: new Date(2025, 5, 2),
+      startDate: new Date(2025, 4, 2), // 2 juin 2025
+      endDate: new Date(2025, 4, 2),
       duration: "1 journée",
       resources: "Olivier Moncoudiol, André, matthieu, Hélene",
       section: "Planning de déploiement",
@@ -150,8 +150,8 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 13,
       name: "Congès",
-      startDate: new Date(2025, 5, 2), // 14 juillet 2025 – 15 aout 2025
-      endDate: new Date(2025, 5, 13),
+      startDate: new Date(2025, 4, 2), // 14 juillet 2025 – 15 aout 2025
+      endDate: new Date(2025, 4, 13),
       duration: "1 mois environ",
       resources: "ADT",
       section: "Planning de déploiement",
@@ -162,8 +162,8 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 14,
       name: "Formation des équipes Commerciales et Administratif",
-      startDate: new Date(2025, 8, 18), // 18 aout 2025 –  31 aout 2025
-      endDate: new Date(2025, 8, 31),
+      startDate: new Date(2025, 7, 18), // 18 aout 2025 –  31 aout 2025
+      endDate: new Date(2025, 7, 31),
       duration: "12 jours environ",
       resources: "(8 BtoB + 2 GC + 3 BtoC + 2 admin",
       section: "Planning de déploiement",
@@ -174,8 +174,8 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 15,
       name: "Rentrée Septembre - deploiement de la V1",
-      startDate: new Date(2025, 9, 1), // 1 juillet 2025
-      endDate: new Date(2025, 9, 1),
+      startDate: new Date(2025, 8, 1), // 1 juillet 2025
+      endDate: new Date(2025, 8, 1),
       duration: "1 journée",
       resources: "ADT",
       section: "Planning de déploiement",
@@ -186,7 +186,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 16,
       name: "Fusion des systèmes BDD campus et CRM",
-      startDate: new Date(2025, 9, 1), // debut septembre a mi-septembre 2025
+      startDate: new Date(2025, 8, 1), // debut septembre a mi-septembre 2025
       endDate: new Date(2025, 9, 15),
       duration: "15 jours",
       resources: "Équipe technique",
@@ -211,7 +211,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 22, // Corrigé l'ID dupliqué (17 -> 22)
       name: "Formulaires Web et liaisons webhook",
-      startDate: new Date(2025, 3, 24),
+      startDate: new Date(2025, 2, 24),
       endDate: new Date(2025, 4, 14),
       duration: "1 mois environ",
       resources: "Équipe technique - André",
@@ -223,7 +223,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 18,
       name: "Module Pré-opportunité",
-      startDate: new Date(2025, 2, 1),
+      startDate: new Date(2025, 1, 1),
       endDate: new Date(2025, 4, 14),
       duration: "2 mois environ",
       resources: "Équipe technique - André",
@@ -235,7 +235,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 19,
       name: "ISP et correspondance des champs",
-      startDate: new Date(2025, 2, 18),
+      startDate: new Date(2025, 1, 18),
       endDate: new Date(2025, 6, 1),
       duration: "3 mois environ",
       resources: "Équipe technique - André & Hélene",
@@ -259,7 +259,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 21,
       name: "Developpement interne dolibarr : modules personnalisés",
-      startDate: new Date(2024, 10, 5),
+      startDate: new Date(2024, 9, 5),
       endDate: new Date(2025, 5, 14),
       duration: "1 mois environ",
       resources: "Équipe technique - André",

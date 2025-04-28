@@ -644,3 +644,32 @@ footer {
         text-align: center;
     }
 }
+
+/* Style pour la description dans le tooltip */
+.tooltip-description {
+    margin: 5px 0 10px 0;
+    font-size: 13px;
+    color: #555;
+    line-height: 1.5;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+    max-width: 350px;
+    text-align: justify;
+}
+
+/* Agrandir légèrement le tooltip pour les descriptions plus longues */
+.tooltip {
+    max-width: 380px;
+}
+
+/* Transition plus fluide pour l'affichage du tooltip */
+.tooltip {
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    transform: translateY(0);
+}
+
+.tooltip.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+}

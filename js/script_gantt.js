@@ -239,7 +239,7 @@ document.addEventListener("DOMContentLoaded", function () {
       completed: false,
       progress: 0,
       description:
-        "Formation et sensibilisation des équipes campus et pédagogie à l'utilisation du système Dolibarr. Mise en place de sessions de formation pour assurer une transition fluide vers le nouvel outil.",
+        "Formation et sensibilisation des équipes campus et pédagogie à l'utilisation du système Dolibarr. pts à abordés : portail formateur / documentation formateurs etc... .",
     },
 
     {
@@ -343,6 +343,21 @@ document.addEventListener("DOMContentLoaded", function () {
       progress: 65, // Pourcentage d'avancement
       description:
         "Travaux de personnalisation et d'optimisation du cœur de Dolibarr pour répondre aux besoins spécifiques de l'organisation. Développement de modules sur mesure.",
+    },
+
+    {
+      id: 25,
+      name: "Phase de test avec 4 référents d'activité du pôle commercial - keyUsers",
+      startDate: new Date(2025, 7, 25), // 2 juin 2025
+      endDate: new Date(2025, 8, 10),
+      duration: "10 journées environ",
+      resources: "Fanny, Caroline, Mélina, autres",
+      section: "Planning de déploiement",
+      cssClass: "planning-test-referents",
+      completed: true,
+      progress: 100,
+      description:
+        "Demo icademie pour le dolibarvierge et notre CRM. Comparaison éventuelle avec Salesforce",
     },
   ];
 

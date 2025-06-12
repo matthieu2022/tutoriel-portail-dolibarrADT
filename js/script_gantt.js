@@ -138,8 +138,8 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 12,
       name: "Phase de test avec référents",
-      startDate: new Date(2025, 15, 7), // 2 juin 2025
-      endDate: new Date(2025, 15, 7),
+      startDate: new Date(2025, 4, 2), // 2 juin 2025
+      endDate: new Date(2025, 4, 2),
       duration: "1 journée",
       resources: "Olivier Moncoudiol, André, matthieu, Hélene",
       section: "Planning de déploiement",
@@ -174,8 +174,8 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 15,
       name: "Rentrée Septembre - deploiement de la V1",
-      startDate: new Date(2025, 10, 20), // 1 juillet 2025
-      endDate: new Date(2025, 10, 20),
+      startDate: new Date(2025, 8, 1), // 1 juillet 2025
+      endDate: new Date(2025, 8, 1),
       duration: "1 journée",
       resources: "ADT",
       section: "Planning de déploiement",

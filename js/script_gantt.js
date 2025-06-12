@@ -124,22 +124,22 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Équipe technique + Admin ADT",
       section: "Planning de déploiement",
       cssClass: "planning-test",
-      completed: false,
-      progress: 30,
+      completed: true,
+      progress: 100,
       description:
-        "Finalisation et livraison de la base de test complète pour validation sur le dolibarr de test :https://dolibarrvierge19.e-learning-neo-sphere.fr/.Cette étape marque le début de la phase de tests approfondis.",
+        "Finalisation et livraison de la BDD fusionnée complète pour validation sur le dolibarr de test :https://dolibarrvierge19.e-learning-neo-sphere.fr/.Cette étape marque le début de la phase de tests approfondis.",
     },
     {
       id: 10,
       name: "Phase pré-test",
       startDate: new Date(2025, 3, 5), // 5 mai 2025 – 15 juin 2025
-      endDate: new Date(2025, 5, 15),
+      endDate: new Date(2025, 8, 15),
       duration: "1 mois environ",
       resources: "Hélène, Olivier, Equipe Technique",
       section: "Planning de déploiement",
       cssClass: "planning-pretest",
       completed: false,
-      progress: 0,
+      progress: 40,
       description:
         "Vérification préliminaire des fonctionnalités par une équipe restreinte. Identification des problèmes avant les tests élargis et resolution des problèmes critiques.",
     },
@@ -147,36 +147,36 @@ document.addEventListener("DOMContentLoaded", function () {
       id: 11,
       name: "Débugs et ajustements (1)",
       startDate: new Date(2025, 5, 15), // 15 juin 2025 – 14 juillet 2025
-      endDate: new Date(2025, 6, 14),
+      endDate: new Date(2025, 8, 15),
       duration: "1 mois environ",
       resources: "Aurélien, Fanny, Caroline, Mélina",
       section: "Planning de déploiement",
       cssClass: "planning-debug",
       completed: false,
-      progress: 0,
+      progress: 40,
       description:
         "Première phase de correction des bugs et d'ajustements suite aux retours des pré-tests. Optimisation des performances et de l'Phase de test avec 4 référents d'activité du pôle commercial + Débugs et ajustements pour la V1.",
     },
     {
       id: 12,
-      name: "Phase de test avec référents",
+      name: "1ere démo pour le dolibarvierge - prez Icademie",
       startDate: new Date(2025, 4, 2), // 2 juin 2025
       endDate: new Date(2025, 4, 2),
       duration: "1 journée",
       resources: "Olivier Moncoudiol, André, matthieu, Hélene",
       section: "Planning de déploiement",
       cssClass: "planning-test-referents",
-      completed: false,
-      progress: 0,
+      completed: true,
+      progress: 100,
       description:
         "Demo icademie pour le dolibarvierge et notre CRM. Comparaison éventuelle avec Salesforce",
     },
     {
       id: 13,
-      name: "Congès",
-      startDate: new Date(2025, 4, 2), // 14 juillet 2025 – 15 aout 2025
-      endDate: new Date(2025, 4, 13),
-      duration: "1 mois environ",
+      name: "Congès entreprise été 2025",
+      startDate: new Date(2025, 6, 2), // 14 juillet 2025 – 15 aout 2025
+      endDate: new Date(2025, 7, 20),
+      duration: "2 mois environ",
       resources: "ADT",
       section: "Planning de déploiement",
       cssClass: "planning-test-referents",
@@ -251,10 +251,10 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Équipe technique - André",
       section: "Developpement & améliorations",
       cssClass: "dev-cybertechnique",
-      completed: false,
-      progress: 45,
+      completed: true,
+      progress: 100,
       description:
-        "Développement de formulaires web interactifs et mise en place des webhooks pour l'intégration en temps réel avec les systèmes externes.",
+        "Développement de formulaires web interactifs ADT et mise en place des webhooks pour l'intégration en temps réel avec Dolibarr (https://gestion.academie-tourisme.fr/).",
     },
 
     {
@@ -269,13 +269,13 @@ document.addEventListener("DOMContentLoaded", function () {
       completed: false,
       progress: 95, // Pourcentage d'avancement
       description:
-        "Création d'un module spécifique pour la gestion des pré-opportunités commerciales, permettant de qualifier les leads avant leur conversion en opportunités.",
+        "Création d'un module spécifique pour la gestion des pré-opportunités commerciales, permettant de qualifier les leads avant leur conversion en opportunités. Dev en cours de finalisation pour integration des leads du module dans le projet et tiers/contacts",
     },
     {
       id: 19,
       name: "ISP et correspondance des champs",
       startDate: new Date(2025, 1, 18),
-      endDate: new Date(2025, 6, 1),
+      endDate: new Date(2025, 5, 10),
       duration: "3 mois environ",
       resources: "Équipe technique - André & Hélene",
       section: "Developpement & amélioration",
@@ -289,7 +289,7 @@ document.addEventListener("DOMContentLoaded", function () {
       id: 20,
       name: "Liaisons API maformation.fr",
       startDate: new Date(2025, 3, 14),
-      endDate: new Date(2025, 5, 14),
+      endDate: new Date(2025, 5, 4),
       duration: "1 mois environ",
       resources: "Équipe technique - André",
       section: "Developpement & amélioration",
@@ -334,7 +334,7 @@ document.addEventListener("DOMContentLoaded", function () {
       id: 21,
       name: "Developpement interne dolibarr : modules personnalisés",
       startDate: new Date(2024, 9, 5),
-      endDate: new Date(2025, 5, 14),
+      endDate: new Date(2025, 7, 26),
       duration: "1 mois environ",
       resources: "Équipe technique - André",
       section: "Developpement & amélioration",

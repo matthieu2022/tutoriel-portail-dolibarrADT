@@ -359,7 +359,7 @@ document.addEventListener("DOMContentLoaded", function () {
       completed: true,
       progress: 100,
       description:
-        "Demo icademie pour le dolibarvierge et notre CRM. Comparaison éventuelle avec Salesforce",
+        "Phase active des testeurs avec REX sur les fonctionnalités clés du système. Les key users fournissent des retours détaillés pour affiner le système avant le déploiement final.",
     },
   ];
 

@@ -77,9 +77,10 @@ h1 {
     border-bottom: 2px solid #eee;
 }
 
-/* Styles de base pour le diagramme de Gantt */
+/* Conteneurs Gantt */
 .gantt-container,
-#gantt-container {
+#gantt-container,
+#historic-gantt {
     position: relative;
     background-color: white;
     border-radius: 8px;
@@ -87,8 +88,27 @@ h1 {
     padding: 20px;
     margin-bottom: 30px;
     overflow-x: auto;
+    overflow-y: hidden;
     width: 1500px;
     min-height: 150px;
+    height: auto !important;
+    max-height: none !important;
+}
+
+/* Conteneur futur avec plus de largeur pour la granularité */
+#future-gantt {
+    position: relative;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 30px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 2000px;
+    min-height: 150px;
+    height: auto !important;
+    max-height: none !important;
 }
 
 /* Timeline */
@@ -99,11 +119,23 @@ h1 {
     margin-bottom: 20px;
 }
 
+/* Timeline détaillée pour le planning futur */
+#future-gantt .timeline {
+    height: 80px;
+}
+
+/* Timeline simple pour l'historique */
+#historic-gantt .timeline {
+    height: 50px;
+}
+
+/* Styles pour les marqueurs trimestriels (historique) */
 .quarter-marker {
     position: absolute;
     transform: translateX(-50%);
     font-size: 12px;
     color: #666;
+    top: 5px;
 }
 
 .quarter-marker::after {
@@ -116,9 +148,77 @@ h1 {
     background-color: #ddd;
 }
 
+/* Styles pour la barre des mois */
+.months-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Styles pour les marqueurs de mois */
+.month-marker {
+    position: absolute;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: #0c2340;
+    border-right: 1px solid #eee;
+    padding-left: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+}
+
+.month-marker:first-child {
+    border-left: 1px solid #eee;
+}
+
+/* Styles pour la barre des semaines */
+.weeks-bar {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    right: 0;
+    height: 50px;
+}
+
+/* Styles pour les marqueurs de semaine */
+.week-marker {
+    position: absolute;
+    width: 1px;
+    height: 15px;
+    background-color: #ccc;
+    top: 0;
+    cursor: pointer;
+}
+
+.week-marker::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    width: 1px;
+    height: 800px;
+    background-color: rgba(204, 204, 204, 0.15);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.week-marker:hover::after {
+    background-color: rgba(52, 152, 219, 0.3);
+}
+
 /* Sections et projets */
 .section {
-    margin-bottom: 30px;
+    margin-bottom: 25px;
+    position: relative;
+    clear: both;
 }
 
 .section-title {
@@ -126,6 +226,10 @@ h1 {
     color: #0c2340;
     margin-bottom: 15px;
     font-size: 16px;
+    padding: 8px 12px;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-left: 4px solid #0c2340;
+    border-radius: 0 4px 4px 0;
 }
 
 .projects {
@@ -136,58 +240,27 @@ h1 {
 
 .project-row {
     position: relative;
-    height: 30px;
-    margin-bottom: 5px;
-}
-
-/* Styles pour le marqueur de la date du jour */
-.today-marker {
-    position: absolute;
-    height: 25px;
-    width: 2px;
-    background-color: #ff0000;
-    top: 0;
-    z-index: 10;
-}
-
-.today-label {
-    position: absolute;
-    white-space: nowrap;
-    background-color: #ff0000;
-    color: white;
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 12px;
-    top: 25px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.today-line {
-    position: absolute;
-    width: 2px;
-    background-color: #ff0000;
-    top: 0;
-    bottom: 0;
-    z-index: 5;
-    height: 100%;
-    opacity: 0.7;
+    height: 35px;
+    margin-bottom: 8px;
 }
 
 /* Styles pour les barres de projet */
 .project-bar {
     position: absolute;
-    height: 25px;
+    height: 28px;
     text-align: center;
-    padding: 5px 10px;
+    padding: 5px 8px;
     box-sizing: border-box;
-    border-radius: 3px;
+    border-radius: 4px;
     font-size: 12px;
-    overflow: hidden;
+    overflow: visible;
     white-space: nowrap;
     text-overflow: ellipsis;
     cursor: pointer;
     transition: opacity 0.2s ease, transform 0.2s ease;
+    min-width: 20px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    z-index: 2;
 }
 
 .project-bar:hover {
@@ -225,6 +298,30 @@ h1 {
 .current-project {
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
     border: 2px solid #ff0000;
+}
+
+/* Améliorations pour les projets courts */
+.short-project {
+    min-width: 30px !important;
+    height: 30px !important;
+    font-size: 11px !important;
+    border: 2px solid rgba(255, 255, 255, 0.8) !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) !important;
+    z-index: 10 !important;
+    font-weight: bold !important;
+}
+
+.short-project .progress-badge {
+    font-size: 9px !important;
+    padding: 1px 3px !important;
+    top: -12px !important;
+    right: -5px !important;
+}
+
+.short-project:hover {
+    transform: scale(1.05) translateY(-2px) !important;
+    z-index: 20 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
 }
 
 /* Styles pour les jalons */
@@ -280,24 +377,204 @@ h1 {
     border: 2px dotted #333;
 }
 
-/* Animation de pulsation pour indiquer l'interaction */
-.project-bar:active,
-.milestone:active {
-    animation: pulse 0.3s ease;
+/* Styles pour le marqueur de la date du jour */
+.today-marker {
+    position: absolute;
+    height: 80px;
+    width: 3px;
+    background: linear-gradient(180deg, #ff4757, #ff3742);
+    top: 0;
+    z-index: 15;
+    border-radius: 0 0 2px 2px;
+    box-shadow: 0 2px 8px rgba(255, 71, 87, 0.4);
 }
 
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
+.today-label {
+    position: absolute;
+    white-space: nowrap;
+    background: linear-gradient(135deg, #ff4757, #ff3742);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 2px 6px rgba(255, 71, 87, 0.3);
+}
 
-    50% {
-        transform: scale(1.03);
-    }
+.today-line {
+    position: absolute;
+    width: 3px;
+    background: linear-gradient(180deg, rgba(255, 71, 87, 0.8), rgba(255, 71, 87, 0.4));
+    top: 0;
+    bottom: 0;
+    z-index: 5;
+    height: 100%;
+    border-radius: 0 0 2px 2px;
+}
 
-    100% {
-        transform: scale(1);
-    }
+/* Styles pour le conteneur de progression */
+.progress-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5px;
+    pointer-events: none;
+}
+
+/* Barre de progression interne */
+.progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background: linear-gradient(90deg,
+            rgba(255, 255, 255, 0.3) 0%,
+            rgba(255, 255, 255, 0.1) 100%);
+    border-radius: 3px 0 0 3px;
+    transition: width 0.5s ease;
+    z-index: 1;
+}
+
+/* Style pour les barres de progression selon le pourcentage */
+.progress-bar[style*="100%"] {
+    background: linear-gradient(90deg,
+            rgba(46, 204, 113, 0.4) 0%,
+            rgba(46, 204, 113, 0.2) 100%);
+}
+
+.progress-bar[style*="75%"],
+.progress-bar[style*="80%"],
+.progress-bar[style*="85%"],
+.progress-bar[style*="90%"],
+.progress-bar[style*="95%"] {
+    background: linear-gradient(90deg,
+            rgba(52, 152, 219, 0.4) 0%,
+            rgba(52, 152, 219, 0.2) 100%);
+}
+
+/* Badge de pourcentage */
+.progress-badge {
+    position: absolute;
+    top: -10px;
+    right: -2px;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 2px 5px;
+    border-radius: 8px;
+    white-space: nowrap;
+    z-index: 20;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    min-width: 20px;
+    text-align: center;
+    animation: progressBadgeGlow 3s ease-in-out infinite;
+}
+
+/* Couleurs du badge selon le pourcentage */
+.progress-badge.completed {
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    color: white;
+}
+
+.progress-badge.high {
+    background: linear-gradient(135deg, #3498db, #5dade2);
+    color: white;
+}
+
+.progress-badge.medium {
+    background: linear-gradient(135deg, #f39c12, #f8c471);
+    color: white;
+}
+
+.progress-badge.low {
+    background: linear-gradient(135deg, #e67e22, #ec7063);
+    color: white;
+}
+
+.progress-badge.very-low {
+    background: linear-gradient(135deg, #e74c3c, #ec7063);
+    color: white;
+    animation: urgentPulse 2s ease-in-out infinite;
+}
+
+.progress-badge.not-started {
+    background: linear-gradient(135deg, #95a5a6, #bdc3c7);
+    color: #34495e;
+}
+
+/* Style spécial pour les jalons avec pourcentage */
+.milestone-progress {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 9px;
+    padding: 1px 4px;
+    border-radius: 6px;
+    min-width: 18px;
+}
+
+/* Styles pour le badge "Terminé" */
+.completed-badge {
+    position: absolute;
+    top: -8px;
+    right: 5px;
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 10px;
+    white-space: nowrap;
+    z-index: 15;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    animation: completedPulse 2s ease-in-out infinite;
+}
+
+/* Style spécial pour les projets terminés */
+.project-completed {
+    position: relative;
+    border: 2px solid #27ae60;
+    box-shadow: 0 0 8px rgba(39, 174, 96, 0.3);
+}
+
+.project-completed:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 6px 15px rgba(39, 174, 96, 0.4) !important;
+}
+
+/* Ajustement pour les jalons terminés */
+.milestone.project-completed .completed-badge {
+    top: -12px;
+    right: -15px;
+    font-size: 9px;
+    padding: 1px 4px;
+}
+
+/* Style spécial pour les projets avec progression élevée */
+.project-bar:has(.progress-badge.completed),
+.project-bar:has(.progress-badge.high) {
+    box-shadow: 0 2px 8px rgba(46, 204, 113, 0.3);
+}
+
+/* Effet de survol amélioré pour les projets avec progression */
+.project-bar:hover .progress-badge {
+    transform: scale(1.1);
+    animation-duration: 1s;
+}
+
+.milestone:hover .milestone-progress {
+    transform: translateX(-50%) scale(1.1);
+    animation-duration: 1s;
 }
 
 /* Styles pour le tooltip */
@@ -305,11 +582,11 @@ h1 {
     position: fixed;
     background-color: white;
     border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-    max-width: 380px;
-    min-width: 280px;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    min-width: 300px;
     z-index: 1000;
     transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
     transform: translateY(0);
@@ -322,7 +599,7 @@ h1 {
     pointer-events: none;
 }
 
-/* Ajout d'un en-tête pour le tooltip avec bouton de fermeture */
+/* En-tête du tooltip avec bouton de fermeture */
 .tooltip-header {
     display: flex;
     position: relative;
@@ -339,7 +616,7 @@ h1 {
     width: 100%;
 }
 
-/* Style amélioré pour le bouton de fermeture du tooltip */
+/* Bouton de fermeture du tooltip */
 .tooltip-close-btn {
     background-color: #ff3333;
     color: white;
@@ -369,7 +646,7 @@ h1 {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-/* Style de la description */
+/* Description du tooltip */
 .tooltip-description {
     margin: 5px 0 12px 0;
     font-size: 13px;
@@ -380,7 +657,7 @@ h1 {
     text-align: justify;
 }
 
-/* Style pour les grilles d'information */
+/* Grille d'information du tooltip */
 .tooltip-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -393,17 +670,130 @@ h1 {
     color: #555;
 }
 
-/* Animation pour rendre la fermeture plus fluide */
-@keyframes fadeOut {
-    from {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* Styles pour la section de progression dans le tooltip */
+.tooltip-progress-section {
+    margin: 10px 0;
+    padding: 10px;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+}
 
-    to {
-        opacity: 0;
-        transform: translateY(10px);
-    }
+.tooltip-progress-bar {
+    position: relative;
+    width: 100%;
+    height: 20px;
+    background-color: #e9ecef;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 8px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.tooltip-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3498db, #2ecc71);
+    border-radius: 10px;
+    transition: width 0.8s ease;
+    position: relative;
+}
+
+.tooltip-progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.3),
+            transparent);
+    animation: progressShine 2s ease-in-out infinite;
+}
+
+.tooltip-progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    font-size: 12px;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+/* Styles pour le statut dans le tooltip */
+.tooltip-status {
+    margin: 8px 0;
+    padding: 6px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid;
+}
+
+.tooltip-status.completed {
+    background: linear-gradient(135deg, #d5f4e6, #a8e6cf);
+    color: #27ae60;
+    border-color: #27ae60;
+}
+
+.tooltip-status.in-progress {
+    background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+    color: #f39c12;
+    border-color: #f39c12;
+}
+
+.tooltip-status.high {
+    background: linear-gradient(135deg, #d6eaf8, #aed6f1);
+    color: #3498db;
+    border-color: #3498db;
+}
+
+.tooltip-status.medium {
+    background: linear-gradient(135deg, #fdebd0, #f8c471);
+    color: #f39c12;
+    border-color: #f39c12;
+}
+
+.tooltip-status.low {
+    background: linear-gradient(135deg, #fadbd8, #f1948a);
+    color: #e67e22;
+    border-color: #e67e22;
+}
+
+.tooltip-status.very-low {
+    background: linear-gradient(135deg, #fadbd8, #ec7063);
+    color: #e74c3c;
+    border-color: #e74c3c;
+}
+
+.tooltip-status.not-started {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    color: #6c757d;
+    border-color: #6c757d;
+}
+
+/* Overlay du tooltip */
+.tooltip-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.tooltip-overlay.visible {
+    opacity: 1;
+    visibility: visible;
 }
 
 /* Couleurs des projets */
@@ -478,10 +868,27 @@ h1 {
     background-image: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
 }
 
-/* Ajouter une bordure noire autour du jalon de déploiement */
+/* Bordure spéciale pour le jalon de déploiement */
 .planning-deployment.milestone {
     border: 3px solid black;
     z-index: 20;
+}
+
+/* Ajustements spéciaux */
+#future-gantt .sections-container {
+    margin-top: 50px;
+}
+
+.sections-container {
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+/* Harmoniser les noms de sections */
+[data-section="Developpement & améliorations"],
+[data-section="Developpement & amélioration"] {
+    font-weight: bold;
+    color: #0c2340;
 }
 
 /* Footer */
@@ -492,265 +899,21 @@ footer {
     margin-top: 20px;
 }
 
-/* Responsive */
-@media screen and (max-width: 768px) {
-    .container {
-        padding: 10px;
+/* Animations */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
     }
 
-    .gantt-container,
-    #gantt-container {
-        padding: 15px;
+    50% {
+        transform: scale(1.03);
     }
 
-    .project-bar {
-        font-size: 11px;
-        padding-left: 5px;
+    100% {
+        transform: scale(1);
     }
-
-    .tooltip {
-        max-width: 300px;
-    }
-
-    .gantt-nav ul {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .gantt-nav li {
-        margin: 5px 0;
-        width: 100%;
-        text-align: center;
-    }
-
 }
 
-/* Styles pour la timeline détaillée */
-.timeline {
-    position: relative;
-    height: 80px;
-    /* Plus haute pour accommoder les mois et semaines */
-    border-bottom: 1px solid #ccc;
-    margin-bottom: 20px;
-}
-
-/* Styles pour les marqueurs trimestriels (premier diagramme) */
-.quarter-marker {
-    position: absolute;
-    transform: translateX(-50%);
-    font-size: 12px;
-    color: #666;
-    top: 5px;
-}
-
-.quarter-marker::after {
-    content: '';
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    height: 8px;
-    width: 1px;
-    background-color: #ddd;
-}
-
-/* Styles pour la barre des mois */
-.months-bar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 30px;
-    border-bottom: 1px solid #eee;
-}
-
-/* Styles pour les marqueurs de mois */
-.month-marker {
-    position: absolute;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    font-weight: 600;
-    color: #0c2340;
-    border-right: 1px solid #eee;
-    padding-left: 5px;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-.month-marker:first-child {
-    border-left: 1px solid #eee;
-}
-
-/* Styles pour la barre des semaines */
-.weeks-bar {
-    position: absolute;
-    top: 30px;
-    left: 0;
-    right: 0;
-    height: 20px;
-}
-
-/* Styles pour les marqueurs de semaine */
-.week-marker {
-    position: absolute;
-    width: 1px;
-    height: 10px;
-    background-color: #ccc;
-    top: 0;
-}
-
-.week-marker::after {
-    content: '';
-    position: absolute;
-    bottom: -40px;
-    /* Étendre les lignes de semaine à travers le diagramme */
-    left: 0;
-    width: 1px;
-    height: 1000px;
-    /* Assez haut pour traverser tout le diagramme */
-    background-color: rgba(204, 204, 204, 0.2);
-    z-index: 0;
-    pointer-events: none;
-}
-
-/* Style pour le marqueur du jour actuel */
-.today-marker {
-    position: absolute;
-    height: 80px;
-    /* Même hauteur que la timeline */
-    width: 2px;
-    background-color: #ff0000;
-    top: 0;
-    z-index: 10;
-}
-
-.today-label {
-    position: absolute;
-    white-space: nowrap;
-    background-color: #ff0000;
-    color: white;
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 12px;
-    top: 5px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.today-line {
-    position: absolute;
-    width: 2px;
-    background-color: #ff0000;
-    top: 0;
-    bottom: 0;
-    z-index: 5;
-    height: 2000px;
-    /* Assez haut pour traverser tout le contenu */
-    opacity: 0.7;
-}
-
-/* Ajuster la position des sections pour la nouvelle timeline */
-#future-gantt .sections-container {
-    margin-top: 50px;
-    /* Espace pour la timeline plus haute */
-}
-
-/* S'assurer que les barres de projet sont au-dessus des lignes de semaine */
-.project-bar,
-.milestone {
-    position: relative;
-    z-index: 2;
-}
-
-/* Correction pour le conteneur du diagramme */
-.gantt-container,
-#gantt-container,
-#historic-gantt,
-#future-gantt {
-    position: relative;
-    overflow-x: auto;
-    /* Permet le défilement horizontal */
-    overflow-y: hidden;
-    /* Supprime le défilement vertical */
-    height: auto !important;
-    /* Hauteur automatique basée sur le contenu */
-    max-height: none !important;
-    /* Supprime toute hauteur maximale */
-}
-
-/* S'assurer que la ligne verticale du jour actuel ne dépasse pas */
-.today-line {
-    height: 100% !important;
-    /* Limiter la hauteur à celle du conteneur */
-    bottom: 0;
-    top: 0;
-}
-
-/* Correction pour les lignes de semaine */
-.week-marker::after {
-    bottom: -40px;
-    height: 500px;
-    /* Réduire la hauteur pour éviter le défilement */
-}
-
-/* Assurer que les sections sont correctement alignées */
-.section {
-    position: relative;
-    clear: both;
-    margin-bottom: 20px;
-}
-
-/* Harmoniser les noms de sections */
-[data-section="Developpement & améliorations"],
-[data-section="Developpement & amélioration"] {
-    /* Appliquer les mêmes styles pour harmoniser l'affichage */
-    font-weight: bold;
-    color: #0c2340;
-}
-
-/* Correction pour le positionnement des barres */
-.project-bar,
-.milestone {
-    /* S'assurer que les positions calculées sont correctes */
-    box-sizing: border-box;
-    position: absolute;
-}
-
-/* Assurer que les conteneurs de barres ont une hauteur suffisante */
-.project-row {
-    position: relative;
-    height: 35px;
-    /* Légèrement plus haut pour éviter les chevauchements */
-    margin-bottom: 5px;
-}
-
-/* Supprimer tout espace supplémentaire sous le diagramme */
-.sections-container {
-    padding-bottom: 0;
-    margin-bottom: 0;
-}
-
-/* Styles pour le badge "Terminé" */
-.completed-badge {
-    position: absolute;
-    top: -8px;
-    right: 5px;
-    background: linear-gradient(135deg, #27ae60, #2ecc71);
-    color: white;
-    font-size: 10px;
-    font-weight: bold;
-    padding: 2px 6px;
-    border-radius: 10px;
-    white-space: nowrap;
-    z-index: 15;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    animation: completedPulse 2s ease-in-out infinite;
-}
-
-/* Animation pour le badge terminé */
 @keyframes completedPulse {
 
     0%,
@@ -765,164 +928,6 @@ footer {
     }
 }
 
-/* Style spécial pour les projets terminés */
-.project-completed {
-    position: relative;
-    border: 2px solid #27ae60;
-    box-shadow: 0 0 8px rgba(39, 174, 96, 0.3);
-}
-
-/* Ajustement pour les jalons terminés */
-.milestone.project-completed .completed-badge {
-    top: -12px;
-    right: -15px;
-    font-size: 9px;
-    padding: 1px 4px;
-}
-
-/* Styles pour le statut dans le tooltip */
-.tooltip-status {
-    margin: 8px 0;
-    padding: 6px 10px;
-    border-radius: 15px;
-    font-size: 12px;
-    font-weight: bold;
-    text-align: center;
-    border: 1px solid;
-}
-
-.tooltip-status.completed {
-    background: linear-gradient(135deg, #d5f4e6, #a8e6cf);
-    color: #27ae60;
-    border-color: #27ae60;
-}
-
-.tooltip-status.in-progress {
-    background: linear-gradient(135deg, #fff3cd, #ffeaa7);
-    color: #f39c12;
-    border-color: #f39c12;
-}
-
-/* Animation au survol des projets terminés */
-.project-completed:hover {
-    transform: translateY(-3px) !important;
-    box-shadow: 0 6px 15px rgba(39, 174, 96, 0.4) !important;
-}
-
-/* Style pour l'overlay du tooltip */
-.tooltip-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-}
-
-.tooltip-overlay.visible {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Responsive pour le badge terminé */
-@media screen and (max-width: 768px) {
-    .completed-badge {
-        font-size: 9px;
-        padding: 1px 4px;
-        top: -6px;
-        right: 2px;
-    }
-
-    .milestone.project-completed .completed-badge {
-        top: -10px;
-        right: -12px;
-        font-size: 8px;
-        padding: 1px 3px;
-    }
-}
-
-/* Styles pour le conteneur de progression */
-.progress-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 5px;
-    pointer-events: none;
-}
-
-/* Barre de progression interne */
-.progress-bar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    background: linear-gradient(90deg,
-            rgba(255, 255, 255, 0.3) 0%,
-            rgba(255, 255, 255, 0.1) 100%);
-    border-radius: 3px 0 0 3px;
-    transition: width 0.5s ease;
-    z-index: 1;
-}
-
-/* Badge de pourcentage */
-.progress-badge {
-    position: absolute;
-    top: -10px;
-    right: -2px;
-    font-size: 10px;
-    font-weight: bold;
-    padding: 2px 5px;
-    border-radius: 8px;
-    white-space: nowrap;
-    z-index: 20;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    min-width: 20px;
-    text-align: center;
-    animation: progressBadgeGlow 3s ease-in-out infinite;
-}
-
-/* Couleurs du badge selon le pourcentage */
-.progress-badge.completed {
-    background: linear-gradient(135deg, #27ae60, #2ecc71);
-    color: white;
-}
-
-.progress-badge.high {
-    background: linear-gradient(135deg, #3498db, #5dade2);
-    color: white;
-}
-
-.progress-badge.medium {
-    background: linear-gradient(135deg, #f39c12, #f8c471);
-    color: white;
-}
-
-.progress-badge.low {
-    background: linear-gradient(135deg, #e67e22, #ec7063);
-    color: white;
-}
-
-.progress-badge.very-low {
-    background: linear-gradient(135deg, #e74c3c, #ec7063);
-    color: white;
-}
-
-.progress-badge.not-started {
-    background: linear-gradient(135deg, #95a5a6, #bdc3c7);
-    color: #34495e;
-}
-
-/* Animation pour le badge */
 @keyframes progressBadgeGlow {
 
     0%,
@@ -937,59 +942,16 @@ footer {
     }
 }
 
-/* Style spécial pour les jalons avec pourcentage */
-.milestone-progress {
-    position: absolute;
-    top: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 9px;
-    padding: 1px 4px;
-    border-radius: 6px;
-    min-width: 18px;
-}
+@keyframes urgentPulse {
 
-/* Styles pour la section de progression dans le tooltip */
-.tooltip-progress-section {
-    margin: 10px 0;
-    padding: 10px;
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-    border-radius: 8px;
-    border: 1px solid #dee2e6;
-}
+    0%,
+    100% {
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
 
-.tooltip-progress-bar {
-    position: relative;
-    width: 100%;
-    height: 20px;
-    background-color: #e9ecef;
-    border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 8px;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.tooltip-progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #3498db, #2ecc71);
-    border-radius: 10px;
-    transition: width 0.8s ease;
-    position: relative;
-}
-
-/* Animation de la barre de progression dans le tooltip */
-.tooltip-progress-fill::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(90deg,
-            transparent,
-            rgba(255, 255, 255, 0.3),
-            transparent);
-    animation: progressShine 2s ease-in-out infinite;
+    50% {
+        box-shadow: 0 2px 8px rgba(231, 76, 60, 0.6);
+    }
 }
 
 @keyframes progressShine {
@@ -1002,123 +964,75 @@ footer {
     }
 }
 
-.tooltip-progress-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-weight: bold;
-    font-size: 12px;
-    color: white;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-    z-index: 10;
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-/* Styles pour le statut textuel dans le tooltip */
-.tooltip-status {
-    text-align: center;
-    font-size: 13px;
-    font-weight: bold;
-    padding: 5px 10px;
-    border-radius: 15px;
-    border: 1px solid;
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(10px);
+    }
 }
 
-.tooltip-status.completed {
-    background: linear-gradient(135deg, #d5f4e6, #a8e6cf);
-    color: #27ae60;
-    border-color: #27ae60;
+/* Animation pour l'interaction */
+.project-bar:active,
+.milestone:active {
+    animation: pulse 0.3s ease;
 }
 
-.tooltip-status.high {
-    background: linear-gradient(135deg, #d6eaf8, #aed6f1);
-    color: #3498db;
-    border-color: #3498db;
+.progress-badge,
+.milestone-progress {
+    animation: fadeInUp 0.6s ease forwards;
 }
 
-.tooltip-status.medium {
-    background: linear-gradient(135deg, #fdebd0, #f8c471);
-    color: #f39c12;
-    border-color: #f39c12;
-}
-
-.tooltip-status.low {
-    background: linear-gradient(135deg, #fadbd8, #f1948a);
-    color: #e67e22;
-    border-color: #e67e22;
-}
-
-.tooltip-status.very-low {
-    background: linear-gradient(135deg, #fadbd8, #ec7063);
-    color: #e74c3c;
-    border-color: #e74c3c;
-}
-
-.tooltip-status.not-started {
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-    color: #6c757d;
-    border-color: #6c757d;
-}
-
-/* Ajustements pour les barres de projet avec progression */
-.project-bar {
-    position: relative;
-    overflow: visible;
-    /* Permet aux badges de dépasser */
-}
-
-/* Style spécial pour les projets avec progression élevée */
-.project-bar:has(.progress-badge.completed),
-.project-bar:has(.progress-badge.high) {
-    box-shadow: 0 2px 8px rgba(46, 204, 113, 0.3);
-}
-
-/* Effet de survol amélioré pour les projets avec progression */
-.project-bar:hover .progress-badge {
-    transform: scale(1.1);
-    animation-duration: 1s;
-}
-
-.milestone:hover .milestone-progress {
-    transform: translateX(-50%) scale(1.1);
-    animation-duration: 1s;
-}
-
-/* Styles pour l'overlay du tooltip */
-.tooltip-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-}
-
-.tooltip-overlay.visible {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Amélioration du tooltip */
-.tooltip {
-    position: fixed;
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    max-width: 400px;
-    min-width: 300px;
-    z-index: 1000;
-    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-}
-
-/* Responsive pour mobile */
+/* Responsive */
 @media screen and (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .gantt-container,
+    #gantt-container,
+    #historic-gantt {
+        padding: 15px;
+        width: 1200px;
+    }
+
+    #future-gantt {
+        width: 1200px;
+    }
+
+    .month-marker {
+        font-size: 11px;
+        padding-left: 3px;
+    }
+
+    .project-bar {
+        height: 25px;
+        font-size: 11px;
+        padding: 4px 6px;
+    }
+
+    .short-project {
+        min-width: 25px !important;
+        height: 25px !important;
+        font-size: 10px !important;
+    }
+
     .progress-badge {
         font-size: 9px;
         padding: 1px 3px;
@@ -1132,6 +1046,20 @@ footer {
         padding: 1px 3px;
         top: -12px;
         min-width: 15px;
+    }
+
+    .completed-badge {
+        font-size: 9px;
+        padding: 1px 4px;
+        top: -6px;
+        right: 2px;
+    }
+
+    .milestone.project-completed .completed-badge {
+        top: -10px;
+        right: -12px;
+        font-size: 8px;
+        padding: 1px 3px;
     }
 
     .tooltip-progress-bar {
@@ -1152,61 +1080,15 @@ footer {
         min-width: 280px;
         max-width: 95vw;
     }
-}
 
-/* Animation d'entrée pour les éléments de progression */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
+    .gantt-nav ul {
+        flex-direction: column;
+        align-items: center;
     }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.progress-badge,
-.milestone-progress {
-    animation: fadeInUp 0.6s ease forwards;
-}
-
-/* Style pour les barres de progression selon le pourcentage */
-.progress-bar[style*="100%"] {
-    background: linear-gradient(90deg,
-            rgba(46, 204, 113, 0.4) 0%,
-            rgba(46, 204, 113, 0.2) 100%);
-}
-
-.progress-bar[style*="75%"],
-.progress-bar[style*="80%"],
-.progress-bar[style*="85%"],
-.progress-bar[style*="90%"],
-.progress-bar[style*="95%"] {
-    background: linear-gradient(90deg,
-            rgba(52, 152, 219, 0.4) 0%,
-            rgba(52, 152, 219, 0.2) 100%);
-}
-
-/* Amélioration de la lisibilité du texte sur les barres de projet */
-.project-bar {
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-}
-
-/* Indicateur de progression critique (très faible) */
-.progress-badge.very-low {
-    animation: urgentPulse 2s ease-in-out infinite;
-}
-
-@keyframes urgentPulse {
-
-    0%,
-    100% {
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-    }
-
-    50% {
-        box-shadow: 0 2px 8px rgba(231, 76, 60, 0.6);
+    .gantt-nav li {
+        margin: 5px 0;
+        width: 100%;
+        text-align: center;
     }
 }

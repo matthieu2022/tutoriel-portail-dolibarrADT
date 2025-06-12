@@ -201,9 +201,9 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     {
       id: 15,
-      name: "Rentrée Septembre - deploiement de la V1",
-      startDate: new Date(2025, 8, 1), // 1 juillet 2025
-      endDate: new Date(2025, 8, 1),
+      name: "Deploiement de la V1",
+      startDate: new Date(2025, 9, 1), // 1 juillet 2025
+      endDate: new Date(2025, 9, 1),
       duration: "1 journée",
       resources: "ADT",
       section: "Planning de déploiement",
@@ -216,8 +216,8 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 16,
       name: "Fusion des systèmes BDD campus et CRM",
-      startDate: new Date(2025, 8, 1), // debut septembre a mi-septembre 2025
-      endDate: new Date(2025, 9, 15),
+      startDate: new Date(2024, 9, 10), // debut septembre a mi-septembre 2025
+      endDate: new Date(2024, 11, 23),
       duration: "15 jours",
       resources: "Équipe technique",
       section: "Planning de déploiement",

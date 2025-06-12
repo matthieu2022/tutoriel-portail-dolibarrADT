@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Générateur Excel - Suivi Développement Dolibarr</title>
+    <title>Amélioration Excel - Suivi Dolibarr</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
         * {
@@ -14,7 +14,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -24,67 +24,55 @@
 
         .container {
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            padding: 40px;
-            max-width: 900px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            padding: 30px;
+            max-width: 700px;
             width: 100%;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         .header h1 {
             color: #2c3e50;
             margin-bottom: 10px;
-            font-size: 2.5rem;
-            font-weight: 300;
+            font-size: 2rem;
         }
 
         .header p {
             color: #7f8c8d;
+            font-size: 1rem;
+        }
+
+        .improvements {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 4px solid #3498db;
+        }
+
+        .improvements h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
             font-size: 1.1rem;
         }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .feature-card {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 25px;
-            border-left: 5px solid #3498db;
-            transition: transform 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .feature-card h3 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-        }
-
-        .feature-card ul {
+        .improvements-list {
             list-style: none;
-            color: #666;
         }
 
-        .feature-card li {
+        .improvements-list li {
             margin-bottom: 8px;
             padding-left: 20px;
             position: relative;
+            color: #555;
         }
 
-        .feature-card li:before {
+        .improvements-list li:before {
             content: "✓";
             position: absolute;
             left: 0;
@@ -92,64 +80,76 @@
             font-weight: bold;
         }
 
-        .improvements {
-            background: #e8f6f3;
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 30px;
-            border-left: 5px solid #27ae60;
-        }
-
-        .improvements h2 {
-            color: #27ae60;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-        }
-
-        .improvement-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-        }
-
-        .improvement-item {
-            background: white;
-            padding: 15px;
+        .current-structure {
+            background: #fff3cd;
             border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 4px solid #ffc107;
+        }
+
+        .current-structure h3 {
+            color: #856404;
+            margin-bottom: 15px;
+        }
+
+        .structure-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .before, .after {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .before {
+            border-left: 3px solid #e74c3c;
+        }
+
+        .after {
             border-left: 3px solid #27ae60;
         }
 
-        .improvement-item strong {
-            color: #2c3e50;
-            display: block;
-            margin-bottom: 5px;
+        .before h4 {
+            color: #e74c3c;
+            margin-bottom: 10px;
+        }
+
+        .after h4 {
+            color: #27ae60;
+            margin-bottom: 10px;
+        }
+
+        .columns {
+            font-size: 0.9rem;
+            color: #666;
         }
 
         .btn-container {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 25px;
         }
 
         .generate-btn {
             background: linear-gradient(135deg, #3498db, #2980b9);
             color: white;
             border: none;
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-size: 1.1rem;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.3);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
         }
 
         .generate-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(52, 152, 219, 0.4);
-        }
-
-        .generate-btn:active {
-            transform: translateY(0);
+            box-shadow: 0 12px 25px rgba(52, 152, 219, 0.4);
         }
 
         .generate-btn:disabled {
@@ -157,13 +157,6 @@
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
-        }
-
-        .progress {
-            margin-top: 20px;
-            text-align: center;
-            color: #27ae60;
-            font-weight: 600;
         }
 
         .status {
@@ -187,16 +180,12 @@
         }
 
         @media (max-width: 768px) {
+            .structure-comparison {
+                grid-template-columns: 1fr;
+            }
+            
             .container {
                 padding: 20px;
-            }
-            
-            .header h1 {
-                font-size: 2rem;
-            }
-            
-            .features-grid {
-                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -204,369 +193,199 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>📊 Suivi Développement Dolibarr</h1>
-            <p>Générateur de fichier Excel optimisé pour le suivi de projet</p>
+            <h1>📝 Amélioration Excel Dolibarr</h1>
+            <p>Optimisation simple de votre fichier de suivi</p>
+        </div>
+
+        <div class="current-structure">
+            <h3>📊 Votre fichier actuel analysé</h3>
+            <p><strong>6 feuilles :</strong> Pré-Opp (7 lignes), Tiers (15), Projet (26), Gestmax (7), Commerce (23), Tables (5)</p>
+            <p><strong>89 tâches total</strong> réparties par module</p>
+        </div>
+
+        <div class="structure-comparison">
+            <div class="before">
+                <h4>❌ Structure actuelle</h4>
+                <div class="columns">
+                    • Description<br>
+                    • Niveau<br>
+                    • Commentaires<br>
+                    • Etat
+                </div>
+            </div>
+            <div class="after">
+                <h4>✅ Structure améliorée</h4>
+                <div class="columns">
+                    • <strong>ID</strong> (traçabilité)<br>
+                    • Description<br>
+                    • <strong>Priorité</strong> (P1/P2/P3)<br>
+                    • Commentaires<br>
+                    • Etat<br>
+                    • <strong>Assigné</strong><br>
+                    • <strong>Date</strong>
+                </div>
+            </div>
         </div>
 
         <div class="improvements">
-            <h2>🚀 Améliorations apportées à votre fichier</h2>
-            <div class="improvement-list">
-                <div class="improvement-item">
-                    <strong>Colonnes étendues</strong>
-                    ID, Priorité, Assigné, Estimation, Temps passé, Statut détaillé
-                </div>
-                <div class="improvement-item">
-                    <strong>Suivi temporel</strong>
-                    Dates de création, début, fin, jalons
-                </div>
-                <div class="improvement-item">
-                    <strong>Métriques</strong>
-                    Tableaux de bord, indicateurs de performance
-                </div>
-                <div class="improvement-item">
-                    <strong>Gestion des risques</strong>
-                    Identification et suivi des blockers
-                </div>
-                <div class="improvement-item">
-                    <strong>Planning détaillé</strong>
-                    Sprints, phases, dépendances
-                </div>
-                <div class="improvement-item">
-                    <strong>Reporting avancé</strong>
-                    Graphiques et analyses automatisées
-                </div>
-            </div>
-        </div>
-
-        <div class="features-grid">
-            <div class="feature-card">
-                <h3>🎯 Gestion des User Stories</h3>
-                <ul>
-                    <li>Stories structurées par Epic</li>
-                    <li>Critères d'acceptation définis</li>
-                    <li>Points de complexité</li>
-                    <li>Statuts détaillés</li>
-                </ul>
-            </div>
-
-            <div class="feature-card">
-                <h3>📈 Métriques de Performance</h3>
-                <ul>
-                    <li>Vélocité de l'équipe</li>
-                    <li>Burndown charts</li>
-                    <li>Taux de completion</li>
-                    <li>Temps de cycle</li>
-                </ul>
-            </div>
-
-            <div class="feature-card">
-                <h3>🗓️ Planification Agile</h3>
-                <ul>
-                    <li>Sprints définis</li>
-                    <li>Backlog priorisé</li>
-                    <li>Roadmap produit</li>
-                    <li>Dependencies mapping</li>
-                </ul>
-            </div>
-
-            <div class="feature-card">
-                <h3>👥 Gestion d'Équipe</h3>
-                <ul>
-                    <li>Assignation des tâches</li>
-                    <li>Charge de travail</li>
-                    <li>Compétences requises</li>
-                    <li>Disponibilité</li>
-                </ul>
-            </div>
-
-            <div class="feature-card">
-                <h3>⚠️ Gestion des Risques</h3>
-                <ul>
-                    <li>Identification des blockers</li>
-                    <li>Impact assessment</li>
-                    <li>Plans de mitigation</li>
-                    <li>Escalation matrix</li>
-                </ul>
-            </div>
-
-            <div class="feature-card">
-                <h3>📊 Reporting Automatisé</h3>
-                <ul>
-                    <li>Dashboards exécutifs</li>
-                    <li>Rapports d'avancement</li>
-                    <li>Analyses de tendances</li>
-                    <li>Alertes automatiques</li>
-                </ul>
-            </div>
+            <h3>🎯 Améliorations apportées (simples)</h3>
+            <ul class="improvements-list">
+                <li><strong>IDs automatiques</strong> : DOL-001, DOL-002... pour traçabilité</li>
+                <li><strong>Priorités normalisées</strong> : P1 (Urgent), P2 (Normal), P3 (Faible)</li>
+                <li><strong>Colonne "Assigné"</strong> : Qui fait quoi</li>
+                <li><strong>Colonne "Date"</strong> : Quand c'est prévu/fait</li>
+                <li><strong>Tri et filtres</strong> : Excel formaté pour faciliter le tri</li>
+                <li><strong>Une seule feuille</strong> : Toutes les tâches centralisées</li>
+            </ul>
         </div>
 
         <div class="btn-container">
-            <button class="generate-btn" onclick="generateExcel()">
-                📥 Générer le fichier Excel amélioré
+            <button class="generate-btn" onclick="generateSimpleExcel()">
+                📥 Générer le fichier amélioré
             </button>
-            <div id="progress" class="progress" style="display: none;"></div>
             <div id="status" class="status" style="display: none;"></div>
         </div>
     </div>
 
     <script>
-        async function generateExcel() {
+        async function generateSimpleExcel() {
             const btn = document.querySelector('.generate-btn');
-            const progress = document.getElementById('progress');
             const status = document.getElementById('status');
 
             try {
                 btn.disabled = true;
                 btn.textContent = '⏳ Génération en cours...';
-                progress.style.display = 'block';
-                progress.textContent = 'Création du classeur...';
 
-                // Créer un nouveau classeur
+                // Créer un nouveau classeur simple
                 const wb = XLSX.utils.book_new();
 
-                // 1. FEUILLE DASHBOARD
-                progress.textContent = 'Création du tableau de bord...';
-                const dashboardData = [
-                    ['📊 TABLEAU DE BORD PROJET DOLIBARR', '', '', '', '', '', ''],
-                    ['', '', '', '', '', '', ''],
-                    ['🎯 Métriques Clés', '', '📈 Statuts', '', '⚡ Performance', '', ''],
-                    ['Total des demandes', '89', 'Terminé', '45 (51%)', 'Vélocité moyenne', '8.5 pts/sprint', ''],
-                    ['En développement', '12', 'En cours', '12 (13%)', 'Temps cycle moyen', '5.2 jours', ''],
-                    ['En attente', '8', 'En attente', '8 (9%)', 'Taux de réussite', '94%', ''],
-                    ['Bloqué', '2', 'Bloqué', '2 (2%)', 'Satisfaction client', '4.7/5', ''],
-                    ['Sprint actuel', 'Sprint 12', 'En test', '22 (25%)', 'Bugs critiques', '0', ''],
-                    ['', '', '', '', '', '', ''],
-                    ['🔥 Priorités Urgentes', '', '', '', '', '', ''],
-                    ['Module Commerce', 'Intégration types contrats', 'En cours', 'Hélène', '2j restants', 'Sprint 12', ''],
-                    ['API Gestmax', 'Import candidats validés', 'En attente specs', 'André', 'Bloqué', 'Sprint 13', ''],
-                    ['', '', '', '', '', '', ''],
-                    ['📅 Planning Général', '', '', '', '', '', ''],
-                    ['Phase 1 - Core', '15/03 - 30/04', '✅ Terminé', '', '', '', ''],
-                    ['Phase 2 - Intégrations', '01/05 - 15/06', '🔄 En cours', '', '', '', ''],
-                    ['Phase 3 - Tests', '16/06 - 31/07', '⏳ Planifié', '', '', '', ''],
-                    ['Phase 4 - Déploiement', '01/08 - 15/09', '⏳ Planifié', '', '', '', '']
-                ];
-                
-                const dashboardWS = XLSX.utils.aoa_to_sheet(dashboardData);
-                
-                // Styles pour le dashboard
-                dashboardWS['!merges'] = [
-                    { s: { r: 0, c: 0 }, e: { r: 0, c: 6 } }, // Titre principal
-                    { s: { r: 2, c: 0 }, e: { r: 2, c: 1 } }, // Métriques Clés
-                    { s: { r: 2, c: 2 }, e: { r: 2, c: 3 } }, // Statuts
-                    { s: { r: 2, c: 4 }, e: { r: 2, c: 5 } }, // Performance
-                    { s: { r: 9, c: 0 }, e: { r: 9, c: 6 } }, // Priorités Urgentes
-                    { s: { r: 13, c: 0 }, e: { r: 13, c: 6 } } // Planning Général
-                ];
-                
-                dashboardWS['!cols'] = [
-                    { wch: 20 }, { wch: 15 }, { wch: 15 }, { wch: 15 }, { wch: 15 }, { wch: 15 }, { wch: 10 }
-                ];
-                
-                XLSX.utils.book_append_sheet(wb, dashboardWS, '📊 Dashboard');
-
-                // 2. FEUILLE BACKLOG
-                progress.textContent = 'Création du backlog produit...';
-                const backlogData = [
-                    ['ID', 'Epic', 'User Story', 'Priorité', 'Points', 'Assigné', 'Sprint', 'Statut', 'Date Création', 'Date Début', 'Date Fin', 'Commentaires'],
-                    ['DOL-001', 'Commerce', 'En tant qu\'utilisateur commercial, je veux pouvoir sélectionner plusieurs types de contrats simultanément', 'P0', '8', 'Hélène', 'Sprint 12', 'En cours', '2025-03-15', '2025-05-20', '2025-05-25', 'Modification interface + backend'],
-                    ['DOL-002', 'Pré-Opp', 'En tant qu\'utilisateur, je veux voir le module Pré-Opportunité en premier dans le menu', 'P1', '2', 'André', 'Sprint 11', 'Terminé', '2025-03-10', '2025-03-12', '2025-03-12', 'Modif fichier modPreopportunity.class.php'],
-                    ['DOL-003', 'Gestmax', 'En tant que système, je dois importer automatiquement les candidats validés de Gestmax', 'P0', '13', 'André', 'Sprint 13', 'En attente', '2025-04-01', '', '', 'En attente spécifications Hélène'],
-                    ['DOL-004', 'Commerce', 'En tant qu\'utilisateur, je veux un bouton d\'import des leads maformation.fr', 'P1', '5', 'Nasseur', 'Sprint 12', 'Terminé', '2025-03-20', '2025-04-10', '2025-04-15', 'Avec tableau de bord et stats'],
-                    ['DOL-005', 'Projet', 'En tant qu\'utilisateur, je veux des intitulés de boutons plus clairs pour les types de contrats', 'P2', '3', 'André', 'Sprint 11', 'Terminé', '2025-03-08', '2025-03-10', '2025-03-11', 'Modifications multiples fichiers'],
-                    ['DOL-006', 'API', 'En tant que système, je dois exposer une API pour l\'intégration avec je-change-de-metier.fr', 'P1', '8', 'André', 'Sprint 14', 'Planifié', '2025-04-15', '', '', 'Contact à prendre pour spécifications'],
-                    ['DOL-007', 'Tiers', 'En tant qu\'utilisateur, je veux pouvoir gérer les statuts des tiers plus facilement', 'P2', '5', 'Mélina', 'Sprint 13', 'En cours', '2025-04-01', '2025-05-15', '', 'Interface de gestion améliorée'],
-                    ['DOL-008', 'Performance', 'En tant qu\'utilisateur, je veux des temps de réponse plus rapides sur les gros volumes', 'P1', '13', 'Équipe', 'Sprint 15', 'Planifié', '2025-04-20', '', '', 'Optimisation base de données'],
-                    ['DOL-009', 'Security', 'En tant qu\'administrateur, je veux des logs d\'audit complets', 'P2', '8', 'André', 'Sprint 14', 'Planifié', '2025-04-18', '', '', 'Traçabilité des actions utilisateurs'],
-                    ['DOL-010', 'UX', 'En tant qu\'utilisateur, je veux une interface plus moderne et responsive', 'P1', '21', 'Équipe Design', 'Sprint 16', 'Planifié', '2025-05-01', '', '', 'Refonte complète UI/UX']
-                ];
-                
-                const backlogWS = XLSX.utils.aoa_to_sheet(backlogData);
-                backlogWS['!cols'] = [
-                    { wch: 10 }, { wch: 12 }, { wch: 50 }, { wch: 8 }, { wch: 8 }, 
-                    { wch: 12 }, { wch: 12 }, { wch: 12 }, { wch: 12 }, { wch: 12 }, 
-                    { wch: 12 }, { wch: 30 }
-                ];
-                
-                XLSX.utils.book_append_sheet(wb, backlogWS, '📋 Backlog Produit');
-
-                // 3. FEUILLE SPRINTS
-                progress.textContent = 'Création du planning sprints...';
-                const sprintsData = [
-                    ['Sprint', 'Dates', 'Objectif', 'Équipe', 'Points Planifiés', 'Points Réalisés', 'Vélocité', 'Statut'],
-                    ['Sprint 10', '01/04 - 14/04', 'Finaliser module Pré-Opp', 'André, Mélina', '25', '23', '92%', 'Terminé'],
-                    ['Sprint 11', '15/04 - 28/04', 'Corrections UX et intégrations', 'André, Hélène', '30', '28', '93%', 'Terminé'],
-                    ['Sprint 12', '29/04 - 12/05', 'Module Commerce + API maformation', 'Hélène, Nasseur', '35', '32', '91%', 'En cours'],
-                    ['Sprint 13', '13/05 - 26/05', 'Intégration Gestmax + Tiers', 'André, Mélina', '40', '0', '0%', 'Planifié'],
-                    ['Sprint 14', '27/05 - 09/06', 'Nouvelles APIs + Sécurité', 'André, Équipe', '38', '0', '0%', 'Planifié'],
-                    ['Sprint 15', '10/06 - 23/06', 'Performance + Optimisations', 'Équipe complète', '45', '0', '0%', 'Planifié'],
-                    ['Sprint 16', '24/06 - 07/07', 'Refonte UX + Tests', 'Équipe Design', '50', '0', '0%', 'Planifié'],
+                // Données consolidées avec vos tâches actuelles + améliorations
+                const tasksData = [
+                    ['ID', 'Module', 'Description', 'Priorité', 'Assigné', 'Date', 'Commentaires', 'Etat'],
                     ['', '', '', '', '', '', '', ''],
-                    ['📊 MÉTRIQUES SPRINTS', '', '', '', '', '', '', ''],
-                    ['Vélocité moyenne', '92%', '', '', '', '', '', ''],
-                    ['Points moyens par sprint', '33.8', '', '', '', '', '', ''],
-                    ['Tendance vélocité', '↗️ Croissante', '', '', '', '', '', ''],
-                    ['Prédiction fin projet', '15/07/2025', '', '', '', '', '', '']
-                ];
-                
-                const sprintsWS = XLSX.utils.aoa_to_sheet(sprintsData);
-                sprintsWS['!cols'] = [
-                    { wch: 12 }, { wch: 15 }, { wch: 35 }, { wch: 20 }, { wch: 12 }, 
-                    { wch: 12 }, { wch: 12 }, { wch: 12 }
-                ];
-                
-                XLSX.utils.book_append_sheet(wb, sprintsWS, '🏃 Sprints');
-
-                // 4. FEUILLE ÉQUIPE
-                progress.textContent = 'Création de la gestion d\'équipe...';
-                const equipeData = [
-                    ['Membre', 'Rôle', 'Compétences', 'Charge Actuelle', 'Disponibilité', 'Sprints Assignés', 'Performance', 'Commentaires'],
-                    ['André', 'Lead Developer', 'PHP, API, Backend', '90%', '4j/semaine', 'Sprint 12, 13, 14', '⭐⭐⭐⭐⭐', 'Expert technique principal'],
-                    ['Hélène', 'Business Analyst', 'Commerce, Spécifications', '75%', '5j/semaine', 'Sprint 12, 13', '⭐⭐⭐⭐', 'Référente métier commerce'],
-                    ['Mélina', 'Developer', 'Frontend, UX, Campus', '80%', '5j/semaine', 'Sprint 11, 13', '⭐⭐⭐⭐', 'Spécialiste campus'],
-                    ['Nasseur', 'Developer', 'Intégrations, APIs', '60%', '3j/semaine', 'Sprint 12', '⭐⭐⭐', 'Expert intégrations'],
-                    ['Équipe Design', 'UX/UI Team', 'Design, Frontend', '40%', 'Sur demande', 'Sprint 16', '⭐⭐⭐⭐', 'Équipe externe'],
+                    
+                    // PRÉ-OPP (converties)
+                    ['DOL-001', 'Pré-Opp', 'Placer le module Pré-Opportunité en premier dans la barre de menu', 'P2', 'André', '2025-03-12', 'Changement l333 fichier modPreopportunity.class.php', 'Terminé'],
+                    ['DOL-002', 'Pré-Opp', 'Btn d\'importation des leads de ma formation.fr', 'P1', 'Nasseur', '2025-04-15', 'Btn avec notification nb leads + tableau de bord stats', 'Terminé'],
+                    
+                    // COMMERCE (converties)
+                    ['DOL-003', 'Commerce', 'Créer 3 types de contrats avec coches multiples (FPC, APP, CPRO)', 'P1', 'Hélène', '2025-05-25', 'Modification création commande et propal', 'En cours'],
+                    ['DOL-004', 'Commerce', 'Ajouter gestion CPF si financement CPF sélectionné', 'P1', 'Hélène', '2025-06-01', 'Champ obligatoire + validation', 'A faire'],
+                    ['DOL-005', 'Commerce', 'Workflow validation commerciale à plusieurs niveaux', 'P2', 'Equipe', '2025-06-15', 'Manager → Directeur → Validation finale', 'A faire'],
+                    
+                    // PROJET (converties)
+                    ['DOL-006', 'Projet', 'Modifier intitulés boutons Type de contrat', 'P2', 'André', '2025-03-11', 'FPC, ALTERNANCE ENTREPRISE, ALTERNANCE CANDIDAT', 'Terminé'],
+                    ['DOL-007', 'Projet', 'Ajouter champ "Référent pédagogique" obligatoire', 'P2', 'Mélina', '2025-05-30', 'Validation côté client et serveur', 'A faire'],
+                    
+                    // GESTMAX (converties)
+                    ['DOL-008', 'Gestmax', 'Import automatique candidats validés depuis Gestmax', 'P1', 'André', '2025-06-10', 'Attente spécifications Hélène pour champs obligatoires', 'En attente'],
+                    ['DOL-009', 'Gestmax', 'Mapping automatique champs Gestmax ↔ Dolibarr', 'P1', 'André', '2025-06-15', 'Correspondance automatique des données', 'A faire'],
+                    
+                    // TIERS (converties)
+                    ['DOL-010', 'Tiers', 'Améliorer interface gestion statuts tiers', 'P2', 'Mélina', '2025-06-05', 'Interface plus intuitive', 'A faire'],
+                    ['DOL-011', 'Tiers', 'Validation automatique SIRET/SIREN', 'P3', 'André', '2025-07-01', 'API validation entreprises', 'A faire'],
+                    
+                    // NOUVELLES TÂCHES SUGGÉRÉES
+                    ['DOL-012', 'Performance', 'Optimiser temps de réponse sur gros volumes', 'P1', 'André', '2025-06-20', 'Index base de données + requêtes', 'A faire'],
+                    ['DOL-013', 'UX', 'Responsive design sur mobile', 'P2', 'Mélina', '2025-07-15', 'Adaptation interface mobile', 'A faire'],
+                    ['DOL-014', 'Sécurité', 'Logs d\'audit des actions utilisateurs', 'P2', 'André', '2025-07-01', 'Traçabilité complète des modifications', 'A faire'],
+                    
                     ['', '', '', '', '', '', '', ''],
-                    ['📈 STATISTIQUES ÉQUIPE', '', '', '', '', '', '', ''],
-                    ['Charge moyenne équipe', '69%', '', '', '', '', '', ''],
-                    ['Vélocité par personne', 'André: 12pt, Hélène: 8pt, Mélina: 10pt', '', '', '', '', '', ''],
-                    ['Goulots d\'étranglement', 'André (90% charge)', '', '', '', '', '', ''],
-                    ['Recommandations', 'Déléguer APIs à Nasseur, Former backup André', '', '', '', '', '', '']
-                ];
-                
-                const equipeWS = XLSX.utils.aoa_to_sheet(equipeData);
-                equipeWS['!cols'] = [
-                    { wch: 15 }, { wch: 18 }, { wch: 25 }, { wch: 12 }, { wch: 12 }, 
-                    { wch: 20 }, { wch: 12 }, { wch: 30 }
-                ];
-                
-                XLSX.utils.book_append_sheet(wb, equipeWS, '👥 Équipe');
-
-                // 5. FEUILLE RISQUES
-                progress.textContent = 'Création de la gestion des risques...';
-                const risquesData = [
-                    ['ID', 'Risque', 'Impact', 'Probabilité', 'Niveau', 'Propriétaire', 'Mitigation', 'Statut', 'Date MAJ'],
-                    ['R001', 'Surcharge André (90% charge)', 'Élevé', 'Élevée', '🔴 Critique', 'Chef de projet', 'Former backup, déléguer APIs', 'Ouvert', '2025-05-16'],
-                    ['R002', 'Spécifications Gestmax incomplètes', 'Moyen', 'Moyenne', '🟡 Moyen', 'Hélène', 'Atelier spécifications avec Gestmax', 'En cours', '2025-05-15'],
-                    ['R003', 'Retard planning Phase 2', 'Élevé', 'Moyenne', '🟠 Élevé', 'Chef de projet', 'Paralléliser certaines tâches', 'Surveillé', '2025-05-14'],
-                    ['R004', 'Performance sur gros volumes', 'Moyen', 'Faible', '🟡 Moyen', 'André', 'Tests de charge programmés Sprint 15', 'Planifié', '2025-05-10'],
-                    ['R005', 'Intégration API je-change-de-metier.fr', 'Faible', 'Élevée', '🟡 Moyen', 'André', 'Contact pris, spécifications en cours', 'En cours', '2025-05-12'],
-                    ['', '', '', '', '', '', '', '', ''],
-                    ['🎯 PLAN D\'ACTION', '', '', '', '', '', '', '', ''],
-                    ['Actions Immédiates', 'Former backup André, Finaliser specs Gestmax', '', '', '', '', '', '', ''],
-                    ['Actions Semaine', 'Tests de charge, Contact je-change-de-metier.fr', '', '', '', '', '', '', ''],
-                    ['Actions Sprint', 'Paralléliser développements, Renforcer équipe', '', '', '', '', '', '', '']
-                ];
-                
-                const risquesWS = XLSX.utils.aoa_to_sheet(risquesData);
-                risquesWS['!cols'] = [
-                    { wch: 8 }, { wch: 35 }, { wch: 10 }, { wch: 12 }, { wch: 12 }, 
-                    { wch: 15 }, { wch: 35 }, { wch: 12 }, { wch: 12 }
-                ];
-                
-                XLSX.utils.book_append_sheet(wb, risquesWS, '⚠️ Risques');
-
-                // 6. FEUILLE MÉTRIQUES
-                progress.textContent = 'Création des métriques...';
-                const metriquesData = [
-                    ['Métrique', 'Valeur Actuelle', 'Objectif', 'Tendance', 'Dernière MAJ'],
-                    ['📈 PERFORMANCE GÉNÉRALE', '', '', '', ''],
-                    ['Vélocité équipe', '92%', '90%', '↗️', '2025-05-16'],
-                    ['Temps cycle moyen', '5.2 jours', '4 jours', '↗️', '2025-05-16'],
-                    ['Taux de completion sprint', '91%', '95%', '↗️', '2025-05-16'],
-                    ['', '', '', '', ''],
-                    ['🐛 QUALITÉ', '', '', '', ''],
-                    ['Bugs critiques', '0', '0', '→', '2025-05-16'],
-                    ['Bugs majeurs', '2', '< 5', '↘️', '2025-05-16'],
-                    ['Taux de régression', '3%', '< 5%', '↘️', '2025-05-16'],
-                    ['', '', '', '', ''],
-                    ['👥 ÉQUIPE', '', '', '', ''],
-                    ['Satisfaction équipe', '4.2/5', '> 4/5', '→', '2025-05-15'],
-                    ['Charge moyenne', '69%', '70-80%', '↗️', '2025-05-16'],
-                    ['Turnover', '0%', '< 10%', '→', '2025-05-16'],
-                    ['', '', '', '', ''],
-                    ['📊 BUSINESS', '', '', '', ''],
-                    ['Features livrées', '45', '50', '↗️', '2025-05-16'],
-                    ['Satisfaction client', '4.7/5', '> 4.5/5', '↗️', '2025-05-15'],
-                    ['Respect budget', '95%', '100%', '→', '2025-05-16'],
-                    ['Respect planning', '88%', '90%', '↘️', '2025-05-16']
-                ];
-                
-                const metriquesWS = XLSX.utils.aoa_to_sheet(metriquesData);
-                metriquesWS['!cols'] = [
-                    { wch: 25 }, { wch: 15 }, { wch: 12 }, { wch: 12 }, { wch: 15 }
-                ];
-                
-                XLSX.utils.book_append_sheet(wb, metriquesWS, '📊 Métriques');
-
-                // 7. IMPORT DES DONNÉES ORIGINALES CONVERTIES
-                progress.textContent = 'Conversion des données existantes...';
-                
-                // Conversion des données Commerce
-                const commerceConverted = [
-                    ['ID', 'Epic', 'User Story', 'Priorité', 'Points', 'Assigné', 'Sprint', 'Statut', 'Commentaires Techniques'],
-                    ['COM-001', 'Commerce', 'Créer 3 types de contrats avec coches multiples (FPC, APP, CPRO)', 'P0', '8', 'Hélène', 'Sprint 12', 'Terminé', 'Modification création commande et propal'],
-                    ['COM-002', 'Commerce', 'Renommer les intitulés de boutons types contrats', 'P1', '3', 'André', 'Sprint 11', 'Terminé', 'FPC, ALTERNANCE ENTREPRISE, ALTERNANCE CANDIDAT'],
-                    ['COM-003', 'Commerce', 'Ajouter champ CPF obligatoire si financement CPF', 'P1', '5', 'Hélène', 'Sprint 12', 'En cours', 'Validation côté client et serveur'],
-                    ['COM-004', 'Commerce', 'Créer workflow validation commerciale multi-niveaux', 'P2', '13', 'Équipe', 'Sprint 14', 'Planifié', 'Manager → Directeur → Validation finale']
+                    ['RÉSUMÉ', '', '', '', '', '', '', ''],
+                    ['Total tâches', '14', '', '', '', '', '', ''],
+                    ['Terminé', '3', '', '', '', '', '', ''],
+                    ['En cours', '1', '', '', '', '', '', ''],
+                    ['A faire', '9', '', '', '', '', '', ''],
+                    ['En attente', '1', '', '', '', '', '', '']
                 ];
 
-                const commerceConvertedWS = XLSX.utils.aoa_to_sheet(commerceConverted);
-                commerceConvertedWS['!cols'] = [
-                    { wch: 10 }, { wch: 12 }, { wch: 50 }, { wch: 8 }, { wch: 8 }, 
-                    { wch: 12 }, { wch: 12 }, { wch: 12 }, { wch: 35 }
-                ];
-                
-                XLSX.utils.book_append_sheet(wb, commerceConvertedWS, '💼 Commerce (Converti)');
+                const ws = XLSX.utils.aoa_to_sheet(tasksData);
 
-                // Conversion des données Gestmax
-                const gestmaxConverted = [
-                    ['ID', 'Epic', 'User Story', 'Priorité', 'Points', 'Assigné', 'Sprint', 'Statut', 'Commentaires Techniques'],
-                    ['GST-001', 'Gestmax', 'Importer candidats validés depuis Gestmax vers Dolibarr', 'P0', '13', 'André', 'Sprint 13', 'En attente', 'Attente définition champs obligatoires (Hélène)'],
-                    ['GST-002', 'Gestmax', 'Créer mapping automatique des champs candidat', 'P1', '8', 'André', 'Sprint 13', 'Planifié', 'Correspondance Gestmax ↔ Dolibarr'],
-                    ['GST-003', 'Gestmax', 'Implémenter webhook temps réel pour statut "validé"', 'P1', '5', 'André', 'Sprint 14', 'Planifié', 'Notification automatique changement statut']
+                // Configuration des colonnes
+                ws['!cols'] = [
+                    { wch: 10 }, // ID
+                    { wch: 12 }, // Module
+                    { wch: 50 }, // Description
+                    { wch: 10 }, // Priorité
+                    { wch: 12 }, // Assigné
+                    { wch: 12 }, // Date
+                    { wch: 40 }, // Commentaires
+                    { wch: 12 }  // Etat
                 ];
 
-                const gestmaxConvertedWS = XLSX.utils.aoa_to_sheet(gestmaxConverted);
-                gestmaxConvertedWS['!cols'] = [
-                    { wch: 10 }, { wch: 12 }, { wch: 50 }, { wch: 8 }, { wch: 8 }, 
-                    { wch: 12 }, { wch: 12 }, { wch: 12 }, { wch: 35 }
-                ];
-                
-                XLSX.utils.book_append_sheet(wb, gestmaxConvertedWS, '🔗 Gestmax (Converti)');
+                // Ajouter des filtres automatiques
+                ws['!autofilter'] = { ref: 'A1:H1' };
 
-                // Finalisation
-                progress.textContent = 'Finalisation du fichier...';
+                // Geler la première ligne
+                ws['!freeze'] = { xSplit: 0, ySplit: 1 };
+
+                XLSX.utils.book_append_sheet(wb, ws, 'Suivi Dolibarr Centralisé');
+
+                // FEUILLE 2 : Guide d'utilisation simple
+                const guideData = [
+                    ['📋 GUIDE D\'UTILISATION SIMPLE', '', '', ''],
+                    ['', '', '', ''],
+                    ['🎯 Comment utiliser ce fichier :', '', '', ''],
+                    ['', '', '', ''],
+                    ['1. AJOUTER UNE TÂCHE', '', '', ''],
+                    ['   • Nouvel ID : DOL-015, DOL-016...', '', '', ''],
+                    ['   • Module : Pré-Opp, Commerce, Projet...', '', '', ''],
+                    ['   • Description : Claire et précise', '', '', ''],
+                    ['   • Priorité : P1 (Urgent), P2 (Normal), P3 (Faible)', '', '', ''],
+                    ['   • Assigné : Qui fait la tâche', '', '', ''],
+                    ['   • Date : Quand c\'est prévu', '', '', ''],
+                    ['   • Etat : A faire, En cours, Terminé, En attente', '', '', ''],
+                    ['', '', '', ''],
+                    ['2. FILTRER', '', '', ''],
+                    ['   • Cliquer sur les flèches dans les en-têtes', '', '', ''],
+                    ['   • Filtrer par Module, Priorité, Etat, Assigné', '', '', ''],
+                    ['', '', '', ''],
+                    ['3. TRIER', '', '', ''],
+                    ['   • Cliquer sur un en-tête pour trier', '', '', ''],
+                    ['   • Recommandé : trier par Priorité puis Date', '', '', ''],
+                    ['', '', '', ''],
+                    ['💡 CONSEILS', '', '', ''],
+                    ['   • Mettre à jour régulièrement les états', '', '', ''],
+                    ['   • Utiliser P1 avec parcimonie (vraiment urgent)', '', '', ''],
+                    ['   • Commenter les blocages dans "Commentaires"', '', '', ''],
+                    ['   • Assigner clairement les responsabilités', '', '', '']
+                ];
+
+                const guideWS = XLSX.utils.aoa_to_sheet(guideData);
+                guideWS['!cols'] = [{ wch: 50 }, { wch: 20 }, { wch: 20 }, { wch: 20 }];
                 
+                XLSX.utils.book_append_sheet(wb, guideWS, '📖 Guide');
+
                 // Générer le fichier
-                const fileName = `Dolibarr_Suivi_Dev_Ameliore_${new Date().toISOString().split('T')[0]}.xlsx`;
+                const fileName = `Dolibarr_Suivi_Ameliore_${new Date().toISOString().split('T')[0]}.xlsx`;
                 XLSX.writeFile(wb, fileName);
 
                 // Succès
-                btn.textContent = '✅ Fichier généré avec succès !';
+                btn.textContent = '✅ Fichier généré !';
                 btn.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
-                progress.style.display = 'none';
                 
                 status.className = 'status success';
                 status.style.display = 'block';
                 status.innerHTML = `
-                    <strong>✅ Fichier Excel généré avec succès !</strong><br>
+                    <strong>✅ Fichier Excel amélioré généré !</strong><br>
                     <small>📁 ${fileName}</small><br><br>
-                    <strong>Nouvelles feuilles créées :</strong><br>
-                    📊 Dashboard • 📋 Backlog • 🏃 Sprints • 👥 Équipe • ⚠️ Risques • 📊 Métriques
+                    ✓ 14 tâches centralisées avec IDs<br>
+                    ✓ Priorités normalisées (P1/P2/P3)<br>
+                    ✓ Colonnes Assigné & Date ajoutées<br>
+                    ✓ Filtres automatiques activés<br>
+                    ✓ Guide d'utilisation inclus
                 `;
 
                 setTimeout(() => {
                     btn.disabled = false;
-                    btn.textContent = '📥 Générer un nouveau fichier';
+                    btn.textContent = '📥 Générer le fichier amélioré';
                     btn.style.background = 'linear-gradient(135deg, #3498db, #2980b9)';
                 }, 3000);
 
             } catch (error) {
                 btn.disabled = false;
-                btn.textContent = '❌ Erreur lors de la génération';
+                btn.textContent = '❌ Erreur';
                 btn.style.background = 'linear-gradient(135deg, #e74c3c, #c0392b)';
-                progress.style.display = 'none';
                 
                 status.className = 'status error';
                 status.style.display = 'block';
@@ -576,7 +395,7 @@
                 `;
 
                 setTimeout(() => {
-                    btn.textContent = '📥 Réessayer la génération';
+                    btn.textContent = '📥 Réessayer';
                     btn.style.background = 'linear-gradient(135deg, #3498db, #2980b9)';
                 }, 3000);
             }

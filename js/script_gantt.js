@@ -224,9 +224,9 @@ document.addEventListener("DOMContentLoaded", function () {
       description:
         "Formation et sensibilisation des équipes campus et pédagogie à l'utilisation du système Dolibarr. Mise en place de sessions de formation pour assurer une transition fluide vers le nouvel outil.",
     },
-    //rajout ISP + GESTMAX + API + CSS du dolibarr
+    
     {
-      id: 22, // Corrigé l'ID dupliqué (17 -> 22)
+      id: 22, 
       name: "Formulaires Web et liaisons webhook",
       startDate: new Date(2025, 2, 24),
       endDate: new Date(2025, 4, 14),
@@ -238,6 +238,7 @@ document.addEventListener("DOMContentLoaded", function () {
       description:
         "Développement de formulaires web interactifs et mise en place des webhooks pour l'intégration en temps réel avec les systèmes externes.",
     },
+
     {
       id: 18,
       name: "Module Pré-opportunité",
@@ -248,6 +249,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Developpement & amélioration",
       cssClass: "dev-cybertechnique",
       completed: false,
+      progress: 95, // Pourcentage d'avancement
       description:
         "Création d'un module spécifique pour la gestion des pré-opportunités commerciales, permettant de qualifier les leads avant leur conversion en opportunités.",
     },
@@ -261,12 +263,28 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Developpement & amélioration",
       cssClass: "dev-cybertechnique",
       completed: true, // Marqué comme terminé selon la description
+      progress: 100, // Pourcentage d'avancement
       description:
         "Développement du système d'intégration ISP et mise en place des correspondances de champs entre les différentes plateformes pour assurer la cohérence des données. TACHES TERMINÉES",
     },
     {
       id: 20,
-      name: "Liaisons API GESTMAX + maformation.fr + je-change-de-metier.fr",
+      name: "Liaisons API maformation.fr",
+      startDate: new Date(2025, 3, 14),
+      endDate: new Date(2025, 5, 14),
+      duration: "1 mois environ",
+      resources: "Équipe technique - André",
+      section: "Developpement & amélioration",
+      cssClass: "dev-cybertechnique",
+      completed: true,
+      progress: 100, // Pourcentage d'avancement
+      description:
+        "Développement des connecteurs API pour l'intégration des leads issus de GETMYLEADS.",
+    },
+
+    {
+      id: 23,
+      name: "Liaisons API GESTMAX",
       startDate: new Date(2025, 3, 14),
       endDate: new Date(2025, 5, 14),
       duration: "1 mois environ",
@@ -274,9 +292,26 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Developpement & amélioration",
       cssClass: "dev-cybertechnique",
       completed: false,
+      progress: 80, // Pourcentage d'avancement
       description:
-        "Développement des connecteurs API pour l'intégration avec GESTMAX et les plateformes de formation en ligne, permettant la synchronisation automatique des données.",
+        "Développement des connecteurs API pour l'intégration avec GESTMAX - etat d'avancement 80% - rapatriement des pieces jointes => dev",
     },
+
+    {
+      id: 24,
+      name: "Liaisons API je-change-de-metier.fr",
+      startDate: new Date(2025, 3, 14),
+      endDate: new Date(2025, 5, 14),
+      duration: "1 mois environ",
+      resources: "Équipe technique - André",
+      section: "Developpement & amélioration",
+      cssClass: "dev-cybertechnique",
+      completed: false,
+      progress: 0, // Pourcentage d'avancement
+      description:
+        "Développement des connecteurs API pour l'intégration des leads issus de je-change-de-metier.fr - contact a prendre pour les spécifications techniques.",
+    },
+
     {
       id: 21,
       name: "Developpement interne dolibarr : modules personnalisés",
@@ -287,6 +322,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Developpement & amélioration",
       cssClass: "dev-cybertechnique",
       completed: false,
+      progress: 65, // Pourcentage d'avancement
       description:
         "Travaux de personnalisation et d'optimisation du cœur de Dolibarr pour répondre aux besoins spécifiques de l'organisation. Développement de modules sur mesure.",
     },

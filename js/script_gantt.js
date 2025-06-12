@@ -188,9 +188,9 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 14,
       name: "Formation des équipes Commerciales et Administratif",
-      startDate: new Date(2025, 7, 18), // 18 aout 2025 –  31 aout 2025
-      endDate: new Date(2025, 7, 31),
-      duration: "12 jours environ",
+      startDate: new Date(2025, 8, 10),
+      endDate: new Date(2025, 8, 31),
+      duration: "environ 1 mois",
       resources: "(8 BtoB + 2 GC + 3 BtoC + 2 admin",
       section: "Planning de déploiement",
       cssClass: "planning-debug-v1",
@@ -202,8 +202,8 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 15,
       name: "Deploiement de la V1",
-      startDate: new Date(2025, 9, 1), // 1 juillet 2025
-      endDate: new Date(2025, 9, 1),
+      startDate: new Date(2025, 10, 1), 
+      endDate: new Date(2025, 10, 1),
       duration: "1 journée",
       resources: "ADT",
       section: "Planning de déploiement",
@@ -350,7 +350,7 @@ document.addEventListener("DOMContentLoaded", function () {
       name: "Phase de test avec 4 référents d'activité du pôle commercial - keyUsers",
       startDate: new Date(2025, 7, 25), // 2 juin 2025
       endDate: new Date(2025, 8, 10),
-      duration: "10 journées environ",
+      duration: "15 journées environ",
       resources: "Fanny, Caroline, Mélina, autres",
       section: "Planning de déploiement",
       cssClass: "planning-test-referents",

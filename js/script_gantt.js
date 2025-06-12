@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
       id: 5,
       name: "Dolibarr fusionné",
       startDate: new Date(2025, 0, 13),
-      endDate: new Date(2026, 2, 26),
+      endDate: new Date(2025, 10, 1),
       duration: "104 jours",
       resources: "ADT - https://gestion.academie-tourisme.fr/",
       section: "Historique Dolibarr",
@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
       name: "Livraison base test définitive",
       startDate: new Date(2025, 2, 15), // 15 mars 2025 – 30 avril 2025
       endDate: new Date(2025, 3, 30),
-      duration: "5 jours",
+      duration: "1 mois 15 jours",
       resources: "Équipe technique + Admin ADT",
       section: "Planning de déploiement",
       cssClass: "planning-test",
@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
       name: "Phase pré-test",
       startDate: new Date(2025, 3, 5), // 5 mai 2025 – 15 juin 2025
       endDate: new Date(2025, 8, 15),
-      duration: "1 mois environ",
+      duration: "5 mois environ",
       resources: "Hélène, Olivier, Equipe Technique",
       section: "Planning de déploiement",
       cssClass: "planning-pretest",
@@ -145,10 +145,10 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     {
       id: 11,
-      name: "Débugs et ajustements (1)",
-      startDate: new Date(2025, 5, 15), // 15 juin 2025 – 14 juillet 2025
+      name: "Débugs et ajustements",
+      startDate: new Date(2025, 4, 15), // 15 juin 2025 – 14 juillet 2025
       endDate: new Date(2025, 8, 15),
-      duration: "1 mois environ",
+      duration: "3 mois environ",
       resources: "Aurélien, Fanny, Caroline, Mélina",
       section: "Planning de déploiement",
       cssClass: "planning-debug",
@@ -222,8 +222,8 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Équipe technique",
       section: "Planning de déploiement",
       cssClass: "planning-debug-final",
-      completed: false,
-      progress: 0,
+      completed: true,
+      progress: 100,
       description:
         "Fusion Bdd Campus avec le dolibarr principal gestion + Concertation avec Mélina pour l'integration par la Cyber-technique",
     },

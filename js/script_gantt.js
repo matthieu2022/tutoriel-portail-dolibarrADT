@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "Mélina, Lauryn, laetitia, maeva sur https://crm-neo-sphere.fr/",
       section: "Historique Dolibarr",
       cssClass: "dolibarr-crm",
+      completed: false, // Ajout du statut de completion
       description:
         "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
     },
@@ -23,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Mélina, Lauryn, laetitia, maeva",
       section: "Historique Dolibarr",
       cssClass: "dolibarr-prospect",
+      completed: false,
       description:
         "Système de gestion des prospects et des opportunités commerciales. Permet de suivre le cycle de vente complet, de la prospection initiale à la conversion client.",
     },
@@ -35,6 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Romuald, maeva",
       section: "Historique Dolibarr",
       cssClass: "dolibarr-facturation",
+      completed: true, // Marqué comme terminé
       description:
         "Module de facturation électronique avec gestion des factures, devis, bons de commande et règlements. Intègre un système de relances automatisées pour les paiements en retard.",
     },
@@ -47,6 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Melina, sabine, charlotte",
       section: "Historique Dolibarr",
       cssClass: "dolibarr-campus",
+      completed: false,
       description:
         "Adaptation du système Dolibarr pour la gestion des campus et centres de formation, incluant le suivi des étudiants, des cours et la gestion des ressources pédagogiques.",
     },
@@ -59,6 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "ADT - https://gestion.academie-tourisme.fr/",
       section: "Historique Dolibarr",
       cssClass: "dolibarr-fusionnee",
+      completed: false,
       description:
         "Version fusionnée intégrant tous les modules Dolibarr déployés pour ADT. Centralisation et harmonisation des différents systèmes pour une gestion globale.",
     },
@@ -71,6 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "",
       section: "Historique Projets Eureka",
       cssClass: "creme",
+      completed: true, // Marqué comme terminé
       description:
         "Projet Crème développé pour le secteur cosmétique, incluant la gestion des formulations, le suivi de production et la traçabilité des ingrédients.",
     },
@@ -83,6 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "",
       section: "Historique Projets Eureka",
       cssClass: "ypareo",
+      completed: true, // Marqué comme terminé
       description:
         "Intégration avec la plateforme Ypareo pour la gestion et le suivi de l'apprentissage et de la formation professionnelle.",
     },
@@ -95,6 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "",
       section: "Historique Projets Eureka",
       cssClass: "pepit",
+      completed: true, // Marqué comme terminé
       description:
         "Projet Pepit dédié aux startups innovantes, incluant des outils de gestion de projets agiles et de suivi d'avancement.",
     },
@@ -108,6 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Équipe technique + Admin ADT",
       section: "Planning de déploiement",
       cssClass: "planning-test",
+      completed: false,
       description:
         "Finalisation et livraison de la base de test complète pour validation sur le dolibarr de test :https://dolibarrvierge19.e-learning-neo-sphere.fr/.Cette étape marque le début de la phase de tests approfondis.",
     },
@@ -120,6 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Hélène, Olivier, Equipe Technique",
       section: "Planning de déploiement",
       cssClass: "planning-pretest",
+      completed: false,
       description:
         "Vérification préliminaire des fonctionnalités par une équipe restreinte. Identification des problèmes avant les tests élargis et resolution des problèmes critiques.",
     },
@@ -132,6 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Aurélien, Fanny, Caroline, Mélina",
       section: "Planning de déploiement",
       cssClass: "planning-debug",
+      completed: false,
       description:
         "Première phase de correction des bugs et d'ajustements suite aux retours des pré-tests. Optimisation des performances et de l'Phase de test avec 4 référents d'activité du pôle commercial + Débugs et ajustements pour la V1.",
     },
@@ -144,6 +155,7 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Olivier Moncoudiol, André, matthieu, Hélene",
       section: "Planning de déploiement",
       cssClass: "planning-test-referents",
+      completed: false,
       description:
         "Demo icademie pour le dolibarvierge et notre CRM. Comparaison éventuelle avec Salesforce",
     },
@@ -156,6 +168,7 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "ADT",
       section: "Planning de déploiement",
       cssClass: "planning-test-referents",
+      completed: false,
       description:
         "Période estivale de congés pour l'équipe technique et les référents d'activité mais cette période peut être sujette à des tests ou des développements légers.",
     },
@@ -168,6 +181,7 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "(8 BtoB + 2 GC + 3 BtoC + 2 admin",
       section: "Planning de déploiement",
       cssClass: "planning-debug-v1",
+      completed: false,
       description:
         "Formation des équipes commerciales et administratif (15 personnes) - 1 journée par utilisateur, soit 3 groupes de 5 personnes – mise en place de référents dolibarr qui assureront aide et suivi. Un portail web dédiée sera à disposition.",
     },
@@ -180,6 +194,7 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "ADT",
       section: "Planning de déploiement",
       cssClass: "planning-formation",
+      completed: false,
       description:
         "Inauguration officielle de la version V1 du système Dolibarr. Lancement de la solution en environnement de production et début de la phase de support post-déploiement. Notifications tous canaux TEAMS",
     },
@@ -192,6 +207,7 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Équipe technique",
       section: "Planning de déploiement",
       cssClass: "planning-debug-final",
+      completed: false,
       description:
         "Fusion Bdd Campus avec le dolibarr principal gestion + Concertation avec Mélina pour l'integration par la Cyber-technique",
     },
@@ -204,6 +220,7 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Équipe technique",
       section: "Planning de déploiement",
       cssClass: "planning-deployment",
+      completed: false,
       description:
         "Formation et sensibilisation des équipes campus et pédagogie à l'utilisation du système Dolibarr. Mise en place de sessions de formation pour assurer une transition fluide vers le nouvel outil.",
     },
@@ -217,6 +234,7 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Équipe technique - André",
       section: "Developpement & améliorations",
       cssClass: "dev-cybertechnique",
+      completed: false,
       description:
         "Développement de formulaires web interactifs et mise en place des webhooks pour l'intégration en temps réel avec les systèmes externes.",
     },
@@ -229,6 +247,7 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Équipe technique - André",
       section: "Developpement & amélioration",
       cssClass: "dev-cybertechnique",
+      completed: false,
       description:
         "Création d'un module spécifique pour la gestion des pré-opportunités commerciales, permettant de qualifier les leads avant leur conversion en opportunités.",
     },
@@ -241,8 +260,9 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Équipe technique - André & Hélene",
       section: "Developpement & amélioration",
       cssClass: "dev-cybertechnique",
+      completed: true, // Marqué comme terminé selon la description
       description:
-        "Développement du système d'intégration ISP et mise en place des correspondances de champs entre les différentes plateformes pour assurer la cohérence des données.",
+        "Développement du système d'intégration ISP et mise en place des correspondances de champs entre les différentes plateformes pour assurer la cohérence des données. TACHES TERMINÉES",
     },
     {
       id: 20,
@@ -253,6 +273,7 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Équipe technique - André",
       section: "Developpement & amélioration",
       cssClass: "dev-cybertechnique",
+      completed: false,
       description:
         "Développement des connecteurs API pour l'intégration avec GESTMAX et les plateformes de formation en ligne, permettant la synchronisation automatique des données.",
     },
@@ -265,6 +286,7 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Équipe technique - André",
       section: "Developpement & amélioration",
       cssClass: "dev-cybertechnique",
+      completed: false,
       description:
         "Travaux de personnalisation et d'optimisation du cœur de Dolibarr pour répondre aux besoins spécifiques de l'organisation. Développement de modules sur mesure.",
     },
@@ -316,6 +338,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const start = ((startDate - minDate) / totalDuration) * 100;
     const width = ((endDate - startDate) / totalDuration) * 100;
     return { start, width };
+  }
+
+  // Fonction pour créer un badge "Terminé"
+  function createCompletedBadge() {
+    const badge = document.createElement("div");
+    badge.className = "completed-badge";
+    badge.innerHTML = "✓ Terminé";
+    return badge;
   }
 
   // Génération des trimestres pour l'axe temporel
@@ -480,6 +510,13 @@ document.addEventListener("DOMContentLoaded", function () {
           milestoneLabel.textContent = project.name;
           milestone.appendChild(milestoneLabel);
 
+          // Ajouter le badge "Terminé" si le projet est terminé
+          if (project.completed) {
+            const completedBadge = createCompletedBadge();
+            milestone.appendChild(completedBadge);
+            milestone.classList.add("project-completed");
+          }
+
           // Ajouter le gestionnaire d'événement au clic
           milestone.addEventListener("click", toggleTooltip);
 
@@ -524,6 +561,14 @@ document.addEventListener("DOMContentLoaded", function () {
           futureBar.style.width = `${futureBarPosition.width}%`;
           futureBar.dataset.projectId = project.id;
 
+          // Ajouter le badge "Terminé" si le projet est terminé (sur la première barre seulement)
+          if (project.completed) {
+            const completedBadge = createCompletedBadge();
+            pastBar.appendChild(completedBadge);
+            pastBar.classList.add("project-completed");
+            futureBar.classList.add("project-completed");
+          }
+
           // Ajouter les gestionnaires d'événements au clic
           pastBar.addEventListener("click", toggleTooltip);
           futureBar.addEventListener("click", toggleTooltip);
@@ -545,6 +590,13 @@ document.addEventListener("DOMContentLoaded", function () {
           projectBar.style.width = `${width}%`;
           projectBar.dataset.projectId = project.id;
 
+          // Ajouter le badge "Terminé" si le projet est terminé
+          if (project.completed) {
+            const completedBadge = createCompletedBadge();
+            projectBar.appendChild(completedBadge);
+            projectBar.classList.add("project-completed");
+          }
+
           // Ajouter le gestionnaire d'événement au clic
           projectBar.addEventListener("click", toggleTooltip);
 
@@ -563,6 +615,13 @@ document.addEventListener("DOMContentLoaded", function () {
           projectBar.style.left = `${start}%`;
           projectBar.style.width = `${width}%`;
           projectBar.dataset.projectId = project.id;
+
+          // Ajouter le badge "Terminé" si le projet est terminé
+          if (project.completed) {
+            const completedBadge = createCompletedBadge();
+            projectBar.appendChild(completedBadge);
+            projectBar.classList.add("project-completed");
+          }
 
           // Ajouter le gestionnaire d'événement au clic
           projectBar.addEventListener("click", toggleTooltip);
@@ -618,12 +677,18 @@ document.addEventListener("DOMContentLoaded", function () {
     // Récupérer le tooltip
     const tooltip = document.getElementById("tooltip");
 
+    // Ajouter le statut de completion dans le tooltip
+    const completionStatus = project.completed
+      ? '<div class="tooltip-status completed">✓ Projet terminé</div>'
+      : '<div class="tooltip-status in-progress">🔄 En cours</div>';
+
     // Remplir le contenu du tooltip avec un bouton de fermeture
     tooltip.innerHTML = `
       <div class="tooltip-header">
         <div class="tooltip-title">${project.name}</div>
         <button class="tooltip-close-btn" aria-label="Fermer">&#10005;</button>
       </div>
+      ${completionStatus}
       ${
         project.description
           ? `<div class="tooltip-description">${project.description}</div>`

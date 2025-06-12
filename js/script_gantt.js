@@ -355,8 +355,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const historicMaxDate = new Date(2027, 11, 31); // 31 décembre 2027
   const historicTotalDuration = historicMaxDate - historicMinDate;
 
-  // Paramètres du diagramme pour le second diagramme (futur)
-  const futureMinDate = new Date(2025, 1, 1); // 1er février 2025
+  // Paramètres du diagramme pour le second diagramme (futur) - période étendue
+  const futureMinDate = new Date(2025, 0, 1); // 1er janvier 2025 (corrigé)
   const futureMaxDate = new Date(2025, 11, 31); // 31 décembre 2025
   const futureTotalDuration = futureMaxDate - futureMinDate;
 
@@ -428,7 +428,15 @@ document.addEventListener("DOMContentLoaded", function () {
     return progressContainer;
   }
 
-  // Génération des trimestres pour l'axe temporel
+  // Fonction pour créer un badge "Terminé" (fonction manquante)
+  function createCompletedBadge() {
+    const badge = document.createElement("div");
+    badge.className = "completed-badge";
+    badge.innerHTML = "✓ Terminé";
+    return badge;
+  }
+
+  // Génération des marqueurs temporels pour l'axe temporel
   function generateTimeline(containerId) {
     const timelineElement = document.querySelector(`#${containerId} .timeline`);
 
@@ -443,11 +451,19 @@ document.addEventListener("DOMContentLoaded", function () {
     if (containerId === "historic-gantt") {
       minDate = historicMinDate;
       maxDate = historicMaxDate;
+      generateQuarterlyTimeline(timelineElement, minDate, maxDate);
     } else {
       minDate = futureMinDate;
       maxDate = futureMaxDate;
+      generateDetailedTimeline(timelineElement, minDate, maxDate);
     }
 
+    // Ajouter le marqueur pour la date du jour si elle est dans la plage du diagramme
+    addTodayMarker(timelineElement, containerId);
+  }
+
+  // Timeline par trimestres pour l'historique (longue période)
+  function generateQuarterlyTimeline(timelineElement, minDate, maxDate) {
     let currentDate = new Date(minDate);
 
     while (currentDate < maxDate) {
@@ -467,9 +483,98 @@ document.addEventListener("DOMContentLoaded", function () {
       // Avancer au trimestre suivant
       currentDate = new Date(year, month + 3, 1);
     }
+  }
 
-    // Ajouter le marqueur pour la date du jour si elle est dans la plage du diagramme
-    addTodayMarker(timelineElement, containerId);
+  // Timeline détaillée avec mois et semaines pour le planning (courte période)
+  function generateDetailedTimeline(timelineElement, minDate, maxDate) {
+    // Créer la structure de la timeline détaillée
+    timelineElement.innerHTML = `
+      <div class="months-bar"></div>
+      <div class="weeks-bar"></div>
+    `;
+
+    const monthsBar = timelineElement.querySelector(".months-bar");
+    const weeksBar = timelineElement.querySelector(".weeks-bar");
+
+    // Générer les marqueurs de mois
+    generateMonthMarkers(monthsBar, minDate, maxDate);
+
+    // Générer les marqueurs de semaines
+    generateWeekMarkers(weeksBar, minDate, maxDate);
+  }
+
+  // Génération des marqueurs de mois
+  function generateMonthMarkers(monthsBar, minDate, maxDate) {
+    const monthNames = [
+      "Janv",
+      "Févr",
+      "Mars",
+      "Avril",
+      "Mai",
+      "Juin",
+      "Juil",
+      "Août",
+      "Sept",
+      "Oct",
+      "Nov",
+      "Déc",
+    ];
+
+    let currentDate = new Date(minDate.getFullYear(), minDate.getMonth(), 1);
+
+    while (currentDate < maxDate) {
+      const nextMonth = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth() + 1,
+        1
+      );
+      const monthEnd = nextMonth > maxDate ? maxDate : nextMonth;
+
+      const startPosition =
+        ((currentDate - minDate) / (maxDate - minDate)) * 100;
+      const width = ((monthEnd - currentDate) / (maxDate - minDate)) * 100;
+
+      const monthMarker = document.createElement("div");
+      monthMarker.className = "month-marker";
+      monthMarker.textContent = `${
+        monthNames[currentDate.getMonth()]
+      } ${currentDate.getFullYear()}`;
+      monthMarker.style.left = `${startPosition}%`;
+      monthMarker.style.width = `${width}%`;
+
+      monthsBar.appendChild(monthMarker);
+
+      currentDate = nextMonth;
+    }
+  }
+
+  // Génération des marqueurs de semaines
+  function generateWeekMarkers(weeksBar, minDate, maxDate) {
+    // Commencer au lundi de la première semaine
+    let currentDate = new Date(minDate);
+    const dayOfWeek = currentDate.getDay();
+    const mondayOffset = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
+    currentDate.setDate(currentDate.getDate() + mondayOffset);
+
+    while (currentDate < maxDate) {
+      const position = ((currentDate - minDate) / (maxDate - minDate)) * 100;
+
+      if (position >= 0 && position <= 100) {
+        const weekMarker = document.createElement("div");
+        weekMarker.className = "week-marker";
+        weekMarker.style.left = `${position}%`;
+
+        // Ajouter la date pour les premières semaines du mois
+        if (currentDate.getDate() <= 7) {
+          weekMarker.title = `Semaine du ${formatDate(currentDate)}`;
+        }
+
+        weeksBar.appendChild(weekMarker);
+      }
+
+      // Avancer d'une semaine
+      currentDate.setDate(currentDate.getDate() + 7);
+    }
   }
 
   // Fonction pour ajouter le marqueur de la date du jour
@@ -568,6 +673,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const isMilestone =
           project.startDate.getTime() === project.endDate.getTime();
 
+        // Calculer la durée du projet en jours pour améliorer la visibilité des projets courts
+        const projectDurationDays = Math.ceil(
+          (project.endDate - project.startDate) / (1000 * 60 * 60 * 24)
+        );
+        const isShortProject = projectDurationDays <= 30; // Projet de moins d'un mois
+
         if (isMilestone) {
           // Traitement spécial pour les jalons
           const position = calculatePosition(
@@ -632,9 +743,15 @@ document.addEventListener("DOMContentLoaded", function () {
           );
           const pastBar = document.createElement("div");
           pastBar.className = `project-bar ${project.cssClass} project-past`;
+
+          // Ajouter une classe spéciale pour les projets courts
+          if (isShortProject) {
+            pastBar.classList.add("short-project");
+          }
+
           pastBar.textContent = project.name;
           pastBar.style.left = `${pastBarPosition.start}%`;
-          pastBar.style.width = `${pastBarPosition.width}%`;
+          pastBar.style.width = `${Math.max(pastBarPosition.width, 2)}%`; // Largeur minimale
           pastBar.dataset.projectId = project.id;
 
           // 2. Barre pour la partie future (à partir d'aujourd'hui)
@@ -654,10 +771,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
           const futureBar = document.createElement("div");
           futureBar.className = `project-bar ${project.cssClass} project-future`;
+
+          if (isShortProject) {
+            futureBar.classList.add("short-project");
+          }
+
           futureBar.style.left = `${
             ((today - minDate) / totalDuration) * 100
           }%`;
-          futureBar.style.width = `${futureBarPosition.width}%`;
+          futureBar.style.width = `${Math.max(futureBarPosition.width, 2)}%`;
           futureBar.dataset.projectId = project.id;
 
           // Ajouter les éléments de progression (sur la première barre seulement)
@@ -690,9 +812,15 @@ document.addEventListener("DOMContentLoaded", function () {
           const timeClass =
             project.startDate > today ? "project-future" : "project-past";
           projectBar.className = `project-bar ${project.cssClass} ${timeClass}`;
+
+          // Ajouter une classe spéciale pour les projets courts
+          if (isShortProject) {
+            projectBar.classList.add("short-project");
+          }
+
           projectBar.textContent = project.name;
           projectBar.style.left = `${start}%`;
-          projectBar.style.width = `${width}%`;
+          projectBar.style.width = `${Math.max(width, 2)}%`; // Largeur minimale de 2%
           projectBar.dataset.projectId = project.id;
 
           // Ajouter les éléments de progression
@@ -727,7 +855,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Si on clique sur le même projet et que le tooltip est déjà visible, on le cache
     if (
       currentlyDisplayedProjectId === projectId &&
-      !tooltip.classList.contains("hidden")
+      !document.getElementById("tooltip").classList.contains("hidden")
     ) {
       hideTooltip();
       return;

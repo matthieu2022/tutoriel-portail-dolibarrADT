@@ -202,7 +202,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 15,
       name: "Deploiement de la V1",
-      startDate: new Date(2025, 10, 1), 
+      startDate: new Date(2025, 10, 1),
       endDate: new Date(2025, 10, 1),
       duration: "1 journée",
       resources: "ADT",
@@ -243,21 +243,6 @@ document.addEventListener("DOMContentLoaded", function () {
     },
 
     {
-      id: 22,
-      name: "Formulaires Web et liaisons webhook",
-      startDate: new Date(2025, 2, 24),
-      endDate: new Date(2025, 4, 14),
-      duration: "1 mois environ",
-      resources: "Équipe technique - André",
-      section: "Developpement & améliorations",
-      cssClass: "dev-cybertechnique",
-      completed: true,
-      progress: 100,
-      description:
-        "Développement de formulaires web interactifs ADT et mise en place des webhooks pour l'intégration en temps réel avec Dolibarr (https://gestion.academie-tourisme.fr/).",
-    },
-
-    {
       id: 18,
       name: "Module Pré-opportunité",
       startDate: new Date(2025, 1, 1),
@@ -271,6 +256,7 @@ document.addEventListener("DOMContentLoaded", function () {
       description:
         "Création d'un module spécifique pour la gestion des pré-opportunités commerciales, permettant de qualifier les leads avant leur conversion en opportunités. Dev en cours de finalisation pour integration des leads du module dans le projet et tiers/contacts",
     },
+
     {
       id: 19,
       name: "ISP et correspondance des champs",
@@ -285,6 +271,7 @@ document.addEventListener("DOMContentLoaded", function () {
       description:
         "Développement du système d'intégration ISP et mise en place des correspondances de champs entre les différentes plateformes pour assurer la cohérence des données. TACHES TERMINÉES",
     },
+
     {
       id: 20,
       name: "Liaisons API maformation.fr",
@@ -301,7 +288,22 @@ document.addEventListener("DOMContentLoaded", function () {
     },
 
     {
-      id: 23,
+      id: 21,
+      name: "Formulaires Web et liaisons webhook",
+      startDate: new Date(2025, 2, 24),
+      endDate: new Date(2025, 4, 14),
+      duration: "1 mois environ",
+      resources: "Équipe technique - André",
+      section: "Developpement & améliorations",
+      cssClass: "dev-cybertechnique",
+      completed: true,
+      progress: 100,
+      description:
+        "Développement de formulaires web interactifs ADT et mise en place des webhooks pour l'intégration en temps réel avec Dolibarr (https://gestion.academie-tourisme.fr/).",
+    },
+
+    {
+      id: 22,
       name: "Liaisons API GESTMAX",
       startDate: new Date(2025, 3, 14),
       endDate: new Date(2025, 6, 14),
@@ -316,7 +318,7 @@ document.addEventListener("DOMContentLoaded", function () {
     },
 
     {
-      id: 24,
+      id: 23,
       name: "Liaisons API je-change-de-metier.fr",
       startDate: new Date(2025, 6, 14),
       endDate: new Date(2025, 7, 14),
@@ -331,7 +333,7 @@ document.addEventListener("DOMContentLoaded", function () {
     },
 
     {
-      id: 21,
+      id: 24,
       name: "Developpement interne dolibarr : modules personnalisés",
       startDate: new Date(2024, 9, 5),
       endDate: new Date(2025, 7, 26),

@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Historique Dolibarr",
       cssClass: "dolibarr-crm",
       completed: false, // Ajout du statut de completion
+      progress: 85, // Pourcentage d'avancement
       description:
         "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
     },
@@ -25,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Historique Dolibarr",
       cssClass: "dolibarr-prospect",
       completed: false,
+      progress: 75,
       description:
         "Système de gestion des prospects et des opportunités commerciales. Permet de suivre le cycle de vente complet, de la prospection initiale à la conversion client.",
     },
@@ -38,6 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Historique Dolibarr",
       cssClass: "dolibarr-facturation",
       completed: true, // Marqué comme terminé
+      progress: 100, // Terminé
       description:
         "Module de facturation électronique avec gestion des factures, devis, bons de commande et règlements. Intègre un système de relances automatisées pour les paiements en retard.",
     },
@@ -51,6 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Historique Dolibarr",
       cssClass: "dolibarr-campus",
       completed: false,
+      progress: 60,
       description:
         "Adaptation du système Dolibarr pour la gestion des campus et centres de formation, incluant le suivi des étudiants, des cours et la gestion des ressources pédagogiques.",
     },
@@ -64,6 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Historique Dolibarr",
       cssClass: "dolibarr-fusionnee",
       completed: false,
+      progress: 15,
       description:
         "Version fusionnée intégrant tous les modules Dolibarr déployés pour ADT. Centralisation et harmonisation des différents systèmes pour une gestion globale.",
     },
@@ -77,6 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Historique Projets Eureka",
       cssClass: "creme",
       completed: true, // Marqué comme terminé
+      progress: 100,
       description:
         "Projet Crème développé pour le secteur cosmétique, incluant la gestion des formulations, le suivi de production et la traçabilité des ingrédients.",
     },
@@ -90,6 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Historique Projets Eureka",
       cssClass: "ypareo",
       completed: true, // Marqué comme terminé
+      progress: 100,
       description:
         "Intégration avec la plateforme Ypareo pour la gestion et le suivi de l'apprentissage et de la formation professionnelle.",
     },
@@ -103,6 +110,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Historique Projets Eureka",
       cssClass: "pepit",
       completed: true, // Marqué comme terminé
+      progress: 100,
       description:
         "Projet Pepit dédié aux startups innovantes, incluant des outils de gestion de projets agiles et de suivi d'avancement.",
     },
@@ -117,6 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Planning de déploiement",
       cssClass: "planning-test",
       completed: false,
+      progress: 30,
       description:
         "Finalisation et livraison de la base de test complète pour validation sur le dolibarr de test :https://dolibarrvierge19.e-learning-neo-sphere.fr/.Cette étape marque le début de la phase de tests approfondis.",
     },
@@ -130,6 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Planning de déploiement",
       cssClass: "planning-pretest",
       completed: false,
+      progress: 0,
       description:
         "Vérification préliminaire des fonctionnalités par une équipe restreinte. Identification des problèmes avant les tests élargis et resolution des problèmes critiques.",
     },
@@ -143,6 +153,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Planning de déploiement",
       cssClass: "planning-debug",
       completed: false,
+      progress: 0,
       description:
         "Première phase de correction des bugs et d'ajustements suite aux retours des pré-tests. Optimisation des performances et de l'Phase de test avec 4 référents d'activité du pôle commercial + Débugs et ajustements pour la V1.",
     },
@@ -156,6 +167,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Planning de déploiement",
       cssClass: "planning-test-referents",
       completed: false,
+      progress: 0,
       description:
         "Demo icademie pour le dolibarvierge et notre CRM. Comparaison éventuelle avec Salesforce",
     },
@@ -169,6 +181,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Planning de déploiement",
       cssClass: "planning-test-referents",
       completed: false,
+      progress: 0,
       description:
         "Période estivale de congés pour l'équipe technique et les référents d'activité mais cette période peut être sujette à des tests ou des développements légers.",
     },
@@ -182,6 +195,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Planning de déploiement",
       cssClass: "planning-debug-v1",
       completed: false,
+      progress: 0,
       description:
         "Formation des équipes commerciales et administratif (15 personnes) - 1 journée par utilisateur, soit 3 groupes de 5 personnes – mise en place de référents dolibarr qui assureront aide et suivi. Un portail web dédiée sera à disposition.",
     },
@@ -195,6 +209,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Planning de déploiement",
       cssClass: "planning-formation",
       completed: false,
+      progress: 0,
       description:
         "Inauguration officielle de la version V1 du système Dolibarr. Lancement de la solution en environnement de production et début de la phase de support post-déploiement. Notifications tous canaux TEAMS",
     },
@@ -208,6 +223,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Planning de déploiement",
       cssClass: "planning-debug-final",
       completed: false,
+      progress: 0,
       description:
         "Fusion Bdd Campus avec le dolibarr principal gestion + Concertation avec Mélina pour l'integration par la Cyber-technique",
     },
@@ -221,12 +237,13 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Planning de déploiement",
       cssClass: "planning-deployment",
       completed: false,
+      progress: 0,
       description:
         "Formation et sensibilisation des équipes campus et pédagogie à l'utilisation du système Dolibarr. Mise en place de sessions de formation pour assurer une transition fluide vers le nouvel outil.",
     },
-    
+
     {
-      id: 22, 
+      id: 22,
       name: "Formulaires Web et liaisons webhook",
       startDate: new Date(2025, 2, 24),
       endDate: new Date(2025, 4, 14),
@@ -235,6 +252,7 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Developpement & améliorations",
       cssClass: "dev-cybertechnique",
       completed: false,
+      progress: 45,
       description:
         "Développement de formulaires web interactifs et mise en place des webhooks pour l'intégration en temps réel avec les systèmes externes.",
     },
@@ -376,12 +394,38 @@ document.addEventListener("DOMContentLoaded", function () {
     return { start, width };
   }
 
-  // Fonction pour créer un badge "Terminé"
-  function createCompletedBadge() {
-    const badge = document.createElement("div");
-    badge.className = "completed-badge";
-    badge.innerHTML = "✓ Terminé";
-    return badge;
+  // Fonction pour créer la barre de progression et le badge de pourcentage
+  function createProgressElements(project) {
+    const progressContainer = document.createElement("div");
+    progressContainer.className = "progress-container";
+
+    // Barre de progression
+    const progressBar = document.createElement("div");
+    progressBar.className = "progress-bar";
+    progressBar.style.width = `${project.progress}%`;
+
+    // Badge de pourcentage
+    const progressBadge = document.createElement("div");
+    progressBadge.className = "progress-badge";
+    progressBadge.textContent = `${project.progress}%`;
+
+    // Couleur du badge selon le pourcentage
+    if (project.progress === 100) {
+      progressBadge.classList.add("completed");
+    } else if (project.progress >= 75) {
+      progressBadge.classList.add("high");
+    } else if (project.progress >= 50) {
+      progressBadge.classList.add("medium");
+    } else if (project.progress >= 25) {
+      progressBadge.classList.add("low");
+    } else {
+      progressBadge.classList.add("very-low");
+    }
+
+    progressContainer.appendChild(progressBar);
+    progressContainer.appendChild(progressBadge);
+
+    return progressContainer;
   }
 
   // Génération des trimestres pour l'axe temporel
@@ -546,6 +590,25 @@ document.addEventListener("DOMContentLoaded", function () {
           milestoneLabel.textContent = project.name;
           milestone.appendChild(milestoneLabel);
 
+          // Ajouter le badge de pourcentage pour les jalons
+          const progressBadge = document.createElement("div");
+          progressBadge.className = "progress-badge milestone-progress";
+          progressBadge.textContent = `${project.progress}%`;
+
+          if (project.progress === 100) {
+            progressBadge.classList.add("completed");
+          } else if (project.progress >= 75) {
+            progressBadge.classList.add("high");
+          } else if (project.progress >= 50) {
+            progressBadge.classList.add("medium");
+          } else if (project.progress >= 25) {
+            progressBadge.classList.add("low");
+          } else {
+            progressBadge.classList.add("very-low");
+          }
+
+          milestone.appendChild(progressBadge);
+
           // Ajouter le badge "Terminé" si le projet est terminé
           if (project.completed) {
             const completedBadge = createCompletedBadge();
@@ -597,6 +660,10 @@ document.addEventListener("DOMContentLoaded", function () {
           futureBar.style.width = `${futureBarPosition.width}%`;
           futureBar.dataset.projectId = project.id;
 
+          // Ajouter les éléments de progression (sur la première barre seulement)
+          const progressElements = createProgressElements(project);
+          pastBar.appendChild(progressElements);
+
           // Ajouter le badge "Terminé" si le projet est terminé (sur la première barre seulement)
           if (project.completed) {
             const completedBadge = createCompletedBadge();
@@ -611,34 +678,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
           projectRow.appendChild(pastBar);
           projectRow.appendChild(futureBar);
-        } else if (project.startDate > today) {
-          // Projet entièrement dans le futur
-          const { start, width } = calculatePosition(
-            project.startDate,
-            project.endDate,
-            containerId
-          );
-
-          const projectBar = document.createElement("div");
-          projectBar.className = `project-bar ${project.cssClass} project-future`;
-          projectBar.textContent = project.name;
-          projectBar.style.left = `${start}%`;
-          projectBar.style.width = `${width}%`;
-          projectBar.dataset.projectId = project.id;
-
-          // Ajouter le badge "Terminé" si le projet est terminé
-          if (project.completed) {
-            const completedBadge = createCompletedBadge();
-            projectBar.appendChild(completedBadge);
-            projectBar.classList.add("project-completed");
-          }
-
-          // Ajouter le gestionnaire d'événement au clic
-          projectBar.addEventListener("click", toggleTooltip);
-
-          projectRow.appendChild(projectBar);
         } else {
-          // Projet entièrement dans le passé
+          // Projet entièrement dans le futur ou le passé
           const { start, width } = calculatePosition(
             project.startDate,
             project.endDate,
@@ -646,11 +687,17 @@ document.addEventListener("DOMContentLoaded", function () {
           );
 
           const projectBar = document.createElement("div");
-          projectBar.className = `project-bar ${project.cssClass} project-past`;
+          const timeClass =
+            project.startDate > today ? "project-future" : "project-past";
+          projectBar.className = `project-bar ${project.cssClass} ${timeClass}`;
           projectBar.textContent = project.name;
           projectBar.style.left = `${start}%`;
           projectBar.style.width = `${width}%`;
           projectBar.dataset.projectId = project.id;
+
+          // Ajouter les éléments de progression
+          const progressElements = createProgressElements(project);
+          projectBar.appendChild(progressElements);
 
           // Ajouter le badge "Terminé" si le projet est terminé
           if (project.completed) {
@@ -694,6 +741,23 @@ document.addEventListener("DOMContentLoaded", function () {
     event.stopPropagation();
   }
 
+  // Fonction pour obtenir le statut textuel selon le pourcentage
+  function getProgressStatus(progress) {
+    if (progress === 100) {
+      return { text: "✅ Terminé", class: "completed" };
+    } else if (progress >= 75) {
+      return { text: "🚀 Presque terminé", class: "high" };
+    } else if (progress >= 50) {
+      return { text: "⚡ En bonne voie", class: "medium" };
+    } else if (progress >= 25) {
+      return { text: "🔄 En cours", class: "low" };
+    } else if (progress > 0) {
+      return { text: "🏗️ Démarré", class: "very-low" };
+    } else {
+      return { text: "⏳ Pas commencé", class: "not-started" };
+    }
+  }
+
   // Fonction modifiée pour afficher le tooltip
   function showTooltip(projectId) {
     const project = projects.find((p) => p.id === projectId);
@@ -713,7 +777,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // Récupérer le tooltip
     const tooltip = document.getElementById("tooltip");
 
-    // Ajouter le statut de completion dans le tooltip
+    // Obtenir le statut de progression
+    const status = getProgressStatus(project.progress);
+
+    // Ajouter le statut de completion dans le tooltip (étiquette Terminé/En cours)
     const completionStatus = project.completed
       ? '<div class="tooltip-status completed">✓ Projet terminé</div>'
       : '<div class="tooltip-status in-progress">🔄 En cours</div>';
@@ -725,6 +792,15 @@ document.addEventListener("DOMContentLoaded", function () {
         <button class="tooltip-close-btn" aria-label="Fermer">&#10005;</button>
       </div>
       ${completionStatus}
+      <div class="tooltip-progress-section">
+        <div class="tooltip-progress-bar">
+          <div class="tooltip-progress-fill" style="width: ${
+            project.progress
+          }%"></div>
+          <span class="tooltip-progress-text">${project.progress}%</span>
+        </div>
+        <div class="tooltip-status ${status.class}">${status.text}</div>
+      </div>
       ${
         project.description
           ? `<div class="tooltip-description">${project.description}</div>`
@@ -768,8 +844,8 @@ document.addEventListener("DOMContentLoaded", function () {
       tooltip.style.width = "90%";
       tooltip.style.maxWidth = "none";
     } else {
-      tooltip.style.width = "380px";
-      tooltip.style.maxWidth = "380px";
+      tooltip.style.width = "400px";
+      tooltip.style.maxWidth = "400px";
     }
 
     // Ajouter un gestionnaire pour le bouton de fermeture

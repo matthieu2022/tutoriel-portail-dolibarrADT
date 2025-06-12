@@ -230,16 +230,16 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 17,
       name: "Formation des équipes Campus et Pédagogie",
-      startDate: new Date(2025, 10, 1), // debut octobre à mi octobre 2025
-      endDate: new Date(2025, 10, 15),
-      duration: "1 jour",
+      startDate: new Date(2025, 10, 5), 
+      endDate: new Date(2025, 11, 15),
+      duration: "environ 2 mois",
       resources: "Équipe technique",
       section: "Planning de déploiement",
       cssClass: "planning-deployment",
       completed: false,
       progress: 0,
       description:
-        "Formation et sensibilisation des équipes campus et pédagogie à l'utilisation du système Dolibarr. pts à abordés : portail formateur / documentation formateurs etc... .",
+        "Table ronde avec les équipes Campus et Pédagogie à l'utilisation Dolibarr. pts Péda possible : portail formateur / documentation formateurs etc... .",
     },
 
     {
@@ -307,7 +307,7 @@ document.addEventListener("DOMContentLoaded", function () {
       name: "Liaisons API GESTMAX",
       startDate: new Date(2025, 3, 14),
       endDate: new Date(2025, 6, 14),
-      duration: "1 mois environ",
+      duration: "3 mois environ",
       resources: "Équipe technique - André",
       section: "Developpement & amélioration",
       cssClass: "dev-cybertechnique",

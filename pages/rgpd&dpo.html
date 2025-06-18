@@ -14,570 +14,750 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
             color: #333;
-            overflow: hidden;
         }
 
-        .presentation-container {
-            height: 100vh;
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 15px;
         }
 
-        .slide {
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.2em;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            gap: 10px;
+        }
+
+        .tab {
+            flex: 1;
+            min-width: 120px;
+            padding: 15px 20px;
+            background: transparent;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .tab:hover {
+            background: rgba(52, 152, 219, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        /* Card Styles */
+        .card {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
-            padding: 60px;
-            max-width: 1000px;
-            width: 90%;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
             backdrop-filter: blur(10px);
-            transform: translateY(20px);
-            opacity: 0;
-            transition: all 0.5s ease;
-            text-align: center;
-            min-height: 600px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
         }
 
-        .slide.active {
-            transform: translateY(0);
-            opacity: 1;
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
 
-        .slide h1 {
-            color: #2c3e50;
+        .card-icon {
             font-size: 3em;
-            margin-bottom: 30px;
-            font-weight: 700;
+            margin-bottom: 15px;
+            display: block;
         }
 
-        .slide h2 {
-            color: #3498db;
-            font-size: 2.5em;
-            margin-bottom: 30px;
-            font-weight: 600;
+        .card h3 {
+            color: #2c3e50;
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .slide h3 {
-            color: #e74c3c;
-            font-size: 1.8em;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-
-        .slide p, .slide li {
-            font-size: 1.3em;
+        .card p {
+            font-size: 1.1em;
             line-height: 1.6;
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        .slide ul {
-            text-align: left;
-            margin: 20px 0;
-            padding-left: 30px;
-        }
-
-        .slide li {
+            color: #555;
             margin-bottom: 15px;
         }
 
+        .card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .card li {
+            padding: 8px 0;
+            font-size: 1.05em;
+            color: #555;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .card li::before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            margin-top: 2px;
+        }
+
+        /* Special Card Types */
+        .card-warning {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+        }
+
+        .card-warning h3,
+        .card-warning p,
+        .card-warning li {
+            color: white;
+        }
+
+        .card-info {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+
+        .card-info h3,
+        .card-info p,
+        .card-info li {
+            color: white;
+        }
+
+        .card-success {
+            background: linear-gradient(135deg, #27ae60, #229954);
+            color: white;
+        }
+
+        .card-success h3,
+        .card-success p,
+        .card-success li {
+            color: white;
+        }
+
+        /* Highlight Box */
         .highlight {
             background: linear-gradient(120deg, #f39c12 0%, #e74c3c 100%);
             color: white;
             padding: 15px 25px;
             border-radius: 10px;
             font-weight: 600;
-            margin: 20px 0;
+            margin: 15px 0;
             display: inline-block;
         }
 
-        .warning-box {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            color: white;
-            padding: 25px;
-            border-radius: 15px;
-            margin: 25px 0;
-            box-shadow: 0 10px 20px rgba(231, 76, 60, 0.3);
+        /* Full Width Card */
+        .card-full {
+            grid-column: 1 / -1;
         }
 
-        .info-box {
-            background: linear-gradient(135deg, #3498db, #2980b9);
-            color: white;
-            padding: 25px;
-            border-radius: 15px;
-            margin: 25px 0;
-            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
-        }
-
-        .success-box {
-            background: linear-gradient(135deg, #27ae60, #229954);
-            color: white;
-            padding: 25px;
-            border-radius: 15px;
-            margin: 25px 0;
-            box-shadow: 0 10px 20px rgba(39, 174, 96, 0.3);
-        }
-
-        .navigation {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 20px;
-            z-index: 1000;
-        }
-
-        .nav-btn {
-            background: rgba(255, 255, 255, 0.9);
-            border: none;
-            padding: 15px 25px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 1.1em;
-            font-weight: 600;
-            color: #2c3e50;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .nav-btn:hover {
-            background: #3498db;
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
-        }
-
-        .nav-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .slide-counter {
-            position: fixed;
-            top: 30px;
-            right: 30px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-weight: 600;
-            color: #2c3e50;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .logo {
-            position: fixed;
-            top: 30px;
-            left: 30px;
-            font-size: 1.5em;
-            font-weight: 700;
-            color: white;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
+        /* Two Column Layout */
         .two-columns {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            text-align: left;
-            align-items: start;
+            gap: 20px;
         }
 
-        .icon {
-            font-size: 3em;
-            margin-bottom: 20px;
+        /* Code blocks */
+        code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            word-break: break-all;
         }
 
-        .progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 4px;
-            background: #3498db;
-            transition: width 0.3s ease;
-            z-index: 1001;
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: white;
+            font-size: 1.1em;
         }
 
+        /* Responsive */
         @media (max-width: 768px) {
-            .slide {
-                padding: 30px;
-                margin: 20px;
+            .header h1 {
+                font-size: 2em;
             }
-            
-            .slide h1 {
-                font-size: 2.2em;
+
+            .tabs {
+                gap: 5px;
             }
-            
-            .slide h2 {
-                font-size: 1.8em;
+
+            .tab {
+                min-width: 80px;
+                padding: 8px 12px;
+                font-size: 0.85em;
             }
-            
-            .two-columns {
+
+            .cards-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
+            }
+
+            .two-columns {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            code {
+                font-size: 0.8em;
             }
         }
     </style>
 </head>
 <body>
-    <div class="progress-bar" id="progressBar"></div>
-    <div class="logo">🎓 Académie du Tourisme</div>
-    <div class="slide-counter">
-        <span id="currentSlide">1</span> / <span id="totalSlides">10</span>
-    </div>
-
-    <div class="presentation-container">
-        <!-- Slide 1: Title -->
-        <div class="slide active">
-            <div class="icon">🛡️</div>
-            <h1>RGPD & DPO</h1>
-            <h3>Protection des Données Personnelles</h3>
-            <div class="highlight">
-                Centre de Formation - Académie du Tourisme
-            </div>
-            <p style="text-align: center; margin-top: 40px; font-size: 1.1em; color: #7f8c8d;">
-                Comprendre nos obligations et garantir la conformité
-            </p>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🛡️ RGPD & DPO</h1>
+            <p>Protection des Données Personnelles - Académie du Tourisme</p>
         </div>
 
-        <!-- Slide 2: Introduction RGPD -->
-        <div class="slide">
-            <h2>🚀 Le RGPD en bref</h2>
-            <div class="info-box">
-                <h3>Règlement Général sur la Protection des Données</h3>
-                <p><strong>En vigueur depuis le 25 mai 2018</strong></p>
-                <p>Réglementation européenne qui encadre le traitement des données personnelles sur le territoire de l'Union européenne.</p>
-            </div>
-            <p><strong>Objectifs principaux :</strong></p>
-            <ul>
-                <li>🔒 Renforcer les droits des personnes</li>
-                <li>📋 Responsabiliser les acteurs traitant des données</li>
-                <li>⚖️ Crédibiliser la régulation grâce à une coopération renforcée</li>
-            </ul>
+        <!-- Tabs Navigation -->
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('introduction')">📚 Introduction</button>
+            <button class="tab" onclick="showTab('donnees')">👤 Données</button>
+            <button class="tab" onclick="showTab('dpo')">🎯 DPO</button>
+            <button class="tab" onclick="showTab('moodle')">🎓 Moodle RGPD</button>
+            <button class="tab" onclick="showTab('conformite')">📋 Conformité</button>
+            <button class="tab" onclick="showTab('sanctions')">⚠️ Sanctions & Actions</button>
         </div>
 
-        <!-- Slide 3: Données personnelles -->
-        <div class="slide">
-            <h2>👤 Nos Données Personnelles</h2>
-            <div class="success-box">
-                <h3>Définition pour l'Académie du Tourisme</h3>
-                <p>Toutes les données qui se rapportent à une personne <strong>identifiée</strong> sur nos systèmes LMS et services web qui les rendent <strong>identifiables</strong>.</p>
-            </div>
-            <div class="two-columns">
-                <div>
-                    <h3>📚 Exemples dans notre LMS :</h3>
+        <!-- Tab 1: Introduction -->
+        <div id="introduction" class="tab-content active">
+            <div class="cards-grid">
+                <div class="card card-info">
+                    <span class="card-icon">🚀</span>
+                    <h3>Le RGPD en bref</h3>
+                    <p><strong>Règlement Général sur la Protection des Données</strong></p>
+                    <p>En vigueur depuis le 25 mai 2018</p>
                     <ul>
-                        <li>Nom, prénom</li>
-                        <li>Adresse email</li>
+                        <li>🔒 Renforcer les droits des personnes</li>
+                        <li>📋 Responsabiliser les acteurs traitant des données</li>
+                        <li>⚖️ Crédibiliser la régulation</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <span class="card-icon">🎯</span>
+                    <h3>Objectifs pour notre centre</h3>
+                    <p>Garantir la protection des données de nos apprenants et formateurs sur nos plateformes numériques.</p>
+                    <ul>
+                        <li>Conformité LMS Moodle</li>
+                        <li>Sécurisation des services web</li>
+                        <li>Transparence des processus</li>
+                        <li>Formation des équipes</li>
+                    </ul>
+                </div>
+
+                <div class="card card-full">
+                    <h3>🏛️ Cadre réglementaire européen</h3>
+                    <p>Le RGPD s'applique à toute organisation qui traite des données personnelles de résidents européens, quelle que soit sa localisation. Pour l'Académie du Tourisme, cela implique une mise en conformité complète de nos systèmes d'information et de nos processus de formation.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 2: Données Personnelles -->
+        <div id="donnees" class="tab-content">
+            <div class="cards-grid">
+                <div class="card card-success">
+                    <span class="card-icon">👤</span>
+                    <h3>Définition pour l'Académie</h3>
+                    <p>Toutes les données qui se rapportent à une personne <strong>identifiée</strong> ou <strong>identifiable</strong> sur nos systèmes.</p>
+                </div>
+
+                <div class="card">
+                    <span class="card-icon">📚</span>
+                    <h3>Données LMS Moodle</h3>
+                    <ul>
+                        <li>Nom, prénom, email</li>
                         <li>Numéro de téléphone</li>
                         <li>Parcours de formation</li>
                         <li>Notes et évaluations</li>
                         <li>Temps de connexion</li>
+                        <li>Forums et messages</li>
+                        <li>Fichiers uploadés</li>
                     </ul>
                 </div>
-                <div>
-                    <h3>🌐 Services web :</h3>
+
+                <div class="card">
+                    <span class="card-icon">🌐</span>
+                    <h3>Données Services Web</h3>
                     <ul>
                         <li>Cookies de navigation</li>
                         <li>Adresses IP</li>
                         <li>Données de géolocalisation</li>
                         <li>Préférences utilisateur</li>
                         <li>Historique d'activité</li>
+                        <li>Logs de connexion</li>
                     </ul>
                 </div>
-            </div>
-        </div>
 
-        <!-- Slide 4: Sanctions -->
-        <div class="slide">
-            <h2>⚠️ Sanctions Encourues</h2>
-            <div class="warning-box">
-                <h3>🚨 En cas de non-respect du RGPD</h3>
-            </div>
-            <div class="two-columns">
-                <div>
-                    <h3>💰 Sanctions Financières</h3>
-                    <div class="highlight">
-                        Jusqu'à 4% du CA annuel
+                <div class="card card-full card-info">
+                    <h3>⏰ Durées de conservation</h3>
+                    <div class="two-columns">
+                        <div>
+                            <p><strong>Données pédagogiques :</strong></p>
+                            <ul>
+                                <li>Parcours actifs : durée de la formation + 1 an</li>
+                                <li>Certifications : 10 ans</li>
+                                <li>Évaluations : 3 ans</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p><strong>Données techniques :</strong></p>
+                            <ul>
+                                <li>Logs de connexion : 1 an</li>
+                                <li>Cookies : selon finalité (max 13 mois)</li>
+                                <li>Données de support : 2 ans</li>
+                            </ul>
+                        </div>
                     </div>
-                    <p>Ou 20 millions d'euros (le montant le plus élevé)</p>
                 </div>
-                <div>
-                    <h3>⚖️ Sanctions Juridiques</h3>
-                    <ul>
-                        <li>Indemnisation des victimes</li>
-                        <li>Mise en demeure publique</li>
-                        <li>Limitation de traitement</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="warning-box">
-                <h3>📉 Atteinte à l'image</h3>
-                <p>Impact sur la notoriété globale et numérique de l'établissement</p>
             </div>
         </div>
 
-        <!-- Slide 5: Qu'est-ce que le DPO -->
-        <div class="slide">
-            <h2>🎯 Qu'est-ce que le DPO ?</h2>
-            <div class="info-box">
-                <h3>Data Protection Officer</h3>
-                <p><strong>Délégué à la Protection des Données</strong></p>
-            </div>
-            <p><strong>🛡️ Personne référente qui garantit la conformité au RGPD</strong></p>
-            <div class="two-columns">
-                <div>
-                    <h3>✅ Ses missions :</h3>
+        <!-- Tab 3: DPO -->
+        <div id="dpo" class="tab-content">
+            <div class="cards-grid">
+                <div class="card card-success">
+                    <span class="card-icon">🛡️</span>
+                    <h3>Qu'est-ce que le DPO ?</h3>
+                    <p><strong>Data Protection Officer - Délégué à la Protection des Données</strong></p>
+                    <p>Personne référente qui garantit la conformité au RGPD au sein de l'Académie du Tourisme.</p>
+                </div>
+
+                <div class="card">
+                    <span class="card-icon">✅</span>
+                    <h3>Missions du DPO</h3>
                     <ul>
-                        <li>Conseiller et informer</li>
+                        <li>Conseiller et informer la direction</li>
                         <li>Contrôler le respect du RGPD</li>
-                        <li>Sensibiliser et former</li>
-                        <li>Être le point de contact avec la CNIL</li>
+                        <li>Sensibiliser et former les équipes</li>
+                        <li>Être le point de contact CNIL</li>
+                        <li>Gérer le registre des traitements</li>
+                        <li>Réaliser des audits de conformité</li>
                     </ul>
                 </div>
-                <div>
-                    <h3>🚫 Point important :</h3>
-                    <div class="warning-box">
-                        <strong>Ne peut PAS être l'administrateur des systèmes mis en place</strong>
-                        <p>Il ne peut pas être juge ET partie !</p>
-                        <p>Encadré par la CNIL</p>
+
+                <div class="card card-warning">
+                    <span class="card-icon">🚫</span>
+                    <h3>Indépendance du DPO</h3>
+                    <p><strong>Le DPO ne peut PAS être l'administrateur des systèmes !</strong></p>
+                    <ul>
+                        <li>Conflit d'intérêts interdit</li>
+                        <li>Ne peut être juge et partie</li>
+                        <li>Position encadrée par la CNIL</li>
+                        <li>Reporting direct à la direction</li>
+                    </ul>
+                </div>
+
+                <div class="card card-full">
+                    <span class="card-icon">📋</span>
+                    <h3>Traitement des demandes</h3>
+                    <div class="two-columns">
+                        <div>
+                            <p><strong>Types de demandes :</strong></p>
+                            <ul>
+                                <li>Accès aux données personnelles</li>
+                                <li>Rectification des informations</li>
+                                <li>Suppression (droit à l'oubli)</li>
+                                <li>Portabilité des données</li>
+                                <li>Opposition au traitement</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p><strong>Processus de traitement :</strong></p>
+                            <ul>
+                                <li>Réception via interface LMS</li>
+                                <li>Vérification de l'identité</li>
+                                <li>Analyse de la demande</li>
+                                <li>Réponse sous 1 mois</li>
+                                <li>Documentation du traitement</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 6: Rôle du DPO -->
-        <div class="slide">
-            <h2>🔧 Rôle du DPO</h2>
-            <h3>📋 Traitement des Demandes</h3>
-            <div class="success-box">
-                <p>Le DPO doit <strong>consulter</strong> et <strong>traiter</strong> toutes les demandes liées aux données personnelles</p>
-            </div>
-            <div class="two-columns">
-                <div>
-                    <h3>📝 Types de demandes :</h3>
+        <!-- Tab 4: Moodle RGPD -->
+        <div id="moodle" class="tab-content">
+            <div class="cards-grid">
+                <div class="card card-full card-info">
+                    <span class="card-icon">🎓</span>
+                    <h3>Protection des données dans Moodle</h3>
+                    <p>Moodle intègre nativement des outils de gestion RGPD pour assurer la conformité de notre plateforme LMS.</p>
+                </div>
+
+                <div class="card">
+                    <span class="card-icon">⚙️</span>
+                    <h3>Réglages de protection</h3>
                     <ul>
-                        <li>Accès aux données</li>
-                        <li>Rectification</li>
-                        <li>Suppression</li>
-                        <li>Portabilité</li>
-                        <li>Opposition au traitement</li>
+                        <li>Configuration globale de la protection</li>
+                        <li>Paramètres de confidentialité par défaut</li>
+                        <li>Gestion des consentements</li>
+                        <li>Délais de conservation automatiques</li>
+                        <li>Anonymisation des données</li>
                     </ul>
                 </div>
-                <div>
-                    <h3>⚙️ Interface LMS :</h3>
-                    <div class="info-box">
-                        <p>Capture d'écran du LMS pour visualiser les demandes</p>
-                        <p><em>(Interface fournie séparément)</em></p>
+
+                <div class="card">
+                    <span class="card-icon">📜</span>
+                    <h3>Gestion des politiques</h3>
+                    <ul>
+                        <li>Création de politiques personnalisées</li>
+                        <li>Versions et historique</li>
+                        <li>Affichage obligatoire à la connexion</li>
+                        <li>Traduction multilingue</li>
+                        <li>Suivi des acceptations</li>
+                    </ul>
+                </div>
+
+                <div class="card card-success">
+                    <span class="card-icon">✅</span>
+                    <h3>Accords des utilisateurs</h3>
+                    <p><strong>Page : Acceptation des politiques</strong></p>
+                    <div class="highlight">📍 /admin/tool/policy/acceptances.php</div>
+                    <ul>
+                        <li>Vue d'ensemble des acceptations</li>
+                        <li>Filtrage par utilisateur/date</li>
+                        <li>Export des consentements</li>
+                    </ul>
+                </div>
+
+                <div class="card card-warning">
+                    <span class="card-icon">📋</span>
+                    <h3>Demandes de données</h3>
+                    <p><strong>Page : Gestion des demandes</strong></p>
+                    <div class="highlight">📍 /admin/tool/dataprivacy/datarequests.php</div>
+                    <ul>
+                        <li>Demandes d'accès aux données</li>
+                        <li>Demandes de suppression</li>
+                        <li>Traitement et suivi</li>
+                        <li>Délais légaux respectés</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <span class="card-icon">📊</span>
+                    <h3>Registre des données</h3>
+                    <p><strong>Page : Registre principal</strong></p>
+                    <div class="highlight">📍 /admin/tool/dataprivacy/dataregistry.php</div>
+                    <ul>
+                        <li>Cartographie complète des données</li>
+                        <li>Catégories et finalités</li>
+                        <li>Périodes de conservation</li>
+                        <li>Base légale du traitement</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <span class="card-icon">🔌</span>
+                    <h3>Registre des plugins</h3>
+                    <p><strong>Page : Données des plugins</strong></p>
+                    <div class="highlight">📍 /admin/tool/dataprivacy/pluginregistry.php</div>
+                    <ul>
+                        <li>Analyse des données par plugin</li>
+                        <li>Conformité des extensions</li>
+                        <li>Risques potentiels identifiés</li>
+                        <li>Recommandations de sécurité</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <span class="card-icon">🗑️</span>
+                    <h3>Suppression de données</h3>
+                    <ul>
+                        <li>Suppression manuelle sélective</li>
+                        <li>Purge automatique programmée</li>
+                        <li>Anonymisation vs suppression</li>
+                        <li>Logs de suppression</li>
+                        <li>Validation multi-niveaux</li>
+                    </ul>
+                </div>
+
+                <div class="card card-full">
+                    <h3>🚀 Pages clés à maîtriser pour le DPO</h3>
+                    <div class="two-columns">
+                        <div>
+                            <p><strong>1️⃣ Registre des plugins</strong></p>
+                            <code style="background: #e3f2fd; color: #1565c0; padding: 10px; border-radius: 5px; display: block; margin: 10px 0; border: 1px solid #90caf9; font-weight: 500;">/admin/tool/dataprivacy/pluginregistry.php</code>
+                            <p>Vérifier la conformité de chaque plugin installé</p>
+                            
+                            <p><strong>2️⃣ Registre des données</strong></p>
+                            <code style="background: #e3f2fd; color: #1565c0; padding: 10px; border-radius: 5px; display: block; margin: 10px 0; border: 1px solid #90caf9; font-weight: 500;">/admin/tool/dataprivacy/dataregistry.php</code>
+                            <p>Documenter tous les traitements de données</p>
+                        </div>
+                        <div>
+                            <p><strong>3️⃣ Demandes de données</strong></p>
+                            <code style="background: #e3f2fd; color: #1565c0; padding: 10px; border-radius: 5px; display: block; margin: 10px 0; border: 1px solid #90caf9; font-weight: 500;">/admin/tool/dataprivacy/datarequests.php</code>
+                            <p>Gérer les demandes RGPD des utilisateurs</p>
+                            
+                            <p><strong>4️⃣ Accords utilisateurs</strong></p>
+                            <code style="background: #e3f2fd; color: #1565c0; padding: 10px; border-radius: 5px; display: block; margin: 10px 0; border: 1px solid #90caf9; font-weight: 500;">/admin/tool/policy/acceptances.php</code>
+                            <p>Suivre les consentements et acceptations</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 7: Registre des données -->
-        <div class="slide">
-            <h2>📊 Registre des Données Moodle</h2>
-            <div class="two-columns">
-                <div>
-                    <h3>🗂️ Données stockées :</h3>
+        <!-- Tab 5: Conformité -->
+        <div id="conformite" class="tab-content">
+            <div class="cards-grid">
+                <div class="card">
+                    <span class="card-icon">📊</span>
+                    <h3>Registre Moodle</h3>
+                    <p>Documentation complète des traitements de données dans notre LMS :</p>
                     <ul>
-                        <li>Profils utilisateurs</li>
-                        <li>Parcours pédagogiques</li>
-                        <li>Résultats d'évaluation</li>
-                        <li>Forums et messages</li>
-                        <li>Logs d'activité</li>
-                        <li>Fichiers uploadés</li>
+                        <li>Finalités pédagogiques</li>
+                        <li>Base légale du traitement</li>
+                        <li>Catégories de données</li>
+                        <li>Destinataires</li>
+                        <li>Durées de conservation</li>
+                        <li>Mesures de sécurité</li>
                     </ul>
                 </div>
-                <div>
-                    <h3>🎯 Finalités :</h3>
-                    <ul>
-                        <li>Gestion de la formation</li>
-                        <li>Suivi pédagogique</li>
-                        <li>Évaluation des apprenants</li>
-                        <li>Certification</li>
-                        <li>Support technique</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="info-box">
-                <h3>⏰ Durée de conservation</h3>
-                <p>Définie selon la réglementation et les besoins pédagogiques</p>
-            </div>
-            <p><strong>🔍 Le DPO doit vérifier les plugins Moodle et leur configuration</strong></p>
-        </div>
 
-        <!-- Slide 8: Communication -->
-        <div class="slide">
-            <h2>📢 Communication & Transparence</h2>
-            <div class="success-box">
-                <h3>🎯 Obligation d'information</h3>
-                <p>Communication auprès des apprenants dans les formulaires de satisfaction</p>
-            </div>
-            <div class="two-columns">
-                <div>
-                    <h3>📋 Exemple concret :</h3>
-                    <div class="info-box">
-                        <p><strong>Société EDKO</strong></p>
-                        <p>Reçoit les données des formulaires de satisfaction pour en faire des statistiques</p>
-                    </div>
+                <div class="card card-info">
+                    <span class="card-icon">📢</span>
+                    <h3>Communication & Transparence</h3>
+                    <p><strong>Obligation d'information aux apprenants</strong></p>
+                    <div class="highlight">Exemple : Société EDKO</div>
+                    <p>Reçoit les données des formulaires de satisfaction pour statistiques - Les apprenants doivent en être informés.</p>
                 </div>
-                <div>
-                    <h3>📝 Informations obligatoires :</h3>
+
+                <div class="card">
+                    <span class="card-icon">📝</span>
+                    <h3>Mentions obligatoires</h3>
                     <ul>
-                        <li>Finalité du traitement</li>
+                        <li>Identité du responsable</li>
+                        <li>Finalités du traitement</li>
                         <li>Destinataires des données</li>
                         <li>Durée de conservation</li>
                         <li>Droits des personnes</li>
                         <li>Contact du DPO</li>
+                        <li>Droit de réclamation CNIL</li>
                     </ul>
+                </div>
+
+                <div class="card card-full card-success">
+                    <h3>🔍 Audit et contrôle</h3>
+                    <p>Le DPO doit régulièrement vérifier :</p>
+                    <div class="two-columns">
+                        <ul>
+                            <li>Configuration des plugins Moodle</li>
+                            <li>Paramètres de confidentialité</li>
+                            <li>Accès aux données sensibles</li>
+                            <li>Processus de suppression</li>
+                        </ul>
+                        <ul>
+                            <li>Sécurité des transferts</li>
+                            <li>Conformité des sous-traitants</li>
+                            <li>Documentation à jour</li>
+                            <li>Formation du personnel</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 9: Investissements suggérés -->
-        <div class="slide">
-            <h2>💡 Investissements Suggérés</h2>
-            <div class="success-box">
-                <h3>🛠️ Outils pour améliorer la conformité</h3>
-            </div>
-            <div class="two-columns">
-                <div>
-                    <h3>🔒 Plugin d'anonymisation</h3>
-                    <div class="highlight">
-                        Plugin Ingenium
+        <!-- Tab 6: Sanctions & Actions -->
+        <div id="sanctions" class="tab-content">
+            <div class="cards-grid">
+                <div class="card card-warning card-full">
+                    <span class="card-icon">⚠️</span>
+                    <h3>Sanctions encourues</h3>
+                    <div class="two-columns">
+                        <div>
+                            <p><strong>💰 Sanctions financières :</strong></p>
+                            <div class="highlight">Jusqu'à 4% du CA annuel</div>
+                            <p>Ou 20 millions d'euros (montant le plus élevé)</p>
+                        </div>
+                        <div>
+                            <p><strong>⚖️ Sanctions juridiques :</strong></p>
+                            <ul>
+                                <li>Indemnisation des victimes</li>
+                                <li>Mise en demeure publique</li>
+                                <li>Limitation de traitement</li>
+                                <li>Atteinte à l'image</li>
+                            </ul>
+                        </div>
                     </div>
+                </div>
+
+                <div class="card">
+                    <span class="card-icon">💡</span>
+                    <h3>Investissements suggérés</h3>
+                    <p><strong>Plugin d'anonymisation</strong></p>
+                    <div class="highlight">Plugin Ingenium</div>
                     <ul>
                         <li>Anonymisation automatique</li>
                         <li>Suppression sécurisée</li>
-                        <li>Conformité RGPD</li>
+                        <li>Conformité RGPD garantie</li>
                     </ul>
                 </div>
-                <div>
-                    <h3>♿ Accessibilité</h3>
-                    <div class="highlight">
-                        Plugin Dyslexie Andika
+
+                <div class="card">
+                    <span class="card-icon">♿</span>
+                    <h3>Accessibilité</h3>
+                    <p><strong>Inclusion numérique</strong></p>
+                    <div class="highlight">Plugin Dyslexie Andika</div>
+                    <ul>
+                        <li>Police adaptée dyslexiques</li>
+                        <li>Amélioration accessibilité</li>
+                        <li>Conformité handicap</li>
+                    </ul>
+                </div>
+
+                <div class="card card-full card-success">
+                    <h3>🚀 Plan d'action</h3>
+                    <div class="two-columns">
+                        <div>
+                            <p><strong>Actions immédiates :</strong></p>
+                            <ul>
+                                <li>Désigner officiellement le DPO</li>
+                                <li>Cartographier les traitements</li>
+                                <li>Mettre à jour les mentions légales</li>
+                                <li>Former les équipes</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p><strong>Actions à moyen terme :</strong></p>
+                            <ul>
+                                <li>Implémenter les plugins</li>
+                                <li>Auditer la sécurité</li>
+                                <li>Documenter les processus</li>
+                                <li>Établir un plan de crise</li>
+                            </ul>
+                        </div>
                     </div>
-                    <ul>
-                        <li>Amélioration de l'accessibilité</li>
-                        <li>Police adaptée aux dyslexiques</li>
-                        <li>Inclusion numérique</li>
-                    </ul>
                 </div>
             </div>
-            <p style="text-align: center; margin-top: 30px;"><strong>💼 Le DPO évalue la pertinence et supervise la mise en place</strong></p>
         </div>
 
-        <!-- Slide 10: Conclusion -->
-        <div class="slide">
-            <div class="icon">✅</div>
-            <h2>🎯 Conclusion</h2>
-            <div class="success-box">
-                <h3>🛡️ La protection des données : un enjeu majeur</h3>
-                <p>Pour l'Académie du Tourisme et ses apprenants</p>
-            </div>
-            <div class="two-columns">
-                <div>
-                    <h3>🔑 Points clés :</h3>
-                    <ul>
-                        <li>Conformité obligatoire</li>
-                        <li>Rôle central du DPO</li>
-                        <li>Processus bien définis</li>
-                        <li>Amélioration continue</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>🚀 Prochaines étapes :</h3>
-                    <ul>
-                        <li>Formation des équipes</li>
-                        <li>Mise à jour des processus</li>
-                        <li>Investissements techniques</li>
-                        <li>Suivi régulier</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="highlight" style="margin-top: 30px;">
-                Questions & Discussion
-            </div>
+        <!-- Footer -->
+        <div class="footer">
+            <p>🎓 Académie du Tourisme - Protection des données personnelles</p>
         </div>
-    </div>
-
-    <div class="navigation">
-        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Précédent</button>
-        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Suivant →</button>
     </div>
 
     <script>
-        let currentSlideIndex = 0;
-        const slides = document.querySelectorAll('.slide');
-        const totalSlides = slides.length;
-        
-        document.getElementById('totalSlides').textContent = totalSlides;
-
-        function showSlide(index) {
-            slides.forEach((slide, i) => {
-                slide.classList.toggle('active', i === index);
+        function showTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => {
+                content.classList.remove('active');
             });
-            
-            document.getElementById('currentSlide').textContent = index + 1;
-            document.getElementById('prevBtn').disabled = index === 0;
-            document.getElementById('nextBtn').disabled = index === totalSlides - 1;
-            
-            // Update progress bar
-            const progress = ((index + 1) / totalSlides) * 100;
-            document.getElementById('progressBar').style.width = progress + '%';
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+
+            // Scroll to top smoothly
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         }
 
-        function changeSlide(direction) {
-            const newIndex = currentSlideIndex + direction;
-            if (newIndex >= 0 && newIndex < totalSlides) {
-                currentSlideIndex = newIndex;
-                showSlide(currentSlideIndex);
-            }
-        }
-
-        // Keyboard navigation
+        // Add keyboard navigation
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-                changeSlide(-1);
-            } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-                changeSlide(1);
-            }
-        });
-
-        // Touch navigation for mobile
-        let startX = 0;
-        document.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
-        });
-
-        document.addEventListener('touchend', (e) => {
-            const endX = e.changedTouches[0].clientX;
-            const diff = startX - endX;
+            const activeTabs = document.querySelectorAll('.tab');
+            const activeIndex = Array.from(activeTabs).findIndex(tab => tab.classList.contains('active'));
             
-            if (Math.abs(diff) > 50) {
-                if (diff > 0) {
-                    changeSlide(1); // Swipe left (next)
-                } else {
-                    changeSlide(-1); // Swipe right (previous)
-                }
+            if (e.key === 'ArrowRight' && activeIndex < activeTabs.length - 1) {
+                activeTabs[activeIndex + 1].click();
+            } else if (e.key === 'ArrowLeft' && activeIndex > 0) {
+                activeTabs[activeIndex - 1].click();
             }
         });
-
-        // Initialize
-        showSlide(0);
-
-        // Auto-advance option (uncomment to enable)
-        // setInterval(() => {
-        //     if (currentSlideIndex < totalSlides - 1) {
-        //         changeSlide(1);
-        //     }
-        // }, 90000); // 1.5 minutes per slide for 15-minute presentation
     </script>
 </body>
 </html>

@@ -4,6 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RGPD & DPO - Académie du Tourisme</title>
+    <!-- 
+    Pour ajouter des captures d'écran :
+    1. Remplacez le contenu de <div class="screenshot-container"> par :
+       <img src="chemin/vers/votre/image.png" alt="Description de l'image">
+    2. L'image sera automatiquement redimensionnée et stylisée
+    3. Formats recommandés : PNG, JPG, WebP
+    4. Taille recommandée : 800-1200px de largeur
+    
+    Alternative avec base64 (pour intégrer l'image directement) :
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANS..." alt="Description">
+    
+    Styles alternatifs disponibles :
+    - Normal : <div class="screenshot-container">
+    - Style navigateur : <div class="screenshot-container style-browser">
+    - Style appareil : <div class="screenshot-container style-device">
+    -->
     <style>
         * {
             margin: 0;
@@ -239,6 +255,72 @@
             word-break: break-all;
         }
 
+        /* Screenshot placeholder */
+        .screenshot-container {
+            background: #f5f5f5;
+            border: 2px dashed #ddd;
+            border-radius: 10px;
+            padding: 40px 20px;
+            text-align: center;
+            margin: 20px 0;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .screenshot-container:hover {
+            background: #ececec;
+            border-color: #bbb;
+        }
+
+        .screenshot-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* Styles alternatifs pour les captures d'écran */
+        .screenshot-container.style-browser img {
+            border: 1px solid #ddd;
+            border-radius: 8px 8px 0 0;
+            box-shadow: 0 0 0 1px #e0e0e0, 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        .screenshot-container.style-device img {
+            border: 8px solid #333;
+            border-radius: 16px;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+        }
+
+        /* Exemple d'utilisation pour les captures d'écran :
+           <div class="screenshot-container">
+               <img src="capture-moodle-rgpd.png" alt="Interface RGPD Moodle">
+           </div>
+        */
+
+        /* Exemple d'utilisation pour les captures d'écran :
+           <div class="screenshot-container">
+               <img src="capture-moodle-rgpd.png" alt="Interface RGPD Moodle">
+           </div>
+        */
+
+        .screenshot-placeholder {
+            color: #999;
+            font-size: 1.1em;
+        }
+
+        .screenshot-icon {
+            font-size: 3em;
+            color: #ccc;
+            margin-bottom: 10px;
+        }
+
         /* Footer */
         .footer {
             text-align: center;
@@ -279,6 +361,15 @@
             code {
                 font-size: 0.8em;
             }
+
+            .screenshot-container {
+                padding: 20px 10px;
+                min-height: 150px;
+            }
+
+            .screenshot-icon {
+                font-size: 2em;
+            }
         }
     </style>
 </head>
@@ -313,6 +404,13 @@
                         <li>📋 Responsabiliser les acteurs traitant des données</li>
                         <li>⚖️ Crédibiliser la régulation</li>
                     </ul>
+                    <div class="screenshot-container" id="screenshot-rgpd-intro">
+                        <div class="screenshot-icon">📸</div>
+                        <div class="screenshot-placeholder">
+                            Espace pour capture d'écran<br>
+                            <small>(Logo RGPD ou infographie)</small>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="card">
@@ -390,6 +488,65 @@
                             </ul>
                         </div>
                     </div>
+                    <div class="screenshot-container">
+                        <div class="screenshot-icon">📸</div>
+                        <div class="screenshot-placeholder">
+                            Espace pour capture d'écran<br>
+                            <small>(Tableau des durées de conservation)</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card card-full" style="background: linear-gradient(135deg, #e3f2fd, #f5f5f5);">
+                    <span class="card-icon">📧</span>
+                    <h3 style="color: #1565c0;">Exemple : Template d'information Office 365</h3>
+                    <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #3498db; margin-top: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                        <p style="color: #555;"><strong>Objet : Information RGPD - Accès aux ressources de formation</strong></p>
+                        <p style="margin-top: 15px; color: #555;">Bonjour [Prénom],</p>
+                        <p style="color: #555;">Dans le cadre de votre formation [Nom formation], nous allons créer un compte invité Microsoft avec votre adresse email personnelle pour vous donner accès aux ressources pédagogiques sur notre espace SharePoint.</p>
+                        <p style="color: #555;"><strong>Données collectées :</strong> Nom, prénom et adresse email<br>
+                        <strong>Finalité :</strong> Uniquement pour l'accès aux supports de formation<br>
+                        <strong>Durée :</strong> Pendant la formation + 3 mois<br>
+                        <strong>Utilisation commerciale :</strong> AUCUNE</p>
+                        <p style="color: #555;">Vous pouvez demander la suppression de ces données à tout moment en contactant notre DPO : dpo@academie-tourisme.fr</p>
+                        <p style="color: #555;">Cordialement,<br>L'équipe pédagogique</p>
+                    </div>
+                </div>
+
+                <div class="card card-full card-warning">
+                    <span class="card-icon">☁️</span>
+                    <h3>Office 365 - Comptes invités</h3>
+                    <div class="two-columns">
+                        <div>
+                            <p><strong>🔐 Données collectées par Azure/Entra :</strong></p>
+                            <ul>
+                                <li>Nom et prénom de l'apprenant</li>
+                                <li>Adresse email personnelle</li>
+                                <li>Date de création du compte invité</li>
+                                <li>Dernière connexion</li>
+                                <li>Ressources consultées</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p><strong>📁 SharePoint partagés :</strong></p>
+                            <ul>
+                                <li>Belambra - Documents formation</li>
+                                <li>VTF - Supports pédagogiques</li>
+                                <li>Autres clients - Ressources spécifiques</li>
+                                <li>Historique des accès</li>
+                                <li>Permissions accordées</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="highlight" style="margin-top: 20px;">⚠️ OBLIGATION D'INFORMATION</div>
+                    <p style="margin-top: 15px;"><strong>Les apprenants DOIVENT être informés :</strong></p>
+                    <ul>
+                        <li>✉️ Que leur email personnel sera utilisé pour créer un compte invité Microsoft</li>
+                        <li>📚 Que ces données sont utilisées UNIQUEMENT dans le cadre de leur formation</li>
+                        <li>🚫 Qu'aucune utilisation commerciale ne sera faite de ces informations</li>
+                        <li>⏱️ De la durée de conservation (fin de formation + période définie)</li>
+                        <li>🗑️ De leur droit de demander la suppression après la formation</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -465,6 +622,16 @@
                     <span class="card-icon">🎓</span>
                     <h3>Protection des données dans Moodle</h3>
                     <p>Moodle intègre nativement des outils de gestion RGPD pour assurer la conformité de notre plateforme LMS.</p>
+                    <div class="screenshot-container">
+                        <div class="screenshot-icon">📸</div>
+                        <div class="screenshot-placeholder">
+                            Espace pour capture d'écran<br>
+                            <small>(Interface administration Moodle - Section RGPD)</small>
+                        </div>
+                        <!-- Exemple avec image :
+                        <img src="capture-moodle-admin.png" alt="Interface administration Moodle RGPD">
+                        -->
+                    </div>
                 </div>
 
                 <div class="card">
@@ -495,51 +662,79 @@
                     <span class="card-icon">✅</span>
                     <h3>Accords des utilisateurs</h3>
                     <p><strong>Page : Acceptation des politiques</strong></p>
-                    <div class="highlight">📍https://learning-tourism.academy/admin/tool/policy/acceptances.php</div>
+                    <div class="highlight">📍 /admin/tool/policy/acceptances.php</div>
                     <ul>
                         <li>Vue d'ensemble des acceptations</li>
                         <li>Filtrage par utilisateur/date</li>
                         <li>Export des consentements</li>
                     </ul>
+                    <div class="screenshot-container">
+                        <div class="screenshot-icon">📸</div>
+                        <div class="screenshot-placeholder">
+                            Espace pour capture d'écran<br>
+                            <small>(Interface acceptances.php)</small>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="card card-warning">
                     <span class="card-icon">📋</span>
                     <h3>Demandes de données</h3>
                     <p><strong>Page : Gestion des demandes</strong></p>
-                    <div class="highlight">📍https://learning-tourism.academy/admin/tool/dataprivacy/datarequests.php</div>
+                    <div class="highlight">📍 /admin/tool/dataprivacy/datarequests.php</div>
                     <ul>
                         <li>Demandes d'accès aux données</li>
                         <li>Demandes de suppression</li>
                         <li>Traitement et suivi</li>
                         <li>Délais légaux respectés</li>
                     </ul>
+                    <div class="screenshot-container">
+                        <div class="screenshot-icon">📸</div>
+                        <div class="screenshot-placeholder">
+                            Espace pour capture d'écran<br>
+                            <small>(Interface datarequests.php)</small>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="card">
                     <span class="card-icon">📊</span>
                     <h3>Registre des données</h3>
                     <p><strong>Page : Registre principal</strong></p>
-                    <div class="highlight">📍https://learning-tourism.academy/admin/tool/dataprivacy/dataregistry.php</div>
+                    <div class="highlight">📍 /admin/tool/dataprivacy/dataregistry.php</div>
                     <ul>
                         <li>Cartographie complète des données</li>
                         <li>Catégories et finalités</li>
                         <li>Périodes de conservation</li>
                         <li>Base légale du traitement</li>
                     </ul>
+                    <div class="screenshot-container">
+                        <div class="screenshot-icon">📸</div>
+                        <div class="screenshot-placeholder">
+                            Espace pour capture d'écran<br>
+                            <small>(Interface dataregistry.php)</small>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="card">
                     <span class="card-icon">🔌</span>
                     <h3>Registre des plugins</h3>
                     <p><strong>Page : Données des plugins</strong></p>
-                    <div class="highlight">📍https://learning-tourism.academy/admin/tool/dataprivacy/pluginregistry.php</div>
+                    <div class="highlight">📍 /admin/tool/dataprivacy/pluginregistry.php</div>
                     <ul>
                         <li>Analyse des données par plugin</li>
                         <li>Conformité des extensions</li>
                         <li>Risques potentiels identifiés</li>
                         <li>Recommandations de sécurité</li>
                     </ul>
+                    <div class="screenshot-container">
+                        <div class="screenshot-icon">📸</div>
+                        <div class="screenshot-placeholder">
+                            Espace pour capture d'écran<br>
+                            <small>(Interface pluginregistry.php)</small>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="card">
@@ -603,6 +798,15 @@
                     <p><strong>Obligation d'information aux apprenants</strong></p>
                     <div class="highlight">Exemple : Société EDKO</div>
                     <p>Reçoit les données des formulaires de satisfaction pour statistiques - Les apprenants doivent en être informés.</p>
+                    <div class="highlight" style="background: linear-gradient(135deg, #3498db, #2980b9); margin-top: 15px;">Office 365 : Comptes invités</div>
+                    <p>Information obligatoire sur l'utilisation des emails personnels pour les accès SharePoint.</p>
+                    <div class="screenshot-container">
+                        <div class="screenshot-icon">📸</div>
+                        <div class="screenshot-placeholder">
+                            Espace pour capture d'écran<br>
+                            <small>(Exemple de formulaire avec mentions RGPD)</small>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="card">
@@ -636,6 +840,33 @@
                             <li>Formation du personnel</li>
                         </ul>
                     </div>
+                </div>
+
+                <div class="card card-full">
+                    <span class="card-icon">☁️</span>
+                    <h3>Process Office 365 - Recommandations</h3>
+                    <p><strong>Pour garantir la conformité RGPD des comptes invités Office 365 :</strong></p>
+                    <div class="two-columns">
+                        <div>
+                            <p><strong>📝 Avant l'invitation :</strong></p>
+                            <ul>
+                                <li>Informer l'apprenant par email</li>
+                                <li>Obtenir le consentement explicite</li>
+                                <li>Préciser la finalité pédagogique</li>
+                                <li>Mentionner la durée d'accès</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p><strong>🔧 Gestion des accès :</strong></p>
+                            <ul>
+                                <li>Révision trimestrielle des invités</li>
+                                <li>Suppression après formation</li>
+                                <li>Logs d'accès conservés 1 an</li>
+                                <li>Pas de réutilisation commerciale</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="highlight" style="margin-top: 15px;">💡 Créer un modèle d'email type pour l'information préalable</div>
                 </div>
             </div>
         </div>
@@ -711,12 +942,35 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="card card-info">
+                    <span class="card-icon">📧</span>
+                    <h3>Process Office 365</h3>
+                    <p><strong>Action prioritaire : Formaliser le processus d'invitation</strong></p>
+                    <ul>
+                        <li>Créer un template d'information RGPD</li>
+                        <li>Documenter le processus d'invitation</li>
+                        <li>Former les équipes à l'information préalable</li>
+                        <li>Mettre en place un registre des invités</li>
+                        <li>Planifier les suppressions post-formation</li>
+                    </ul>
+                    <div class="screenshot-container">
+                        <div class="screenshot-icon">📸</div>
+                        <div class="screenshot-placeholder">
+                            Espace pour capture d'écran<br>
+                            <small>(Process d'invitation Office 365)</small>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- Footer -->
         <div class="footer">
             <p>🎓 Académie du Tourisme - Protection des données personnelles</p>
+            <p style="font-size: 0.9em; opacity: 0.8; margin-top: 10px;">
+                💡 Astuce : Pour ajouter vos captures d'écran, remplacez le contenu des zones grises par vos images
+            </p>
         </div>
     </div>
 
@@ -758,6 +1012,18 @@
                 activeTabs[activeIndex - 1].click();
             }
         });
+
+        // Fonction exemple pour remplacer les placeholders par des images
+        // Usage : addScreenshot('selector', 'image-url', 'alt-text')
+        function addScreenshot(containerSelector, imageUrl, altText) {
+            const container = document.querySelector(containerSelector);
+            if (container) {
+                container.innerHTML = `<img src="${imageUrl}" alt="${altText}">`;
+            }
+        }
+
+        // Exemple d'utilisation (décommentez et adaptez) :
+        // addScreenshot('.card-info:first-child .screenshot-container', 'images/rgpd-logo.png', 'Logo RGPD');
     </script>
 </body>
 </html>

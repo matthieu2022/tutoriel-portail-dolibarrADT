@@ -429,6 +429,103 @@
                     <h3>🏛️ Cadre réglementaire européen</h3>
                     <p>Le RGPD s'applique à toute organisation qui traite des données personnelles de résidents européens, quelle que soit sa localisation. Pour l'Académie du Tourisme, cela implique une mise en conformité complète de nos systèmes d'information et de nos processus de formation.</p>
                 </div>
+
+                <div class="card card-full card-success">
+                    <span class="card-icon">✨</span>
+                    <h3>Ce que le DPO pourra faire avec ces permissions</h3>
+                    <div class="two-columns">
+                        <div>
+                            <p><strong>✅ Actions possibles :</strong></p>
+                            <ul>
+                                <li>Traiter les demandes RGPD (accès, suppression, export)</li>
+                                <li>Définir les catégories de données et leurs finalités</li>
+                                <li>Configurer les durées de conservation</li>
+                                <li>Générer des rapports de conformité</li>
+                                <li>Consulter l'historique des consentements</li>
+                                <li>Exporter les registres pour la CNIL</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p><strong>🚫 Actions impossibles (sécurité) :</strong></p>
+                            <ul>
+                                <li>Modifier la configuration technique du site</li>
+                                <li>Supprimer des comptes utilisateurs</li>
+                                <li>Accéder aux mots de passe</li>
+                                <li>Installer ou désinstaller des plugins</li>
+                                <li>Modifier les permissions d'autres rôles</li>
+                                <li>Accéder aux sauvegardes système</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p style="text-align: center; margin-top: 20px; font-style: italic;">
+                        💡 Cette séparation garantit l'indépendance du DPO tout en lui donnant les outils nécessaires
+                    </p>
+                </div>
+
+                <div class="card card-success">
+                    <span class="card-icon">⚙️</span>
+                    <h3>Créer le rôle DPO</h3>
+                    <p><strong>Étapes de configuration :</strong></p>
+                    <ol style="padding-left: 20px;">
+                        <li><strong>Accéder à la définition des rôles</strong><br>
+                        <small>Administration → Utilisateurs → Permissions → Définir les rôles</small></li>
+                        <li><strong>Ajouter un nouveau rôle</strong><br>
+                        <small>Cliquer sur "Ajouter un nouveau rôle"</small></li>
+                        <li><strong>Configurer le rôle</strong><br>
+                        <small>• Nom court : <code>dpo</code><br>
+                        • Nom complet : Délégué à la Protection des Données<br>
+                        • Description : Responsable RGPD de l'établissement<br>
+                        • Type de rôle : Système</small></li>
+                        <li><strong>Attribuer les capacités</strong><br>
+                        <small>Rechercher et activer les permissions listées</small></li>
+                        <li><strong>Assigner le rôle</strong><br>
+                        <small>Administration → Utilisateurs → Permissions → Attribuer des rôles système</small></li>
+                    </ol>
+                    <div class="highlight" style="margin-top: 15px;">
+                        💡 Conseil : Exporter le rôle pour réutilisation
+                    </div>
+                    <div class="info-box" style="margin-top: 15px;">
+                        <p><strong>Export/Import du rôle :</strong></p>
+                        <p style="font-size: 0.95em;">Administration → Utilisateurs → Permissions → Définir les rôles → [Roue dentée] → Exporter<br>
+                        Format XML pour réutilisation sur d'autres plateformes Moodle</p>
+                    </div>
+                </div>
+
+                <div class="card card-info">
+                    <span class="card-icon">📊</span>
+                    <h3>Tableau de bord DPO</h3>
+                    <p><strong>Accès rapide aux outils RGPD :</strong></p>
+                    <ul>
+                        <li>Créer un bloc "Liens" sur le tableau de bord</li>
+                        <li>Ajouter les 4 URLs principales</li>
+                        <li>Configurer des rapports personnalisés</li>
+                        <li>Mettre en place des alertes email</li>
+                    </ul>
+                    <div class="screenshot-container">
+                        <div class="screenshot-icon">📸</div>
+                        <div class="screenshot-placeholder">
+                            Espace pour capture d'écran<br>
+                            <small>(Tableau de bord DPO personnalisé)</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <span class="card-icon">💻</span>
+                    <h3>Commandes CLI utiles</h3>
+                    <p><strong>Pour les administrateurs système :</strong></p>
+                    <div style="background: #263238; color: #aed581; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 0.9em; overflow-x: auto;">
+                        <span style="color: #80cbc4;"># Exporter les données d'un utilisateur</span><br>
+                        php admin/cli/privacy_export.php --userid=123<br><br>
+                        <span style="color: #80cbc4;"># Lister les demandes en attente</span><br>
+                        php admin/cli/privacy_requests.php --status=pending<br><br>
+                        <span style="color: #80cbc4;"># Approuver une demande</span><br>
+                        php admin/cli/privacy_approve.php --requestid=45
+                    </div>
+                    <p style="margin-top: 10px; font-size: 0.9em;">
+                        <em>Note : Ces commandes sont exécutées par l'admin système sur demande du DPO</em>
+                    </p>
+                </div>
             </div>
         </div>
 
@@ -611,6 +708,16 @@
                             </ul>
                         </div>
                     </div>
+                    <div class="info-box" style="margin-top: 20px;">
+                        <h3>📌 Points d'attention importants</h3>
+                        <ul style="margin: 0;">
+                            <li>Le DPO doit avoir un compte utilisateur distinct de ses autres fonctions</li>
+                            <li>Ne jamais donner les droits d'administration système au DPO</li>
+                            <li>Documenter toutes les actions effectuées (traçabilité)</li>
+                            <li>Former le DPO à l'utilisation des outils Moodle RGPD</li>
+                        <li>⚠️ <strong>JAMAIS utiliser le compte admin pour les fonctions DPO</strong></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -749,7 +856,68 @@
                     </ul>
                 </div>
 
-                <div class="card card-full">
+                <div class="card card-full card-warning">
+                    <span class="card-icon">🔐</span>
+                    <h3>Permissions du rôle DPO dans Moodle</h3>
+                    <p><strong>Configuration du rôle DPO : Contexte système</strong></p>
+                    <div class="two-columns">
+                        <div>
+                            <p><strong>✅ Capacités à ACTIVER :</strong></p>
+                            <ul style="font-size: 0.95em;">
+                                <li><code>tool/dataprivacy:managedatarequests</code><br>
+                                <small>Gérer toutes les demandes de données</small></li>
+                                <li><code>tool/dataprivacy:managedataregistry</code><br>
+                                <small>Gérer le registre des données</small></li>
+                                <li><code>tool/dataprivacy:managedatacategory</code><br>
+                                <small>Gérer les catégories de données</small></li>
+                                <li><code>tool/dataprivacy:managedatapurpose</code><br>
+                                <small>Gérer les finalités de traitement</small></li>
+                                <li><code>tool/dataprivacy:viewdatarequests</code><br>
+                                <small>Voir toutes les demandes</small></li>
+                                <li><code>tool/dataprivacy:downloadallrequests</code><br>
+                                <small>Télécharger les exports de données</small></li>
+                                <li><code>moodle/site:viewreports</code><br>
+                                <small>Voir les rapports d'activité</small></li>
+                                <li><code>moodle/site:viewuseridentity</code><br>
+                                <small>Voir l'identité complète des utilisateurs</small></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p><strong>🚫 Capacités à NE PAS donner :</strong></p>
+                            <ul style="font-size: 0.95em;">
+                                <li><code>moodle/site:config</code><br>
+                                <small>Configuration du site (admin)</small></li>
+                                <li><code>moodle/user:delete</code><br>
+                                <small>Supprimer directement des utilisateurs</small></li>
+                                <li><code>moodle/user:update</code><br>
+                                <small>Modifier les profils utilisateurs</small></li>
+                                <li><code>moodle/site:doanything</code><br>
+                                <small>Droits administrateur complets</small></li>
+                            </ul>
+                            <p><strong>📝 Capacités optionnelles :</strong></p>
+                            <ul style="font-size: 0.95em;">
+                                <li><code>tool/policy:managedocs</code><br>
+                                <small>Gérer les politiques du site</small></li>
+                                <li><code>tool/policy:viewacceptances</code><br>
+                                <small>Voir les acceptations des politiques</small></li>
+                                <li><code>moodle/site:viewparticipants</code><br>
+                                <small>Voir la liste des participants</small></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="highlight" style="margin-top: 20px;">
+                        ⚡ Commande de création : Site administration → Users → Permissions → Define roles → Add a new role
+                    </div>
+                    <div class="screenshot-container" style="margin-top: 20px;">
+                        <div class="screenshot-icon">📸</div>
+                        <div class="screenshot-placeholder">
+                            Espace pour capture d'écran<br>
+                            <small>(Configuration des permissions DPO)</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card card-full"
                     <h3>🚀 Pages clés à maîtriser pour le DPO</h3>
                     <div class="two-columns">
                         <div>

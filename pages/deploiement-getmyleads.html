@@ -390,22 +390,58 @@
         <section id="preparation" class="section">
             <h2><span class="section-icon">📁</span>Préparation des Fichiers</h2>
             
-            <h3>Structure à déployer</h3>
+            <h3>Structure complète à déployer</h3>
             <pre>/custom/getmyleads/
-├── admin/           # Pages d'administration
-├── class/           # Classes PHP (API + objet métier)
-├── css/            # Styles
-├── lang/           # Traductions
-├── lib/            # Fonctions utilitaires
-├── bin/            # Scripts batch (optionnel)
-├── hook.php        # Point d'entrée webhook
-└── core/modules/   # Descripteur du module</pre>
+├── admin/              # Pages d'administration
+│   ├── about.php
+│   ├── dashboard.php
+│   ├── getmyleads_card.php
+│   ├── getmyleads_links.php
+│   └── getmyleads.php
+├── archive/            # Fichiers de test archivés
+├── bin/                # Scripts d'import et traitement
+│   ├── batch_import_leads.php
+│   ├── direct_import_api.php
+│   ├── import_leads.php
+│   └── test_api_call.php
+├── class/              # Classes PHP principales
+│   ├── getmyleadsapi.class.php
+│   └── getmyleads.class.php
+├── core/               # Configuration module
+│   ├── boxes/
+│   └── modules/
+│       └── modGetmyleads.class.php
+├── cron/               # Scripts tâches planifiées
+│   ├── cron_getmyleads.php
+│   ├── getmyleads_daily_sync.php
+│   ├── plesk_lead_checker.php
+│   └── process_queue.php
+├── css/                # Styles
+│   └── getmyleads.css
+├── hook/               # 🎯 WEBHOOKS (Point d'entrée)
+│   ├── hook.php        # Webhook principal
+│   └── process_queue.php
+├── img/                # Images et logos
+├── js/                 # JavaScript (vide)
+├── langs/              # Traductions
+│   └── fr_FR/
+│       └── getmyleads.lang
+├── lib/                # Fonctions utilitaires
+│   └── getmyleads.lib.php
+├── sql/                # Scripts SQL
+│   ├── llx_getmyleads_lead.sql
+│   └── llx_getmyleads_token.sql
+├── getmyleads_list.php # Pages principales
+├── getmyleads_stats.php
+└── test_api.php        # Tests API</pre>
 
             <div class="warning">
                 <h4>⚠️ Points d'attention critiques :</h4>
                 <ul>
                     <li><strong>Permissions</strong> : 755 pour dossiers, 644 pour fichiers PHP</li>
-                    <li><strong>hook.php</strong> : Doit être accessible via web (pas dans admin/)</li>
+                    <li><strong>Webhook</strong> : Dossier <code>/hook/</code> doit être accessible via web</li>
+                    <li><strong>Scripts cron</strong> : Dossier <code>/cron/</code> pour tâches planifiées</li>
+                    <li><strong>Archives</strong> : Dossier <code>/archive/</code> peut être exclu du déploiement</li>
                     <li><strong>Logs</strong> : Créer <code>/dolibarr_documents/getmyleads/</code> avec permissions 777</li>
                 </ul>
             </div>
@@ -414,24 +450,33 @@
         <section id="database" class="section">
             <h2><span class="section-icon">🗄️</span>Base de Données</h2>
             
-            <h3>Tables avec préfixe llxay_</h3>
+            <h3>Tables SQL disponibles</h3>
             <div class="card-grid">
                 <div class="card">
                     <h4>📋 llxay_getmyleads_lead</h4>
                     <p>Table principale contenant tous les leads importés avec leurs informations complètes.</p>
-                </div>
-                <div class="card">
-                    <h4>⏳ llxay_getmyleads_queue</h4>
-                    <p>File d'attente pour le traitement différé des notifications webhook.</p>
+                    <code>sql/llx_getmyleads_lead.sql</code>
                 </div>
                 <div class="card">
                     <h4>🔐 llxay_getmyleads_token</h4>
                     <p>Cache des tokens d'authentification API pour optimiser les performances.</p>
+                    <code>sql/llx_getmyleads_token.sql</code>
+                </div>
+                <div class="card">
+                    <h4>⏳ llxay_getmyleads_queue</h4>
+                    <p>File d'attente pour le traitement différé (créée automatiquement si nécessaire).</p>
+                    <small>Pas de script SQL - création dynamique</small>
                 </div>
             </div>
 
             <div class="info">
-                <h4>🔍 Vérifications obligatoires :</h4>
+                <h4>🔍 Scripts SQL à exécuter :</h4>
+                <pre># Création des tables principales
+mysql -u user -p database < sql/llx_getmyleads_lead.sql
+mysql -u user -p database < sql/llx_getmyleads_token.sql
+
+# Vérification
+SHOW TABLES LIKE 'llxay_getmyleads_%';</pre>
                 <ul>
                     <li><strong>Préfixe</strong> : S'assurer que <code>getTableName()</code> retourne bien <code>llxay_</code></li>
                     <li><strong>Entité</strong> : Vérifier que le champ <code>entity</code> correspond à votre configuration</li>
@@ -461,7 +506,7 @@
                     </tr>
                     <tr>
                         <td><code>GETMYLEADS_API_EMAIL</code></td>
-                        <td>votre-email@domaine.fr</td>
+                        <td>cyber_technique@academie-tourisme.fr</td>
                         <td>Email d'authentification API</td>
                     </tr>
                     <tr>
@@ -471,7 +516,7 @@
                     </tr>
                     <tr>
                         <td><code>GETMYLEADS_HOOK_URL</code></td>
-                        <td>https://votre-domaine.fr/custom/getmyleads/hook.php</td>
+                        <td>https://dolibarrvierge19.e-learning-neo-sphere.fr/custom/getmyleads/hook/hook.php</td>
                         <td>URL du webhook à configurer</td>
                     </tr>
                     <tr>
@@ -492,11 +537,11 @@
             
             <h3>URL à configurer chez GetMyLeads</h3>
             <div class="architecture-box">
-                <code>https://votre-domaine-prod.fr/custom/getmyleads/hook.php</code>
+                <code>https://dolibarrvierge19.e-learning-neo-sphere.fr/custom/getmyleads/hook/hook.php</code>
             </div>
 
             <h3>Test du webhook</h3>
-            <pre>curl -X POST https://votre-domaine.fr/custom/getmyleads/hook.php \
+            <pre>curl -X POST https://dolibarrvierge19.e-learning-neo-sphere.fr/custom/getmyleads/hook/hook.php \
 -H "Content-Type: application/json" \
 -d '{"id":"TEST-123"}'</pre>
 
@@ -514,12 +559,34 @@
         <section id="cron" class="section">
             <h2><span class="section-icon">⏰</span>Tâches Planifiées Plesk</h2>
             
-            <h3>Configuration de la tâche cron</h3>
+            <h3>Scripts disponibles pour les tâches cron</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4>🔄 cron_getmyleads.php</h4>
+                    <p>Script principal de synchronisation automatique</p>
+                </div>
+                <div class="card">
+                    <h4>📅 getmyleads_daily_sync.php</h4>
+                    <p>Synchronisation quotidienne complète</p>
+                </div>
+                <div class="card">
+                    <h4>👁️ plesk_lead_checker.php</h4>
+                    <p>Vérificateur de leads pour environnement Plesk</p>
+                </div>
+                <div class="card">
+                    <h4>⚙️ process_queue.php</h4>
+                    <p>Traitement de la file d'attente des leads</p>
+                </div>
+            </div>
+
+            <h3>Configuration de la tâche cron recommandée</h3>
             <div class="card">
-                <h4>📝 Paramètres recommandés</h4>
-                <p><strong>Commande :</strong></p>
-                <pre>/usr/bin/php /path/to/dolibarr/custom/getmyleads/bin/sync_recent_leads.php</pre>
-                <p><strong>Fréquence :</strong> Toutes les 5 minutes</p>
+                <h4>📝 Paramètres pour Plesk</h4>
+                <p><strong>Script principal :</strong></p>
+                <pre>/usr/bin/php /var/www/vhosts/dolibarrvierge19.e-learning-neo-sphere.fr/httpdocs/custom/getmyleads/cron/plesk_lead_checker.php</pre>
+                <p><strong>Script alternatif :</strong></p>
+                <pre>/usr/bin/php /var/www/vhosts/dolibarrvierge19.e-learning-neo-sphere.fr/httpdocs/custom/getmyleads/cron/cron_getmyleads.php</pre>
+                <p><strong>Fréquence recommandée :</strong> Toutes les 5 minutes</p>
                 <p><strong>Timeout :</strong> 300 secondes</p>
             </div>
 
@@ -539,15 +606,30 @@
             
             <h3>Tests obligatoires après déploiement</h3>
             <ul class="checklist">
-                <li>Activation du module via Dolibarr > Setup > Modules</li>
-                <li>Test de connexion API via Admin > GetMyLeads</li>
-                <li>Test du webhook avec curl ou outil similaire</li>
-                <li>Import manuel d'un lead via interface de synchronisation</li>
-                <li>Exécution manuelle du script cron</li>
-                <li>Vérification de la génération des logs</li>
-                <li>Test de création automatique tiers/contact</li>
-                <li>Validation des permissions utilisateur</li>
+                <li>Activation du module via Dolibarr > Setup > Modules > GetMyLeads</li>
+                <li>Test de connexion API via <code>/admin/getmyleads.php</code></li>
+                <li>Test direct API avec <code>/test_api_official.php</code></li>
+                <li>Test du webhook : <code>/hook/hook.php</code> avec curl</li>
+                <li>Test import direct : <code>/bin/direct_import_api.php</code></li>
+                <li>Exécution manuelle cron : <code>/cron/plesk_lead_checker.php</code></li>
+                <li>Test process queue : <code>/cron/process_queue.php</code></li>
+                <li>Vérification logs dans <code>/dolibarr_documents/getmyleads/</code></li>
+                <li>Import manuel via interface : <code>/getmyleads_list.php</code></li>
+                <li>Test création tiers/contact automatique</li>
+                <li>Validation permissions utilisateur et entités</li>
             </ul>
+
+            <h3>Commandes de test spécifiques</h3>
+            <pre># Test API direct
+https://dolibarrvierge19.e-learning-neo-sphere.fr/custom/getmyleads/test_api_official.php
+
+# Test webhook
+curl -X POST https://dolibarrvierge19.e-learning-neo-sphere.fr/custom/getmyleads/hook/hook.php \
+     -H "Content-Type: application/json" \
+     -d '{"id":"TEST-12345"}'
+
+# Test cron Plesk (à exécuter en SSH)
+/usr/bin/php /var/www/vhosts/dolibarrvierge19.e-learning-neo-sphere.fr/httpdocs/custom/getmyleads/cron/plesk_lead_checker.php</pre>
         </section>
 
         <section id="monitoring" class="section">
@@ -557,16 +639,35 @@
             <div class="card-grid">
                 <div class="card">
                     <h4>📝 webhook_YYYYMMDD.log</h4>
-                    <p>Logs des notifications webhook reçues et de leur traitement.</p>
+                    <p>Logs des notifications webhook reçues via <code>/hook/hook.php</code></p>
+                    <small>Emplacement : /dolibarr_documents/getmyleads/</small>
                 </div>
                 <div class="card">
                     <h4>🔄 process_debug_*.log</h4>
-                    <p>Logs détaillés des synchronisations et imports batch.</p>
+                    <p>Logs détaillés des scripts <code>/cron/</code> et traitement batch</p>
+                    <small>Emplacement : /dolibarr_documents/getmyleads/</small>
                 </div>
                 <div class="card">
                     <h4>❌ api_errors.log</h4>
-                    <p>Erreurs de communication avec l'API GetMyLeads.</p>
+                    <p>Erreurs de communication avec l'API GetMyLeads</p>
+                    <small>Emplacement : /dolibarr_documents/getmyleads/</small>
                 </div>
+                <div class="card">
+                    <h4>⏰ cron_execution.log</h4>
+                    <p>Logs d'exécution des tâches planifiées Plesk</p>
+                    <small>Emplacement : défini dans Plesk</small>
+                </div>
+            </div>
+
+            <h3>Scripts de test disponibles</h3>
+            <div class="info">
+                <h4>📋 Tests manuels :</h4>
+                <ul>
+                    <li><code>/test_api.php</code> : Test direct de l'API GetMyLeads</li>
+                    <li><code>/test_api_official.php</code> : Test API version officielle</li>
+                    <li><code>/bin/test_api_call.php</code> : Test approfondi des appels API</li>
+                    <li><code>/cron/test_execution.php</code> : Test des scripts cron</li>
+                </ul>
             </div>
 
             <div class="info">

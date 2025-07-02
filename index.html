@@ -31,11 +31,11 @@
         .navbar {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 10px 20px;
             display: flex;
             align-items: center;
-            flex-wrap: wrap;
             gap: 20px;
+            min-height: 60px;
         }
 
         .logo {
@@ -72,8 +72,10 @@
         .nav-container {
             flex: 1;
             display: flex;
-            flex-direction: column;
-            gap: 10px;
+            flex-direction: row;
+            align-items: center;
+            gap: 20px;
+            justify-content: space-between;
         }
 
         /* Section Admin */
@@ -83,35 +85,38 @@
             border-radius: 8px;
             border: 2px solid #ff6b35;
             box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
+            flex-shrink: 0;
         }
 
         .admin-label {
             color: white;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
             display: block;
+            text-align: center;
         }
 
         .admin-nav {
             display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
+            gap: 10px;
+            flex-wrap: nowrap;
         }
 
         .admin-nav a {
             color: white;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: 500;
-            padding: 5px 10px;
-            border-radius: 5px;
+            padding: 4px 8px;
+            border-radius: 4px;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
+            white-space: nowrap;
         }
 
         .admin-nav a:hover {
@@ -122,29 +127,32 @@
         /* Section Modules */
         .modules-section {
             display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
+            gap: 15px;
+            flex-wrap: nowrap;
             align-items: center;
+            flex: 1;
+            justify-content: center;
         }
 
         .module-group {
             display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
+            gap: 10px;
+            flex-wrap: nowrap;
         }
 
         .module-group a {
             color: #ecf0f1;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 500;
-            padding: 8px 12px;
+            padding: 6px 10px;
             border-radius: 6px;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
             border: 1px solid transparent;
+            white-space: nowrap;
         }
 
         .module-group a:hover {
@@ -155,15 +163,16 @@
         }
 
         .module-group a i {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
         }
 
         /* Séparateurs visuels */
         .nav-separator {
-            height: 20px;
+            height: 25px;
             width: 1px;
             background: rgba(255, 255, 255, 0.3);
             margin: 0 5px;
+            flex-shrink: 0;
         }
 
         /* Recherche */
@@ -172,9 +181,9 @@
             align-items: center;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 20px;
-            padding: 8px 15px;
-            margin-left: auto;
-            min-width: 250px;
+            padding: 6px 12px;
+            min-width: 220px;
+            flex-shrink: 0;
         }
 
         .search-box i {
@@ -463,11 +472,41 @@
         }
 
         /* Responsive */
-        @media (max-width: 1024px) {
+        @media (max-width: 1200px) {
+            .module-group a {
+                font-size: 0.8rem;
+                padding: 5px 8px;
+            }
+            
+            .admin-nav a {
+                font-size: 0.75rem;
+                padding: 3px 6px;
+            }
+            
             .modules-section {
+                gap: 10px;
+            }
+            
+            .module-group {
+                gap: 8px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .nav-container {
                 flex-direction: column;
                 gap: 10px;
-                align-items: flex-start;
+                align-items: stretch;
+            }
+
+            .admin-section {
+                align-self: center;
+            }
+
+            .modules-section {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 15px;
             }
 
             .search-box {
@@ -484,11 +523,28 @@
 
             .nav-container {
                 width: 100%;
+                flex-direction: column;
+                gap: 15px;
             }
 
-            .admin-nav,
+            .admin-section {
+                width: 100%;
+            }
+
+            .admin-nav {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .modules-section {
+                flex-direction: column;
+                gap: 10px;
+            }
+
             .module-group {
                 justify-content: center;
+                flex-wrap: wrap;
             }
 
             .search-box {
@@ -515,7 +571,7 @@
             .admin-nav,
             .module-group {
                 flex-direction: column;
-                gap: 8px;
+                gap: 6px;
             }
 
             .hero {

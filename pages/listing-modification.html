@@ -90,6 +90,71 @@
             padding: 2px 6px;
         }
 
+        /* Style pour la section de téléchargement auto */
+        .auto-download {
+            background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%);
+            border: 1px solid #4caf50;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .auto-download h4 {
+            color: #2e7d32;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .download-info {
+            background: white;
+            border: 1px solid #c8e6c9;
+            border-radius: 6px;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 0.8rem;
+            color: #2e7d32;
+        }
+
+        .download-filename {
+            font-family: 'Courier New', monospace;
+            background: #f1f8e9;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+
+        .btn-auto-download {
+            background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .btn-auto-download:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-auto-download:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
         /* Container principal */
         .main-container {
             width: 70%;
@@ -464,6 +529,18 @@
                     <button class="btn" onclick="document.getElementById('importFile').click()" style="font-size: 0.8rem; padding: 8px 12px;">📥 Importer</button>
                     <input type="file" id="importFile" accept=".json" style="display: none;" onchange="importData(this)">
                 </div>
+
+                <!-- Section téléchargement automatique -->
+                <div class="auto-download">
+                    <h4>🚀 Téléchargement rapide</h4>
+                    <div class="download-info">
+                        <strong>Fichier du jour :</strong><br>
+                        <span class="download-filename" id="todayFilename">taches_02-01-2025.json</span>
+                    </div>
+                    <button class="btn-auto-download" onclick="downloadTodayFile()" id="downloadBtn">
+                        📥 Télécharger directement
+                    </button>
+                </div>
             </div>
 
             <!-- Dernières modifications -->
@@ -548,8 +625,8 @@
                                     </optgroup>
                                     
                                     <optgroup label="👥 3 - Tiers & Contact">
-                                        <option value="Tiers - Clients">tiers candidats
-                                        <option value="Tiers - Clients">tiers entreprise
+                                        <option value="Tiers - Clients">tiers candidats</option>
+                                        <option value="Tiers - Clients">tiers entreprise</option>
                                         <option value="Contact - Gestion">Gestion des contacts</option>
                                     </optgroup>
                                     
@@ -818,7 +895,67 @@
             setupEventListeners();
             updateNavBadges();
             updateLastSaveInfo();
+            updateTodayFilename();
         });
+
+        function updateTodayFilename() {
+            const today = new Date();
+            const day = String(today.getDate()).padStart(2, '0');
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const year = today.getFullYear();
+            const filename = `taches_${day}-${month}-${year}.json`;
+            
+            document.getElementById('todayFilename').textContent = filename;
+            
+            // Mettre à jour le bouton selon s'il y a des données
+            const downloadBtn = document.getElementById('downloadBtn');
+            if (modifications.length === 0) {
+                downloadBtn.disabled = true;
+                downloadBtn.innerHTML = '📥 Aucune donnée à télécharger';
+            } else {
+                downloadBtn.disabled = false;
+                downloadBtn.innerHTML = `📥 Télécharger directement (${modifications.length} modifs)`;
+            }
+        }
+
+        function downloadTodayFile() {
+            if (modifications.length === 0) {
+                alert('⚠️ Aucune modification à télécharger.\n\nAjoutez d\'abord des modifications pour pouvoir les télécharger.');
+                return;
+            }
+
+            const today = new Date();
+            const day = String(today.getDate()).padStart(2, '0');
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const year = today.getFullYear();
+            const filename = `taches_${day}-${month}-${year}.json`;
+
+            const exportObj = {
+                metadata: {
+                    version: "1.0",
+                    exportDate: new Date().toISOString(),
+                    totalModifications: modifications.length,
+                    exportedBy: "Suivi Modifications Dolibarr",
+                    filename: filename
+                },
+                modifications: modifications
+            };
+            
+            const data = JSON.stringify(exportObj, null, 2);
+            const blob = new Blob([data], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            
+            URL.revokeObjectURL(url);
+            
+            // Message de confirmation optimisé
+            const message = `✅ Téléchargement réussi !\n\n📄 Fichier : ${filename}\n🔢 ${modifications.length} modification(s) incluse(s)\n\n💡 Le fichier est téléchargé dans votre dossier de téléchargements par défaut.`;
+            alert(message);
+        }
 
         function updateLastSaveInfo() {
             const lastSave = localStorage.getItem('dolibarr-last-save');
@@ -1130,6 +1267,7 @@
             updateStats();
             updateNavBadges();
             updateLastSaveInfo();
+            updateTodayFilename(); // Mettre à jour le bouton de téléchargement
             populateFilters();
             populateFiltersForTab(currentTab);
             clearForm();
@@ -1145,6 +1283,7 @@
                 updateStats();
                 updateNavBadges();
                 updateLastSaveInfo();
+                updateTodayFilename(); // Mettre à jour le bouton de téléchargement
                 populateFilters();
                 populateFiltersForTab(currentTab);
                 
@@ -1357,6 +1496,7 @@
                     saveData();
                     updateStats();
                     updateNavBadges();
+                    updateTodayFilename(); // Mettre à jour le bouton de téléchargement
                     populateFilters();
                     populateFiltersForTab(currentTab);
                     switchTab(currentTab);
@@ -1395,6 +1535,7 @@
                 updateStats();
                 updateNavBadges();
                 updateLastSaveInfo();
+                updateTodayFilename(); // Mettre à jour le bouton de téléchargement
                 populateFilters();
                 populateFiltersForTab(currentTab);
                 switchTab(currentTab);

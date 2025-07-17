@@ -319,7 +319,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     {
       id: 23,
-      name: "Liaisons API je-change-de-metier.fr",
+      name: "Liaisons API je-change-de-metier.com",
       startDate: new Date(2025, 6, 14),
       endDate: new Date(2025, 7, 14),
       duration: "1 mois environ",
@@ -327,9 +327,9 @@ document.addEventListener("DOMContentLoaded", function () {
       section: "Developpement & amélioration",
       cssClass: "dev-cybertechnique",
       completed: false,
-      progress: 0, // Pourcentage d'avancement
+      progress: 20, // Pourcentage d'avancement
       description:
-        "Développement des connecteurs API pour l'intégration des leads issus de je-change-de-metier.fr - contact a prendre pour les spécifications techniques.",
+        "Développement des connecteurs API pour l'intégration des leads issus de je-change-de-metier.com - contact a prendre pour les spécifications techniques.",
     },
 
     {

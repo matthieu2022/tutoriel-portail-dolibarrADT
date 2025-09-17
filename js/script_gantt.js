@@ -291,28 +291,28 @@ document.addEventListener("DOMContentLoaded", function () {
       id: 21,
       name: "Formulaires Web et liaisons webhook",
       startDate: new Date(2025, 2, 24),
-      endDate: new Date(2025, 4, 14),
+      endDate: new Date(2025, 8, 14),
       duration: "1 mois environ",
       resources: "Équipe technique - André",
       section: "Developpement & améliorations",
       cssClass: "dev-cybertechnique",
       completed: true,
-      progress: 100,
+      progress: 95,
       description:
-        "Développement de formulaires web interactifs ADT et mise en place des webhooks pour l'intégration en temps réel avec Dolibarr (https://gestion.academie-tourisme.fr/).",
+        "Développement de formulaires web interactifs ADT et mise en place des webhooks pour l'intégration en temps réel avec Dolibarr (https://gestion.academie-tourisme.fr/). Intégration de flux d'automatisation avec N8N vers Brevo",
     },
 
     {
       id: 22,
       name: "Liaisons API GESTMAX",
       startDate: new Date(2025, 3, 14),
-      endDate: new Date(2025, 6, 14),
+      endDate: new Date(2025, 9, 14),
       duration: "3 mois environ",
       resources: "Équipe technique - André",
       section: "Developpement & amélioration",
       cssClass: "dev-cybertechnique",
       completed: false,
-      progress: 80, // Pourcentage d'avancement
+      progress: 70, // Pourcentage d'avancement
       description:
         "Développement des connecteurs API pour l'intégration avec GESTMAX - etat d'avancement 80% - rapatriement des pieces jointes => dev",
     },
@@ -321,7 +321,7 @@ document.addEventListener("DOMContentLoaded", function () {
       id: 23,
       name: "Liaisons API je-change-de-metier.com",
       startDate: new Date(2025, 6, 14),
-      endDate: new Date(2025, 7, 14),
+      endDate: new Date(2025, 9, 14),
       duration: "1 mois environ",
       resources: "Équipe technique - André",
       section: "Developpement & amélioration",
@@ -336,13 +336,13 @@ document.addEventListener("DOMContentLoaded", function () {
       id: 24,
       name: "Developpement interne dolibarr : modules personnalisés",
       startDate: new Date(2024, 9, 5),
-      endDate: new Date(2025, 7, 26),
+      endDate: new Date(2025, 9, 26),
       duration: "1 mois environ",
       resources: "Équipe technique - André",
       section: "Developpement & amélioration",
       cssClass: "dev-cybertechnique",
-      completed: false,
-      progress: 65, // Pourcentage d'avancement
+      completed: true,
+      progress: 95, // Pourcentage d'avancement
       description:
         "Travaux de personnalisation et d'optimisation du cœur de Dolibarr pour répondre aux besoins spécifiques de l'organisation. Développement de modules sur mesure.",
     },

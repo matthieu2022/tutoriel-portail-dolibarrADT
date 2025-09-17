@@ -11,8 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
         "Mélina, Lauryn, laetitia, maeva sur https://crm-neo-sphere.fr/",
       section: "Historique Dolibarr",
       cssClass: "dolibarr-crm",
-      completed: false, // Ajout du statut de completion
-      progress: 85, // Pourcentage d'avancement
+      completed: true, // Ajout du statut de completion
+      progress: 100, // Pourcentage d'avancement
       description:
         "Mise en place d'un CRM pour la gestion complète des prospects et clients. Intégration de modules de suivi commercial, d'automatisation des tâches et des communications avec les clients.",
     },
@@ -25,8 +25,8 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Mélina, Lauryn, laetitia, maeva",
       section: "Historique Dolibarr",
       cssClass: "dolibarr-prospect",
-      completed: false,
-      progress: 75,
+      completed: true,
+      progress: 100,
       description:
         "Système de gestion des prospects et des opportunités commerciales. Permet de suivre le cycle de vente complet, de la prospection initiale à la conversion client.",
     },
@@ -53,8 +53,8 @@ document.addEventListener("DOMContentLoaded", function () {
       resources: "Melina, sabine, charlotte",
       section: "Historique Dolibarr",
       cssClass: "dolibarr-campus",
-      completed: false,
-      progress: 60,
+      completed: true,
+      progress: 100,
       description:
         "Adaptation du système Dolibarr pour la gestion des campus et centres de formation, incluant le suivi des étudiants, des cours et la gestion des ressources pédagogiques.",
     },
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
       completed: false,
       progress: 15,
       description:
-        "Version fusionnée intégrant tous les modules Dolibarr déployés pour ADT. Centralisation et harmonisation des différents systèmes pour une gestion globale.",
+        "Version fusionnée intégrant tous les modules Dolibarr déployés pour ADT. Centralisation et harmonisation des différents systèmes pour une gestion globale.La date de fin de vie de cette instance est prévue pour fin 2025 avec le déploiement de la V1.",
     },
     {
       id: 6,
@@ -131,31 +131,31 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     {
       id: 10,
-      name: "Phase pré-test",
+      name: "Phase de pré-test",
       startDate: new Date(2025, 3, 5), // 5 mai 2025 – 15 juin 2025
-      endDate: new Date(2025, 8, 15),
+      endDate: new Date(2025, 8, 30),
       duration: "5 mois environ",
       resources: "Hélène, Olivier, Equipe Technique",
       section: "Planning de déploiement",
       cssClass: "planning-pretest",
       completed: false,
-      progress: 40,
+      progress: 90,
       description:
         "Vérification préliminaire des fonctionnalités par une équipe restreinte. Identification des problèmes avant les tests élargis et resolution des problèmes critiques.",
     },
     {
       id: 11,
-      name: "Débugs et ajustements",
-      startDate: new Date(2025, 4, 15), // 15 juin 2025 – 14 juillet 2025
-      endDate: new Date(2025, 8, 15),
+      name: "Débugs et ajustements avec des référents ADT",
+      startDate: new Date(2025, 8, 20),
+      endDate: new Date(2025, 9, 10),
       duration: "3 mois environ",
-      resources: "Aurélien, Fanny, Caroline, Mélina",
+      resources: "Aurélien, Fanny, Caroline, Mélina, Sophie",
       section: "Planning de déploiement",
       cssClass: "planning-debug",
       completed: false,
-      progress: 40,
+      progress: 30,
       description:
-        "Première phase de correction des bugs et d'ajustements suite aux retours des pré-tests. Optimisation des performances et de l'Phase de test avec 4 référents d'activité du pôle commercial + Débugs et ajustements pour la V1.",
+        "Première phase de correction des bugs et d'ajustements suite aux retours des pré-tests. Optimisation des performances et de l'Phase de test avec 5 référents d'activité du pôle commercial + Débugs et ajustements pour la V1.",
     },
     {
       id: 12,
@@ -188,22 +188,22 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 14,
       name: "Formation des équipes Commerciales et Administratif",
-      startDate: new Date(2025, 8, 10),
-      endDate: new Date(2025, 8, 31),
-      duration: "environ 1 mois",
-      resources: "(8 BtoB + 2 GC + 3 BtoC + 2 admin",
+      startDate: new Date(2025, 9, 5),
+      endDate: new Date(2025, 9, 10),
+      duration: "environ 10 jours",
+      resources: "8 BtoB + 2 GC + 3 BtoC + 2 admin",
       section: "Planning de déploiement",
       cssClass: "planning-debug-v1",
       completed: false,
-      progress: 0,
+      progress: 10,
       description:
         "Formation des équipes commerciales et administratif (15 personnes) - 1 journée par utilisateur, soit 3 groupes de 5 personnes – mise en place de référents dolibarr qui assureront aide et suivi. Un portail web dédiée sera à disposition.",
     },
     {
       id: 15,
       name: "Deploiement de la V1",
-      startDate: new Date(2025, 10, 1),
-      endDate: new Date(2025, 10, 1),
+      startDate: new Date(2025, 11, 20),
+      endDate: new Date(2025, 11, 20),
       duration: "1 journée",
       resources: "ADT",
       section: "Planning de déploiement",
@@ -230,7 +230,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 17,
       name: "Formation des équipes Campus et Pédagogie",
-      startDate: new Date(2025, 10, 5), 
+      startDate: new Date(2025, 10, 5),
       endDate: new Date(2025, 11, 15),
       duration: "environ 2 mois",
       resources: "Équipe technique",

@@ -12,8 +12,6 @@
             box-sizing: border-box;
         }
 
-        .addcontact.bubble {display:none}
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
@@ -343,7 +341,7 @@
             display: flex;
             align-items: center;
             gap: 5px;
-            color: #edf3f3;
+            color: #95a5a6;
             font-size: 0.9rem;
         }
 
@@ -591,38 +589,84 @@
         <nav class="navbar">
             <div class="logo">
                 <a href="./index.html">
-                    <div class="logo-icon">Tuto</div>
-                    <h1>ADT Tutoriels</h1>
+                    <div class="logo-icon">D</div>
+                    <h1>ADT Dolibarr</h1>
                 </a>
             </div>
 
             <div class="nav-container">
-                <!-- Section cyber -->
+                <!-- Section Administration -->
                 <div class="admin-section">
-                    <span class="admin-label">CYBERTECHNIQUE</span>
+                    <span class="admin-label">Porjets en cours CyberTechnique</span>
                     <div class="admin-nav">
 
                         <a href="pages/dolibarr.html">
-                            <i class="fas fa-chart-gantt"></i> Suivi DOLIBARR
+                            <i class="fas fa-chart-gantt"></i> Suivi Dolibarr
                         </a>
 
-                        <a href="pages/keyyo.html">
-                            <i class="fas fa-chart-gantt"></i> Tutoriel KEYYO
+                         <a href="pages/gantt.html">
+                            <i class="fas fa-chart-gantt"></i> Gantt & Historique
                         </a>
+                        <a href="pages/listing-modification.html">
+                            <i class="fas fa-list-check"></i> Suivi Modifications
+                        </a>
+                    </div>
+                                    <!-- Section Modules Métier -->
+                <div class="modules-section">
+                    <!-- Groupe 1: Prospection & Clients -->
+                    <div class="module-group">
+                        <a href="pages/pre-opportunite.html">
+                            <i class="fas fa-bullhorn"></i> Pré-Opportunité
+                        </a>
+                        <a href="pages/tiers.html">
+                            <i class="fas fa-building"></i> Tiers & Contacts
+                        </a>
+                    </div>
 
-                        <a href="pages/configuration.html">
-                            <i class="fas fa-cogs"></i> Plateformes LMS & CAMPUS
+                    <div class="nav-separator"></div>
+
+                    <!-- Groupe 2: Projets & Commerce -->
+                    <div class="module-group">
+                        <a href="pages/projets.html">
+                            <i class="fas fa-project-diagram"></i> Projets
                         </a>
-                        <a href="pages/utilisateurs.html">
-                            <i class="fas fa-users-cog"></i> Utilisateurs (en cours de dev)
+                        <a href="pages/commerce.html">
+                            <i class="fas fa-suitcase"></i> Commerce
                         </a>
-                          <a href="pages/utilisateurs.html">
-                            <i class="fas fa-users-cog"></i> Office 365 & AzureAD (en cours de dev)
+                        <a href="pages/facturation.html">
+                            <i class="fas fa-file-invoice-dollar"></i> Facturation
+                        </a>
+                    </div>
+
+                    <div class="nav-separator"></div>
+
+                    <!-- Groupe 3: Ressources & Outils -->
+                    <div class="module-group">
+                        <a href="pages/produits-services.html">
+                            <i class="fas fa-cube"></i> Services
+                        </a>
+                        <a href="pages/banques.html">
+                            <i class="fas fa-university"></i> Banques
+                        </a>
+                        <a href="pages/grh.html">
+                            <i class="fas fa-user-tie"></i> GRH
+                        </a>
+                    </div>
+
+                    <div class="nav-separator"></div>
+
+                    <!-- Groupe 4: Outils quotidiens -->
+                    <div class="module-group">
+                        <a href="pages/agenda.html">
+                            <i class="fas fa-calendar-alt"></i> Agenda
+                        </a>
+                        <a href="pages/documents.html">
+                            <i class="fas fa-folder-open"></i> Documents
                         </a>
                     </div>
                 </div>
 
-
+                </div>
             </div>
 
             <div class="search-box">
@@ -638,8 +682,8 @@
 
     <section class="hero" id="accueil">
         <div class="hero-content">
-            <h2>Maîtrisez nos process ! Avec des tutoriels dédiés pour chaque usage</h2>
-            <p>Des guides pas à pas, des astuces et des conseils pour tirer le meilleur parti des outils que nous utilisons. Que vous soyez débutant ou utilisateur avancé, nous avons ce qu'il vous faut.</p>
+            <h2>Maîtrisez Dolibarr avec les tutoriels dédiés à chaque module</h2>
+            <p>Des guides pas à pas, des astuces et des conseils pour tirer le meilleur parti de votre ERP/CRM Dolibarr. Que vous soyez débutant ou utilisateur avancé, nous avons ce qu'il vous faut.</p>
             <a href="#tutoriels" class="btn">Découvrir les tutoriels</a>
         </div>
     </section>
@@ -647,65 +691,63 @@
     <main>
         <section id="tutoriels">
             <div class="section-title">
-                <h3>Tutoriels CYBER-TECHNIQUE</h3>
-                <p>Apprenez à utiliser les outils digitaux de l'ADT de manière efficace grâce aux conseils extraordinaires de la Cyber</p>
+                <h3>Nos Tutoriels CYBER-TECHNIQUE</h3>
+                <p>Apprenez à utiliser Dolibarr efficacement grâce aux conseils extraordinaires de la Cyber</p>
             </div>
 
             <div class="tutorial-cards">
                 <article class="card">
                     <div class="card-image">
-                        <a href="https://tourism-school.academy/mediatheque_campus/tutoriel-keyyophone/co/guide.html"><img src="../img/keyyo/keyyo.webp" alt="Premiers pas avec KEYYO"></a>
+                        <a href="pages/premier-pas.html"><img src="../img/premier-pas.png" alt="Premiers pas avec Dolibarr"></a>
                     </div>
                     <div class="card-content">
                         <h4>Premiers pas avec Dolibarr et révision</h4>
                         <p>Un guide complet pour configurer et commencer à utiliser Dolibarr rapidement.</p>
                         <div class="card-meta">
-                            <span><i class="fas fa-clock"></i> 1 heure</span>
-                            <span class="tag">FACILE</span>
+                            <span><i class="fas fa-clock"></i> 15 min</span>
+                            <span class="tag">Débutant</span>
                         </div>
                     </div>
                 </article>
 
                 <article class="card">
                     <div class="card-image">
-                        <a href="pages/dolibarr.html"><img src="../img/dolibarr.webp" alt="Dolibarr et ses modules"></a>
+                        <a href="pages/pre-opportunite.html"><img src="../img/pre-opp.png" alt="Module de Pré-Opportunité"></a>
                     </div>
                     <div class="card-content">
-                        <h4>Modules</h4>
-                        <p>Un guide complet pour maitriser les differents modules rapidement.</p>
+                        <h4>Module Pré-opportunité</h4>
+                        <p>Un guide complet pour maitriser le module rapidement.</p>
                         <div class="card-meta">
-                            <span><i class="fas fa-clock"></i> 5 jours</span>
-                            <span class="tag">MOYEN-DIFFICILE</span>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <div class="card-image">
-                        <a href="pages/lms.html"><img src="../img/moodle.webp" alt="PLateforme LMS et les CAMPUS"></a>
-                    </div>
-                    <div class="card-content">
-                        <h4>LMS ADT et sa gestion</h4>
-                        <p>retrouvez ici nos différents mémos et conseils.</p>
-                        <div class="card-meta">
-                            <span><i class="fas fa-clock"></i> 60 min</span>
+                            <span><i class="fas fa-clock"></i> 25 min</span>
                             <span class="tag">MOYEN</span>
-                            <span class="tag">IDEAL POUR LES COMMERCIAUX</span>
                         </div>
                     </div>
                 </article>
 
                 <article class="card">
                     <div class="card-image">
-                        <a href="pages/lmscampus.html"><img src="../img/campus.png" alt="Le mode Projet"></a>
+                        <a href="pages/tiers.html"><img src="../img/tiers.png" alt="Gestion des tiers et des contacts"></a>
                     </div>
                     <div class="card-content">
-                        <h4>Les différents campus</h4>
-                        <p>Et du côté des campus ?</p>
+                        <h4>Gestion des tiers et des contacts</h4>
+                        <p>Apprenez à gérer efficacement vos clients, prospects et fournisseurs dans Dolibarr.</p>
                         <div class="card-meta">
-                            <span><i class="fas fa-clock"></i> 60 min</span>
-                            <span class="tag">MOYEN</span>
-                            <span class="tag">IDEAL POUR LES COMMERCIAUX</span>
+                            <span><i class="fas fa-clock"></i> 20 min</span>
+                            <span class="tag">Intermédiaire</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-image">
+                        <a href="pages/projets.html"><img src="../img/projet.png" alt="Le mode Projet"></a>
+                    </div>
+                    <div class="card-content">
+                        <h4>Le mode Projet</h4>
+                        <p>Maîtrisez la gestion de projets et suivez leur avancement avec précision.</p>
+                        <div class="card-meta">
+                            <span><i class="fas fa-clock"></i> 25 min</span>
+                            <span class="tag">Intermédiaire</span>
                         </div>
                     </div>
                 </article>
@@ -809,7 +851,7 @@
         <div class="cta-content">
             <h3>Prêt à devenir un expert Dolibarr?</h3>
             <p>plateforme de demonstration Dolibarr - accès réservé à la cyber-technique</p>
-            <a href="https://dolibarrvierge19.e-learning-neo-sphere.fr/index.php" class="btn">S'inscrire maintenant ou se connecter</a>
+            <a href="https://dolibarrvierge19.e-learning-neo-sphere.fr/index.php" class="btn">S'inscrire maintenant</a>
         </div>
     </section>
 

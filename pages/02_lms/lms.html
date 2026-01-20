@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Les Campus ADT - ADT Tutoriels</title>
+    <title>Plateformes LMS - ADT Tutoriels</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -19,6 +19,7 @@
             background-color: #f8f9fa;
         }
 
+        /* Header et Navigation */
         header {
             background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -89,6 +90,10 @@
             padding: 15px 0;
         }
 
+        .nav-menu li {
+            position: relative;
+        }
+
         .nav-menu a {
             display: flex;
             align-items: center;
@@ -125,8 +130,9 @@
             font-size: 1.2rem;
         }
 
+        /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #16a085 0%, #27ae60 100%);
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
             color: white;
             padding: 60px 30px;
             text-align: center;
@@ -149,6 +155,7 @@
             opacity: 0.95;
         }
 
+        /* Layout avec aside */
         .main-wrapper {
             display: flex;
             max-width: 1800px;
@@ -158,6 +165,7 @@
             position: relative;
         }
 
+        /* Aside gauche */
         .sidebar {
             width: 300px;
             flex-shrink: 0;
@@ -259,6 +267,7 @@
             width: 20px;
         }
 
+        /* Contenu principal */
         main {
             flex: 1;
             padding: 60px 0;
@@ -289,7 +298,7 @@
         }
 
         .content-section h3 {
-            color: #16a085;
+            color: #f39c12;
             font-size: 1.8rem;
             margin-bottom: 20px;
             display: flex;
@@ -320,94 +329,58 @@
             line-height: 1.6;
         }
 
-        .campus-card {
-            background: linear-gradient(135deg, #f8f9fa 0%, #ecf0f1 100%);
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 25px;
-            border-left: 5px solid #16a085;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-
-        .campus-card h4 {
-            color: #16a085;
-            margin-top: 0;
-            font-size: 1.5rem;
-        }
-
-        .campus-card .campus-meta {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .campus-meta-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .campus-meta-item i {
-            color: #16a085;
-            font-size: 1.2rem;
-        }
-
-        .campus-meta-item strong {
-            color: #2c3e50;
-        }
-
         .info-box {
-            background: #e8f8f5;
-            border-left: 4px solid #16a085;
+            background: #e8f4f8;
+            border-left: 4px solid #3498db;
             padding: 20px;
             margin: 25px 0;
             border-radius: 0 8px 8px 0;
         }
 
         .info-box h4 {
-            color: #16a085;
+            color: #3498db;
             margin-top: 0;
         }
 
-        .grid-3 {
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #f39c12;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .warning-box h4 {
+            color: #f39c12;
+            margin-top: 0;
+        }
+
+        .grid-2 {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
             margin: 25px 0;
         }
 
-        .stat-card {
-            background: white;
+        .card-item {
+            background: #f8f9fa;
             padding: 25px;
             border-radius: 12px;
-            text-align: center;
-            border: 2px solid #ecf0f1;
+            border: 1px solid #ecf0f1;
             transition: all 0.3s ease;
         }
 
-        .stat-card:hover {
-            border-color: #16a085;
-            box-shadow: 0 5px 20px rgba(22, 160, 133, 0.2);
+        .card-item:hover {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transform: translateY(-3px);
         }
 
-        .stat-card i {
-            font-size: 2.5rem;
-            color: #16a085;
-            margin-bottom: 15px;
+        .card-item h4 {
+            color: #f39c12;
+            margin-top: 0;
         }
 
-        .stat-card h4 {
-            font-size: 2rem;
-            color: #2c3e50;
-            margin: 10px 0;
-        }
-
-        .stat-card p {
-            color: #7f8c8d;
-            font-size: 0.9rem;
-        }
-
+        /* Footer */
         footer {
             background: #2c3e50;
             color: white;
@@ -419,6 +392,7 @@
             color: #95a5a6;
         }
 
+        /* Responsive */
         @media (max-width: 1200px) {
             .main-wrapper {
                 padding: 0 20px;
@@ -430,6 +404,11 @@
         }
 
         @media (max-width: 1024px) {
+            .nav-menu a {
+                padding: 8px 12px;
+                font-size: 0.85rem;
+            }
+
             .main-wrapper {
                 flex-direction: column;
             }
@@ -446,11 +425,7 @@
                 padding: 30px 0;
             }
 
-            .grid-3 {
-                grid-template-columns: 1fr;
-            }
-
-            .campus-card .campus-meta {
+            .grid-2 {
                 grid-template-columns: 1fr;
             }
         }
@@ -523,9 +498,9 @@
                 <li><a href="../index.html"><i class="fas fa-home"></i> Accueil</a></li>
                 <li><a href="../pages/00_dolibarr/dolibarr.html"><i class="fas fa-database"></i> Dolibarr V1</a></li>
                 <li><a href="https://tourism-school.academy/mediatheque_campus/tutoriel-keyyophone/co/guide.html"><i class="fas fa-phone"></i> Téléphonie KEYYO</a></li>
-                <li><a href="lms.html"><i class="fas fa-graduation-cap"></i> LMS</a></li>
-                <li><a href="lmscampus.html" class="active"><i class="fas fa-school"></i> Campus</a></li>
-                <li><a href="icademie.html"><i class="fas fa-project-diagram"></i> Projets</a></li>
+                <li><a href="lms.html" class="active"><i class="fas fa-graduation-cap"></i> LMS & Campus</a></li>
+                <li><a href="../pages/00_dolibarr/commerce.html"><i class="fab fa-microsoft"></i> Office 365</a></li>
+                <li><a href="icademie.html"><i class="fas fa-project-diagram"></i> Projets en cours</a></li>
                 <li><a href="videos.html"><i class="fas fa-video"></i> Vidéos</a></li>
                 <li><a href="pdf.html"><i class="fas fa-download"></i> PDF</a></li>
             </ul>
@@ -534,23 +509,27 @@
 
     <section class="hero">
         <div class="hero-content">
-            <h1>Les Campus ADT</h1>
-            <p>Découvrez nos différents campus et leur gestion au quotidien</p>
+            <h1>Plateformes LMS ADT</h1>
+            <p>Maîtrisez la gestion et l'administration de nos plateformes d'apprentissage en ligne</p>
         </div>
     </section>
 
     <div class="main-wrapper">
+        <!-- Aside gauche -->
         <aside class="sidebar">
+            <!-- Navigation rapide -->
             <div class="sidebar-section">
                 <h3><i class="fas fa-list"></i> Sur cette page</h3>
                 <ul class="quick-links">
-                    <li><a href="#vue-ensemble"><i class="fas fa-chevron-right"></i> Vue d'ensemble</a></li>
-                    <li><a href="#campus-liste"><i class="fas fa-chevron-right"></i> Nos campus</a></li>
+                    <li><a href="#introduction"><i class="fas fa-chevron-right"></i> Introduction</a></li>
+                    <li><a href="#plateformes"><i class="fas fa-chevron-right"></i> Nos plateformes</a></li>
                     <li><a href="#gestion"><i class="fas fa-chevron-right"></i> Gestion quotidienne</a></li>
-                    <li><a href="#integration"><i class="fas fa-chevron-right"></i> Intégration Dolibarr</a></li>
+                    <li><a href="#commerciaux"><i class="fas fa-chevron-right"></i> Guide commerciaux</a></li>
+                    <li><a href="#ressources"><i class="fas fa-chevron-right"></i> Ressources</a></li>
                 </ul>
             </div>
 
+            <!-- Ticketing -->
             <div class="sidebar-section ticketing-sidebar">
                 <h3><i class="fas fa-ticket-alt"></i> Besoin d'aide ?</h3>
                 <p>Créez un ticket de support pour obtenir une assistance personnalisée de l'équipe Cyber-Technique.</p>
@@ -561,222 +540,200 @@
             </div>
         </aside>
 
+        <!-- Contenu principal -->
         <main>
             <div class="page-header">
-                <h2>Nos Campus de Formation</h2>
-                <p>Organisation et gestion de nos centres de formation sur le territoire</p>
+                <h2>Gestion des plateformes LMS</h2>
+                <p>Guide complet pour l'administration et l'utilisation de nos Learning Management Systems</p>
             </div>
 
-            <!-- Vue d'ensemble -->
-            <section class="content-section" id="vue-ensemble">
-                <h3><i class="fas fa-chart-pie"></i> Vue d'ensemble</h3>
-                <p>L'Académie du Tourisme dispose de plusieurs campus répartis sur le territoire français, chacun spécialisé dans des domaines spécifiques de la formation touristique et hôtelière.</p>
-
-                <div class="grid-3">
-                    <div class="stat-card">
-                        <i class="fas fa-building"></i>
-                        <h4>12</h4>
-                        <p>Campus actifs</p>
-                    </div>
-
-                    <div class="stat-card">
-                        <i class="fas fa-users"></i>
-                        <h4>8 500+</h4>
-                        <p>Apprenants</p>
-                    </div>
-
-                    <div class="stat-card">
-                        <i class="fas fa-chalkboard-teacher"></i>
-                        <h4>350+</h4>
-                        <p>Formateurs</p>
-                    </div>
-                </div>
+            <!-- Introduction -->
+            <section class="content-section" id="introduction">
+                <h3><i class="fas fa-graduation-cap"></i> Introduction aux LMS ADT</h3>
+                <p>L'Académie du Tourisme utilise plusieurs plateformes LMS (Learning Management System) basées sur Moodle pour gérer et diffuser ses formations en ligne. Ces plateformes sont essentielles pour :</p>
+                <ul>
+                    <li>Héberger et organiser les contenus pédagogiques</li>
+                    <li>Suivre la progression des apprenants</li>
+                    <li>Gérer les inscriptions et les sessions de formation</li>
+                    <li>Faciliter les interactions entre formateurs et apprenants</li>
+                    <li>Délivrer les attestations et certificats de formation</li>
+                </ul>
 
                 <div class="info-box">
-                    <h4><i class="fas fa-info-circle"></i> Intégration avec Dolibarr</h4>
-                    <p>Depuis fin 2024, tous nos campus sont intégrés dans le système Dolibarr unifié, permettant une gestion centralisée des inscriptions, du suivi pédagogique et de la facturation.</p>
+                    <h4><i class="fas fa-info-circle"></i> Important pour les commerciaux</h4>
+                    <p>Les plateformes LMS sont au cœur de notre offre de formation. Il est essentiel de comprendre leur fonctionnement pour présenter efficacement nos formations aux prospects et accompagner les clients dans leur parcours.</p>
                 </div>
             </section>
 
-            <!-- Liste des campus -->
-            <section class="content-section" id="campus-liste">
-                <h3><i class="fas fa-map-marked-alt"></i> Nos Campus</h3>
+            <!-- Nos plateformes -->
+            <section class="content-section" id="plateformes">
+                <h3><i class="fas fa-server"></i> Nos différentes plateformes LMS</h3>
+                <p>L'ADT gère plusieurs instances Moodle, chacune dédiée à des formations ou publics spécifiques :</p>
 
-                <div class="campus-card">
-                    <h4><i class="fas fa-map-marker-alt"></i> Campus Paris - Montparnasse</h4>
-                    <p>Notre campus principal, spécialisé dans les formations tourisme d'affaires et événementiel.</p>
-                    <div class="campus-meta">
-                        <div class="campus-meta-item">
-                            <i class="fas fa-users"></i>
-                            <div>
-                                <strong>Capacité :</strong> 1200 apprenants
-                            </div>
-                        </div>
-                        <div class="campus-meta-item">
-                            <i class="fas fa-door-open"></i>
-                            <div>
-                                <strong>Salles :</strong> 18 salles de cours
-                            </div>
-                        </div>
-                        <div class="campus-meta-item">
-                            <i class="fas fa-graduation-cap"></i>
-                            <div>
-                                <strong>Formations :</strong> BTS, Bachelors, Masters
-                            </div>
-                        </div>
-                        <div class="campus-meta-item">
-                            <i class="fas fa-link"></i>
-                            <div>
-                                <strong>LMS :</strong> learning.academie-tourisme.fr
-                            </div>
-                        </div>
+                <div class="grid-2">
+                    <div class="card-item">
+                        <h4><i class="fas fa-school"></i> LMS Principal ADT</h4>
+                        <p><strong>URL :</strong> learning.academie-tourisme.fr</p>
+                        <p><strong>Usage :</strong> Formations principales BtoB et BtoC</p>
+                        <p><strong>Nombre d'apprenants :</strong> ~5000 utilisateurs actifs</p>
                     </div>
-                </div>
 
-                <div class="campus-card">
-                    <h4><i class="fas fa-map-marker-alt"></i> Campus Nice - Promenade des Anglais</h4>
-                    <p>Spécialisé dans les formations hôtellerie de luxe et spa management.</p>
-                    <div class="campus-meta">
-                        <div class="campus-meta-item">
-                            <i class="fas fa-users"></i>
-                            <div>
-                                <strong>Capacité :</strong> 800 apprenants
-                            </div>
-                        </div>
-                        <div class="campus-meta-item">
-                            <i class="fas fa-door-open"></i>
-                            <div>
-                                <strong>Salles :</strong> 12 salles + 2 labs
-                            </div>
-                        </div>
-                        <div class="campus-meta-item">
-                            <i class="fas fa-graduation-cap"></i>
-                            <div>
-                                <strong>Formations :</strong> Hôtellerie, Spa
-                            </div>
-                        </div>
-                        <div class="campus-meta-item">
-                            <i class="fas fa-link"></i>
-                            <div>
-                                <strong>LMS :</strong> hospitality-school.academy
-                            </div>
-                        </div>
+                    <div class="card-item">
+                        <h4><i class="fas fa-hotel"></i> LMS Hospitality School</h4>
+                        <p><strong>URL :</strong> hospitality-school.academy</p>
+                        <p><strong>Usage :</strong> Formations secteur hôtellerie-restauration</p>
+                        <p><strong>Nombre d'apprenants :</strong> ~2000 utilisateurs actifs</p>
                     </div>
-                </div>
 
-                <div class="campus-card">
-                    <h4><i class="fas fa-map-marker-alt"></i> Campus Lyon - Part-Dieu</h4>
-                    <p>Focus sur les formations MICE (Meetings, Incentives, Conferences, Events).</p>
-                    <div class="campus-meta">
-                        <div class="campus-meta-item">
-                            <i class="fas fa-users"></i>
-                            <div>
-                                <strong>Capacité :</strong> 600 apprenants
-                            </div>
-                        </div>
-                        <div class="campus-meta-item">
-                            <i class="fas fa-door-open"></i>
-                            <div>
-                                <strong>Salles :</strong> 10 salles
-                            </div>
-                        </div>
-                        <div class="campus-meta-item">
-                            <i class="fas fa-graduation-cap"></i>
-                            <div>
-                                <strong>Formations :</strong> Événementiel, MICE
-                            </div>
-                        </div>
-                        <div class="campus-meta-item">
-                            <i class="fas fa-link"></i>
-                            <div>
-                                <strong>LMS :</strong> tourism-school.academy
-                            </div>
-                        </div>
+                    <div class="card-item">
+                        <h4><i class="fas fa-plane"></i> LMS Tourism School</h4>
+                        <p><strong>URL :</strong> tourism-school.academy</p>
+                        <p><strong>Usage :</strong> Formations secteur tourisme et voyages</p>
+                        <p><strong>Nombre d'apprenants :</strong> ~3000 utilisateurs actifs</p>
                     </div>
-                </div>
 
-                <div class="campus-card">
-                    <h4><i class="fas fa-map-marker-alt"></i> Campus Bordeaux - Chartrons</h4>
-                    <p>Spécialisation œnotourisme et gastronomie.</p>
-                    <div class="campus-meta">
-                        <div class="campus-meta-item">
-                            <i class="fas fa-users"></i>
-                            <div>
-                                <strong>Capacité :</strong> 400 apprenants
-                            </div>
-                        </div>
-                        <div class="campus-meta-item">
-                            <i class="fas fa-door-open"></i>
-                            <div>
-                                <strong>Salles :</strong> 8 salles + cave
-                            </div>
-                        </div>
-                        <div class="campus-meta-item">
-                            <i class="fas fa-graduation-cap"></i>
-                            <div>
-                                <strong>Formations :</strong> Œnotourisme, Gastronomie
-                            </div>
-                        </div>
-                        <div class="campus-meta-item">
-                            <i class="fas fa-link"></i>
-                            <div>
-                                <strong>LMS :</strong> hospitality-school.academy
-                            </div>
-                        </div>
+                    <div class="card-item">
+                        <h4><i class="fas fa-briefcase"></i> LMS Entreprises</h4>
+                        <p><strong>URL :</strong> corporate.academie-tourisme.fr</p>
+                        <p><strong>Usage :</strong> Formations sur-mesure pour entreprises</p>
+                        <p><strong>Nombre d'apprenants :</strong> Variable selon contrats</p>
                     </div>
                 </div>
             </section>
 
             <!-- Gestion quotidienne -->
             <section class="content-section" id="gestion">
-                <h3><i class="fas fa-tasks"></i> Gestion Quotidienne des Campus</h3>
+                <h3><i class="fas fa-tasks"></i> Gestion quotidienne des plateformes</h3>
                 
-                <h4>Rôles et responsabilités</h4>
+                <h4>Accès administrateur</h4>
+                <p>Pour accéder aux fonctions d'administration d'une plateforme LMS :</p>
                 <ul>
-                    <li><strong>Directeur de campus :</strong> Responsable global du campus, gestion des équipes et des budgets</li>
-                    <li><strong>Responsable pédagogique :</strong> Coordination des formations et des formateurs</li>
-                    <li><strong>Responsable administratif :</strong> Gestion des inscriptions, examens et certifications</li>
-                    <li><strong>Référent technique :</strong> Support informatique et gestion des outils digitaux</li>
+                    <li>Se connecter avec un compte administrateur</li>
+                    <li>Cliquer sur "Administration du site" dans le menu</li>
+                    <li>Accéder aux différentes sections de gestion</li>
                 </ul>
 
-                <h4>Tâches quotidiennes</h4>
-                <ul>
-                    <li>Accueil et orientation des nouveaux apprenants</li>
-                    <li>Coordination des planning de formation</li>
-                    <li>Suivi des présences et des progressions</li>
-                    <li>Gestion des problématiques techniques (LMS, équipements)</li>
-                    <li>Liaison avec les entreprises partenaires</li>
-                    <li>Organisation des examens et jurys</li>
-                </ul>
-            </section>
+                <h4>Tâches courantes</h4>
+                <div class="grid-2">
+                    <div class="card-item">
+                        <h4>Création de cours</h4>
+                        <ul>
+                            <li>Définir la structure du cours</li>
+                            <li>Importer les contenus pédagogiques</li>
+                            <li>Configurer les paramètres</li>
+                            <li>Tester le parcours apprenant</li>
+                        </ul>
+                    </div>
 
-            <!-- Intégration Dolibarr -->
-            <section class="content-section" id="integration">
-                <h3><i class="fas fa-sync-alt"></i> Intégration avec Dolibarr</h3>
-                
-                <h4>Fonctionnalités disponibles</h4>
-                <p>L'intégration des campus dans Dolibarr permet de :</p>
-                <ul>
-                    <li>Centraliser toutes les inscriptions dans un seul système</li>
-                    <li>Gérer automatiquement la facturation des formations</li>
-                    <li>Suivre les paiements et relances</li>
-                    <li>Générer des rapports d'activité par campus</li>
-                    <li>Synchroniser les données avec les plateformes LMS</li>
-                </ul>
+                    <div class="card-item">
+                        <h4>Gestion des utilisateurs</h4>
+                        <ul>
+                            <li>Créer des comptes apprenants</li>
+                            <li>Gérer les inscriptions aux cours</li>
+                            <li>Attribuer les rôles (formateur, tuteur...)</li>
+                            <li>Suivre l'activité des utilisateurs</li>
+                        </ul>
+                    </div>
 
-                <div class="info-box">
-                    <h4><i class="fas fa-lightbulb"></i> Bon à savoir</h4>
-                    <p>La migration vers Dolibarr Campus a été finalisée en décembre 2024. Consultez la <a href="../pages/00_dolibarr/dolibarr.html">page Dolibarr</a> pour plus de détails sur le planning de déploiement.</p>
+                    <div class="card-item">
+                        <h4>Suivi pédagogique</h4>
+                        <ul>
+                            <li>Consulter les rapports de progression</li>
+                            <li>Analyser les résultats aux évaluations</li>
+                            <li>Identifier les apprenants en difficulté</li>
+                            <li>Générer les attestations de formation</li>
+                        </ul>
+                    </div>
+
+                    <div class="card-item">
+                        <h4>Maintenance technique</h4>
+                        <ul>
+                            <li>Effectuer les mises à jour Moodle</li>
+                            <li>Gérer les plugins et extensions</li>
+                            <li>Optimiser les performances</li>
+                            <li>Sauvegarder régulièrement les données</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <h4>Accès aux données campus dans Dolibarr</h4>
-                <p>Pour consulter les données d'un campus spécifique :</p>
+                <div class="warning-box">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Bonnes pratiques</h4>
+                    <p>Toujours tester les modifications sur un cours test avant de les appliquer aux cours en production. Effectuer des sauvegardes avant toute mise à jour importante.</p>
+                </div>
+            </section>
+
+            <!-- Guide pour les commerciaux -->
+            <section class="content-section" id="commerciaux">
+                <h3><i class="fas fa-handshake"></i> Guide pour les commerciaux</h3>
+                
+                <h4>Présenter nos plateformes LMS aux prospects</h4>
+                <p>Voici les points clés à mettre en avant lors de la présentation de nos LMS :</p>
+
+                <ul>
+                    <li><strong>Accessibilité 24/7 :</strong> Les apprenants peuvent se connecter à tout moment, de n'importe où</li>
+                    <li><strong>Interface intuitive :</strong> Navigation simple et ergonomique, adaptée à tous les profils</li>
+                    <li><strong>Suivi personnalisé :</strong> Tableaux de bord complets pour suivre la progression</li>
+                    <li><strong>Contenus riches :</strong> Vidéos, documents, quiz, exercices interactifs</li>
+                    <li><strong>Support technique :</strong> Équipe cyber-technique disponible pour assistance</li>
+                </ul>
+
+                <h4>Démonstration type</h4>
+                <p>Pour une démonstration efficace :</p>
                 <ol>
-                    <li>Se connecter à Dolibarr avec un compte ayant les droits appropriés</li>
-                    <li>Aller dans le module "Campus" ou "Tiers"</li>
-                    <li>Filtrer par nom de campus ou ville</li>
-                    <li>Accéder aux projets, factures et contacts associés</li>
+                    <li>Montrer la page d'accueil et la navigation</li>
+                    <li>Parcourir un exemple de cours complet</li>
+                    <li>Démontrer les outils collaboratifs (forums, messagerie)</li>
+                    <li>Présenter le tableau de bord apprenant</li>
+                    <li>Expliquer le processus de certification</li>
                 </ol>
+
+                <div class="info-box">
+                    <h4><i class="fas fa-lightbulb"></i> Astuce commerciale</h4>
+                    <p>Proposez toujours un accès démo temporaire au prospect. Rien ne vaut l'expérience directe pour convaincre !</p>
+                </div>
+            </section>
+
+            <!-- Ressources -->
+            <section class="content-section" id="ressources">
+                <h3><i class="fas fa-folder-open"></i> Ressources et documentation</h3>
+                
+                <div class="grid-2">
+                    <div class="card-item">
+                        <h4><i class="fas fa-book"></i> Documentation technique</h4>
+                        <ul>
+                            <li><a href="#">Guide administrateur Moodle</a></li>
+                            <li><a href="#">Tutoriel création de cours</a></li>
+                            <li><a href="#">FAQ technique</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="card-item">
+                        <h4><i class="fas fa-video"></i> Vidéos tutorielles</h4>
+                        <ul>
+                            <li><a href="videos.html">Créer un cours sur Moodle</a></li>
+                            <li><a href="videos.html">Gérer les inscriptions</a></li>
+                            <li><a href="videos.html">Analyser les rapports</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="card-item">
+                        <h4><i class="fas fa-file-pdf"></i> Guides PDF</h4>
+                        <ul>
+                            <li><a href="pdf.html">Guide rapide LMS</a></li>
+                            <li><a href="pdf.html">Argumentaire commercial</a></li>
+                            <li><a href="pdf.html">Checklist lancement formation</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="card-item">
+                        <h4><i class="fas fa-link"></i> Liens utiles</h4>
+                        <ul>
+                            <li><a href="https://docs.moodle.org" target="_blank">Documentation officielle Moodle</a></li>
+                            <li><a href="lmscampus.html">Gestion des campus</a></li>
+                            <li><a href="../index.html">Retour à l'accueil</a></li>
+                        </ul>
+                    </div>
+                </div>
             </section>
         </main>
     </div>
@@ -791,10 +748,12 @@
     </footer>
 
     <script>
+        // Menu mobile
         document.getElementById('mobileToggle').addEventListener('click', function() {
             document.getElementById('mainNav').classList.toggle('active');
         });
 
+        // Smooth scroll pour les liens d'ancrage
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();

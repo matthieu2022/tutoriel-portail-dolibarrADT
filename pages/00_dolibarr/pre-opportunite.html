@@ -3,415 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tiers TITLE_PLACEHOLDER Contacts - ADT Dolibarr</title>
+    <title>Pré-Opportunité - Dolibarr ADT</title>
+    <link rel="stylesheet" href="../../css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
-        }
-
-        header {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .top-bar {
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 10px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .logo a {
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: white;
-        }
-
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background-color: #4a73ab;
-            border-radius: 8px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .logo h1 {
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-
-        .search-box {
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 25px;
-            padding: 8px 16px;
-            min-width: 300px;
-        }
-
-        .search-box i {
-            color: #bdc3c7;
-            margin-right: 10px;
-        }
-
-        .search-box input {
-            background: none;
-            border: none;
-            outline: none;
-            color: white;
-            flex: 1;
-            font-size: 0.95rem;
-        }
-
-        .search-box input::placeholder { color: #bdc3c7; }
-
-        .mobile-toggle {
-            display: none;
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
-
-        .main-nav {
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 0 30px;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 5px;
-            padding: 15px 0;
-        }
-
-        .nav-menu a {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 10px 18px;
-            color: #ecf0f1;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-        }
-
-        .nav-menu a:hover,
-        .nav-menu a.active {
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .hero {
-            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-            color: white;
-            padding: 60px 30px;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-            font-weight: 300;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            opacity: 0.95;
-        }
-
-        .main-wrapper {
-            display: flex;
-            max-width: 1800px;
-            margin: 0 auto;
-            gap: 30px;
-            padding: 0 30px;
-        }
-
-        .sidebar {
-            width: 300px;
-            flex-shrink: 0;
-            position: sticky;
-            top: 100px;
-            height: fit-content;
-            max-height: calc(100vh - 120px);
-            overflow-y: auto;
-        }
-
-        .sidebar-section {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        }
-
-        .sidebar-section h3 {
-            color: #2c3e50;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #ecf0f1;
-        }
-
-        .sidebar-section h3 i { color: #e74c3c; }
-
-        .quick-links { list-style: none; }
-
-        .quick-links li { margin-bottom: 12px; }
-
-        .quick-links a {
-            color: #555;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 12px;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-        }
-
-        .quick-links a:hover {
-            background: #f8f9fa;
-            color: #e74c3c;
-            transform: translateX(5px);
-        }
-
-        .quick-links i {
-            color: #e74c3c;
-            width: 20px;
-        }
-
-        .ticketing-sidebar {
-            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(41, 128, 185, 0.05));
-            border: 2px solid #e74c3c;
-        }
-
-        .ticketing-sidebar h3 {
-            color: #e74c3c;
-            border-bottom-color: #e74c3c;
-        }
-
-        .ticketing-sidebar h3 i { color: #e74c3c; }
-
-        .ticketing-sidebar p {
-            color: #555;
-            margin-bottom: 20px;
-            line-height: 1.6;
-            font-size: 0.9rem;
-        }
-
-        .ticket-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            color: white;
-            padding: 12px 20px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            font-size: 0.95rem;
-            width: 100%;
-            justify-content: center;
-        }
-
-        .ticket-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 25px rgba(52, 152, 219, 0.5);
-        }
-
-        main {
-            flex: 1;
-            padding: 60px 0;
-            min-width: 0;
-        }
-
-        .breadcrumbs {
-            color: #7f8c8d;
-            margin-bottom: 30px;
-            font-size: 0.9rem;
-        }
-
-        .breadcrumbs a {
-            color: #e74c3c;
-            text-decoration: none;
-        }
-
-        .page-header h2 {
-            font-size: 2.5rem;
-            color: #2c3e50;
-            margin-bottom: 50px;
-        }
-
-        .content-section {
-            background: white;
-            border-radius: 15px;
-            padding: 40px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        }
-
-        .content-section h3 {
-            color: #e74c3c;
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .content-section p {
-            color: #555;
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
-
-        footer {
-            background: #2c3e50;
-            color: white;
-            padding: 30px;
-        }
-
-        .copyright {
-            text-align: center;
-            color: #95a5a6;
-        }
-
-        @media (max-width: 1024px) {
-            .main-wrapper { flex-direction: column; }
-            .sidebar {
-                width: 100%;
-                position: relative;
-                top: 0;
-                max-height: none;
-                margin-bottom: 30px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .mobile-toggle { display: block; }
-            .main-nav { display: none; }
-            .main-nav.active { display: block; }
-            .nav-menu { flex-direction: column; padding: 20px; }
-            .hero h1 { font-size: 2rem; }
-        }
-    </style>
 </head>
 <body>
     <header>
-        <div class="top-bar">
+        <nav class="navbar">
             <div class="logo">
-                <a href="../index.html">
-                    <div class="logo-icon">D</div>
-                    <h1>ADT Dolibarr</h1>
+                <a href="../../index.html">
+                    <div class="logo-icon">A</div>
+                    <h1>ADT Tutoriels</h1>
                 </a>
+            </div>
+            <div class="nav-menu">
+                <a href="../../index.html"><i class="fas fa-home"></i> Accueil</a>
+                <a href="index.html"><i class="fas fa-database"></i> Dolibarr</a>
+                <a href="pre-opportunite.html"><i class="fas fa-filter"></i> Pré-Opp</a>
+                <a href="tiers.html"><i class="fas fa-building"></i> Tiers</a>
+                <a href="projets.html"><i class="fas fa-project-diagram"></i> Projets</a>
             </div>
             <div class="search-box">
                 <i class="fas fa-search"></i>
                 <input type="text" placeholder="Rechercher...">
             </div>
-            <button class="mobile-toggle" id="mobileToggle">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-        <nav class="main-nav" id="mainNav">
-            <ul class="nav-menu">
-                <li><a href="../index.html"><i class="fas fa-home"></i> Accueil</a></li>
-                <li><a href="pre-opportunite.html"><i class="fas fa-bullhorn"></i> Pré-Opportunité</a></li>
-                <li><a href="pre-opportunite.html"><i class="fas fa-building"></i> Tiers</a></li>
-                <li><a href="projets.html"><i class="fas fa-project-diagram"></i> Projets</a></li>
-                <li><a href="commerce.html"><i class="fas fa-suitcase"></i> Commerce</a></li>
-                <li><a href="facturation.html"><i class="fas fa-file-invoice-dollar"></i> Facturation</a></li>
-                <li><a href="produits-services.html"><i class="fas fa-cube"></i> Services</a></li>
-                <li><a href="agenda.html"><i class="fas fa-calendar-alt"></i> Agenda</a></li>
-            </ul>
         </nav>
     </header>
 
-    <section class="hero">
+    <section class="hero" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
         <div class="hero-content">
-            <h1>Gestion des Tiers HERO_TITLE Contacts</h1>
-            <p>Gérez efficacement vos leads et qualifiez vos opportunités commerciales</p>
+            <h2>Module Pré-Opportunité</h2>
+            <p>la qualification et le suivi de vos leads</p>
         </div>
     </section>
 
     <div class="main-wrapper">
         <aside class="sidebar">
             <div class="sidebar-section">
-                <h3><i class="fas fa-list"></i> Sur cette page</h3>
+                <h3 style="color: #e74c3c;"><i class="fas fa-list"></i> Navigation rapide</h3>
                 <ul class="quick-links">
-                    <li><a href="#introduction"><i class="fas fa-chevron-right"></i> Introduction</a></li>
-                    <li><a href="#configuration"><i class="fas fa-chevron-right"></i> Configuration</a></li>
-                    <li><a href="#utilisation"><i class="fas fa-chevron-right"></i> Utilisation</a></li>
+                    <li><a href="#introduction"><i class="fas fa-chevron-right" style="color: #e74c3c;"></i> Introduction</a></li>
+                    <li><a href="#configuration"><i class="fas fa-chevron-right" style="color: #e74c3c;"></i> Configuration</a></li>
+                    <li><a href="#utilisation"><i class="fas fa-chevron-right" style="color: #e74c3c;"></i> Utilisation</a></li>
+                    <li><a href="#conseils"><i class="fas fa-chevron-right" style="color: #e74c3c;"></i> Bonnes pratiques</a></li>
                 </ul>
             </div>
 
             <div class="sidebar-section ticketing-sidebar">
-                <h3><i class="fas fa-ticket-alt"></i> Besoin d'aide ?</h3>
-                <p>Créez un ticket de support pour obtenir une assistance personnalisée.</p>
+                <h3 style="color: #3498db; border-bottom-color: #3498db;"><i class="fas fa-ticket-alt"></i> Support</h3>
+                <p style="color: #555; margin-bottom: 20px; line-height: 1.6; font-size: 0.9rem;">
+                    Besoin d'aide ? Créez un ticket support.
+                </p>
                 <a href="https://gestion.academie-tourisme.fr/" class="ticket-btn" target="_blank">
-                    <i class="fas fa-plus-circle"></i>
-                    Créer un ticket
+                    <i class="fas fa-plus-circle"></i> Créer un ticket
                 </a>
             </div>
         </aside>
 
-        <main>
-            <div class="breadcrumbs">
-                <a href="../index.html">Accueil</a> > Tiers TITLE_PLACEHOLDER Contacts
+        <main style="flex: 1;">
+            <div class="breadcrumbs" style="margin-bottom: 30px; color: #7f8c8d; font-size: 0.9rem;">
+                <a href="../../index.html" style="color: #3498db; text-decoration: none;">Accueil</a> &gt; 
+                <a href="index.html" style="color: #3498db; text-decoration: none;">Dolibarr</a> &gt; 
+                <span>Pré-Opportunité</span>
             </div>
 
-            <div class="page-header">
-                <h2>Tiers TITLE_PLACEHOLDER Contacts</h2>
+            <div class="page-header" style="margin-bottom: 50px;">
+                <h2 style="font-size: 2.5rem; color: #2c3e50; margin-bottom: 15px;">Pré-Opportunité</h2>
             </div>
 
             <section class="content-section" id="introduction">
-                <h3><i class="fas fa-info-circle"></i> Introduction</h3>
-                <p>Contenu à venir pour le module Tiers TITLE_PLACEHOLDER Contacts...</p>
+                <h3 style="color: #e74c3c;"><i class="fas fa-info-circle"></i> Introduction</h3>
+                <p>Le module <strong>Pré-Opportunité</strong> permet de gérer efficacement la qualification et le suivi de vos leads dans Dolibarr.</p>
+                
+                <div class="info-box" style="border-left-color: #e74c3c; background: rgba(52, 152, 219, 0.05);">
+                    <strong><i class="fas fa-lightbulb"></i> À savoir</strong>
+                    <p>Ce module est essentiel pour la gestion quotidienne de vos activités commerciales.</p>
+                </div>
             </section>
 
             <section class="content-section" id="configuration">
-                <h3><i class="fas fa-cog"></i> Configuration</h3>
-                <p>Guide de configuration à venir...</p>
+                <h3 style="color: #e74c3c;"><i class="fas fa-cog"></i> Configuration</h3>
+                <p>Voici les étapes pour configurer le module :</p>
+                
+                <div class="tutorial-step">
+                    <div class="step-number" style="background-color: #e74c3c;">1</div>
+                    <div class="step-content">
+                        <h5>Activer le module</h5>
+                        <p>Rendez-vous dans Configuration → Modules → Cherchez "Pré-Opportunité" et activez-le.</p>
+                    </div>
+                </div>
+
+                <div class="tutorial-step">
+                    <div class="step-number" style="background-color: #e74c3c;">2</div>
+                    <div class="step-content">
+                        <h5>Paramétrer les options</h5>
+                        <p>Configurez les options selon vos besoins métier.</p>
+                    </div>
+                </div>
+
+                <div class="tutorial-step">
+                    <div class="step-number" style="background-color: #e74c3c;">3</div>
+                    <div class="step-content">
+                        <h5>Définir les permissions</h5>
+                        <p>Attribuez les droits d'accès appropriés à vos utilisateurs.</p>
+                    </div>
+                </div>
             </section>
 
             <section class="content-section" id="utilisation">
-                <h3><i class="fas fa-tasks"></i> Utilisation</h3>
-                <p>Guide d'utilisation à venir...</p>
+                <h3 style="color: #e74c3c;"><i class="fas fa-tasks"></i> Utilisation pratique</h3>
+                <p>Guide d'utilisation du module au quotidien.</p>
+                
+                <div class="note-box">
+                    <strong><i class="fas fa-exclamation-triangle"></i> Important</strong>
+                    <p>Vérifiez toujours vos données avant validation.</p>
+                </div>
+            </section>
+
+            <section class="content-section" id="conseils">
+                <h3 style="color: #e74c3c;"><i class="fas fa-star"></i> Bonnes pratiques</h3>
+                <ul style="line-height: 2; color: #555;">
+                    <li>Maintenez vos données à jour régulièrement</li>
+                    <li>Utilisez les filtres pour gagner du temps</li>
+                    <li>Formez votre équipe aux fonctionnalités avancées</li>
+                    <li>Consultez le support en cas de doute</li>
+                </ul>
             </section>
         </main>
     </div>
@@ -423,8 +139,15 @@
     </footer>
 
     <script>
-        document.getElementById('mobileToggle').addEventListener('click', function() {
-            document.getElementById('mainNav').classList.toggle('active');
+        // Smooth scroll pour les ancres
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
         });
     </script>
 </body>

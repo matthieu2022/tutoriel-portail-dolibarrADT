@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projets ICADEMIE & ProLearn - ADT Tutoriels</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .top-bar {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 10px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+            padding: 8px 16px;
+            min-width: 300px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus-within {
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 15px rgba(255,255,255,0.2);
+        }
+
+        .search-box i {
+            color: #bdc3c7;
+            margin-right: 10px;
+        }
+
+        .search-box input {
+            background: none;
+            border: none;
+            outline: none;
+            color: white;
+            flex: 1;
+            font-size: 0.95rem;
+        }
+
+        .search-box input::placeholder {
+            color: #bdc3c7;
+        }
+
+        .main-nav {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 5px;
+            padding: 15px 0;
+        }
+
+        .nav-menu a {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            color: #ecf0f1;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .nav-menu a i {
+            font-size: 0.85rem;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+            color: white;
+            padding: 60px 30px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .main-wrapper {
+            display: flex;
+            max-width: 1800px;
+            margin: 0 auto;
+            gap: 30px;
+            padding: 0 30px;
+            position: relative;
+        }
+
+        .sidebar {
+            width: 300px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+
+        .sidebar-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .sidebar-section h3 {
+            color: #2c3e50;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        .sidebar-section h3 i {
+            color: #3498db;
+        }
+
+        .ticketing-sidebar {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(41, 128, 185, 0.05));
+            border: 2px solid #3498db;
+        }
+
+        .ticketing-sidebar h3 {
+            color: #3498db;
+            border-bottom-color: #3498db;
+        }
+
+        .ticketing-sidebar p {
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+
+        .ticket-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .ticket-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(52, 152, 219, 0.5);
+        }
+
+        .quick-links {
+            list-style: none;
+        }
+
+        .quick-links li {
+            margin-bottom: 12px;
+        }
+
+        .quick-links a {
+            color: #555;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .quick-links a:hover {
+            background: #f8f9fa;
+            color: #3498db;
+            transform: translateX(5px);
+        }
+
+        .quick-links i {
+            color: #3498db;
+            width: 20px;
+        }
+
+        main {
+            flex: 1;
+            padding: 60px 0;
+            min-width: 0;
+        }
+
+        .page-header {
+            margin-bottom: 50px;
+        }
+
+        .page-header h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+        }
+
+        .content-section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .content-section h3 {
+            color: #9b59b6;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-section h4 {
+            color: #2c3e50;
+            font-size: 1.3rem;
+            margin: 25px 0 15px;
+        }
+
+        .content-section p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .content-section ul, .content-section ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        .content-section li {
+            color: #555;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin: 30px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #9b59b6, #8e44ad);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 20px 0 20px 25px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 25px;
+            width: 16px;
+            height: 16px;
+            background: #9b59b6;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(155, 89, 182, 0.3);
+        }
+
+        .timeline-item.completed::before {
+            background: #27ae60;
+        }
+
+        .timeline-item.in-progress::before {
+            background: #f39c12;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .timeline-date {
+            color: #9b59b6;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .timeline-content h4 {
+            margin: 0 0 10px 0;
+            color: #2c3e50;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-left: 10px;
+        }
+
+        .status-badge.completed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-badge.in-progress {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-badge.planned {
+            background: #e7f3ff;
+            color: #0066cc;
+        }
+
+        .info-box {
+            background: #f4ecf7;
+            border-left: 4px solid #9b59b6;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .info-box h4 {
+            color: #9b59b6;
+            margin-top: 0;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #9b59b6;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            box-shadow: 0 5px 20px rgba(155, 89, 182, 0.2);
+            transform: translateX(5px);
+        }
+
+        .feature-card h4 {
+            color: #9b59b6;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-card i {
+            font-size: 1.5rem;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 30px;
+        }
+
+        .copyright {
+            text-align: center;
+            color: #95a5a6;
+        }
+
+        @media (max-width: 1200px) {
+            .main-wrapper {
+                padding: 0 20px;
+            }
+
+            .sidebar {
+                width: 280px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .main-wrapper {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                position: relative;
+                top: 0;
+                max-height: none;
+                margin-bottom: 30px;
+            }
+
+            main {
+                padding: 30px 0;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            .top-bar {
+                padding: 10px 20px;
+            }
+
+            .search-box {
+                min-width: auto;
+                flex: 1;
+                max-width: 250px;
+            }
+
+            .main-nav {
+                display: none;
+                padding: 0;
+            }
+
+            .main-nav.active {
+                display: block;
+            }
+
+            .nav-menu {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .nav-menu a {
+                padding: 12px 20px;
+                justify-content: flex-start;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="top-bar">
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../img/adtutoriel.png" alt="ADT Tutoriels">
+                </a>
+            </div>
+
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Rechercher...">
+            </div>
+
+            <button class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <nav class="main-nav" id="mainNav">
+            <ul class="nav-menu">
+                <li><a href="../index.html"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="../pages/00_dolibarr/dolibarr.html"><i class="fas fa-database"></i> Dolibarr V1</a></li>
+                <li><a href="https://tourism-school.academy/mediatheque_campus/tutoriel-keyyophone/co/guide.html"><i class="fas fa-phone"></i> Téléphonie KEYYO</a></li>
+                <li><a href="lms.html"><i class="fas fa-graduation-cap"></i> LMS & Campus</a></li>
+                <li><a href="icademie.html" class="active"><i class="fas fa-project-diagram"></i> Projets</a></li>
+                <li><a href="videos.html"><i class="fas fa-video"></i> Vidéos</a></li>
+                <li><a href="pdf.html"><i class="fas fa-download"></i> PDF</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Projets ICADEMIE & ProLearn</h1>
+            <p>Suivez l'avancement de nos projets de développement et partenariats stratégiques</p>
+        </div>
+    </section>
+
+    <div class="main-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3><i class="fas fa-list"></i> Sur cette page</h3>
+                <ul class="quick-links">
+                    <li><a href="#contexte"><i class="fas fa-chevron-right"></i> Contexte</a></li>
+                    <li><a href="#prolearn"><i class="fas fa-chevron-right"></i> ProLearn</a></li>
+                    <li><a href="#icademie"><i class="fas fa-chevron-right"></i> ICADEMIE</a></li>
+                    <li><a href="#roadmap"><i class="fas fa-chevron-right"></i> Roadmap</a></li>
+                    <li><a href="#integration"><i class="fas fa-chevron-right"></i> Intégration</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section ticketing-sidebar">
+                <h3><i class="fas fa-ticket-alt"></i> Besoin d'aide ?</h3>
+                <p>Créez un ticket de support pour obtenir une assistance personnalisée de l'équipe Cyber-Technique.</p>
+                <a href="https://gestion.academie-tourisme.fr/" class="ticket-btn" target="_blank">
+                    <i class="fas fa-plus-circle"></i>
+                    Créer un ticket
+                </a>
+            </div>
+        </aside>
+
+        <main>
+            <div class="page-header">
+                <h2>Projets en Cours</h2>
+                <p>Développements techniques et partenariats stratégiques de l'ADT</p>
+            </div>
+
+            <!-- Contexte -->
+            <section class="content-section" id="contexte">
+                <h3><i class="fas fa-info-circle"></i> Contexte du Projet</h3>
+                <p>L'Académie du Tourisme s'engage dans plusieurs projets stratégiques visant à moderniser ses infrastructures techniques et à développer de nouveaux partenariats pour renforcer son offre de formation.</p>
+
+                <div class="info-box">
+                    <h4><i class="fas fa-handshake"></i> Partenariat Stratégique</h4>
+                    <p>Le partenariat avec ICADEMIE représente une opportunité majeure de mutualisation des ressources techniques et pédagogiques. Cette collaboration permettra d'accéder à la plateforme ProLearn et de bénéficier de synergies au niveau national.</p>
+                </div>
+            </section>
+
+            <!-- ProLearn -->
+            <section class="content-section" id="prolearn">
+                <h3><i class="fas fa-rocket"></i> La Plateforme ProLearn</h3>
+                
+                <h4>Présentation</h4>
+                <p>ProLearn est une plateforme LMS nouvelle génération développée par ICADEMIE. Elle offre des fonctionnalités avancées pour la gestion et la diffusion de formations à distance.</p>
+
+                <h4>Fonctionnalités Principales</h4>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4><i class="fas fa-graduation-cap"></i> Parcours Adaptatifs</h4>
+                        <p>Personnalisation automatique du parcours selon le niveau et la progression de chaque apprenant.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4><i class="fas fa-mobile-alt"></i> Mobile First</h4>
+                        <p>Interface responsive optimisée pour tablettes et smartphones avec application mobile dédiée.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4><i class="fas fa-chart-line"></i> Analytics Avancés</h4>
+                        <p>Tableaux de bord détaillés pour suivre l'engagement et la performance des apprenants.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4><i class="fas fa-users"></i> Collaboration</h4>
+                        <p>Outils de travail collaboratif : forums, classes virtuelles, projets de groupe.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4><i class="fas fa-video"></i> Vidéo Interactive</h4>
+                        <p>Intégration de vidéos avec quiz interactifs et marqueurs temporels.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4><i class="fas fa-sync-alt"></i> Intégration API</h4>
+                        <p>API REST complète pour intégration avec systèmes tiers (CRM, ERP, etc.).</p>
+                    </div>
+                </div>
+
+                <h4>Avantages pour l'ADT</h4>
+                <ul>
+                    <li>Réduction des coûts de maintenance technique</li>
+                    <li>Accès à des fonctionnalités modernes sans développement interne</li>
+                    <li>Mutualisation des contenus avec le réseau ICADEMIE</li>
+                    <li>Support technique et mises à jour régulières inclus</li>
+                    <li>Hébergement sécurisé et conforme RGPD</li>
+                </ul>
+            </section>
+
+            <!-- ICADEMIE -->
+            <section class="content-section" id="icademie">
+                <h3><i class="fas fa-building"></i> Partenariat ICADEMIE</h3>
+                
+                <h4>Présentation d'ICADEMIE</h4>
+                <p>ICADEMIE est un acteur majeur de la formation professionnelle en France, présent dans plus de 25 villes avec une expertise reconnue dans les domaines du digital, du commerce et du management.</p>
+
+                <h4>Domaines de Collaboration</h4>
+                <ul>
+                    <li><strong>Technique :</strong> Accès à la plateforme ProLearn et support technique mutualisé</li>
+                    <li><strong>Pédagogique :</strong> Échange de contenus et co-création de formations</li>
+                    <li><strong>Commercial :</strong> Développement de parcours communs et cross-selling</li>
+                    <li><strong>Innovation :</strong> Participation aux groupes de travail R&D</li>
+                </ul>
+
+                <div class="info-box">
+                    <h4><i class="fas fa-calendar-check"></i> Prochaines Étapes</h4>
+                    <p>Une démonstration complète de ProLearn est prévue le <strong>2 juin 2025</strong> avec Olivier Moncoudiol (ICADEMIE), André, Matthieu et Hélène pour évaluer les fonctionnalités et planifier la migration.</p>
+                </div>
+            </section>
+
+            <!-- Roadmap -->
+            <section class="content-section" id="roadmap">
+                <h3><i class="fas fa-road"></i> Roadmap de Déploiement</h3>
+
+                <div class="timeline">
+                    <div class="timeline-item completed">
+                        <div class="timeline-date">✓ Février 2025</div>
+                        <div class="timeline-content">
+                            <h4>Signature du Partenariat <span class="status-badge completed">Terminé</span></h4>
+                            <p>Finalisation des accords de partenariat avec ICADEMIE et accès initial à la plateforme ProLearn.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item completed">
+                        <div class="timeline-date">✓ Mars - Avril 2025</div>
+                        <div class="timeline-content">
+                            <h4>Audit Technique <span class="status-badge completed">Terminé</span></h4>
+                            <p>Analyse de compatibilité entre nos systèmes actuels et ProLearn. Identification des points d'intégration avec Dolibarr.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item in-progress">
+                        <div class="timeline-date">En cours - Juin 2025</div>
+                        <div class="timeline-content">
+                            <h4>Phase de Test <span class="status-badge in-progress">En cours</span></h4>
+                            <p>Démonstration du 2 juin 2025 et tests approfondis de la plateforme ProLearn avec un groupe pilote de formateurs et apprenants.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">Juillet - Août 2025</div>
+                        <div class="timeline-content">
+                            <h4>Migration des Contenus <span class="status-badge planned">Planifié</span></h4>
+                            <p>Transfer progressif des formations depuis nos LMS Moodle vers ProLearn. Conversion et optimisation des contenus.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">Septembre 2025</div>
+                        <div class="timeline-content">
+                            <h4>Formation des Équipes <span class="status-badge planned">Planifié</span></h4>
+                            <p>Formation des formateurs, administrateurs et équipes support à l'utilisation de ProLearn.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">Octobre 2025</div>
+                        <div class="timeline-content">
+                            <h4>Lancement Pilote <span class="status-badge planned">Planifié</span></h4>
+                            <p>Mise en production sur une sélection de formations pour validation avant déploiement complet.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">Janvier 2026</div>
+                        <div class="timeline-content">
+                            <h4>Déploiement Complet <span class="status-badge planned">Planifié</span></h4>
+                            <p>Basculement de toutes les formations sur ProLearn et désactivation progressive des anciennes plateformes.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Intégration -->
+            <section class="content-section" id="integration">
+                <h3><i class="fas fa-plug"></i> Intégration avec Dolibarr</h3>
+                
+                <h4>Objectifs d'Intégration</h4>
+                <p>L'intégration entre ProLearn et Dolibarr est cruciale pour assurer une gestion fluide des inscriptions, de la facturation et du suivi pédagogique.</p>
+
+                <h4>Points d'Intégration Prévus</h4>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4><i class="fas fa-user-plus"></i> Inscriptions</h4>
+                        <p>Synchronisation automatique des nouvelles inscriptions depuis Dolibarr vers ProLearn.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4><i class="fas fa-file-invoice-dollar"></i> Facturation</h4>
+                        <p>Création automatique des factures dans Dolibarr lors de l'inscription à une formation.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4><i class="fas fa-chart-bar"></i> Suivi Pédagogique</h4>
+                        <p>Remontée des données de progression et de complétion vers Dolibarr.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4><i class="fas fa-certificate"></i> Certifications</h4>
+                        <p>Génération et archivage des attestations dans le dossier apprenant Dolibarr.</p>
+                    </div>
+                </div>
+
+                <h4>Architecture Technique</h4>
+                <p>L'intégration sera réalisée via :</p>
+                <ul>
+                    <li><strong>API REST :</strong> Communication bidirectionnelle entre ProLearn et Dolibarr</li>
+                    <li><strong>Webhooks :</strong> Notifications en temps réel des événements importants</li>
+                    <li><strong>SSO (Single Sign-On) :</strong> Authentification unique pour les utilisateurs</li>
+                    <li><strong>Synchronisation planifiée :</strong> Pour les données non critiques (statistiques, rapports)</li>
+                </ul>
+
+                <div class="info-box">
+                    <h4><i class="fas fa-wrench"></i> Équipe Technique</h4>
+                    <p>L'intégration sera pilotée par la Cyber-Technique ADT en collaboration avec les équipes techniques d'ICADEMIE. Un environnement de test dédié sera mis en place pour valider chaque composant avant la mise en production.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <div class="copyright">
+            <p>&copy; 2025 ADT - Académie du Tourisme. Tous droits réservés.</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">
+                <i class="fas fa-code"></i> Développé par la Cyber-Technique ADT
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

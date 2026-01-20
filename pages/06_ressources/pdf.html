@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vidéos & Tutoriels - ADT Tutoriels</title>
+    <title>Ressources PDF - ADT Tutoriels</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -126,7 +126,7 @@
         }
 
         .hero {
-            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
             color: white;
             padding: 60px 30px;
             text-align: center;
@@ -254,15 +254,15 @@
         }
 
         .category-filter button:hover {
-            border-color: #e74c3c;
-            background: #fff5f5;
+            border-color: #27ae60;
+            background: #f0fff4;
             transform: translateX(5px);
         }
 
         .category-filter button.active {
-            background: #e74c3c;
+            background: #27ae60;
             color: white;
-            border-color: #e74c3c;
+            border-color: #27ae60;
         }
 
         .category-filter i {
@@ -290,106 +290,73 @@
             color: #7f8c8d;
         }
 
-        .videos-grid {
+        .pdf-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
             margin-bottom: 50px;
         }
 
-        .video-card {
+        .pdf-card {
             background: white;
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
+            border: 2px solid transparent;
         }
 
-        .video-card:hover {
+        .pdf-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+            border-color: #27ae60;
         }
 
-        .video-thumbnail {
-            position: relative;
-            height: 200px;
-            background: #ecf0f1;
-            overflow: hidden;
-        }
-
-        .video-thumbnail img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .video-thumbnail .play-btn {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 70px;
-            height: 70px;
-            background: rgba(231, 76, 60, 0.9);
-            border-radius: 50%;
+        .pdf-icon-header {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+            padding: 30px;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+        }
+
+        .pdf-icon-header i {
+            font-size: 4rem;
             color: white;
-            font-size: 1.8rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
         }
 
-        .video-card:hover .play-btn {
-            background: #e74c3c;
-            transform: translate(-50%, -50%) scale(1.1);
+        .pdf-content {
+            padding: 25px;
         }
 
-        .video-duration {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .video-content {
-            padding: 20px;
-        }
-
-        .video-category {
+        .pdf-category {
             display: inline-block;
-            background: #e74c3c;
+            background: #27ae60;
             color: white;
             padding: 4px 12px;
             border-radius: 12px;
             font-size: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
-        .video-title {
+        .pdf-title {
             color: #2c3e50;
             font-size: 1.2rem;
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             line-height: 1.3;
         }
 
-        .video-description {
+        .pdf-description {
             color: #7f8c8d;
             font-size: 0.9rem;
-            line-height: 1.5;
-            margin-bottom: 15px;
+            line-height: 1.6;
+            margin-bottom: 20px;
         }
 
-        .video-meta {
+        .pdf-meta {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -399,8 +366,34 @@
             color: #95a5a6;
         }
 
-        .video-meta i {
+        .pdf-meta i {
             margin-right: 5px;
+        }
+
+        .pdf-size {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .pdf-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #27ae60;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        .pdf-download:hover {
+            background: #229954;
+            transform: translateX(5px);
         }
 
         .info-box {
@@ -412,7 +405,7 @@
         }
 
         .info-box h3 {
-            color: #e74c3c;
+            color: #27ae60;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
@@ -422,6 +415,35 @@
         .info-box p {
             color: #555;
             line-height: 1.8;
+        }
+
+        .stats-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #27ae60;
+            display: block;
+        }
+
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-top: 5px;
         }
 
         footer {
@@ -444,8 +466,8 @@
                 width: 280px;
             }
 
-            .videos-grid {
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            .pdf-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             }
         }
 
@@ -505,8 +527,12 @@
                 font-size: 2rem;
             }
 
-            .videos-grid {
+            .pdf-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .stats-bar {
+                flex-direction: column;
             }
         }
     </style>
@@ -522,7 +548,7 @@
 
             <div class="search-box">
                 <i class="fas fa-search"></i>
-                <input type="text" id="searchInput" placeholder="Rechercher une vidéo...">
+                <input type="text" id="searchInput" placeholder="Rechercher un PDF...">
             </div>
 
             <button class="mobile-toggle" id="mobileToggle">
@@ -537,16 +563,16 @@
                 <li><a href="https://tourism-school.academy/mediatheque_campus/tutoriel-keyyophone/co/guide.html"><i class="fas fa-phone"></i> Téléphonie KEYYO</a></li>
                 <li><a href="lms.html"><i class="fas fa-graduation-cap"></i> LMS & Campus</a></li>
                 <li><a href="icademie.html"><i class="fas fa-project-diagram"></i> Projets</a></li>
-                <li><a href="videos.html" class="active"><i class="fas fa-video"></i> Vidéos</a></li>
-                <li><a href="pdf.html"><i class="fas fa-download"></i> PDF</a></li>
+                <li><a href="videos.html"><i class="fas fa-video"></i> Vidéos</a></li>
+                <li><a href="pdf.html" class="active"><i class="fas fa-download"></i> PDF</a></li>
             </ul>
         </nav>
     </header>
 
     <section class="hero">
         <div class="hero-content">
-            <h1>Vidéos & Tutoriels</h1>
-            <p>Apprenez visuellement avec nos tutoriels vidéo et captures d'écran détaillées</p>
+            <h1>Ressources PDF</h1>
+            <p>Téléchargez nos guides, fiches techniques et mémos au format PDF</p>
         </div>
     </section>
 
@@ -555,11 +581,12 @@
             <div class="sidebar-section">
                 <h3><i class="fas fa-filter"></i> Filtrer par catégorie</h3>
                 <ul class="category-filter">
-                    <li><button class="active" data-category="all"><i class="fas fa-th"></i> Toutes les vidéos</button></li>
+                    <li><button class="active" data-category="all"><i class="fas fa-th"></i> Tous les PDF</button></li>
                     <li><button data-category="dolibarr"><i class="fas fa-database"></i> Dolibarr</button></li>
                     <li><button data-category="lms"><i class="fas fa-graduation-cap"></i> LMS & Campus</button></li>
                     <li><button data-category="keyyo"><i class="fas fa-phone"></i> KEYYO</button></li>
                     <li><button data-category="office"><i class="fab fa-microsoft"></i> Office 365</button></li>
+                    <li><button data-category="commercial"><i class="fas fa-handshake"></i> Commercial</button></li>
                     <li><button data-category="general"><i class="fas fa-info-circle"></i> Général</button></li>
                 </ul>
             </div>
@@ -576,173 +603,268 @@
 
         <main>
             <div class="page-header">
-                <h2>Bibliothèque Vidéo</h2>
-                <p>Explorez notre collection de tutoriels vidéo pour maîtriser tous nos outils</p>
+                <h2>Bibliothèque de Documents</h2>
+                <p>Accédez à notre collection complète de ressources PDF téléchargeables</p>
+            </div>
+
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <span class="stat-number">24</span>
+                    <div class="stat-label">Documents disponibles</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">6</span>
+                    <div class="stat-label">Catégories</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">1,2K+</span>
+                    <div class="stat-label">Téléchargements</div>
+                </div>
             </div>
 
             <div class="info-box">
-                <h3><i class="fas fa-info-circle"></i> À propos de nos tutoriels vidéo</h3>
-                <p>Tous nos tutoriels sont réalisés par l'équipe Cyber-Technique ADT. Ils sont régulièrement mis à jour pour refléter les dernières versions de nos outils. N'hésitez pas à proposer de nouveaux sujets via le système de ticketing !</p>
+                <h3><i class="fas fa-info-circle"></i> À propos de nos ressources</h3>
+                <p>Tous nos documents PDF sont régulièrement mis à jour par l'équipe Cyber-Technique. Ils sont conçus pour être imprimés ou consultés sur écran. N'hésitez pas à les partager avec vos collègues !</p>
             </div>
 
-            <div class="videos-grid" id="videosGrid">
-                <!-- Vidéo Dolibarr -->
-                <div class="video-card" data-category="dolibarr">
-                    <div class="video-thumbnail">
-                        <img src="../img/dolibarr.webp" alt="Dolibarr">
-                        <div class="play-btn">
-                            <i class="fas fa-play"></i>
-                        </div>
-                        <div class="video-duration">12:45</div>
+            <div class="pdf-grid" id="pdfGrid">
+                <!-- Guide Dolibarr -->
+                <div class="pdf-card" data-category="dolibarr">
+                    <div class="pdf-icon-header">
+                        <i class="far fa-file-pdf"></i>
                     </div>
-                    <div class="video-content">
-                        <span class="video-category">Dolibarr</span>
-                        <h3 class="video-title">Introduction à Dolibarr V1</h3>
-                        <p class="video-description">Découvrez les bases de Dolibarr : navigation, modules principaux et premières configurations.</p>
-                        <div class="video-meta">
+                    <div class="pdf-content">
+                        <span class="pdf-category">Dolibarr</span>
+                        <h3 class="pdf-title">Guide de Démarrage Rapide Dolibarr</h3>
+                        <p class="pdf-description">Tout ce qu'il faut savoir pour bien débuter avec Dolibarr : connexion, navigation, modules essentiels.</p>
+                        <div class="pdf-meta">
+                            <span class="pdf-size"><i class="fas fa-file"></i> 2.4 MB</span>
                             <span><i class="far fa-calendar"></i> 15 Jan 2025</span>
-                            <span><i class="far fa-eye"></i> 245 vues</span>
                         </div>
+                        <a href="#" class="pdf-download">
+                            <i class="fas fa-download"></i>
+                            Télécharger
+                        </a>
                     </div>
                 </div>
 
-                <!-- Vidéo CRM -->
-                <div class="video-card" data-category="dolibarr">
-                    <div class="video-thumbnail">
-                        <img src="../img/dolibarr.webp" alt="CRM">
-                        <div class="play-btn">
-                            <i class="fas fa-play"></i>
-                        </div>
-                        <div class="video-duration">18:30</div>
+                <!-- Mémo CRM -->
+                <div class="pdf-card" data-category="dolibarr">
+                    <div class="pdf-icon-header">
+                        <i class="far fa-file-pdf"></i>
                     </div>
-                    <div class="video-content">
-                        <span class="video-category">Dolibarr</span>
-                        <h3 class="video-title">Gérer les contacts et le CRM</h3>
-                        <p class="video-description">Créer et gérer vos contacts, prospects et clients dans le module CRM de Dolibarr.</p>
-                        <div class="video-meta">
+                    <div class="pdf-content">
+                        <span class="pdf-category">Dolibarr</span>
+                        <h3 class="pdf-title">Mémo Module CRM</h3>
+                        <p class="pdf-description">Fiche de référence rapide pour gérer vos contacts, prospects et opportunités commerciales.</p>
+                        <div class="pdf-meta">
+                            <span class="pdf-size"><i class="fas fa-file"></i> 1.1 MB</span>
                             <span><i class="far fa-calendar"></i> 12 Jan 2025</span>
-                            <span><i class="far fa-eye"></i> 189 vues</span>
                         </div>
+                        <a href="#" class="pdf-download">
+                            <i class="fas fa-download"></i>
+                            Télécharger
+                        </a>
                     </div>
                 </div>
 
-                <!-- Vidéo LMS -->
-                <div class="video-card" data-category="lms">
-                    <div class="video-thumbnail">
-                        <img src="../img/moodle.webp" alt="LMS">
-                        <div class="play-btn">
-                            <i class="fas fa-play"></i>
-                        </div>
-                        <div class="video-duration">22:15</div>
+                <!-- Guide Facturation -->
+                <div class="pdf-card" data-category="dolibarr">
+                    <div class="pdf-icon-header">
+                        <i class="far fa-file-pdf"></i>
                     </div>
-                    <div class="video-content">
-                        <span class="video-category">LMS</span>
-                        <h3 class="video-title">Créer un cours sur Moodle</h3>
-                        <p class="video-description">Guide complet pour créer et structurer un cours de formation sur nos plateformes LMS.</p>
-                        <div class="video-meta">
+                    <div class="pdf-content">
+                        <span class="pdf-category">Dolibarr</span>
+                        <h3 class="pdf-title">Guide Complet Facturation</h3>
+                        <p class="pdf-description">Créer des devis, factures, gérer les paiements et suivre les relances dans Dolibarr.</p>
+                        <div class="pdf-meta">
+                            <span class="pdf-size"><i class="fas fa-file"></i> 3.2 MB</span>
                             <span><i class="far fa-calendar"></i> 10 Jan 2025</span>
-                            <span><i class="far fa-eye"></i> 312 vues</span>
                         </div>
+                        <a href="#" class="pdf-download">
+                            <i class="fas fa-download"></i>
+                            Télécharger
+                        </a>
                     </div>
                 </div>
 
-                <!-- Vidéo KEYYO -->
-                <div class="video-card" data-category="keyyo">
-                    <div class="video-thumbnail">
-                        <img src="../img/keyyo/keyyo.webp" alt="KEYYO">
-                        <div class="play-btn">
-                            <i class="fas fa-play"></i>
-                        </div>
-                        <div class="video-duration">8:20</div>
+                <!-- LMS Moodle -->
+                <div class="pdf-card" data-category="lms">
+                    <div class="pdf-icon-header">
+                        <i class="far fa-file-pdf"></i>
                     </div>
-                    <div class="video-content">
-                        <span class="video-category">KEYYO</span>
-                        <h3 class="video-title">Configurer votre téléphone KEYYO</h3>
-                        <p class="video-description">Premiers pas avec le système de téléphonie KEYYO : installation et configuration de base.</p>
-                        <div class="video-meta">
+                    <div class="pdf-content">
+                        <span class="pdf-category">LMS</span>
+                        <h3 class="pdf-title">Manuel Administrateur Moodle</h3>
+                        <p class="pdf-description">Guide complet pour administrer nos plateformes LMS Moodle : utilisateurs, cours, rapports.</p>
+                        <div class="pdf-meta">
+                            <span class="pdf-size"><i class="fas fa-file"></i> 4.8 MB</span>
                             <span><i class="far fa-calendar"></i> 8 Jan 2025</span>
-                            <span><i class="far fa-eye"></i> 156 vues</span>
                         </div>
+                        <a href="#" class="pdf-download">
+                            <i class="fas fa-download"></i>
+                            Télécharger
+                        </a>
                     </div>
                 </div>
 
-                <!-- Vidéo Office -->
-                <div class="video-card" data-category="office">
-                    <div class="video-thumbnail">
-                        <img src="../img/office.webp" alt="Office 365">
-                        <div class="play-btn">
-                            <i class="fas fa-play"></i>
-                        </div>
-                        <div class="video-duration">15:40</div>
+                <!-- Campus -->
+                <div class="pdf-card" data-category="lms">
+                    <div class="pdf-icon-header">
+                        <i class="far fa-file-pdf"></i>
                     </div>
-                    <div class="video-content">
-                        <span class="video-category">Office 365</span>
-                        <h3 class="video-title">Maîtriser Teams pour la collaboration</h3>
-                        <p class="video-description">Utilisation avancée de Microsoft Teams : réunions, partage de fichiers et collaboration.</p>
-                        <div class="video-meta">
+                    <div class="pdf-content">
+                        <span class="pdf-category">LMS</span>
+                        <h3 class="pdf-title">Procédures Gestion Campus</h3>
+                        <p class="pdf-description">Processus standard pour la gestion quotidienne de nos campus de formation.</p>
+                        <div class="pdf-meta">
+                            <span class="pdf-size"><i class="fas fa-file"></i> 1.8 MB</span>
                             <span><i class="far fa-calendar"></i> 5 Jan 2025</span>
-                            <span><i class="far fa-eye"></i> 278 vues</span>
                         </div>
+                        <a href="#" class="pdf-download">
+                            <i class="fas fa-download"></i>
+                            Télécharger
+                        </a>
                     </div>
                 </div>
 
-                <!-- Vidéo Campus -->
-                <div class="video-card" data-category="lms">
-                    <div class="video-thumbnail">
-                        <img src="../img/campus.png" alt="Campus">
-                        <div class="play-btn">
-                            <i class="fas fa-play"></i>
-                        </div>
-                        <div class="video-duration">14:25</div>
+                <!-- KEYYO -->
+                <div class="pdf-card" data-category="keyyo">
+                    <div class="pdf-icon-header">
+                        <i class="far fa-file-pdf"></i>
                     </div>
-                    <div class="video-content">
-                        <span class="video-category">LMS</span>
-                        <h3 class="video-title">Gestion des inscriptions campus</h3>
-                        <p class="video-description">Processus complet d'inscription des apprenants sur nos différents campus.</p>
-                        <div class="video-meta">
+                    <div class="pdf-content">
+                        <span class="pdf-category">KEYYO</span>
+                        <h3 class="pdf-title">Guide Configuration KEYYO</h3>
+                        <p class="pdf-description">Installation et configuration de votre téléphone KEYYO étape par étape.</p>
+                        <div class="pdf-meta">
+                            <span class="pdf-size"><i class="fas fa-file"></i> 2.1 MB</span>
                             <span><i class="far fa-calendar"></i> 3 Jan 2025</span>
-                            <span><i class="far fa-eye"></i> 201 vues</span>
                         </div>
+                        <a href="#" class="pdf-download">
+                            <i class="fas fa-download"></i>
+                            Télécharger
+                        </a>
                     </div>
                 </div>
 
-                <!-- Vidéo Facturation -->
-                <div class="video-card" data-category="dolibarr">
-                    <div class="video-thumbnail">
-                        <img src="../img/dolibarr.webp" alt="Facturation">
-                        <div class="play-btn">
-                            <i class="fas fa-play"></i>
-                        </div>
-                        <div class="video-duration">16:50</div>
+                <!-- Office 365 -->
+                <div class="pdf-card" data-category="office">
+                    <div class="pdf-icon-header">
+                        <i class="far fa-file-pdf"></i>
                     </div>
-                    <div class="video-content">
-                        <span class="video-category">Dolibarr</span>
-                        <h3 class="video-title">Module Facturation Dolibarr</h3>
-                        <p class="video-description">Créer des devis, factures et gérer les paiements dans Dolibarr.</p>
-                        <div class="video-meta">
+                    <div class="pdf-content">
+                        <span class="pdf-category">Office 365</span>
+                        <h3 class="pdf-title">Guide Teams pour les Collaborateurs</h3>
+                        <p class="pdf-description">Maîtriser Microsoft Teams : réunions, chat, partage de fichiers et collaboration.</p>
+                        <div class="pdf-meta">
+                            <span class="pdf-size"><i class="fas fa-file"></i> 2.9 MB</span>
+                            <span><i class="far fa-calendar"></i> 1 Jan 2025</span>
+                        </div>
+                        <a href="#" class="pdf-download">
+                            <i class="fas fa-download"></i>
+                            Télécharger
+                        </a>
+                    </div>
+                </div>
+
+                <!-- OneDrive -->
+                <div class="pdf-card" data-category="office">
+                    <div class="pdf-icon-header">
+                        <i class="far fa-file-pdf"></i>
+                    </div>
+                    <div class="pdf-content">
+                        <span class="pdf-category">Office 365</span>
+                        <h3 class="pdf-title">Bien Utiliser OneDrive</h3>
+                        <p class="pdf-description">Stocker, synchroniser et partager vos fichiers avec OneDrive de manière efficace.</p>
+                        <div class="pdf-meta">
+                            <span class="pdf-size"><i class="fas fa-file"></i> 1.5 MB</span>
                             <span><i class="far fa-calendar"></i> 28 Déc 2024</span>
-                            <span><i class="far fa-eye"></i> 342 vues</span>
                         </div>
+                        <a href="#" class="pdf-download">
+                            <i class="fas fa-download"></i>
+                            Télécharger
+                        </a>
                     </div>
                 </div>
 
-                <!-- Vidéo Général -->
-                <div class="video-card" data-category="general">
-                    <div class="video-thumbnail">
-                        <img src="../img/office.webp" alt="Bonnes pratiques">
-                        <div class="play-btn">
-                            <i class="fas fa-play"></i>
-                        </div>
-                        <div class="video-duration">10:15</div>
+                <!-- Argumentaire Commercial -->
+                <div class="pdf-card" data-category="commercial">
+                    <div class="pdf-icon-header">
+                        <i class="far fa-file-pdf"></i>
                     </div>
-                    <div class="video-content">
-                        <span class="video-category">Général</span>
-                        <h3 class="video-title">Bonnes pratiques cyber-sécurité</h3>
-                        <p class="video-description">Conseils essentiels pour protéger vos données et sécuriser vos accès.</p>
-                        <div class="video-meta">
+                    <div class="pdf-content">
+                        <span class="pdf-category">Commercial</span>
+                        <h3 class="pdf-title">Argumentaire Commercial ADT</h3>
+                        <p class="pdf-description">Arguments clés pour présenter notre offre de formation aux prospects.</p>
+                        <div class="pdf-meta">
+                            <span class="pdf-size"><i class="fas fa-file"></i> 3.5 MB</span>
                             <span><i class="far fa-calendar"></i> 20 Déc 2024</span>
-                            <span><i class="far fa-eye"></i> 428 vues</span>
                         </div>
+                        <a href="#" class="pdf-download">
+                            <i class="fas fa-download"></i>
+                            Télécharger
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Catalogue Formations -->
+                <div class="pdf-card" data-category="commercial">
+                    <div class="pdf-icon-header">
+                        <i class="far fa-file-pdf"></i>
+                    </div>
+                    <div class="pdf-content">
+                        <span class="pdf-category">Commercial</span>
+                        <h3 class="pdf-title">Catalogue Formations 2025</h3>
+                        <p class="pdf-description">Notre catalogue complet de formations pour l'année 2025.</p>
+                        <div class="pdf-meta">
+                            <span class="pdf-size"><i class="fas fa-file"></i> 8.2 MB</span>
+                            <span><i class="far fa-calendar"></i> 15 Déc 2024</span>
+                        </div>
+                        <a href="#" class="pdf-download">
+                            <i class="fas fa-download"></i>
+                            Télécharger
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Charte Graphique -->
+                <div class="pdf-card" data-category="general">
+                    <div class="pdf-icon-header">
+                        <i class="far fa-file-pdf"></i>
+                    </div>
+                    <div class="pdf-content">
+                        <span class="pdf-category">Général</span>
+                        <h3 class="pdf-title">Charte Graphique ADT</h3>
+                        <p class="pdf-description">Règles d'utilisation du logo, couleurs et typographies de l'ADT.</p>
+                        <div class="pdf-meta">
+                            <span class="pdf-size"><i class="fas fa-file"></i> 5.1 MB</span>
+                            <span><i class="far fa-calendar"></i> 10 Déc 2024</span>
+                        </div>
+                        <a href="#" class="pdf-download">
+                            <i class="fas fa-download"></i>
+                            Télécharger
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Sécurité -->
+                <div class="pdf-card" data-category="general">
+                    <div class="pdf-icon-header">
+                        <i class="far fa-file-pdf"></i>
+                    </div>
+                    <div class="pdf-content">
+                        <span class="pdf-category">Général</span>
+                        <h3 class="pdf-title">Guide Cybersécurité</h3>
+                        <p class="pdf-description">Bonnes pratiques pour protéger vos données et sécuriser vos accès.</p>
+                        <div class="pdf-meta">
+                            <span class="pdf-size"><i class="fas fa-file"></i> 2.3 MB</span>
+                            <span><i class="far fa-calendar"></i> 5 Déc 2024</span>
+                        </div>
+                        <a href="#" class="pdf-download">
+                            <i class="fas fa-download"></i>
+                            Télécharger
+                        </a>
                     </div>
                 </div>
             </div>
@@ -776,7 +898,7 @@
                 this.classList.add('active');
                 
                 const category = this.getAttribute('data-category');
-                const cards = document.querySelectorAll('.video-card');
+                const cards = document.querySelectorAll('.pdf-card');
                 
                 cards.forEach(card => {
                     if (category === 'all' || card.getAttribute('data-category') === category) {
@@ -791,11 +913,11 @@
         // Recherche
         document.getElementById('searchInput').addEventListener('input', function() {
             const searchTerm = this.value.toLowerCase();
-            const cards = document.querySelectorAll('.video-card');
+            const cards = document.querySelectorAll('.pdf-card');
             
             cards.forEach(card => {
-                const title = card.querySelector('.video-title').textContent.toLowerCase();
-                const description = card.querySelector('.video-description').textContent.toLowerCase();
+                const title = card.querySelector('.pdf-title').textContent.toLowerCase();
+                const description = card.querySelector('.pdf-description').textContent.toLowerCase();
                 
                 if (title.includes(searchTerm) || description.includes(searchTerm)) {
                     card.style.display = 'block';

@@ -3,572 +3,429 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion des Tiers - ADT Dolibarr</title>
-    <meta name="description" content="Guide complet sur la gestion des tiers (clients, prospects, fournisseurs) et contacts dans Dolibarr ERP/CRM.">
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Tiers TITLE_PLACEHOLDER Contacts - ADT Dolibarr</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Styles pour la nouvelle mise en page à deux colonnes */
-        .two-column-layout {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        .content-column {
-            flex: 0 0 65%;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            padding: 2rem;
-        }
-        
-        .media-column {
-            flex: 0 0 30%; /* Légèrement ajusté pour tenir compte du gap */
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            padding: 2rem;
-        }
-        
-        .media-box {
-            margin-bottom: 2rem;
-            border-bottom: 1px solid #f0f0f0;
-            padding-bottom: 2rem;
-        }
-        
-        .media-box:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-        }
-        
-        .media-box h4 {
-            color: #4a73ab;
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-        
-        .media-box img, 
-        .media-box video {
-            width: 100%;
-            border-radius: 4px;
-            margin-bottom: 0.5rem;
-        }
-        
-        .media-caption {
-            font-size: 0.9rem;
-            color: #666;
-            margin-top: 0.5rem;
-        }
-        
-        .resource-link {
-            display: flex;
-            align-items: center;
-            padding: 0.8rem;
-            background-color: #f8f9fa;
-            border-radius: 4px;
-            margin-bottom: 0.8rem;
-            text-decoration: none;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
             color: #333;
-            transition: all 0.3s ease;
-        }
-        
-        .resource-link:hover {
-            background-color: #e9ecef;
-            transform: translateY(-2px);
-        }
-        
-        .resource-link i {
-            margin-right: 0.8rem;
-            color: #4a73ab;
-            font-size: 1.2rem;
+            background-color: #f8f9fa;
         }
 
-        /* Style pour les boxes d'avertissement et notes */
-        .warning-box, .note-box {
-            background-color: #fff8e1;
-            border-left: 4px solid #ffb300;
-            padding: 1rem;
-            margin: 1.5rem 0;
-            border-radius: 0 4px 4px 0;
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        .note-box strong, .warning-box strong {
-            color: #e65100;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-        
-        /* Responsive design */
-        @media (max-width: 992px) {
-            .content-column,
-            .media-column {
-                flex: 0 0 100%;
-            }
-            
-            .media-column {
-                margin-top: 0;
-            }
-        }
-        
-        /* Style pour module-navigation */
-        .module-navigation {
+        .top-bar {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 10px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 3rem;
-            padding: 1.5rem 0;
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        .module-navigation a {
+        .logo a {
+            text-decoration: none;
             display: flex;
             align-items: center;
-            padding: 0.8rem 1.5rem;
-            color: #4a73ab;
+            gap: 10px;
+            color: white;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #4a73ab;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+            padding: 8px 16px;
+            min-width: 300px;
+        }
+
+        .search-box i {
+            color: #bdc3c7;
+            margin-right: 10px;
+        }
+
+        .search-box input {
+            background: none;
+            border: none;
+            outline: none;
+            color: white;
+            flex: 1;
+            font-size: 0.95rem;
+        }
+
+        .search-box input::placeholder { color: #bdc3c7; }
+
+        .mobile-toggle {
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .main-nav {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 5px;
+            padding: 15px 0;
+        }
+
+        .nav-menu a {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            color: #ecf0f1;
             text-decoration: none;
+            font-size: 0.9rem;
             font-weight: 500;
             border-radius: 8px;
             transition: all 0.3s ease;
+            white-space: nowrap;
         }
 
-        .module-navigation a:hover {
-            background-color: rgba(74, 115, 171, 0.1);
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(74, 115, 171, 0.1);
         }
 
-        .module-navigation .nav-previous {
-            margin-right: auto;
+        .hero {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 60px 30px;
+            text-align: center;
         }
 
-        .module-navigation .nav-next {
-            margin-left: auto;
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            font-weight: 300;
         }
 
-        .module-navigation i {
-            font-size: 0.9rem;
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
         }
 
-        .module-navigation .nav-previous i {
-            margin-right: 0.6rem;
-        }
-
-        .module-navigation .nav-next i {
-            margin-left: 0.6rem;
-        }
-
-        @media (max-width: 768px) {
-            .module-navigation {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .module-navigation a {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-
-        /* Style pour le menu de navigation principal */
-        .page-navigation {
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            padding: 0.5rem;
-            margin-top: 1rem;
-        }
-
-        .nav-list {
+        .main-wrapper {
             display: flex;
-            list-style: none;
-            padding: 0;
-            margin: 0;
+            max-width: 1800px;
+            margin: 0 auto;
+            gap: 30px;
+            padding: 0 30px;
         }
 
-        .nav-item {
-            position: relative;
-            margin-right: 1rem;
+        .sidebar {
+            width: 300px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
         }
 
-        .nav-link {
-            display: block;
-            padding: 0.5rem 1rem;
-            color: #4a73ab;
+        .sidebar-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .sidebar-section h3 {
+            color: #2c3e50;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        .sidebar-section h3 i { color: #3498db; }
+
+        .quick-links { list-style: none; }
+
+        .quick-links li { margin-bottom: 12px; }
+
+        .quick-links a {
+            color: #555;
             text-decoration: none;
-            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 6px;
             transition: all 0.3s ease;
         }
 
-        .nav-link:hover {
-            background-color: rgba(74, 115, 171, 0.1);
+        .quick-links a:hover {
+            background: #f8f9fa;
+            color: #3498db;
+            transform: translateX(5px);
         }
 
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            background-color: white;
-            min-width: 180px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            border-radius: 4px;
-            z-index: 100;
-            list-style: none;
-            padding: 0.5rem 0;
+        .quick-links i {
+            color: #3498db;
+            width: 20px;
         }
 
-        .dropdown-menu a {
-            display: block;
-            padding: 0.5rem 1rem;
-            color: #333;
+        .ticketing-sidebar {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(41, 128, 185, 0.05));
+            border: 2px solid #3498db;
+        }
+
+        .ticketing-sidebar h3 {
+            color: #3498db;
+            border-bottom-color: #3498db;
+        }
+
+        .ticketing-sidebar h3 i { color: #3498db; }
+
+        .ticketing-sidebar p {
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+
+        .ticket-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .ticket-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(52, 152, 219, 0.5);
+        }
+
+        main {
+            flex: 1;
+            padding: 60px 0;
+            min-width: 0;
+        }
+
+        .breadcrumbs {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs a {
+            color: #3498db;
             text-decoration: none;
         }
 
-        .dropdown-menu a:hover {
-            background-color: #f8f9fa;
+        .page-header h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 50px;
         }
 
-        .nav-item:hover .dropdown-menu {
-            display: block;
+        .content-section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .content-section h3 {
+            color: #3498db;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-section p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 30px;
+        }
+
+        .copyright {
+            text-align: center;
+            color: #95a5a6;
+        }
+
+        @media (max-width: 1024px) {
+            .main-wrapper { flex-direction: column; }
+            .sidebar {
+                width: 100%;
+                position: relative;
+                top: 0;
+                max-height: none;
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-toggle { display: block; }
+            .main-nav { display: none; }
+            .main-nav.active { display: block; }
+            .nav-menu { flex-direction: column; padding: 20px; }
+            .hero h1 { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
     <header>
-        <nav class="navbar">
+        <div class="top-bar">
             <div class="logo">
-                <a href="../index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
-                    <div style="width: 40px; height: 40px; background-color: #4a73ab; border-radius: 8px; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold">D</div>
+                <a href="../index.html">
+                    <div class="logo-icon">D</div>
                     <h1>ADT Dolibarr</h1>
                 </a>
             </div>
-            <div class="nav-menu">
-                <a href="pre-opportunite.html"><i class="fas fa-bullhorn"></i> Pré-Opportunité</a>
-                <a href="tiers.html"><i class="fas fa-building"></i> Tiers</a>
-                <a href="projets.html"><i class="fas fa-project-diagram"></i> Projets</a>
-                <a href="commerce.html"><i class="fas fa-suitcase"></i> Commerce</a>
-                <a href="facturation.html"><i class="fas fa-file-invoice-dollar"></i> Facturation</a>
-                <a href="banques.html"><i class="fas fa-university"></i> Banques</a>
-                <a href="produits-services.html"><i class="fas fa-cube"></i> Services</a>
-                <a href="grh.html"><i class="fas fa-user-tie"></i> GRH</a>
-                <a href="documents.html"><i class="fas fa-folder-open"></i> Documents</a>
-                <a href="agenda.html"><i class="fas fa-calendar-alt"></i> Agenda</a>
-            </div>
             <div class="search-box">
                 <i class="fas fa-search"></i>
-                <input type="text" placeholder="Rechercher un tutoriel...">
+                <input type="text" placeholder="Rechercher...">
             </div>
-            <div class="mobile-menu">
+            <button class="mobile-toggle" id="mobileToggle">
                 <i class="fas fa-bars"></i>
-            </div>
+            </button>
+        </div>
+        <nav class="main-nav" id="mainNav">
+            <ul class="nav-menu">
+                <li><a href="../index.html"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="pre-opportunite.html"><i class="fas fa-bullhorn"></i> Pré-Opportunité</a></li>
+                <li><a href="tiers.html"><i class="fas fa-building"></i> Tiers</a></li>
+                <li><a href="projets.html"><i class="fas fa-project-diagram"></i> Projets</a></li>
+                <li><a href="commerce.html"><i class="fas fa-suitcase"></i> Commerce</a></li>
+                <li><a href="facturation.html"><i class="fas fa-file-invoice-dollar"></i> Facturation</a></li>
+                <li><a href="produits-services.html"><i class="fas fa-cube"></i> Services</a></li>
+                <li><a href="agenda.html"><i class="fas fa-calendar-alt"></i> Agenda</a></li>
+            </ul>
         </nav>
     </header>
 
-    <div class="page-header">
-        <div class="page-title">
-            <h2>Gestion des Tiers</h2>
-        </div>
-        <div class="page-navigation">
-            <nav class="main-nav">
-                <ul class="nav-list">
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link">Clients</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="tiers/new.tiers.html">Créer un nouveau tiers</a></li>
-                            <li><a href="tiers/liste.tiers.html">Liste</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link">Contact Adresse</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="tiers/newcontact.html">Créer un nouveau contact</a></li>
-                            <li><a href="tiers/liste.contact.html">Liste</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="echanges.html" class="nav-link">Tous les échanges</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </div>
-
-    <main class="page-content">
-        <div class="breadcrumbs">
-            <a href="../index.html">Accueil</a> > Tiers
-        </div>
-        
-        <!-- Nouvelle mise en page à deux colonnes -->
-        <div class="two-column-layout">
-            <!-- Colonne de contenu (65%) -->
-            <div class="content-column">
-                <h3>Introduction au module Tiers</h3>
-                <p>Le module Tiers est le cœur de Dolibarr. Il vous permet de gérer l'ensemble de vos relations d'affaires en centralisant les informations sur vos clients,
-                    prospects et fournisseurs. Une gestion efficace de vos tiers vous permettra d'optimiser votre relation client et de faciliter votre gestion commerciale.</p>
-                <br>
-                <div class="info-box">
-                    <h4> RAPPEL : Les différents Types de tiers dans Dolibarr</h4>
-                    <ul>
-                        <li><strong>Client</strong> : Personne ou organisation qui achète vos produits ou services</li>
-                        <li><strong>Prospect</strong> : Client potentiel qui pourrait devenir un client à l'avenir</li>
-                        <li><strong>Fournisseur</strong> : Entreprise qui vous approvisionne en produits ou services</li>
-                    </ul>
-                </div>
-                <br>
-
-                
-                <div class="tutorial-section">
-                    <h4>2. Choississez votre tutoriel</h4>
-                    
-                    <div class="step-cards">
-                        <div class="step-card">
-                            <div class="step-card-image">
-                                <img src="../img/tiers/nouveauTiers.png" alt="Création d'un nouveau tiers" style="width: 350px">
-                            </div>
-                            <div class="step-card-content">
-                                <h5>Création d'un nouveau tiers</h5>
-                                <p>Dans le menu, sélectionnez le type de tiers que vous souhaitez créer (client, prospect, fournisseur).</p>
-                                <a href="tiers/new.tiers.html" class="step-card-link">
-                                    <i class="fas fa-arrow-right"></i> Créer un nouveau tiers
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <div class="step-card">
-                            <div class="step-card-image">
-                                <img src="../img/tiers/liste.tiers.png" alt="Liste des tiers" style="width: 350px">
-                            </div>
-                            <div class="step-card-content">
-                                <h5>Consulter vos tiers via "liste"</h5>
-                                <p>Accédez à la liste complète des tiers et utilisez les filtres pour affiner vos recherches.</p>
-                                <a href="tiers/liste.tiers.html" class="step-card-link">
-                                    <i class="fas fa-arrow-right"></i> Voir la liste des tiers
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <div class="step-card">
-                            <div class="step-card-image">
-                                <img src="../img/tiers/tag-categories_1.png" alt="Catégorisation des tiers" style="width: 650px">
-                            </div>
-                            <div class="step-card-content">
-                                <h5>Catégoriser vos tiers</h5>
-                                <p>Organisez vos tiers avec des tags pour une gestion plus efficace de votre base clients.</p>
-                                <a href="tiers/categories.html" class="step-card-link">
-                                    <i class="fas fa-arrow-right"></i> Gérer les catégories
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- <div class="tutorial-section">
-                    <h4>3. Consultation et modification d'un tiers existant</h4>
-                    
-                    <div class="tutorial-step">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h5>Accéder à la liste des tiers</h5>
-                            <p>Dans le menu latéral gauche, cliquez sur <strong>Liste</strong> sous la catégorie qui vous intéresse (clients, prospects, fournisseurs).</p>
-                            <p><img src="../img/tiers/contact.png " style="width: 500px;" alt="Menu de liste des tiers"> </p>
-                        </div>
-                    </div>
-                    
-                    <div class="tutorial-step">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h5>Consulter la fiche d'un tiers</h5>
-                            <p>Cliquez sur le nom du tiers pour accéder à sa fiche complète. La fiche s'ouvre avec plusieurs onglets :</p>
-                            <ul>
-                                <li><strong>Fiche</strong> : Informations générales du tiers</li>
-                                <li><strong>Client</strong> : Données commerciales spécifiques client</li>
-                                <li><strong>Agenda</strong> : Actions planifiées avec ce tiers</li>
-                                <li><strong>Documents</strong> : Fichiers associés à ce tiers</li>
-                                <li>Et d'autres onglets selon votre configuration</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="tutorial-step">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h5>Modifier les informations d'un tiers</h5>
-                            <p>Dans l'onglet "Fiche", cliquez sur le bouton "Modifier" pour éditer les informations du tiers. Après avoir effectué vos modifications, cliquez sur "Enregistrer" pour sauvegarder les changements.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="tutorial-section">
-                    <h4>4. Suppression d'un tiers</h4>
-                    <p>Pour supprimer un tiers, accédez à sa fiche comme expliqué précédemment, puis cliquez sur le bouton "Éliminer" ou "Supprimer".</p>
-                    
-                    <div class="warning-box">
-                        <strong>Attention !</strong> Vous ne pourrez pas supprimer un tiers s'il est associé à d'autres éléments dans Dolibarr (commandes, factures, etc.). Il faudra d'abord supprimer ces éléments liés ou désactiver le tiers plutôt que de le supprimer complètement.
-                    </div>
-                </div>
-                
-                <div class="tutorial-section">
-                    <h4>5. Gestion des contacts</h4>
-                    <p>Les contacts représentent les personnes physiques associées à vos tiers. Ils sont essentiels pour maintenir une communication efficace avec vos partenaires commerciaux.</p>
-                    
-                    <div class="tutorial-step">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h5>Accéder à la gestion des contacts</h5>
-                            <p>Dans le menu latéral du module Tiers, cliquez sur "Contacts" pour accéder aux options de gestion des contacts.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="tutorial-step">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h5>Créer un nouveau contact</h5>
-                            <p>Cliquez sur "Nouveau contact" et remplissez le formulaire avec les informations de la personne :</p>
-                            <ul>
-                                <li>Nom et prénom</li>
-                                <li>Tiers associé (optionnel, car un contact peut exister sans être lié à un tiers)</li>
-                                <li>Fonction/poste</li>
-                                <li>Coordonnées (téléphone, email, etc.)</li>
-                            </ul>
-                            <p>Cliquez sur "Ajouter" pour créer le contact.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="tutorial-step">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h5>Gérer les contacts d'un tiers spécifique</h5>
-                            <p>Vous pouvez également gérer les contacts directement depuis la fiche d'un tiers :</p>
-                            <ol>
-                                <li>Ouvrez la fiche du tiers concerné</li>
-                                <li>Accédez à l'onglet "Contacts/Adresses"</li>
-                                <li>Utilisez le bouton "Ajouter contact" pour associer un contact existant ou en créer un nouveau</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="tutorial-section">
-                    <h4>6. Recherche de tiers et contacts</h4>
-                    
-                    <div class="tutorial-step">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h5>Utiliser la recherche simple</h5>
-                            <p>Dans les listes de tiers ou de contacts, utilisez la barre de recherche en haut pour filtrer par nom, référence, ville, etc.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="tutorial-step">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h5>Filtrer par critères spécifiques</h5>
-                            <p>Dolibarr permet de filtrer les tiers selon différents critères :</p>
-                            <ul>
-                                <li>Commercial assigné</li>
-                                <li>Pays ou région</li>
-                                <li>Statut (prospect, client, fournisseur)</li>
-                                <li>Date de création</li>
-                            </ul>
-                            <div class="quick-tip">
-                                <strong>Astuce !</strong> Utilisez les en-têtes des colonnes pour trier les résultats par ordre croissant ou décroissant selon ce critère.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="tutorial-section">
-                    <h4>7. Fonctionnalités avancées</h4>
-                    
-                    <div class="tutorial-step">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h5>Catégorisation des tiers</h5>
-                            <p>Dolibarr permet de classer vos tiers par catégories pour mieux les organiser :</p>
-                            <ol>
-                                <li>Accédez à la fiche du tiers</li>
-                                <li>Utilisez l'onglet "Catégories"</li>
-                                <li>Sélectionnez les catégories appropriées</li>
-                            </ol>
-                        </div>
-                    </div>
-                    
-                    <div class="tutorial-step">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h5>Importation et exportation de tiers</h5>
-                            <p>Pour gérer des listes importantes de tiers :</p>
-                            <ul>
-                                <li><strong>Exportation</strong> : Dans la liste des tiers, utilisez l'option "Exporter" pour générer un fichier CSV</li>
-                                <li><strong>Importation</strong> : Utilisez l'outil d'importation pour intégrer des tiers depuis un fichier CSV</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="tutorial-step">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h5>Actions commerciales</h5>
-                            <p>Suivez votre relation avec chaque tiers en enregistrant les interactions :</p>
-                            <ol>
-                                <li>Depuis la fiche d'un tiers, accédez à l'onglet "Agenda"</li>
-                                <li>Utilisez "Ajouter un événement" pour enregistrer appels, réunions, emails, etc.</li>
-                                <li>Consultez l'historique des interactions pour mieux suivre la relation</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div> -->
-                
-                <div class="module-navigation">
-                    <a href="pre-opportunite.html" class="nav-previous"><i class="fas fa-arrow-left"></i> Pré-Opportunité</a>
-                    <a href="projets.html" class="nav-next">Projets <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-            
-            <!-- Colonne média (35%) -->
-            <div class="media-column">
-                <h3>Les différents onglets</h3>
-                
-                <div class="media-box">
-                    <h4>Onglet Clients</h4>
-                    <img src="../img/tiers/nav_onglet1.png" alt="Interface du module Tiers dans Dolibarr">
-                    <p class="media-caption">Onglet de creation et de visualisation d'un tiers/clients</p>
-                </div>
-                
-                <div class="media-box">
-                    <h4>Onglet Contact/adresse</h4>
-                    <img src="../img/tiers/nav_onglet2.png" alt="Formulaire de création d'un tiers">
-                    <p class="media-caption">Onglet de creation et de visualisation d'un contact</p>
-                </div>
-                
-                <div class="media-box">
-                    <h4>Consultation des éhanges</h4>
-                    <img src="../img/tiers/nav_onglet3.png" alt="Fiche d'un tiers dans Dolibarr">
-                    <p class="media-caption">Visualisation des différents suivis entre l'ADT et les tiers ou les contacts</p>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <section class="cta">
-        <div class="cta-content">
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Gestion des Tiers HERO_TITLE Contacts</h1>
+            <p>Gérez vos clients, prospects et fournisseurs efficacement</p>
         </div>
     </section>
 
-    <footer id="contact">
-        <div class="footer-content">
-            <div class="footer-column">
-                <h4>ADT Dolibarr</h4>
-                <p>Votre ressource complète pour apprendre et maîtriser le logiciel Dolibarr ERP/CRM.</p>
-            </div>
-            
-            <div class="footer-column">
-                <h4>Navigation</h4>
-                <ul class="footer-links">
-                    <li><a href="../index.html">Accueil</a></li>
-                    <li><a href="pre-opportunite.html">Pré-Opportunité</a></li>
-                    <li><a href="tiers.html">Tiers</a></li>
-                    <li><a href="projets.html">Projets
+    <div class="main-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3><i class="fas fa-list"></i> Sur cette page</h3>
+                <ul class="quick-links">
+                    <li><a href="#introduction"><i class="fas fa-chevron-right"></i> Introduction</a></li>
+                    <li><a href="#configuration"><i class="fas fa-chevron-right"></i> Configuration</a></li>
+                    <li><a href="#utilisation"><i class="fas fa-chevron-right"></i> Utilisation</a></li>
                 </ul>
             </div>
+
+            <div class="sidebar-section ticketing-sidebar">
+                <h3><i class="fas fa-ticket-alt"></i> Besoin d'aide ?</h3>
+                <p>Créez un ticket de support pour obtenir une assistance personnalisée.</p>
+                <a href="https://gestion.academie-tourisme.fr/" class="ticket-btn" target="_blank">
+                    <i class="fas fa-plus-circle"></i>
+                    Créer un ticket
+                </a>
+            </div>
+        </aside>
+
+        <main>
+            <div class="breadcrumbs">
+                <a href="../index.html">Accueil</a> > Tiers TITLE_PLACEHOLDER Contacts
+            </div>
+
+            <div class="page-header">
+                <h2>Tiers TITLE_PLACEHOLDER Contacts</h2>
+            </div>
+
+            <section class="content-section" id="introduction">
+                <h3><i class="fas fa-info-circle"></i> Introduction</h3>
+                <p>Contenu à venir pour le module Tiers TITLE_PLACEHOLDER Contacts...</p>
+            </section>
+
+            <section class="content-section" id="configuration">
+                <h3><i class="fas fa-cog"></i> Configuration</h3>
+                <p>Guide de configuration à venir...</p>
+            </section>
+
+            <section class="content-section" id="utilisation">
+                <h3><i class="fas fa-tasks"></i> Utilisation</h3>
+                <p>Guide d'utilisation à venir...</p>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <div class="copyright">
+            <p>&copy; 2025 ADT - Académie du Tourisme. Tous droits réservés.</p>
         </div>
     </footer>
+
+    <script>
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

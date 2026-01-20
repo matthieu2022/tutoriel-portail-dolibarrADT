@@ -3,156 +3,429 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pré-Opportunité - ADT Dolibarr</title>
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Facturation - ADT Dolibarr</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .top-bar {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 10px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo a {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #4a73ab;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+            padding: 8px 16px;
+            min-width: 300px;
+        }
+
+        .search-box i {
+            color: #bdc3c7;
+            margin-right: 10px;
+        }
+
+        .search-box input {
+            background: none;
+            border: none;
+            outline: none;
+            color: white;
+            flex: 1;
+            font-size: 0.95rem;
+        }
+
+        .search-box input::placeholder { color: #bdc3c7; }
+
+        .mobile-toggle {
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .main-nav {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 5px;
+            padding: 15px 0;
+        }
+
+        .nav-menu a {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            color: #ecf0f1;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            padding: 60px 30px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        .main-wrapper {
+            display: flex;
+            max-width: 1800px;
+            margin: 0 auto;
+            gap: 30px;
+            padding: 0 30px;
+        }
+
+        .sidebar {
+            width: 300px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+
+        .sidebar-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .sidebar-section h3 {
+            color: #2c3e50;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        .sidebar-section h3 i { color: #f39c12; }
+
+        .quick-links { list-style: none; }
+
+        .quick-links li { margin-bottom: 12px; }
+
+        .quick-links a {
+            color: #555;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .quick-links a:hover {
+            background: #f8f9fa;
+            color: #f39c12;
+            transform: translateX(5px);
+        }
+
+        .quick-links i {
+            color: #f39c12;
+            width: 20px;
+        }
+
+        .ticketing-sidebar {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(41, 128, 185, 0.05));
+            border: 2px solid #3498db;
+        }
+
+        .ticketing-sidebar h3 {
+            color: #3498db;
+            border-bottom-color: #3498db;
+        }
+
+        .ticketing-sidebar h3 i { color: #3498db; }
+
+        .ticketing-sidebar p {
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+
+        .ticket-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .ticket-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(52, 152, 219, 0.5);
+        }
+
+        main {
+            flex: 1;
+            padding: 60px 0;
+            min-width: 0;
+        }
+
+        .breadcrumbs {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .page-header h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 50px;
+        }
+
+        .content-section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .content-section h3 {
+            color: #f39c12;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-section p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 30px;
+        }
+
+        .copyright {
+            text-align: center;
+            color: #95a5a6;
+        }
+
+        @media (max-width: 1024px) {
+            .main-wrapper { flex-direction: column; }
+            .sidebar {
+                width: 100%;
+                position: relative;
+                top: 0;
+                max-height: none;
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-toggle { display: block; }
+            .main-nav { display: none; }
+            .main-nav.active { display: block; }
+            .nav-menu { flex-direction: column; padding: 20px; }
+            .hero h1 { font-size: 2rem; }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar">
+        <div class="top-bar">
             <div class="logo">
-                <div style="width: 40px; height: 40px; background-color: #4a73ab; border-radius: 8px; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold">D</div>
-                <h1>ADT Dolibarr</h1>
-            </div>
-            <div class="nav-menu">
-                <a href="pre-opportunite.html"><i class="fas fa-bullhorn"></i> Pré-Opportunité</a>
-                <a href="tiers.html"><i class="fas fa-building"></i> Tiers</a>
-                <a href="projets.html"><i class="fas fa-project-diagram"></i> Projets</a>
-                <a href="commerce.html"><i class="fas fa-suitcase"></i> Commerce</a>
-                <a href="facturation.html"><i class="fas fa-file-invoice-dollar"></i> Facturation</a>
-                <a href="banques.html"><i class="fas fa-university"></i> Banques</a>
-                <a href="produits-services.html"><i class="fas fa-cube"></i> Produits | Services</a>
-                <a href="grh.html"><i class="fas fa-user-tie"></i> GRH</a>
-                <a href="documents.html"><i class="fas fa-folder-open"></i> Documents</a>
-                <a href="agenda.html"><i class="fas fa-calendar-alt"></i> Agenda</a>
+                <a href="../index.html">
+                    <div class="logo-icon">D</div>
+                    <h1>ADT Dolibarr</h1>
+                </a>
             </div>
             <div class="search-box">
                 <i class="fas fa-search"></i>
-                <input type="text" placeholder="Rechercher un tutoriel...">
+                <input type="text" placeholder="Rechercher...">
             </div>
-            <div class="mobile-menu">
+            <button class="mobile-toggle" id="mobileToggle">
                 <i class="fas fa-bars"></i>
-            </div>
+            </button>
+        </div>
+        <nav class="main-nav" id="mainNav">
+            <ul class="nav-menu">
+                <li><a href="../index.html"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="pre-opportunite.html"><i class="fas fa-bullhorn"></i> Pré-Opportunité</a></li>
+                <li><a href="tiers.html"><i class="fas fa-building"></i> Tiers</a></li>
+                <li><a href="projets.html"><i class="fas fa-project-diagram"></i> Projets</a></li>
+                <li><a href="commerce.html"><i class="fas fa-suitcase"></i> Commerce</a></li>
+                <li><a href="facturation.html"><i class="fas fa-file-invoice-dollar"></i> Facturation</a></li>
+                <li><a href="produits-services.html"><i class="fas fa-cube"></i> Services</a></li>
+                <li><a href="agenda.html"><i class="fas fa-calendar-alt"></i> Agenda</a></li>
+            </ul>
         </nav>
     </header>
 
-    <div class="page-header">
-        <div class="page-title">
-            <h2>Pré-Opportunité</h2>
-            <p>Guides pour gérer vos opportunités commerciales dans Dolibarr</p>
-        </div>
-    </div>
-
-    <main class="page-content">
-        <div class="breadcrumbs">
-            <a href="../index.html">Accueil</a> > Pré-Opportunité
-        </div>
-        
-        <section class="module-content">
-            <h3>Comprendre le module Pré-Opportunité</h3>
-            <p>Le module Pré-Opportunité dans Dolibarr vous permet de suivre et de gérer les premières étapes de votre processus commercial, avant même que le prospect ne devienne une opportunité qualifiée.</p>
-            
-            <div class="tutorial-section">
-                <h4>Configuration initiale</h4>
-                <p>Découvrez comment configurer le module Pré-Opportunité pour l'adapter à votre cycle de vente.</p>
-                
-                <!-- Tutoriel à compléter ici -->
-            </div>
-            
-            <div class="tutorial-section">
-                <h4>Création d'une pré-opportunité</h4>
-                <p>Apprenez à créer et qualifier une pré-opportunité dans Dolibarr.</p>
-                
-                <!-- Tutoriel à compléter ici -->
-            </div>
-            
-            <div class="tutorial-section">
-                <h4>Suivi et qualification</h4>
-                <p>Comment suivre l'évolution de vos pré-opportunités et les qualifier efficacement.</p>
-                
-                <!-- Tutoriel à compléter ici -->
-            </div>
-            
-            <div class="tutorial-section">
-                <h4>Conversion en opportunité</h4>
-                <p>Le processus pour convertir une pré-opportunité qualifiée en opportunité commerciale.</p>
-                
-                <!-- Tutoriel à compléter ici -->
-            </div>
-            
-            <div class="tutorial-section">
-                <h4>Rapports et analyses</h4>
-                <p>Comment générer des rapports pour analyser vos pré-opportunités et optimiser votre prospection.</p>
-                
-                <!-- Tutoriel à compléter ici -->
-            </div>
-        </section>
-    </main>
-
-    <section class="cta">
-        <div class="cta-content">
-            <h3>Prêt à maîtriser Dolibarr?</h3>
-            <p>Inscrivez-vous à notre plateforme pour accéder à tous nos tutoriels et progresser rapidement.</p>
-            <a href="https://dolibarrvierge19.e-learning-neo-sphere.fr/index.php" class="btn">S'inscrire maintenant</a>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Module Facturation</h1>
+            <p>Créez et gérez vos factures clients</p>
         </div>
     </section>
 
-    <footer id="contact">
-        <div class="footer-content">
-            <div class="footer-column">
-                <h4>ADT Dolibarr</h4>
-                <p>Votre ressource complète pour apprendre et maîtriser le logiciel Dolibarr ERP/CRM.</p>
-            </div>
-            
-            <div class="footer-column">
-                <h4>Navigation</h4>
-                <ul class="footer-links">
-                    <li><a href="../index.html">Accueil</a></li>
-                    <li><a href="pre-opportunite.html">Pré-Opportunité</a></li>
-                    <li><a href="tiers.html">Tiers</a></li>
-                    <li><a href="projets.html">Projets</a></li>
-                    <li><a href="commerce.html">Commerce</a></li>
+    <div class="main-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3><i class="fas fa-list"></i> Sur cette page</h3>
+                <ul class="quick-links">
+                    <li><a href="#introduction"><i class="fas fa-chevron-right"></i> Introduction</a></li>
+                    <li><a href="#configuration"><i class="fas fa-chevron-right"></i> Configuration</a></li>
+                    <li><a href="#utilisation"><i class="fas fa-chevron-right"></i> Utilisation</a></li>
                 </ul>
             </div>
-            
-            <div class="footer-column">
-                <h4>Modules</h4>
-                <ul class="footer-links">
-                    <li><a href="facturation.html">Facturation</a></li>
-                    <li><a href="banques.html">Banques</a></li>
-                    <li><a href="produits-services.html">Produits | Services</a></li>
-                    <li><a href="grh.html">GRH</a></li>
-                    <li><a href="documents.html">Documents</a></li>
-                    <li><a href="agenda.html">Agenda</a></li>
-                </ul>
+
+            <div class="sidebar-section ticketing-sidebar">
+                <h3><i class="fas fa-ticket-alt"></i> Besoin d'aide ?</h3>
+                <p>Créez un ticket de support pour obtenir une assistance personnalisée.</p>
+                <a href="https://gestion.academie-tourisme.fr/" class="ticket-btn" target="_blank">
+                    <i class="fas fa-plus-circle"></i>
+                    Créer un ticket
+                </a>
             </div>
-            
-            <div class="footer-column">
-                <h4>Ressources</h4>
-                <ul class="footer-links">
-                    <li><a href="#">Téléchargements</a></li>
-                    <li><a href="#">Forum d'entraide</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Blog</a></li>
-                </ul>
+        </aside>
+
+        <main>
+            <div class="breadcrumbs">
+                <a href="../index.html">Accueil</a> > Facturation
             </div>
-            
-            <div class="footer-column">
-                <h4>Contact</h4>
-                <ul class="footer-links">
-                    <li><a href="mailto:contact@adtdolibarr.com">Email</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">LinkedIn</a></li>
-                    <li><a href="#">YouTube</a></li>
-                </ul>
+
+            <div class="page-header">
+                <h2>Facturation</h2>
             </div>
-        </div>
-        
+
+            <section class="content-section" id="introduction">
+                <h3><i class="fas fa-info-circle"></i> Introduction</h3>
+                <p>Contenu à venir pour le module Facturation...</p>
+            </section>
+
+            <section class="content-section" id="configuration">
+                <h3><i class="fas fa-cog"></i> Configuration</h3>
+                <p>Guide de configuration à venir...</p>
+            </section>
+
+            <section class="content-section" id="utilisation">
+                <h3><i class="fas fa-tasks"></i> Utilisation</h3>
+                <p>Guide d'utilisation à venir...</p>
+            </section>
+        </main>
+    </div>
+
+    <footer>
         <div class="copyright">
-            <p>&copy; 2025 ADT Dolibarr. Tous droits réservés.</p>
+            <p>&copy; 2025 ADT - Académie du Tourisme. Tous droits réservés.</p>
         </div>
     </footer>
 
-    <script src="../js/main.js"></script>
+    <script>
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+        });
+    </script>
 </body>
 </html>

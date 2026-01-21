@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projets - ADT Dolibarr</title>
+    <title>Module Projets - Dolibarr ADT</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
@@ -15,6 +19,7 @@
             background-color: #f8f9fa;
         }
 
+        /* Header */
         header {
             background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -30,280 +35,489 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        .logo a {
-            text-decoration: none;
+        .logo {
             display: flex;
             align-items: center;
             gap: 10px;
             color: white;
+            text-decoration: none;
         }
 
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background-color: #4a73ab;
-            border-radius: 8px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
+        .logo img {
+            height: 50px;
         }
 
-        .logo h1 {
-            font-size: 1.5rem;
-            font-weight: 600;
+        /* Breadcrumb */
+        .breadcrumb {
+            background: white;
+            padding: 15px 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
-        .search-box {
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 25px;
-            padding: 8px 16px;
-            min-width: 300px;
-        }
-
-        .search-box i {
-            color: #bdc3c7;
-            margin-right: 10px;
-        }
-
-        .search-box input {
-            background: none;
-            border: none;
-            outline: none;
-            color: white;
-            flex: 1;
-            font-size: 0.95rem;
-        }
-
-        .search-box input::placeholder { color: #bdc3c7; }
-
-        .mobile-toggle {
-            display: none;
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
-
-        .main-nav {
+        .breadcrumb-container {
             max-width: 1600px;
             margin: 0 auto;
-            padding: 0 30px;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 5px;
-            padding: 15px 0;
-        }
-
-        .nav-menu a {
             display: flex;
             align-items: center;
-            gap: 6px;
-            padding: 10px 18px;
-            color: #ecf0f1;
-            text-decoration: none;
+            gap: 10px;
             font-size: 0.9rem;
-            font-weight: 500;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            white-space: nowrap;
         }
 
-        .nav-menu a:hover,
-        .nav-menu a.active {
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            transform: translateY(-2px);
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
         }
 
-        .hero {
-            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
-            color: white;
-            padding: 60px 30px;
-            text-align: center;
+        .breadcrumb a:hover {
+            color: #2980b9;
         }
 
-        .hero h1 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-            font-weight: 300;
+        .breadcrumb-separator {
+            color: #95a5a6;
         }
 
-        .hero p {
-            font-size: 1.2rem;
-            opacity: 0.95;
+        .breadcrumb-current {
+            color: #7f8c8d;
         }
 
-        .main-wrapper {
-            display: flex;
-            max-width: 1800px;
-            margin: 0 auto;
-            gap: 30px;
+        /* Layout 2 colonnes : 40% vidéos / 60% contenu */
+        .page-container {
+            max-width: 1600px;
+            margin: 40px auto;
             padding: 0 30px;
+            display: grid;
+            grid-template-columns: 40% 60%;
+            gap: 30px;
+            align-items: start;
         }
 
-        .sidebar {
-            width: 300px;
-            flex-shrink: 0;
+        /* Aside vidéos - Sticky */
+        .video-aside {
             position: sticky;
             top: 100px;
-            height: fit-content;
-            max-height: calc(100vh - 120px);
+            max-height: 800px;
             overflow-y: auto;
+            scroll-behavior: smooth;
         }
 
-        .sidebar-section {
+        .video-block {
             background: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 20px;
+            border-radius: 12px;
+            padding: 10px;
+            margin-bottom: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
 
-        .sidebar-section h3 {
+        .video-block h3 {
             color: #2c3e50;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #ecf0f1;
-        }
-
-        .sidebar-section h3 i { color: #9b59b6; }
-
-        .quick-links { list-style: none; }
-
-        .quick-links li { margin-bottom: 12px; }
-
-        .quick-links a {
-            color: #555;
-            text-decoration: none;
+            font-size: 1rem;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             gap: 8px;
-            padding: 8px 12px;
-            border-radius: 6px;
-            transition: all 0.3s ease;
         }
 
-        .quick-links a:hover {
-            background: #f8f9fa;
-            color: #9b59b6;
-            transform: translateX(5px);
-        }
-
-        .quick-links i {
-            color: #9b59b6;
-            width: 20px;
-        }
-
-        .ticketing-sidebar {
-            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(41, 128, 185, 0.05));
-            border: 2px solid #3498db;
-        }
-
-        .ticketing-sidebar h3 {
-            color: #3498db;
-            border-bottom-color: #3498db;
-        }
-
-        .ticketing-sidebar h3 i { color: #3498db; }
-
-        .ticketing-sidebar p {
-            color: #555;
-            margin-bottom: 20px;
-            line-height: 1.6;
+        .video-block h3 i {
+            color: #27ae60;
             font-size: 0.9rem;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+            margin-bottom: 10px;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-info {
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.5;
+            padding: 10px;
+            background: #f8f9fa;
+            border-left: 3px solid #27ae60;
+            border-radius: 5px;
+        }
+
+        .video-info p {
+            margin: 0;
+        }
+
+        /* Support sidebar block */
+        .support-block {
+            background: linear-gradient(135deg, #27ae60, #229954);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            color: white;
+        }
+
+        .support-block h3 {
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .support-block h3 i {
+            color: white;
+        }
+
+        .support-block p {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.6;
         }
 
         .ticket-btn {
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, #3498db, #2980b9);
-            color: white;
+            justify-content: center;
+            gap: 8px;
             padding: 12px 20px;
-            border-radius: 10px;
+            background: white;
+            color: #27ae60;
             text-decoration: none;
+            border-radius: 8px;
             font-weight: 600;
             transition: all 0.3s ease;
-            font-size: 0.95rem;
-            width: 100%;
-            justify-content: center;
         }
 
         .ticket-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 25px rgba(52, 152, 219, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
-        main {
-            flex: 1;
-            padding: 60px 0;
+        /* Contenu principal */
+        .main-content {
             min-width: 0;
         }
 
-        .breadcrumbs {
-            color: #7f8c8d;
-            margin-bottom: 30px;
-            font-size: 0.9rem;
-        }
-
-        .breadcrumbs a {
-            color: #3498db;
-            text-decoration: none;
-        }
-
-        .page-header h2 {
-            font-size: 2.5rem;
-            color: #2c3e50;
-            margin-bottom: 50px;
-        }
-
-        .content-section {
+        /* Page header */
+        .page-header {
             background: white;
             border-radius: 15px;
-            padding: 40px;
-            margin-bottom: 30px;
+            padding: 10px;
+            margin-bottom: 25px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
 
-        .content-section h3 {
-            color: #9b59b6;
+        .page-title {
+            color: #2c3e50;
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .page-title i {
+            color: #27ae60;
+        }
+
+        .page-subtitle {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            margin-bottom: 18px;
+        }
+
+        .page-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .tag-difficulty {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+        }
+
+        .tag-time {
+            background: #e7f3ff;
+            color: #0066cc;
+        }
+
+        .tag-category {
+            background: linear-gradient(135deg, #27ae60, #229954);
+            color: white;
+        }
+
+        /* Content sections */
+        .content-section {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .content-section h2 {
+            color: #2c3e50;
             font-size: 1.8rem;
             margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #27ae60;
+        }
+
+        .content-section h3 {
+            color: #34495e;
+            font-size: 1.4rem;
+            margin: 25px 0 12px;
             display: flex;
             align-items: center;
             gap: 10px;
+        }
+
+        .content-section h3 i {
+            color: #27ae60;
+            font-size: 1.1rem;
         }
 
         .content-section p {
             color: #555;
             line-height: 1.8;
-            margin-bottom: 15px;
+            margin-bottom: 16px;
+            text-align: justify;
         }
 
+        .content-section ul,
+        .content-section ol {
+            margin-left: 30px;
+            margin-bottom: 16px;
+        }
+
+        .content-section li {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+
+        .content-section li strong {
+            color: #2c3e50;
+        }
+
+        /* Info boxes */
+        .info-box {
+            background: linear-gradient(135deg, #e8f8f5, #d4efdf);
+            border-left: 5px solid #27ae60;
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .info-box h4 {
+            color: #229954;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .info-box p {
+            color: #555;
+            margin: 0;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fff4e6, #ffe8cc);
+            border-left: 5px solid #f39c12;
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .warning-box h4 {
+            color: #e67e22;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .warning-box p {
+            color: #555;
+            margin: 0;
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, #e8f8f5, #d4efdf);
+            border-left: 5px solid #27ae60;
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .success-box h4 {
+            color: #229954;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .success-box p {
+            color: #555;
+            margin: 0;
+        }
+
+        /* Steps */
+        .steps-container {
+            margin: 25px 0;
+        }
+
+        .step {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 25px;
+            padding: 18px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            background: #ecf0f1;
+            transform: translateX(5px);
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #27ae60, #229954);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .step-content h4 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .step-content p {
+            color: #555;
+            margin: 0;
+        }
+
+        /* Features grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #27ae60;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .feature-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-card h4 i {
+            color: #27ae60;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Navigation buttons */
+        .page-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding: 25px 0;
+            border-top: 2px solid #ecf0f1;
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 22px;
+            background: linear-gradient(135deg, #27ae60, #229954);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(39, 174, 96, 0.4);
+        }
+
+        .nav-button.prev {
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+        }
+
+        .nav-button.prev:hover {
+            box-shadow: 0 6px 25px rgba(149, 165, 166, 0.4);
+        }
+
+        /* Footer */
         footer {
             background: #2c3e50;
             color: white;
             padding: 30px;
+            margin-top: 60px;
         }
 
         .copyright {
@@ -311,120 +525,432 @@
             color: #95a5a6;
         }
 
-        @media (max-width: 1024px) {
-            .main-wrapper { flex-direction: column; }
-            .sidebar {
-                width: 100%;
-                position: relative;
-                top: 0;
-                max-height: none;
-                margin-bottom: 30px;
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .page-container {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .video-aside {
+                position: static;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 15px;
+            }
+
+            .video-block {
+                margin-bottom: 0;
             }
         }
 
         @media (max-width: 768px) {
-            .mobile-toggle { display: block; }
-            .main-nav { display: none; }
-            .main-nav.active { display: block; }
-            .nav-menu { flex-direction: column; padding: 20px; }
-            .hero h1 { font-size: 2rem; }
+            .page-container {
+                padding: 0 20px;
+            }
+
+            .page-header,
+            .content-section {
+                padding: 25px;
+            }
+
+            .page-title {
+                font-size: 1.8rem;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .step {
+                flex-direction: column;
+            }
+
+            .page-navigation {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .video-aside {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="top-bar">
-            <div class="logo">
-                <a href="../index.html">
-                    <div class="logo-icon">D</div>
-                    <h1>ADT Dolibarr</h1>
-                </a>
-            </div>
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Rechercher...">
-            </div>
-            <button class="mobile-toggle" id="mobileToggle">
-                <i class="fas fa-bars"></i>
-            </button>
+        <div class="logo">
+            <a href="/index.html">
+                <img src="/img/adtutoriel.png" alt="ADT Tutoriels">
+            </a>
         </div>
-        <nav class="main-nav" id="mainNav">
-            <ul class="nav-menu">
-                <li><a href="../index.html"><i class="fas fa-home"></i> Accueil</a></li>
-                <li><a href="pre-opportunite.html"><i class="fas fa-bullhorn"></i> Pré-Opportunité</a></li>
-                <li><a href="tiers.html"><i class="fas fa-building"></i> Tiers</a></li>
-                <li><a href="projets.html"><i class="fas fa-project-diagram"></i> Projets</a></li>
-                <li><a href="commerce.html"><i class="fas fa-suitcase"></i> Commerce</a></li>
-                <li><a href="facturation.html"><i class="fas fa-file-invoice-dollar"></i> Facturation</a></li>
-                <li><a href="produits-services.html"><i class="fas fa-cube"></i> Services</a></li>
-                <li><a href="agenda.html"><i class="fas fa-calendar-alt"></i> Agenda</a></li>
-            </ul>
-        </nav>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Module Projets</h1>
-            <p>Gérez et suivez vos projets avec précision</p>
+    <div class="breadcrumb">
+        <div class="breadcrumb-container">
+            <a href="../../index.html"><i class="fas fa-home"></i> Accueil</a>
+            <span class="breadcrumb-separator">/</span>
+            <a href="dolibarr.html">Dolibarr</a>
+            <span class="breadcrumb-separator">/</span>
+            <span class="breadcrumb-current">Projets</span>
         </div>
-    </section>
+    </div>
 
-    <div class="main-wrapper">
-        <aside class="sidebar">
-            <div class="sidebar-section">
-                <h3><i class="fas fa-list"></i> Sur cette page</h3>
-                <ul class="quick-links">
-                    <li><a href="#introduction"><i class="fas fa-chevron-right"></i> Introduction</a></li>
-                    <li><a href="#configuration"><i class="fas fa-chevron-right"></i> Configuration</a></li>
-                    <li><a href="#utilisation"><i class="fas fa-chevron-right"></i> Utilisation</a></li>
-                </ul>
+    <div class="page-container">
+        <!-- Colonne gauche : Vidéos & Support (40%) -->
+        <aside class="video-aside">
+            <!-- Vidéo 1 (placeholder) -->
+            <div class="video-block">
+                <h3><i class="fas fa-play-circle"></i> Introduction aux Projets</h3>
+                <div class="video-container">
+                    <video controls>
+                        <source src="/video/projets-introduction.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <p><strong>Durée : 12 min</strong> - Découvrez la gestion de projets dans Dolibarr et ses fonctionnalités.</p>
+                </div>
             </div>
 
-            <div class="sidebar-section ticketing-sidebar">
-                <h3><i class="fas fa-ticket-alt"></i> Besoin d'aide ?</h3>
-                <p>Créez un ticket de support pour obtenir une assistance personnalisée.</p>
+            <!-- Vidéo 2 (placeholder) -->
+            <div class="video-block">
+                <h3><i class="fas fa-play-circle"></i> Suivi des tâches</h3>
+                <div class="video-container">
+                    <video controls>
+                        <source src="/video/projets-taches.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <p><strong>Durée : 10 min</strong> - Créez et organisez les tâches de vos projets pour un suivi optimal.</p>
+                </div>
+            </div>
+
+            <!-- Support Block -->
+            <div class="support-block">
+                <h3><i class="fas fa-ticket-alt"></i> Support</h3>
+                <p>Besoin d'aide ? Créez un ticket support et notre équipe vous répondra sous 24h.</p>
                 <a href="https://gestion.academie-tourisme.fr/" class="ticket-btn" target="_blank">
-                    <i class="fas fa-plus-circle"></i>
-                    Créer un ticket
+                    <i class="fas fa-plus-circle"></i> Créer un ticket
                 </a>
             </div>
         </aside>
 
-        <main>
-            <div class="breadcrumbs">
-                <a href="../index.html">Accueil</a> > Projets
-            </div>
-
+        <!-- Colonne droite : Contenu principal (60%) -->
+        <main class="main-content">
+            <!-- Page Header -->
             <div class="page-header">
-                <h2>Projets</h2>
+                <h1 class="page-title">
+                    <i class="fas fa-project-diagram"></i>
+                    Module Projets
+                </h1>
+                <p class="page-subtitle">Gérez vos projets de A à Z avec un suivi efficace des tâches et des ressources</p>
+                <div class="page-tags">
+                    <span class="tag tag-difficulty">
+                        <i class="fas fa-signal"></i> Moyen
+                    </span>
+                    <span class="tag tag-time">
+                        <i class="far fa-clock"></i> 30 min
+                    </span>
+                    <span class="tag tag-category">
+                        <i class="fas fa-tag"></i> Gestion
+                    </span>
+                </div>
             </div>
 
-            <section class="content-section" id="introduction">
-                <h3><i class="fas fa-info-circle"></i> Introduction</h3>
-                <p>Contenu à venir pour le module Projets...</p>
-            </section>
+            <!-- Introduction -->
+            <div class="content-section" id="introduction">
+                <h2>La gestion de projets dans Dolibarr</h2>
+                
+                <p>Le module <strong>Projets</strong> de Dolibarr permet de gérer l'ensemble du cycle de vie de vos projets clients : de la phase de prospection jusqu'à la livraison finale. Il centralise toutes les informations et interactions liées à un projet : tâches, temps passé, documents, factures, et communications.</p>
 
-            <section class="content-section" id="configuration">
-                <h3><i class="fas fa-cog"></i> Configuration</h3>
-                <p>Guide de configuration à venir...</p>
-            </section>
+                <div class="info-box">
+                    <h4><i class="fas fa-info-circle"></i> Qu'est-ce qu'un Projet dans Dolibarr ?</h4>
+                    <p>Un projet est une affaire commerciale structurée qui regroupe toutes les actions, tâches et ressources nécessaires pour répondre aux besoins d'un client. Chaque projet peut être lié à un ou plusieurs tiers, contenir des tâches, générer des factures et suivre le temps consacré.</p>
+                </div>
 
-            <section class="content-section" id="utilisation">
-                <h3><i class="fas fa-tasks"></i> Utilisation</h3>
-                <p>Guide d'utilisation à venir...</p>
-            </section>
+                <h3><i class="fas fa-list-check"></i> Avantages du module Projets</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4><i class="fas fa-bullseye"></i> Centralisation</h4>
+                        <p>Toutes les informations d'un projet au même endroit.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-tasks"></i> Gestion des tâches</h4>
+                        <p>Créez, assignez et suivez l'avancement des tâches.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-clock"></i> Suivi du temps</h4>
+                        <p>Mesurez le temps passé sur chaque tâche et projet.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-euro-sign"></i> Rentabilité</h4>
+                        <p>Calculez automatiquement la rentabilité de chaque projet.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Création -->
+            <div class="content-section" id="creation">
+                <h2><i class="fas fa-plus-circle"></i> Créer un projet</h2>
+                
+                <h3><i class="fas fa-file-alt"></i> Étapes de création</h3>
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Accéder aux projets</h4>
+                            <p>Depuis le menu principal, cliquez sur <strong>Projets → Nouveau Projet</strong>.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Informations générales</h4>
+                            <p>Renseignez le titre, la référence, le statut (brouillon, validé, en cours, terminé) et la visibilité du projet.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Lier à un tiers</h4>
+                            <p>Associez le projet à un client ou prospect. Vous pouvez également ajouter d'autres tiers participants.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Dates et budget</h4>
+                            <p>Définissez les dates de début et fin prévues, ainsi que le budget estimé du projet.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h4>Description et objectifs</h4>
+                            <p>Ajoutez une description détaillée du projet et listez les objectifs à atteindre.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">6</div>
+                        <div class="step-content">
+                            <h4>Validation</h4>
+                            <p>Validez le projet pour le rendre actif et commencer à y travailler.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Structure de référence</h4>
+                    <p>Adoptez une nomenclature cohérente pour vos références de projets (ex: ANNEE-CLIENT-TYPE comme 2025-ADT-FORM01). Cela facilitera la recherche et les reportings.</p>
+                </div>
+            </div>
+
+            <!-- Gestion des tâches -->
+            <div class="content-section" id="taches">
+                <h2><i class="fas fa-tasks"></i> Gestion des tâches</h2>
+                
+                <p>Les <strong>tâches</strong> sont les actions élémentaires qui composent un projet. Elles permettent de découper le travail en unités gérables et mesurables.</p>
+
+                <h3><i class="fas fa-plus"></i> Créer une tâche</h3>
+                <ol>
+                    <li>Ouvrez la fiche du projet</li>
+                    <li>Cliquez sur l'onglet <strong>"Tâches"</strong></li>
+                    <li>Cliquez sur <strong>"Nouvelle tâche"</strong></li>
+                    <li>Renseignez : titre, description, dates, durée estimée</li>
+                    <li>Assignez la tâche à un ou plusieurs utilisateurs</li>
+                    <li>Définissez la priorité et le statut</li>
+                    <li>Enregistrez la tâche</li>
+                </ol>
+
+                <h3><i class="fas fa-layer-group"></i> Organisation des tâches</h3>
+                <p>Dolibarr permet d'organiser les tâches de manière hiérarchique :</p>
+                <ul>
+                    <li><strong>Tâches parentes :</strong> Grandes phases du projet (ex: "Phase conception")</li>
+                    <li><strong>Sous-tâches :</strong> Actions détaillées sous chaque phase (ex: "Rédiger cahier des charges")</li>
+                    <li><strong>Dépendances :</strong> Définissez les tâches qui doivent être terminées avant d'en commencer d'autres</li>
+                </ul>
+
+                <div class="success-box">
+                    <h4><i class="fas fa-lightbulb"></i> Astuce Pro</h4>
+                    <p>Utilisez la vue <strong>Diagramme de Gantt</strong> pour visualiser graphiquement le planning de vos tâches et identifier les chemins critiques du projet.</p>
+                </div>
+
+                <h3><i class="fas fa-chart-bar"></i> Statuts des tâches</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4><i class="far fa-circle"></i> À faire</h4>
+                        <p>Tâche planifiée mais non commencée.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-spinner"></i> En cours</h4>
+                        <p>Tâche actuellement en cours de réalisation.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-check-circle"></i> Terminée</h4>
+                        <p>Tâche complétée avec succès.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-ban"></i> Annulée</h4>
+                        <p>Tâche abandonnée ou devenue obsolète.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Suivi du temps -->
+            <div class="content-section" id="temps">
+                <h2><i class="fas fa-stopwatch"></i> Suivi du temps passé</h2>
+                
+                <p>Le suivi du temps est essentiel pour évaluer la rentabilité de vos projets et facturer précisément vos clients.</p>
+
+                <h3><i class="fas fa-clock"></i> Saisir du temps</h3>
+                <p>Deux méthodes pour enregistrer le temps :</p>
+
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Saisie manuelle</h4>
+                            <p>Dans la tâche, cliquez sur <strong>"Ajouter temps"</strong> et renseignez la date, la durée et une description de l'activité.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Chronomètre</h4>
+                            <p>Utilisez le bouton <strong>"Démarrer"</strong> pour lancer un chronomètre en temps réel. Arrêtez-le quand vous avez terminé.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-chart-line"></i> Analyse du temps</h3>
+                <ul>
+                    <li><strong>Temps prévu vs temps réel :</strong> Comparez les estimations avec le temps effectivement passé</li>
+                    <li><strong>Par utilisateur :</strong> Visualisez la charge de travail de chaque membre de l'équipe</li>
+                    <li><strong>Par période :</strong> Analysez le temps passé par semaine, mois ou année</li>
+                    <li><strong>Rentabilité :</strong> Calculez automatiquement le coût du temps passé vs budget</li>
+                </ul>
+
+                <div class="info-box">
+                    <h4><i class="fas fa-euro-sign"></i> Facturation du temps</h4>
+                    <p>Le temps saisi peut être automatiquement converti en lignes de facture selon les taux horaires définis. Cela garantit que vous facturez l'intégralité du temps passé sur chaque projet.</p>
+                </div>
+            </div>
+
+            <!-- Suivi et pilotage -->
+            <div class="content-section" id="suivi">
+                <h2><i class="fas fa-chart-pie"></i> Suivi et pilotage</h2>
+                
+                <h3><i class="fas fa-tachometer-alt"></i> Tableaux de bord</h3>
+                <p>Dolibarr propose plusieurs vues pour suivre l'avancement de vos projets :</p>
+
+                <ul>
+                    <li><strong>Vue d'ensemble :</strong> Liste de tous vos projets avec statut et progression</li>
+                    <li><strong>Kanban :</strong> Vue par colonnes de statut (À faire / En cours / Terminé)</li>
+                    <li><strong>Gantt :</strong> Timeline visuelle de toutes les tâches</li>
+                    <li><strong>Calendrier :</strong> Vue calendrier des échéances</li>
+                    <li><strong>Rapports :</strong> Statistiques détaillées sur la charge, les coûts et la rentabilité</li>
+                </ul>
+
+                <h3><i class="fas fa-exclamation-circle"></i> Indicateurs clés</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4><i class="fas fa-percentage"></i> Avancement</h4>
+                        <p>Pourcentage de complétion du projet (calculé automatiquement ou manuel).</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-coins"></i> Budget consommé</h4>
+                        <p>Part du budget utilisée vs budget initial.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-hourglass-half"></i> Temps restant</h4>
+                        <p>Estimation du temps nécessaire pour terminer.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-calendar-check"></i> Respect des délais</h4>
+                        <p>Suivi des retards potentiels sur les échéances.</p>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-file-alt"></i> Documents attachés</h3>
+                <p>Centralisez tous les documents du projet :</p>
+                <ul>
+                    <li>Cahier des charges et spécifications</li>
+                    <li>Contrats et devis signés</li>
+                    <li>Livrables et compte-rendus</li>
+                    <li>Échanges emails importants</li>
+                    <li>Fichiers de travail (designs, maquettes, code...)</li>
+                </ul>
+            </div>
+
+            <!-- Bonnes pratiques -->
+            <div class="content-section" id="conseils">
+                <h2><i class="fas fa-star"></i> Bonnes pratiques</h2>
+                
+                <ul>
+                    <li><strong>Structure claire :</strong> Adoptez une nomenclature cohérente pour nommer vos projets et tâches</li>
+                    <li><strong>Découpage fin :</strong> Divisez les grands projets en tâches de 2-8 heures maximum pour un meilleur suivi</li>
+                    <li><strong>Mises à jour régulières :</strong> Actualisez le statut des tâches au minimum une fois par semaine</li>
+                    <li><strong>Assignation claire :</strong> Chaque tâche doit avoir un responsable identifié</li>
+                    <li><strong>Estimations réalistes :</strong> Prévoyez toujours une marge de 20-30% sur les estimations de temps</li>
+                    <li><strong>Documentation continue :</strong> Documentez les décisions importantes au fil de l'eau</li>
+                    <li><strong>Réunions de suivi :</strong> Organisez des points réguliers avec l'équipe et le client</li>
+                    <li><strong>Archivage :</strong> À la fin du projet, archivez tous les documents et créez un bilan</li>
+                    <li><strong>Capitalisation :</strong> Identifiez les bonnes pratiques et points d'amélioration pour les projets futurs</li>
+                    <li><strong>Communication client :</strong> Tenez le client informé régulièrement de l'avancement</li>
+                </ul>
+
+                <div class="success-box">
+                    <h4><i class="fas fa-trophy"></i> Conseil d'expert</h4>
+                    <p>Créez des modèles de projets pour vos types de missions récurrentes (formation, accompagnement, audit...). Cela vous fait gagner un temps précieux et garantit que vous n'oubliez aucune étape importante.</p>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="page-navigation">
+                <a href="tiers.html" class="nav-button prev">
+                    <i class="fas fa-arrow-left"></i>
+                    Module précédent : Tiers
+                </a>
+                <a href="produits-services.html" class="nav-button">
+                    Module suivant : Produits & Services
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
         </main>
     </div>
 
     <footer>
         <div class="copyright">
             <p>&copy; 2025 ADT - Académie du Tourisme. Tous droits réservés.</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">
+                <i class="fas fa-code"></i> Développé par la Cyber-Technique ADT
+            </p>
         </div>
     </footer>
 
     <script>
-        document.getElementById('mobileToggle').addEventListener('click', function() {
-            document.getElementById('mainNav').classList.toggle('active');
+        // Smooth scroll pour les liens d'ancrage
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
         });
     </script>
 </body>

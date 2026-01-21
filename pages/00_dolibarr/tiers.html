@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tiers TITLE_PLACEHOLDER Contacts - ADT Dolibarr</title>
+    <title>Tiers & Contacts - Dolibarr ADT</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
@@ -15,6 +19,7 @@
             background-color: #f8f9fa;
         }
 
+        /* Header */
         header {
             background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -30,280 +35,489 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        .logo a {
-            text-decoration: none;
+        .logo {
             display: flex;
             align-items: center;
             gap: 10px;
             color: white;
+            text-decoration: none;
         }
 
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background-color: #4a73ab;
-            border-radius: 8px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
+        .logo img {
+            height: 50px;
         }
 
-        .logo h1 {
-            font-size: 1.5rem;
-            font-weight: 600;
+        /* Breadcrumb */
+        .breadcrumb {
+            background: white;
+            padding: 15px 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
-        .search-box {
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 25px;
-            padding: 8px 16px;
-            min-width: 300px;
-        }
-
-        .search-box i {
-            color: #bdc3c7;
-            margin-right: 10px;
-        }
-
-        .search-box input {
-            background: none;
-            border: none;
-            outline: none;
-            color: white;
-            flex: 1;
-            font-size: 0.95rem;
-        }
-
-        .search-box input::placeholder { color: #bdc3c7; }
-
-        .mobile-toggle {
-            display: none;
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
-
-        .main-nav {
+        .breadcrumb-container {
             max-width: 1600px;
             margin: 0 auto;
-            padding: 0 30px;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 5px;
-            padding: 15px 0;
-        }
-
-        .nav-menu a {
             display: flex;
             align-items: center;
-            gap: 6px;
-            padding: 10px 18px;
-            color: #ecf0f1;
-            text-decoration: none;
+            gap: 10px;
             font-size: 0.9rem;
-            font-weight: 500;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            white-space: nowrap;
         }
 
-        .nav-menu a:hover,
-        .nav-menu a.active {
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            transform: translateY(-2px);
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
         }
 
-        .hero {
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-            color: white;
-            padding: 60px 30px;
-            text-align: center;
+        .breadcrumb a:hover {
+            color: #2980b9;
         }
 
-        .hero h1 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-            font-weight: 300;
+        .breadcrumb-separator {
+            color: #95a5a6;
         }
 
-        .hero p {
-            font-size: 1.2rem;
-            opacity: 0.95;
+        .breadcrumb-current {
+            color: #7f8c8d;
         }
 
-        .main-wrapper {
-            display: flex;
-            max-width: 1800px;
-            margin: 0 auto;
-            gap: 30px;
+        /* Layout 2 colonnes : 40% vidéos / 60% contenu */
+        .page-container {
+            max-width: 1600px;
+            margin: 40px auto;
             padding: 0 30px;
+            display: grid;
+            grid-template-columns: 40% 60%;
+            gap: 30px;
+            align-items: start;
         }
 
-        .sidebar {
-            width: 300px;
-            flex-shrink: 0;
+        /* Aside vidéos - Sticky */
+        .video-aside {
             position: sticky;
             top: 100px;
-            height: fit-content;
-            max-height: calc(100vh - 120px);
+            max-height: 800px;
             overflow-y: auto;
+            scroll-behavior: smooth;
         }
 
-        .sidebar-section {
+        .video-block {
             background: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 20px;
+            border-radius: 12px;
+            padding: 10px;
+            margin-bottom: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
 
-        .sidebar-section h3 {
+        .video-block h3 {
             color: #2c3e50;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #ecf0f1;
-        }
-
-        .sidebar-section h3 i { color: #3498db; }
-
-        .quick-links { list-style: none; }
-
-        .quick-links li { margin-bottom: 12px; }
-
-        .quick-links a {
-            color: #555;
-            text-decoration: none;
+            font-size: 1rem;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             gap: 8px;
-            padding: 8px 12px;
-            border-radius: 6px;
-            transition: all 0.3s ease;
         }
 
-        .quick-links a:hover {
-            background: #f8f9fa;
+        .video-block h3 i {
             color: #3498db;
-            transform: translateX(5px);
-        }
-
-        .quick-links i {
-            color: #3498db;
-            width: 20px;
-        }
-
-        .ticketing-sidebar {
-            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(41, 128, 185, 0.05));
-            border: 2px solid #3498db;
-        }
-
-        .ticketing-sidebar h3 {
-            color: #3498db;
-            border-bottom-color: #3498db;
-        }
-
-        .ticketing-sidebar h3 i { color: #3498db; }
-
-        .ticketing-sidebar p {
-            color: #555;
-            margin-bottom: 20px;
-            line-height: 1.6;
             font-size: 0.9rem;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* Ratio 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+            margin-bottom: 10px;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-info {
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.5;
+            padding: 10px;
+            background: #f8f9fa;
+            border-left: 3px solid #3498db;
+            border-radius: 5px;
+        }
+
+        .video-info p {
+            margin: 0;
+        }
+
+        /* Support sidebar block */
+        .support-block {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            color: white;
+        }
+
+        .support-block h3 {
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .support-block h3 i {
+            color: white;
+        }
+
+        .support-block p {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.6;
         }
 
         .ticket-btn {
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, #3498db, #2980b9);
-            color: white;
+            justify-content: center;
+            gap: 8px;
             padding: 12px 20px;
-            border-radius: 10px;
+            background: white;
+            color: #3498db;
             text-decoration: none;
+            border-radius: 8px;
             font-weight: 600;
             transition: all 0.3s ease;
-            font-size: 0.95rem;
-            width: 100%;
-            justify-content: center;
         }
 
         .ticket-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 25px rgba(52, 152, 219, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
-        main {
-            flex: 1;
-            padding: 60px 0;
+        /* Contenu principal */
+        .main-content {
             min-width: 0;
         }
 
-        .breadcrumbs {
-            color: #7f8c8d;
-            margin-bottom: 30px;
-            font-size: 0.9rem;
-        }
-
-        .breadcrumbs a {
-            color: #3498db;
-            text-decoration: none;
-        }
-
-        .page-header h2 {
-            font-size: 2.5rem;
-            color: #2c3e50;
-            margin-bottom: 50px;
-        }
-
-        .content-section {
+        /* Page header */
+        .page-header {
             background: white;
             border-radius: 15px;
-            padding: 40px;
-            margin-bottom: 30px;
+            padding: 10px;
+            margin-bottom: 25px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
 
-        .content-section h3 {
+        .page-title {
+            color: #2c3e50;
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .page-title i {
             color: #3498db;
+        }
+
+        .page-subtitle {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            margin-bottom: 18px;
+        }
+
+        .page-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .tag-difficulty {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+        }
+
+        .tag-time {
+            background: #e7f3ff;
+            color: #0066cc;
+        }
+
+        .tag-category {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+
+        /* Content sections */
+        .content-section {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .content-section h2 {
+            color: #2c3e50;
             font-size: 1.8rem;
             margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #3498db;
+        }
+
+        .content-section h3 {
+            color: #34495e;
+            font-size: 1.4rem;
+            margin: 25px 0 12px;
             display: flex;
             align-items: center;
             gap: 10px;
+        }
+
+        .content-section h3 i {
+            color: #3498db;
+            font-size: 1.1rem;
         }
 
         .content-section p {
             color: #555;
             line-height: 1.8;
-            margin-bottom: 15px;
+            margin-bottom: 16px;
+            text-align: justify;
         }
 
+        .content-section ul,
+        .content-section ol {
+            margin-left: 30px;
+            margin-bottom: 16px;
+        }
+
+        .content-section li {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+
+        .content-section li strong {
+            color: #2c3e50;
+        }
+
+        /* Info boxes */
+        .info-box {
+            background: linear-gradient(135deg, #e8f4f8, #d4ebf2);
+            border-left: 5px solid #3498db;
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .info-box h4 {
+            color: #2980b9;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .info-box p {
+            color: #555;
+            margin: 0;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fff4e6, #ffe8cc);
+            border-left: 5px solid #f39c12;
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .warning-box h4 {
+            color: #e67e22;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .warning-box p {
+            color: #555;
+            margin: 0;
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, #e8f8f5, #d4efdf);
+            border-left: 5px solid #27ae60;
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .success-box h4 {
+            color: #229954;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .success-box p {
+            color: #555;
+            margin: 0;
+        }
+
+        /* Steps */
+        .steps-container {
+            margin: 25px 0;
+        }
+
+        .step {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 25px;
+            padding: 18px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            background: #ecf0f1;
+            transform: translateX(5px);
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .step-content h4 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .step-content p {
+            color: #555;
+            margin: 0;
+        }
+
+        /* Features grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .feature-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-card h4 i {
+            color: #3498db;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Navigation buttons */
+        .page-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding: 25px 0;
+            border-top: 2px solid #ecf0f1;
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 22px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(52, 152, 219, 0.4);
+        }
+
+        .nav-button.prev {
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+        }
+
+        .nav-button.prev:hover {
+            box-shadow: 0 6px 25px rgba(149, 165, 166, 0.4);
+        }
+
+        /* Footer */
         footer {
             background: #2c3e50;
             color: white;
             padding: 30px;
+            margin-top: 60px;
         }
 
         .copyright {
@@ -311,120 +525,369 @@
             color: #95a5a6;
         }
 
-        @media (max-width: 1024px) {
-            .main-wrapper { flex-direction: column; }
-            .sidebar {
-                width: 100%;
-                position: relative;
-                top: 0;
-                max-height: none;
-                margin-bottom: 30px;
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .page-container {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .video-aside {
+                position: static;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 15px;
+            }
+
+            .video-block {
+                margin-bottom: 0;
             }
         }
 
         @media (max-width: 768px) {
-            .mobile-toggle { display: block; }
-            .main-nav { display: none; }
-            .main-nav.active { display: block; }
-            .nav-menu { flex-direction: column; padding: 20px; }
-            .hero h1 { font-size: 2rem; }
+            .page-container {
+                padding: 0 20px;
+            }
+
+            .page-header,
+            .content-section {
+                padding: 25px;
+            }
+
+            .page-title {
+                font-size: 1.8rem;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .step {
+                flex-direction: column;
+            }
+
+            .page-navigation {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .video-aside {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="top-bar">
-            <div class="logo">
-                <a href="../index.html">
-                    <div class="logo-icon">D</div>
-                    <h1>ADT Dolibarr</h1>
-                </a>
-            </div>
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Rechercher...">
-            </div>
-            <button class="mobile-toggle" id="mobileToggle">
-                <i class="fas fa-bars"></i>
-            </button>
+        <div class="logo">
+            <a href="/index.html">
+                <img src="/img/adtutoriel.png" alt="ADT Tutoriels">
+            </a>
         </div>
-        <nav class="main-nav" id="mainNav">
-            <ul class="nav-menu">
-                <li><a href="../index.html"><i class="fas fa-home"></i> Accueil</a></li>
-                <li><a href="pre-opportunite.html"><i class="fas fa-bullhorn"></i> Pré-Opportunité</a></li>
-                <li><a href="tiers.html"><i class="fas fa-building"></i> Tiers</a></li>
-                <li><a href="projets.html"><i class="fas fa-project-diagram"></i> Projets</a></li>
-                <li><a href="commerce.html"><i class="fas fa-suitcase"></i> Commerce</a></li>
-                <li><a href="facturation.html"><i class="fas fa-file-invoice-dollar"></i> Facturation</a></li>
-                <li><a href="produits-services.html"><i class="fas fa-cube"></i> Services</a></li>
-                <li><a href="agenda.html"><i class="fas fa-calendar-alt"></i> Agenda</a></li>
-            </ul>
-        </nav>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Gestion des Tiers HERO_TITLE Contacts</h1>
-            <p>Gérez vos clients, prospects et fournisseurs efficacement</p>
+    <div class="breadcrumb">
+        <div class="breadcrumb-container">
+            <a href="../../index.html"><i class="fas fa-home"></i> Accueil</a>
+            <span class="breadcrumb-separator">/</span>
+            <a href="dolibarr.html">Dolibarr</a>
+            <span class="breadcrumb-separator">/</span>
+            <span class="breadcrumb-current">Tiers & Contacts</span>
         </div>
-    </section>
+    </div>
 
-    <div class="main-wrapper">
-        <aside class="sidebar">
-            <div class="sidebar-section">
-                <h3><i class="fas fa-list"></i> Sur cette page</h3>
-                <ul class="quick-links">
-                    <li><a href="#introduction"><i class="fas fa-chevron-right"></i> Introduction</a></li>
-                    <li><a href="#configuration"><i class="fas fa-chevron-right"></i> Configuration</a></li>
-                    <li><a href="#utilisation"><i class="fas fa-chevron-right"></i> Utilisation</a></li>
-                </ul>
+    <div class="page-container">
+        <!-- Colonne gauche : Vidéos & Support (40%) -->
+        <aside class="video-aside">
+            <!-- Vidéo 1 (placeholder) -->
+            <div class="video-block">
+                <h3><i class="fas fa-play-circle"></i> Introduction aux Tiers</h3>
+                <div class="video-container">
+                    <video controls>
+                        <source src="/video/tiers-introduction.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <p><strong>Durée : 10 min</strong> - Découvrez la gestion des tiers : clients, prospects et fournisseurs.</p>
+                </div>
             </div>
 
-            <div class="sidebar-section ticketing-sidebar">
-                <h3><i class="fas fa-ticket-alt"></i> Besoin d'aide ?</h3>
-                <p>Créez un ticket de support pour obtenir une assistance personnalisée.</p>
+            <!-- Vidéo 2 (placeholder) -->
+            <div class="video-block">
+                <h3><i class="fas fa-play-circle"></i> Gestion des contacts</h3>
+                <div class="video-container">
+                    <video controls>
+                        <source src="/video/gestion-contacts.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <p><strong>Durée : 8 min</strong> - Comment créer et gérer les contacts liés à vos tiers.</p>
+                </div>
+            </div>
+
+            <!-- Support Block -->
+            <div class="support-block">
+                <h3><i class="fas fa-ticket-alt"></i> Support</h3>
+                <p>Besoin d'aide ? Créez un ticket support et notre équipe vous répondra sous 24h.</p>
                 <a href="https://gestion.academie-tourisme.fr/" class="ticket-btn" target="_blank">
-                    <i class="fas fa-plus-circle"></i>
-                    Créer un ticket
+                    <i class="fas fa-plus-circle"></i> Créer un ticket
                 </a>
             </div>
         </aside>
 
-        <main>
-            <div class="breadcrumbs">
-                <a href="../index.html">Accueil</a> > Tiers TITLE_PLACEHOLDER Contacts
-            </div>
-
+        <!-- Colonne droite : Contenu principal (60%) -->
+        <main class="main-content">
+            <!-- Page Header -->
             <div class="page-header">
-                <h2>Tiers TITLE_PLACEHOLDER Contacts</h2>
+                <h1 class="page-title">
+                    <i class="fas fa-building"></i>
+                    Gestion des Tiers & Contacts
+                </h1>
+                <p class="page-subtitle">Gérez vos clients, prospects et fournisseurs efficacement</p>
+                <div class="page-tags">
+                    <span class="tag tag-difficulty">
+                        <i class="fas fa-signal"></i> Moyen
+                    </span>
+                    <span class="tag tag-time">
+                        <i class="far fa-clock"></i> 20 min
+                    </span>
+                    <span class="tag tag-category">
+                        <i class="fas fa-tag"></i> CRM
+                    </span>
+                </div>
             </div>
 
-            <section class="content-section" id="introduction">
-                <h3><i class="fas fa-info-circle"></i> Introduction</h3>
-                <p>Contenu à venir pour le module Tiers TITLE_PLACEHOLDER Contacts...</p>
-            </section>
+            <!-- Introduction -->
+            <div class="content-section" id="introduction">
+                <h2>Introduction à la gestion des Tiers</h2>
+                
+                <p>Dans Dolibarr, un <strong>Tiers</strong> représente toute entité externe avec laquelle votre organisation entretient des relations commerciales : clients, prospects, fournisseurs, partenaires. La gestion des tiers est au cœur du système CRM et constitue la base de toutes vos interactions commerciales.</p>
 
-            <section class="content-section" id="configuration">
-                <h3><i class="fas fa-cog"></i> Configuration</h3>
-                <p>Guide de configuration à venir...</p>
-            </section>
+                <div class="info-box">
+                    <h4><i class="fas fa-info-circle"></i> Qu'est-ce qu'un Tiers ?</h4>
+                    <p>Un tiers est une personne morale (entreprise, association, administration) ou physique avec laquelle vous avez ou souhaitez avoir des relations d'affaires. Chaque tiers peut avoir plusieurs contacts (personnes physiques) qui lui sont rattachés.</p>
+                </div>
 
-            <section class="content-section" id="utilisation">
-                <h3><i class="fas fa-tasks"></i> Utilisation</h3>
-                <p>Guide d'utilisation à venir...</p>
-            </section>
+                <h3><i class="fas fa-layer-group"></i> Types de Tiers</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4><i class="fas fa-user-check"></i> Clients</h4>
+                        <p>Organisations ayant déjà effectué un achat ou signé un contrat avec l'ADT.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-user-clock"></i> Prospects</h4>
+                        <p>Organisations identifiées comme clients potentiels, en cours de prospection.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-handshake"></i> Fournisseurs</h4>
+                        <p>Organisations qui vous fournissent des produits ou services.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-users"></i> Prospect/Client</h4>
+                        <p>Statut mixte pour les clients existants que vous continuez à prospecter.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Configuration -->
+            <div class="content-section" id="configuration">
+                <h2><i class="fas fa-cog"></i> Créer et configurer un Tiers</h2>
+                
+                <h3><i class="fas fa-plus-circle"></i> Création d'un nouveau Tiers</h3>
+                <p>La création d'un tiers dans Dolibarr est simple et intuitive :</p>
+
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Accéder au module Tiers</h4>
+                            <p>Depuis le menu principal, cliquez sur <strong>Tiers → Nouveau Tiers</strong> ou utilisez le bouton "+" dans la barre d'outils.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Définir le type</h4>
+                            <p>Sélectionnez le type de tiers : Client, Prospect, Fournisseur ou une combinaison. Ce choix détermine les fonctionnalités disponibles.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Renseigner les informations</h4>
+                            <p>Complétez les champs obligatoires : nom de l'organisation, statut juridique, SIRET/SIREN, adresse, téléphone, email.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Ajouter des informations complémentaires</h4>
+                            <p>Code client, mode de règlement préféré, délai de paiement, catégories, tags personnalisés.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h4>Valider la création</h4>
+                            <p>Vérifiez les informations et cliquez sur <strong>"Créer"</strong>. Le tiers est maintenant enregistré dans votre base.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Attention aux doublons</h4>
+                    <p>Avant de créer un nouveau tiers, utilisez la barre de recherche pour vérifier qu'il n'existe pas déjà dans la base. Les doublons peuvent créer des problèmes de suivi commercial et de facturation.</p>
+                </div>
+            </div>
+
+            <!-- Gestion des contacts -->
+            <div class="content-section" id="contacts">
+                <h2><i class="fas fa-user-friends"></i> Gestion des Contacts</h2>
+                
+                <p>Les <strong>contacts</strong> sont les personnes physiques rattachées à un tiers. Un même tiers peut avoir plusieurs contacts avec des rôles différents.</p>
+
+                <h3><i class="fas fa-user-plus"></i> Ajouter un contact à un Tiers</h3>
+                <ol>
+                    <li>Ouvrez la fiche du tiers concerné</li>
+                    <li>Cliquez sur l'onglet <strong>"Contacts"</strong></li>
+                    <li>Cliquez sur <strong>"Ajouter un contact"</strong></li>
+                    <li>Renseignez : civilité, prénom, nom, fonction, email, téléphone</li>
+                    <li>Définissez le rôle du contact (décideur, utilisateur, comptable, etc.)</li>
+                    <li>Validez la création</li>
+                </ol>
+
+                <div class="info-box">
+                    <h4><i class="fas fa-lightbulb"></i> Bonnes pratiques</h4>
+                    <p>Définissez toujours le rôle de chaque contact. Cela permet de savoir rapidement qui contacter pour quel sujet et d'automatiser certaines communications (envoi de devis au décideur, factures à la comptabilité, etc.).</p>
+                </div>
+
+                <h3><i class="fas fa-tags"></i> Rôles des contacts</h3>
+                <ul>
+                    <li><strong>Contact commercial :</strong> Interlocuteur principal pour les discussions commerciales</li>
+                    <li><strong>Contact facturation :</strong> Personne recevant les factures et gérant les paiements</li>
+                    <li><strong>Contact technique :</strong> Interlocuteur pour les aspects techniques du projet</li>
+                    <li><strong>Contact administratif :</strong> Gestion administrative et contractuelle</li>
+                    <li><strong>Décideur :</strong> Personne ayant le pouvoir de décision final</li>
+                </ul>
+            </div>
+
+            <!-- Utilisation avancée -->
+            <div class="content-section" id="utilisation">
+                <h2><i class="fas fa-tasks"></i> Fonctionnalités avancées</h2>
+                
+                <h3><i class="fas fa-search"></i> Rechercher et filtrer</h3>
+                <p>Dolibarr offre de puissants outils de recherche et de filtrage :</p>
+                <ul>
+                    <li><strong>Recherche globale :</strong> Barre de recherche en haut à droite pour trouver rapidement un tiers par nom</li>
+                    <li><strong>Filtres avancés :</strong> Type de tiers, catégorie, statut, code postal, chiffre d'affaires</li>
+                    <li><strong>Recherche géographique :</strong> Trouvez tous les tiers dans une zone donnée</li>
+                    <li><strong>Vues personnalisées :</strong> Créez et sauvegardez vos filtres favoris</li>
+                </ul>
+
+                <h3><i class="fas fa-folder-open"></i> Catégories et tags</h3>
+                <p>Organisez vos tiers avec un système de catégories et de tags :</p>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4><i class="fas fa-tag"></i> Par secteur</h4>
+                        <p>Tourisme, Hôtellerie, Restauration, Agences de voyage...</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-star"></i> Par importance</h4>
+                        <p>Client VIP, Grand compte, PME, TPE...</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-map-marker-alt"></i> Par zone</h4>
+                        <p>Île-de-France, PACA, National, International...</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-chart-line"></i> Par potentiel</h4>
+                        <p>Fort potentiel, Potentiel moyen, À développer...</p>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-history"></i> Historique et suivi</h3>
+                <p>Consultez l'historique complet des interactions avec chaque tiers :</p>
+                <ul>
+                    <li>Devis et propositions commerciales envoyés</li>
+                    <li>Commandes et factures</li>
+                    <li>Paiements et avoirs</li>
+                    <li>Projets en cours ou terminés</li>
+                    <li>Événements et rendez-vous planifiés</li>
+                    <li>Notes et commentaires internes</li>
+                    <li>Documents partagés</li>
+                </ul>
+
+                <div class="success-box">
+                    <h4><i class="fas fa-trophy"></i> Astuce Pro</h4>
+                    <p>Utilisez les notes internes sur chaque fiche tiers pour documenter les discussions importantes, les préférences du client, ou toute information utile pour l'équipe commerciale. Ces notes ne sont jamais visibles par le client.</p>
+                </div>
+            </div>
+
+            <!-- Bonnes pratiques -->
+            <div class="content-section" id="conseils">
+                <h2><i class="fas fa-star"></i> Bonnes pratiques</h2>
+                
+                <ul>
+                    <li><strong>Complétez les fiches :</strong> Plus vous renseignez d'informations, plus le suivi sera efficace. Ne vous limitez pas aux champs obligatoires.</li>
+                    <li><strong>Vérifiez les doublons :</strong> Avant toute création, recherchez si le tiers n'existe pas déjà sous un autre nom ou avec une orthographe légèrement différente.</li>
+                    <li><strong>Maintenez à jour :</strong> Actualisez régulièrement les coordonnées, surtout les emails et téléphones des contacts.</li>
+                    <li><strong>Utilisez les catégories :</strong> Catégorisez systématiquement vos tiers pour faciliter les recherches et analyses.</li>
+                    <li><strong>Documentez les échanges :</strong> Ajoutez des notes après chaque interaction importante avec un client.</li>
+                    <li><strong>Définissez les rôles :</strong> Précisez toujours le rôle de chaque contact pour améliorer la communication.</li>
+                    <li><strong>Nettoyez régulièrement :</strong> Archivez les tiers inactifs et supprimez les doublons pour maintenir une base propre.</li>
+                    <li><strong>Respectez le RGPD :</strong> Ne conservez que les données nécessaires et respectez les demandes de suppression.</li>
+                </ul>
+
+                <div class="warning-box">
+                    <h4><i class="fas fa-shield-alt"></i> Protection des données</h4>
+                    <p>Les données des tiers et contacts sont soumises au RGPD. Assurez-vous de n'enregistrer que les informations nécessaires à la relation commerciale et de respecter les droits des personnes (accès, rectification, suppression).</p>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="page-navigation">
+                <a href="pre-opportunite.html" class="nav-button prev">
+                    <i class="fas fa-arrow-left"></i>
+                    Module précédent : Pré-Opportunité
+                </a>
+                <a href="projets.html" class="nav-button">
+                    Module suivant : Projets
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
         </main>
     </div>
 
     <footer>
         <div class="copyright">
             <p>&copy; 2025 ADT - Académie du Tourisme. Tous droits réservés.</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">
+                <i class="fas fa-code"></i> Développé par la Cyber-Technique ADT
+            </p>
         </div>
     </footer>
 
     <script>
-        document.getElementById('mobileToggle').addEventListener('click', function() {
-            document.getElementById('mainNav').classList.toggle('active');
+        // Smooth scroll pour les liens d'ancrage
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
         });
     </script>
 </body>

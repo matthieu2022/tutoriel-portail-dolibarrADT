@@ -3,158 +3,889 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pré-Opportunité - ADT Dolibarr</title>
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Intégration Calendly - Dolibarr ADT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .top-bar {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 10px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: white;
+            padding: 15px 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .breadcrumb-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: #2980b9;
+        }
+
+        .breadcrumb-separator {
+            color: #95a5a6;
+        }
+
+        .breadcrumb-current {
+            color: #7f8c8d;
+        }
+
+        /* Layout 2 colonnes : 40% vidéos / 60% contenu */
+        .page-container {
+            max-width: 1600px;
+            margin: 40px auto;
+            padding: 0 30px;
+            display: grid;
+            grid-template-columns: 40% 60%;
+            gap: 30px;
+            align-items: start;
+        }
+
+        /* Aside vidéos - Sticky */
+        .video-aside {
+            position: sticky;
+            top: 100px;
+            max-height: 800px;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+
+        .video-block {
+            background: white;
+            border-radius: 12px;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .video-block h3 {
+            color: #2c3e50;
+            font-size: 1rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .video-block h3 i {
+            color: #00a1ff;
+            font-size: 0.9rem;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+            margin-bottom: 10px;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-info {
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.5;
+            padding: 10px;
+            background: #f8f9fa;
+            border-left: 3px solid #00a1ff;
+            border-radius: 5px;
+        }
+
+        .video-info p {
+            margin: 0;
+        }
+
+        /* Support sidebar block */
+        .support-block {
+            background: linear-gradient(135deg, #00a1ff, #0085d1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            color: white;
+        }
+
+        .support-block h3 {
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .support-block h3 i {
+            color: white;
+        }
+
+        .support-block p {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .ticket-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: white;
+            color: #00a1ff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .ticket-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        /* Contenu principal */
+        .main-content {
+            min-width: 0;
+        }
+
+        /* Page header */
+        .page-header {
+            background: white;
+            border-radius: 15px;
+            padding: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .page-title {
+            color: #2c3e50;
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .page-title i {
+            color: #00a1ff;
+        }
+
+        .page-subtitle {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            margin-bottom: 18px;
+        }
+
+        .page-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .tag-difficulty {
+            background: linear-gradient(135deg, #27ae60, #229954);
+            color: white;
+        }
+
+        .tag-time {
+            background: #e7f3ff;
+            color: #0066cc;
+        }
+
+        .tag-category {
+            background: linear-gradient(135deg, #00a1ff, #0085d1);
+            color: white;
+        }
+
+        /* Content sections */
+        .content-section {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .content-section h2 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #00a1ff;
+        }
+
+        .content-section h3 {
+            color: #34495e;
+            font-size: 1.4rem;
+            margin: 25px 0 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-section h3 i {
+            color: #00a1ff;
+            font-size: 1.1rem;
+        }
+
+        .content-section p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 16px;
+            text-align: justify;
+        }
+
+        .content-section ul,
+        .content-section ol {
+            margin-left: 30px;
+            margin-bottom: 16px;
+        }
+
+        .content-section li {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+
+        .content-section li strong {
+            color: #2c3e50;
+        }
+
+        /* Info boxes */
+        .info-box {
+            background: linear-gradient(135deg, #e8f7ff, #d4f0ff);
+            border-left: 5px solid #00a1ff;
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .info-box h4 {
+            color: #0085d1;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .info-box p {
+            color: #555;
+            margin: 0;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fff4e6, #ffe8cc);
+            border-left: 5px solid #f39c12;
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .warning-box h4 {
+            color: #e67e22;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .warning-box p {
+            color: #555;
+            margin: 0;
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, #e8f8f5, #d4efdf);
+            border-left: 5px solid #27ae60;
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .success-box h4 {
+            color: #229954;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .success-box p {
+            color: #555;
+            margin: 0;
+        }
+
+        /* Steps */
+        .steps-container {
+            margin: 25px 0;
+        }
+
+        .step {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 25px;
+            padding: 18px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            background: #ecf0f1;
+            transform: translateX(5px);
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #00a1ff, #0085d1);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .step-content h4 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .step-content p {
+            color: #555;
+            margin: 0;
+        }
+
+        /* Features grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #00a1ff;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .feature-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-card h4 i {
+            color: #00a1ff;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Navigation buttons */
+        .page-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding: 25px 0;
+            border-top: 2px solid #ecf0f1;
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 22px;
+            background: linear-gradient(135deg, #00a1ff, #0085d1);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(0, 161, 255, 0.4);
+        }
+
+        .nav-button.prev {
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+        }
+
+        .nav-button.prev:hover {
+            box-shadow: 0 6px 25px rgba(149, 165, 166, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 30px;
+            margin-top: 60px;
+        }
+
+        .copyright {
+            text-align: center;
+            color: #95a5a6;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .page-container {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .video-aside {
+                position: static;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 15px;
+            }
+
+            .video-block {
+                margin-bottom: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-container {
+                padding: 0 20px;
+            }
+
+            .page-header,
+            .content-section {
+                padding: 25px;
+            }
+
+            .page-title {
+                font-size: 1.8rem;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .step {
+                flex-direction: column;
+            }
+
+            .page-navigation {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .video-aside {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar">
-                    <div class="logo">
-            <a href="../index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
-                <div style="width: 40px; height: 40px; background-color: #4a73ab; border-radius: 8px; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold">D</div>
-                <h1>ADT Dolibarr</h1>
+        <div class="logo">
+            <a href="/index.html">
+                <img src="/img/adtutoriel.png" alt="ADT Tutoriels">
             </a>
         </div>
-            <div class="nav-menu">
-                <a href=pre-opportunite.html"><i class="fas fa-bullhorn"></i> Pré-Opportunité</a>
-                <a href=tiers.html"><i class="fas fa-building"></i> Tiers</a>
-                <a href=projets.html"><i class="fas fa-project-diagram"></i> Projets</a>
-                <a href=commerce.html"><i class="fas fa-suitcase"></i> Commerce</a>
-                <a href=facturation.html"><i class="fas fa-file-invoice-dollar"></i> Facturation</a>
-                <a href=banques.html"><i class="fas fa-university"></i> Banques</a>
-                <a href=produits-services.html"><i class="fas fa-cube"></i> Services</a>
-                <a href=grh.html"><i class="fas fa-user-tie"></i> GRH</a>
-                <a href=documents.html"><i class="fas fa-folder-open"></i> Documents</a>
-                <a href=agenda.html"><i class="fas fa-calendar-alt"></i> Agenda</a>
-            </div>
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Rechercher un tutoriel...">
-            </div>
-            <div class="mobile-menu">
-                <i class="fas fa-bars"></i>
-            </div>
-        </nav>
     </header>
 
-    <div class="page-header">
-        <div class="page-title">
-            <h2>Pré-Opportunité</h2>
-            <p>Guides pour gérer vos opportunités commerciales dans Dolibarr</p>
+    <div class="breadcrumb">
+        <div class="breadcrumb-container">
+            <a href="../../index.html"><i class="fas fa-home"></i> Accueil</a>
+            <span class="breadcrumb-separator">/</span>
+            <a href="dolibarr.html">Dolibarr</a>
+            <span class="breadcrumb-separator">/</span>
+            <span class="breadcrumb-current">Calendly</span>
         </div>
     </div>
 
-    <main class="page-content">
-        <div class="breadcrumbs">
-            <a href="../index.html">Accueil</a> > Pré-Opportunité
-        </div>
-        
-        <section class="module-content">
-            <h3>Comprendre le module Pré-Opportunité</h3>
-            <p>Le module Pré-Opportunité dans Dolibarr vous permet de suivre et de gérer les premières étapes de votre processus commercial, avant même que le prospect ne devienne une opportunité qualifiée.</p>
-            
-            <div class="tutorial-section">
-                <h4>Configuration initiale</h4>
-                <p>Découvrez comment configurer le module Pré-Opportunité pour l'adapter à votre cycle de vente.</p>
-                
-                <!-- Tutoriel à compléter ici -->
+    <div class="page-container">
+        <!-- Colonne gauche : Vidéos & Support (40%) -->
+        <aside class="video-aside">
+            <!-- Vidéo 1 (placeholder) -->
+            <div class="video-block">
+                <h3><i class="fas fa-play-circle"></i> Configuration Calendly</h3>
+                <div class="video-container">
+                    <video controls>
+                        <source src="/video/calendly-configuration.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <p><strong>Durée : 8 min</strong> - Configurez votre compte Calendly et créez vos premiers événements.</p>
+                </div>
             </div>
-            
-            <div class="tutorial-section">
-                <h4>Création d'une pré-opportunité</h4>
-                <p>Apprenez à créer et qualifier une pré-opportunité dans Dolibarr.</p>
-                
-                <!-- Tutoriel à compléter ici -->
-            </div>
-            
-            <div class="tutorial-section">
-                <h4>Suivi et qualification</h4>
-                <p>Comment suivre l'évolution de vos pré-opportunités et les qualifier efficacement.</p>
-                
-                <!-- Tutoriel à compléter ici -->
-            </div>
-            
-            <div class="tutorial-section">
-                <h4>Conversion en opportunité</h4>
-                <p>Le processus pour convertir une pré-opportunité qualifiée en opportunité commerciale.</p>
-                
-                <!-- Tutoriel à compléter ici -->
-            </div>
-            
-            <div class="tutorial-section">
-                <h4>Rapports et analyses</h4>
-                <p>Comment générer des rapports pour analyser vos pré-opportunités et optimiser votre prospection.</p>
-                
-                <!-- Tutoriel à compléter ici -->
-            </div>
-        </section>
-    </main>
 
-    <section class="cta">
-        <div class="cta-content">
-            <h3>Prêt à maîtriser Dolibarr?</h3>
-            <p>Inscrivez-vous à notre plateforme pour accéder à tous nos tutoriels et progresser rapidement.</p>
-            <a href="https://dolibarrvierge19.e-learning-neo-sphere.fr/index.php" class="btn">S'inscrire maintenant</a>
-        </div>
-    </section>
+            <!-- Vidéo 2 (placeholder) -->
+            <div class="video-block">
+                <h3><i class="fas fa-play-circle"></i> Intégration Dolibarr</h3>
+                <div class="video-container">
+                    <video controls>
+                        <source src="/video/calendly-dolibarr.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <p><strong>Durée : 5 min</strong> - Synchronisez Calendly avec votre Dolibarr pour un suivi optimal.</p>
+                </div>
+            </div>
 
-    <footer id="contact">
-        <div class="footer-content">
-            <div class="footer-column">
-                <h4>ADT Dolibarr</h4>
-                <p>Votre ressource complète pour apprendre et maîtriser le logiciel Dolibarr ERP/CRM.</p>
+            <!-- Support Block -->
+            <div class="support-block">
+                <h3><i class="fas fa-ticket-alt"></i> Support</h3>
+                <p>Besoin d'aide ? Créez un ticket support et notre équipe vous répondra sous 24h.</p>
+                <a href="https://gestion.academie-tourisme.fr/" class="ticket-btn" target="_blank">
+                    <i class="fas fa-plus-circle"></i> Créer un ticket
+                </a>
             </div>
-            
-            <div class="footer-column">
-                <h4>Navigation</h4>
-                <ul class="footer-links">
-                    <li><a href="../index.html">Accueil</a></li>
-                    <li><a href="pre-opportunite.html">Pré-Opportunité</a></li>
-                    <li><a href="tiers.html">Tiers</a></li>
-                    <li><a href="projets.html">Projets</a></li>
-                    <li><a href="commerce.html">Commerce</a></li>
+        </aside>
+
+        <!-- Colonne droite : Contenu principal (60%) -->
+        <main class="main-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="page-title">
+                    <i class="fas fa-calendar-check"></i>
+                    Intégration Calendly
+                </h1>
+                <p class="page-subtitle">Automatisez la prise de rendez-vous avec vos prospects et clients</p>
+                <div class="page-tags">
+                    <span class="tag tag-difficulty">
+                        <i class="fas fa-signal"></i> Facile
+                    </span>
+                    <span class="tag tag-time">
+                        <i class="far fa-clock"></i> 10 min
+                    </span>
+                    <span class="tag tag-category">
+                        <i class="fas fa-tag"></i> Dolibarr
+                    </span>
+                </div>
+            </div>
+
+            <!-- Introduction -->
+            <div class="content-section" id="introduction">
+                <h2>Qu'est-ce que Calendly ?</h2>
+                
+                <p><strong>Calendly</strong> est un outil de planification de rendez-vous en ligne qui simplifie la coordination des réunions. Au lieu d'échanger de multiples emails pour trouver un créneau, vos contacts peuvent consulter vos disponibilités en temps réel et réserver directement un rendez-vous.</p>
+
+                <div class="info-box">
+                    <h4><i class="fas fa-lightbulb"></i> Pourquoi utiliser Calendly ?</h4>
+                    <p>Calendly réduit le temps passé à organiser des rendez-vous de 70% en moyenne. Vos prospects et clients réservent en quelques clics, et les rendez-vous sont automatiquement synchronisés avec votre agenda Dolibarr.</p>
+                </div>
+
+                <h3><i class="fas fa-check-circle"></i> Avantages pour l'ADT</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4><i class="fas fa-clock"></i> Gain de temps</h4>
+                        <p>Éliminez les allers-retours d'emails pour fixer un rendez-vous.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-sync"></i> Synchronisation</h4>
+                        <p>Synchronisation automatique avec votre agenda Dolibarr et Outlook.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-bell"></i> Rappels auto</h4>
+                        <p>Notifications et rappels automatiques pour vous et vos contacts.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-chart-line"></i> Suivi</h4>
+                        <p>Statistiques sur vos rendez-vous et taux de conversion.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Configuration -->
+            <div class="content-section" id="configuration">
+                <h2><i class="fas fa-cog"></i> Configuration de Calendly</h2>
+                
+                <h3><i class="fas fa-user-plus"></i> Créer votre compte</h3>
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Inscription</h4>
+                            <p>Rendez-vous sur <strong>calendly.com</strong> et créez un compte avec votre email professionnel ADT (@academie-tourisme.fr).</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Configuration du profil</h4>
+                            <p>Renseignez vos informations : nom, fonction, photo professionnelle. Ces informations seront visibles par vos prospects.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Connecter votre calendrier</h4>
+                            <p>Synchronisez votre calendrier Outlook 365 pour que Calendly connaisse vos disponibilités réelles.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Définir vos horaires</h4>
+                            <p>Configurez vos plages horaires de disponibilité (ex: Lundi-Vendredi 9h-12h / 14h-18h).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-calendar-plus"></i> Créer vos types d'événements</h3>
+                <p>Définissez différents types de rendez-vous selon vos besoins :</p>
+
+                <ul>
+                    <li><strong>Entretien découverte (30 min) :</strong> Premier contact avec un prospect</li>
+                    <li><strong>Présentation commerciale (45 min) :</strong> Présentation détaillée de vos offres</li>
+                    <li><strong>Suivi client (15 min) :</strong> Point rapide avec un client existant</li>
+                    <li><strong>Rendez-vous téléphonique (20 min) :</strong> Discussion par téléphone</li>
+                    <li><strong>Visioconférence (60 min) :</strong> Réunion en ligne via Teams/Zoom</li>
+                </ul>
+
+                <div class="success-box">
+                    <h4><i class="fas fa-star"></i> Astuce</h4>
+                    <p>Pour chaque type d'événement, créez un lien personnalisé (ex: academie-tourisme.calendly.com/decouverte) que vous pourrez partager facilement.</p>
+                </div>
+            </div>
+
+            <!-- Intégration -->
+            <div class="content-section" id="integration">
+                <h2><i class="fas fa-plug"></i> Intégration avec Dolibarr</h2>
+                
+                <p>L'intégration de Calendly avec Dolibarr permet de centraliser tous vos rendez-vous et d'automatiser le suivi commercial.</p>
+
+                <h3><i class="fas fa-link"></i> Synchronisation automatique</h3>
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Activer les webhooks</h4>
+                            <p>Dans Calendly, activez les webhooks pour envoyer les informations de rendez-vous vers Dolibarr.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Configurer l'API Dolibarr</h4>
+                            <p>Dans Dolibarr, activez l'API REST et générez une clé d'API pour Calendly.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Liaison des calendriers</h4>
+                            <p>Connectez Calendly à l'agenda Dolibarr via Zapier ou Make (anciennement Integromat).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Configuration technique</h4>
+                    <p>La configuration de l'intégration nécessite des droits administrateurs. Contactez la Cyber-Technique pour une mise en place assistée.</p>
+                </div>
+
+                <h3><i class="fas fa-robot"></i> Automatisations possibles</h3>
+                <ul>
+                    <li>Création automatique d'un événement dans l'agenda Dolibarr à chaque réservation</li>
+                    <li>Association automatique du rendez-vous au tiers/contact correspondant</li>
+                    <li>Création d'une action commerciale dans le projet du prospect</li>
+                    <li>Envoi d'un email de confirmation personnalisé ADT</li>
+                    <li>Notification de l'équipe commerciale via Teams</li>
                 </ul>
             </div>
-            
-            <div class="footer-column">
-                <h4>Modules</h4>
-                <ul class="footer-links">
-                    <li><a href="facturation.html">Facturation</a></li>
-                    <li><a href="banques.html">Banques</a></li>
-                    <li><a href="produits-services.html">Produits | Services</a></li>
-                    <li><a href="grh.html">GRH</a></li>
-                    <li><a href="documents.html">Documents</a></li>
-                    <li><a href="agenda.html">Agenda</a></li>
+
+            <!-- Utilisation -->
+            <div class="content-section" id="utilisation">
+                <h2><i class="fas fa-share-alt"></i> Utiliser Calendly au quotidien</h2>
+                
+                <h3><i class="fas fa-envelope"></i> Partager votre lien Calendly</h3>
+                <p>Plusieurs façons d'intégrer Calendly dans votre communication :</p>
+
+                <ol>
+                    <li><strong>Signature email :</strong> Ajoutez un bouton "Prendre RDV" dans votre signature Outlook</li>
+                    <li><strong>Emails manuels :</strong> Insérez votre lien Calendly dans vos emails prospects</li>
+                    <li><strong>Site web :</strong> Intégrez un widget Calendly sur les pages de contact ADT</li>
+                    <li><strong>LinkedIn :</strong> Partagez votre lien dans vos messages LinkedIn</li>
+                    <li><strong>Proposition commerciale :</strong> Incluez le lien dans vos PDF de présentation</li>
+                </ol>
+
+                <div class="info-box">
+                    <h4><i class="fas fa-magic"></i> Modèle de message</h4>
+                    <p>"Pour planifier un échange, je vous invite à choisir le créneau qui vous convient le mieux : [votre-lien-calendly]"</p>
+                </div>
+
+                <h3><i class="fas fa-chart-bar"></i> Suivre vos performances</h3>
+                <p>Calendly offre des statistiques détaillées :</p>
+                <ul>
+                    <li>Nombre de rendez-vous réservés par semaine/mois</li>
+                    <li>Taux d'annulation et de non-présentation</li>
+                    <li>Créneaux horaires les plus populaires</li>
+                    <li>Sources de réservation (email, site web, LinkedIn...)</li>
+                    <li>Temps moyen entre l'envoi du lien et la réservation</li>
                 </ul>
             </div>
-            
-            <div class="footer-column">
-                <h4>Ressources</h4>
-                <ul class="footer-links">
-                    <li><a href="#">Téléchargements</a></li>
-                    <li><a href="#">Forum d'entraide</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Blog</a></li>
+
+            <!-- Bonnes pratiques -->
+            <div class="content-section" id="conseils">
+                <h2><i class="fas fa-star"></i> Bonnes pratiques</h2>
+                
+                <ul>
+                    <li><strong>Limitez les options :</strong> Proposez 2-3 types d'événements maximum pour ne pas perdre le prospect</li>
+                    <li><strong>Personnalisez les messages :</strong> Adaptez les confirmations et rappels aux couleurs ADT</li>
+                    <li><strong>Tampons de temps :</strong> Ajoutez 10-15 min entre chaque RDV pour avoir le temps de préparer</li>
+                    <li><strong>Délai de réservation :</strong> Imposez un délai minimum (ex: 24h) pour vous organiser</li>
+                    <li><strong>Questions préalables :</strong> Ajoutez 2-3 questions pour qualifier le prospect avant le RDV</li>
+                    <li><strong>Rappels multiples :</strong> Configurez des rappels 24h et 1h avant le rendez-vous</li>
+                    <li><strong>Lien visio automatique :</strong> Intégrez Teams pour générer automatiquement le lien de réunion</li>
+                    <li><strong>Mise à jour régulière :</strong> Actualisez vos disponibilités selon votre charge de travail</li>
                 </ul>
+
+                <div class="success-box">
+                    <h4><i class="fas fa-trophy"></i> Astuce Pro</h4>
+                    <p>Créez des "routing forms" pour diriger automatiquement vos prospects vers le bon commercial selon leur besoin (BtoB, BtoC, Campus) et leur zone géographique.</p>
+                </div>
             </div>
-            
-            <div class="footer-column">
-                <h4>Contact</h4>
-                <ul class="footer-links">
-                    <li><a href="mailto:contact@adtdolibarr.com">Email</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">LinkedIn</a></li>
-                    <li><a href="#">YouTube</a></li>
-                </ul>
+
+            <!-- Navigation -->
+            <div class="page-navigation">
+                <a href="agenda.html" class="nav-button prev">
+                    <i class="fas fa-arrow-left"></i>
+                    Module précédent : Agenda
+                </a>
+                <a href="dolibarr.html" class="nav-button">
+                    Retour aux tutoriels
+                    <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
-        </div>
-        
+        </main>
+    </div>
+
+    <footer>
         <div class="copyright">
-            <p>&copy; 2025 ADT Dolibarr. Tous droits réservés.</p>
+            <p>&copy; 2025 ADT - Académie du Tourisme. Tous droits réservés.</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">
+                <i class="fas fa-code"></i> Développé par la Cyber-Technique ADT
+            </p>
         </div>
     </footer>
 
-    <script src="../js/main.js"></script>
+    <script>
+        // Smooth scroll pour les liens d'ancrage
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>

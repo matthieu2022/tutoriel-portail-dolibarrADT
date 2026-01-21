@@ -3,149 +3,790 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pré-Opportunité - Dolibarr ADT</title>
-    <link rel="stylesheet" href="../../css/styles.css">
+    <title>Module Pré-Opportunité - Dolibarr ADT</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .top-bar {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 10px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: white;
+            padding: 15px 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .breadcrumb-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: #2980b9;
+        }
+
+        .breadcrumb-separator {
+            color: #95a5a6;
+        }
+
+        .breadcrumb-current {
+            color: #7f8c8d;
+        }
+
+        /* Layout 2 colonnes : 40% vidéos / 60% contenu */
+        .page-container {
+            max-width: 1600px;
+            margin: 40px auto;
+            padding: 0 30px;
+            display: grid;
+            grid-template-columns: 40% 60%;
+            gap: 30px;
+            align-items: start;
+        }
+
+        /* Aside vidéos - Sticky */
+        .video-aside {
+            position: sticky;
+            top: 100px;
+            max-height: 800px;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+
+        .video-block {
+            background: white;
+            border-radius: 12px;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .video-block h3 {
+            color: #2c3e50;
+            font-size: 1rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .video-block h3 i {
+            color: #e74c3c;
+            font-size: 0.9rem;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* Ratio 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+            margin-bottom: 10px;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-info {
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.5;
+            padding: 10px;
+            background: #f8f9fa;
+            border-left: 3px solid #e74c3c;
+            border-radius: 5px;
+        }
+
+        .video-info p {
+            margin: 0;
+        }
+
+        /* Support sidebar block */
+        .support-block {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            color: white;
+        }
+
+        .support-block h3 {
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .support-block h3 i {
+            color: white;
+        }
+
+        .support-block p {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .ticket-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: white;
+            color: #3498db;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .ticket-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        /* Contenu principal */
+        .main-content {
+            min-width: 0;
+        }
+
+        /* Page header */
+        .page-header {
+            background: white;
+            border-radius: 15px;
+            padding: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .page-title {
+            color: #2c3e50;
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .page-title i {
+            color: #e74c3c;
+        }
+
+        .page-subtitle {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            margin-bottom: 18px;
+        }
+
+        .page-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .tag-difficulty {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+        }
+
+        .tag-time {
+            background: #e7f3ff;
+            color: #0066cc;
+        }
+
+        .tag-category {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+        }
+
+        /* Content sections */
+        .content-section {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .content-section h2 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #e74c3c;
+        }
+
+        .content-section h3 {
+            color: #34495e;
+            font-size: 1.4rem;
+            margin: 25px 0 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-section h3 i {
+            color: #e74c3c;
+            font-size: 1.1rem;
+        }
+
+        .content-section p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 16px;
+            text-align: justify;
+        }
+
+        .content-section ul,
+        .content-section ol {
+            margin-left: 30px;
+            margin-bottom: 16px;
+        }
+
+        .content-section li {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+
+        .content-section li strong {
+            color: #2c3e50;
+        }
+
+        /* Info boxes */
+        .info-box {
+            background: linear-gradient(135deg, #e8f4f8, #d4ebf2);
+            border-left: 5px solid #3498db;
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .info-box h4 {
+            color: #2980b9;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .info-box p {
+            color: #555;
+            margin: 0;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fff4e6, #ffe8cc);
+            border-left: 5px solid #f39c12;
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .warning-box h4 {
+            color: #e67e22;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .warning-box p {
+            color: #555;
+            margin: 0;
+        }
+
+        .note-box {
+            background: linear-gradient(135deg, #fff3e6, #ffe4cc);
+            border-left: 5px solid #e74c3c;
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .note-box h4 {
+            color: #c0392b;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .note-box p {
+            color: #555;
+            margin: 0;
+        }
+
+        /* Steps */
+        .steps-container {
+            margin: 25px 0;
+        }
+
+        .step {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 25px;
+            padding: 18px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            background: #ecf0f1;
+            transform: translateX(5px);
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .step-content h4 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .step-content p {
+            color: #555;
+            margin: 0;
+        }
+
+        /* Navigation buttons */
+        .page-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding: 25px 0;
+            border-top: 2px solid #ecf0f1;
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 22px;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(231, 76, 60, 0.4);
+        }
+
+        .nav-button.prev {
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+        }
+
+        .nav-button.prev:hover {
+            box-shadow: 0 6px 25px rgba(149, 165, 166, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 30px;
+            margin-top: 60px;
+        }
+
+        .copyright {
+            text-align: center;
+            color: #95a5a6;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .page-container {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .video-aside {
+                position: static;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 15px;
+            }
+
+            .video-block {
+                margin-bottom: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-container {
+                padding: 0 20px;
+            }
+
+            .page-header,
+            .content-section {
+                padding: 25px;
+            }
+
+            .page-title {
+                font-size: 1.8rem;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .step {
+                flex-direction: column;
+            }
+
+            .page-navigation {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .video-aside {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar">
-            <div class="logo">
-                <a href="../../index.html">
-                    <div class="logo-icon">A</div>
-                    <h1>ADT Tutoriels</h1>
-                </a>
-            </div>
-            <div class="nav-menu">
-                <a href="../../index.html"><i class="fas fa-home"></i> Accueil</a>
-                <a href="index.html"><i class="fas fa-database"></i> Dolibarr</a>
-                <a href="pre-opportunite.html"><i class="fas fa-filter"></i> Pré-Opp</a>
-                <a href="tiers.html"><i class="fas fa-building"></i> Tiers</a>
-                <a href="projets.html"><i class="fas fa-project-diagram"></i> Projets</a>
-            </div>
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Rechercher...">
-            </div>
-        </nav>
+        <div class="logo">
+            <a href="/index.html">
+                <img src="/img/adtutoriel.png" alt="ADT Tutoriels">
+            </a>
+        </div>
     </header>
 
-    <section class="hero" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
-        <div class="hero-content">
-            <h2>Module Pré-Opportunité</h2>
-            <p>la qualification et le suivi de vos leads</p>
+    <div class="breadcrumb">
+        <div class="breadcrumb-container">
+            <a href="../../index.html"><i class="fas fa-home"></i> Accueil</a>
+            <span class="breadcrumb-separator">/</span>
+            <a href="dolibarr.html">Dolibarr</a>
+            <span class="breadcrumb-separator">/</span>
+            <span class="breadcrumb-current">Pré-Opportunité</span>
         </div>
-    </section>
+    </div>
 
-    <div class="main-wrapper">
-        <aside class="sidebar">
-            <div class="sidebar-section">
-                <h3 style="color: #e74c3c;"><i class="fas fa-list"></i> Navigation rapide</h3>
-                <ul class="quick-links">
-                    <li><a href="#introduction"><i class="fas fa-chevron-right" style="color: #e74c3c;"></i> Introduction</a></li>
-                    <li><a href="#configuration"><i class="fas fa-chevron-right" style="color: #e74c3c;"></i> Configuration</a></li>
-                    <li><a href="#utilisation"><i class="fas fa-chevron-right" style="color: #e74c3c;"></i> Utilisation</a></li>
-                    <li><a href="#conseils"><i class="fas fa-chevron-right" style="color: #e74c3c;"></i> Bonnes pratiques</a></li>
-                </ul>
+    <div class="page-container">
+        <!-- Colonne gauche : Vidéos & Support (40%) -->
+        <aside class="video-aside">
+            <!-- Vidéo 1 (placeholder) -->
+            <div class="video-block">
+                <h3><i class="fas fa-play-circle"></i> Introduction Pré-Opportunité</h3>
+                <div class="video-container">
+                    <video controls>
+                        <source src="/video/pre-opportunite-intro.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <p><strong>Durée : 12 min</strong> - Découvrez les fondamentaux du module Pré-Opportunité.</p>
+                </div>
             </div>
 
-            <div class="sidebar-section ticketing-sidebar">
-                <h3 style="color: #3498db; border-bottom-color: #3498db;"><i class="fas fa-ticket-alt"></i> Support</h3>
-                <p style="color: #555; margin-bottom: 20px; line-height: 1.6; font-size: 0.9rem;">
-                    Besoin d'aide ? Créez un ticket support.
-                </p>
+            <!-- Vidéo 2 (placeholder) -->
+            <div class="video-block">
+                <h3><i class="fas fa-play-circle"></i> Qualification des leads</h3>
+                <div class="video-container">
+                    <video controls>
+                        <source src="/video/qualification-leads.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <p><strong>Durée : 10 min</strong> - Comment qualifier efficacement vos leads dans le système.</p>
+                </div>
+            </div>
+
+            <!-- Support Block -->
+            <div class="support-block">
+                <h3><i class="fas fa-ticket-alt"></i> Support</h3>
+                <p>Besoin d'aide ? Créez un ticket support et notre équipe vous répondra sous 24h.</p>
                 <a href="https://gestion.academie-tourisme.fr/" class="ticket-btn" target="_blank">
                     <i class="fas fa-plus-circle"></i> Créer un ticket
                 </a>
             </div>
         </aside>
 
-        <main style="flex: 1;">
-            <div class="breadcrumbs" style="margin-bottom: 30px; color: #7f8c8d; font-size: 0.9rem;">
-                <a href="../../index.html" style="color: #3498db; text-decoration: none;">Accueil</a> &gt; 
-                <a href="index.html" style="color: #3498db; text-decoration: none;">Dolibarr</a> &gt; 
-                <span>Pré-Opportunité</span>
+        <!-- Colonne droite : Contenu principal (60%) -->
+        <main class="main-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="page-title">
+                    <i class="fas fa-filter"></i>
+                    Module Pré-Opportunité
+                </h1>
+                <p class="page-subtitle">Qualification et suivi de vos leads</p>
+                <div class="page-tags">
+                    <span class="tag tag-difficulty">
+                        <i class="fas fa-signal"></i> Moyen
+                    </span>
+                    <span class="tag tag-time">
+                        <i class="far fa-clock"></i> 25 min
+                    </span>
+                    <span class="tag tag-category">
+                        <i class="fas fa-tag"></i> CRM
+                    </span>
+                </div>
             </div>
 
-            <div class="page-header" style="margin-bottom: 50px;">
-                <h2 style="font-size: 2.5rem; color: #2c3e50; margin-bottom: 15px;">Pré-Opportunité</h2>
-            </div>
-
-            <section class="content-section" id="introduction">
-                <h3 style="color: #e74c3c;"><i class="fas fa-info-circle"></i> Introduction</h3>
-                <p>Le module <strong>Pré-Opportunité</strong> permet de gérer efficacement la qualification et le suivi de vos leads dans Dolibarr.</p>
+            <!-- Introduction -->
+            <div class="content-section" id="introduction">
+                <h2>Introduction au module Pré-Opportunité</h2>
                 
-                <div class="info-box" style="border-left-color: #e74c3c; background: rgba(52, 152, 219, 0.05);">
-                    <strong><i class="fas fa-lightbulb"></i> À savoir</strong>
-                    <p>Ce module est essentiel pour la gestion quotidienne de vos activités commerciales.</p>
-                </div>
-            </section>
+                <p>Le module <strong>Pré-Opportunité</strong> permet de gérer efficacement la qualification et le suivi de vos leads dans Dolibarr. Il constitue la première étape du processus commercial, permettant de filtrer et qualifier les contacts avant leur transformation en opportunités commerciales.</p>
 
-            <section class="content-section" id="configuration">
-                <h3 style="color: #e74c3c;"><i class="fas fa-cog"></i> Configuration</h3>
-                <p>Voici les étapes pour configurer le module :</p>
-                
-                <div class="tutorial-step">
-                    <div class="step-number" style="background-color: #e74c3c;">1</div>
-                    <div class="step-content">
-                        <h5>Activer le module</h5>
-                        <p>Rendez-vous dans Configuration → Modules → Cherchez "Pré-Opportunité" et activez-le.</p>
-                    </div>
+                <div class="info-box">
+                    <h4><i class="fas fa-lightbulb"></i> À savoir</h4>
+                    <p>Ce module est essentiel pour la gestion quotidienne de vos activités commerciales. Il permet d'organiser vos contacts entrants et de prioriser vos actions commerciales en fonction de critères de qualification précis.</p>
                 </div>
 
-                <div class="tutorial-step">
-                    <div class="step-number" style="background-color: #e74c3c;">2</div>
-                    <div class="step-content">
-                        <h5>Paramétrer les options</h5>
-                        <p>Configurez les options selon vos besoins métier.</p>
-                    </div>
-                </div>
-
-                <div class="tutorial-step">
-                    <div class="step-number" style="background-color: #e74c3c;">3</div>
-                    <div class="step-content">
-                        <h5>Définir les permissions</h5>
-                        <p>Attribuez les droits d'accès appropriés à vos utilisateurs.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="content-section" id="utilisation">
-                <h3 style="color: #e74c3c;"><i class="fas fa-tasks"></i> Utilisation pratique</h3>
-                <p>Guide d'utilisation du module au quotidien.</p>
-                
-                <div class="note-box">
-                    <strong><i class="fas fa-exclamation-triangle"></i> Important</strong>
-                    <p>Vérifiez toujours vos données avant validation.</p>
-                </div>
-            </section>
-
-            <section class="content-section" id="conseils">
-                <h3 style="color: #e74c3c;"><i class="fas fa-star"></i> Bonnes pratiques</h3>
-                <ul style="line-height: 2; color: #555;">
-                    <li>Maintenez vos données à jour régulièrement</li>
-                    <li>Utilisez les filtres pour gagner du temps</li>
-                    <li>Formez votre équipe aux fonctionnalités avancées</li>
-                    <li>Consultez le support en cas de doute</li>
+                <h3><i class="fas fa-bullseye"></i> Objectifs du module</h3>
+                <ul>
+                    <li>Centraliser tous les leads entrants dans un espace dédié</li>
+                    <li>Qualifier rapidement les prospects selon des critères définis</li>
+                    <li>Prioriser les actions commerciales</li>
+                    <li>Faciliter la conversion vers des opportunités commerciales</li>
+                    <li>Améliorer le taux de transformation commercial</li>
                 </ul>
-            </section>
+            </div>
+
+            <!-- Configuration -->
+            <div class="content-section" id="configuration">
+                <h2><i class="fas fa-cog"></i> Configuration du module</h2>
+                
+                <p>Avant d'utiliser le module Pré-Opportunité, il est nécessaire de le configurer correctement. Voici les étapes à suivre :</p>
+
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Activer le module</h4>
+                            <p>Rendez-vous dans <strong>Configuration → Modules</strong>. Cherchez "Pré-Opportunité" dans la liste des modules disponibles et activez-le en cliquant sur le bouton d'activation.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Paramétrer les options</h4>
+                            <p>Configurez les options selon vos besoins métier : critères de qualification, statuts personnalisés, champs obligatoires, etc. Cette personnalisation permet d'adapter le module à vos processus commerciaux spécifiques.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Définir les permissions</h4>
+                            <p>Attribuez les droits d'accès appropriés à vos utilisateurs dans <strong>Utilisateurs → Groupes</strong>. Définissez qui peut créer, modifier ou supprimer des pré-opportunités.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Personnaliser les workflows</h4>
+                            <p>Configurez les étapes de qualification et les actions automatiques associées à chaque changement de statut pour automatiser votre processus commercial.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Attention</h4>
+                    <p>La configuration initiale doit être validée par un administrateur. Une fois le module en production, les modifications de configuration peuvent impacter les données existantes.</p>
+                </div>
+            </div>
+
+            <!-- Utilisation -->
+            <div class="content-section" id="utilisation">
+                <h2><i class="fas fa-tasks"></i> Utilisation pratique</h2>
+                
+                <h3><i class="fas fa-plus-circle"></i> Créer une pré-opportunité</h3>
+                <p>Pour créer une nouvelle pré-opportunité :</p>
+                
+                <ol>
+                    <li>Accédez au menu <strong>CRM → Pré-Opportunités</strong></li>
+                    <li>Cliquez sur le bouton <strong>"Nouvelle pré-opportunité"</strong></li>
+                    <li>Renseignez les informations obligatoires : nom du contact, entreprise, source du lead</li>
+                    <li>Ajoutez les informations complémentaires selon vos critères de qualification</li>
+                    <li>Validez la création</li>
+                </ol>
+
+                <h3><i class="fas fa-search"></i> Qualifier un lead</h3>
+                <p>La qualification permet d'évaluer le potentiel commercial d'un lead :</p>
+
+                <ul>
+                    <li><strong>Budget :</strong> Le prospect dispose-t-il d'un budget identifié ?</li>
+                    <li><strong>Autorité :</strong> Êtes-vous en contact avec un décideur ?</li>
+                    <li><strong>Besoin :</strong> Le besoin est-il clairement exprimé ?</li>
+                    <li><strong>Timing :</strong> Quel est le calendrier de décision ?</li>
+                </ul>
+
+                <div class="info-box">
+                    <h4><i class="fas fa-info-circle"></i> Méthode BANT</h4>
+                    <p>La méthode BANT (Budget, Authority, Need, Timing) est recommandée pour qualifier efficacement vos leads et prioriser vos actions commerciales.</p>
+                </div>
+
+                <h3><i class="fas fa-exchange-alt"></i> Convertir en opportunité</h3>
+                <p>Une fois le lead qualifié, vous pouvez le convertir en opportunité commerciale :</p>
+
+                <ol>
+                    <li>Ouvrez la fiche de la pré-opportunité</li>
+                    <li>Vérifiez que tous les critères de qualification sont remplis</li>
+                    <li>Cliquez sur <strong>"Convertir en opportunité"</strong></li>
+                    <li>Le système crée automatiquement une opportunité liée et un projet associé</li>
+                </ol>
+
+                <div class="note-box">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Important</h4>
+                    <p>Vérifiez toujours vos données avant validation. Une fois convertie, la pré-opportunité ne peut plus être modifiée directement.</p>
+                </div>
+            </div>
+
+            <!-- Bonnes pratiques -->
+            <div class="content-section" id="conseils">
+                <h2><i class="fas fa-star"></i> Bonnes pratiques</h2>
+                
+                <p>Pour optimiser votre utilisation du module Pré-Opportunité, suivez ces recommandations :</p>
+
+                <ul>
+                    <li><strong>Maintenez vos données à jour régulièrement :</strong> Actualisez les statuts et les informations dès que vous obtenez de nouvelles informations sur un lead</li>
+                    <li><strong>Utilisez les filtres pour gagner du temps :</strong> Créez des vues personnalisées pour accéder rapidement aux leads prioritaires</li>
+                    <li><strong>Formez votre équipe aux fonctionnalités avancées :</strong> Assurez-vous que tous les commerciaux maîtrisent les critères de qualification</li>
+                    <li><strong>Définissez un délai de traitement :</strong> Fixez un SLA pour le traitement des pré-opportunités (ex : qualification sous 48h)</li>
+                    <li><strong>Suivez vos KPIs :</strong> Taux de conversion, délai moyen de qualification, nombre de leads par source</li>
+                    <li><strong>Nettoyez régulièrement :</strong> Archivez ou supprimez les leads obsolètes pour maintenir une base propre</li>
+                    <li><strong>Consultez le support en cas de doute :</strong> L'équipe Cyber-Technique est là pour vous aider</li>
+                </ul>
+
+                <div class="info-box">
+                    <h4><i class="fas fa-trophy"></i> Astuce Pro</h4>
+                    <p>Créez des templates de qualification pour standardiser le processus et améliorer la cohérence des évaluations entre les différents commerciaux de votre équipe.</p>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="page-navigation">
+                <a href="premiers-pas.html" class="nav-button prev">
+                    <i class="fas fa-arrow-left"></i>
+                    Module précédent : Premiers pas
+                </a>
+                <a href="tiers.html" class="nav-button">
+                    Module suivant : Tiers
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
         </main>
     </div>
 
     <footer>
         <div class="copyright">
             <p>&copy; 2025 ADT - Académie du Tourisme. Tous droits réservés.</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">
+                <i class="fas fa-code"></i> Développé par la Cyber-Technique ADT
+            </p>
         </div>
     </footer>
 
     <script>
-        // Smooth scroll pour les ancres
+        // Smooth scroll pour les liens d'ancrage
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
                 }
             });
         });

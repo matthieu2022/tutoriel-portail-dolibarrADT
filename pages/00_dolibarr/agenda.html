@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agenda - ADT Dolibarr</title>
+    <title>Module Agenda - Dolibarr ADT</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
@@ -15,6 +19,7 @@
             background-color: #f8f9fa;
         }
 
+        /* Header */
         header {
             background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -30,280 +35,489 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        .logo a {
-            text-decoration: none;
+        .logo {
             display: flex;
             align-items: center;
             gap: 10px;
             color: white;
+            text-decoration: none;
         }
 
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background-color: #4a73ab;
-            border-radius: 8px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
+        .logo img {
+            height: 50px;
         }
 
-        .logo h1 {
-            font-size: 1.5rem;
-            font-weight: 600;
+        /* Breadcrumb */
+        .breadcrumb {
+            background: white;
+            padding: 15px 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
-        .search-box {
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 25px;
-            padding: 8px 16px;
-            min-width: 300px;
-        }
-
-        .search-box i {
-            color: #bdc3c7;
-            margin-right: 10px;
-        }
-
-        .search-box input {
-            background: none;
-            border: none;
-            outline: none;
-            color: white;
-            flex: 1;
-            font-size: 0.95rem;
-        }
-
-        .search-box input::placeholder { color: #bdc3c7; }
-
-        .mobile-toggle {
-            display: none;
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
-
-        .main-nav {
+        .breadcrumb-container {
             max-width: 1600px;
             margin: 0 auto;
-            padding: 0 30px;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 5px;
-            padding: 15px 0;
-        }
-
-        .nav-menu a {
             display: flex;
             align-items: center;
-            gap: 6px;
-            padding: 10px 18px;
-            color: #ecf0f1;
-            text-decoration: none;
+            gap: 10px;
             font-size: 0.9rem;
-            font-weight: 500;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            white-space: nowrap;
         }
 
-        .nav-menu a:hover,
-        .nav-menu a.active {
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            transform: translateY(-2px);
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
         }
 
-        .hero {
-            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-            color: white;
-            padding: 60px 30px;
-            text-align: center;
+        .breadcrumb a:hover {
+            color: #2980b9;
         }
 
-        .hero h1 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-            font-weight: 300;
+        .breadcrumb-separator {
+            color: #95a5a6;
         }
 
-        .hero p {
-            font-size: 1.2rem;
-            opacity: 0.95;
+        .breadcrumb-current {
+            color: #7f8c8d;
         }
 
-        .main-wrapper {
-            display: flex;
-            max-width: 1800px;
-            margin: 0 auto;
-            gap: 30px;
+        /* Layout 2 colonnes : 40% vidéos / 60% contenu */
+        .page-container {
+            max-width: 1600px;
+            margin: 40px auto;
             padding: 0 30px;
+            display: grid;
+            grid-template-columns: 40% 60%;
+            gap: 30px;
+            align-items: start;
         }
 
-        .sidebar {
-            width: 300px;
-            flex-shrink: 0;
+        /* Aside vidéos - Sticky */
+        .video-aside {
             position: sticky;
             top: 100px;
-            height: fit-content;
-            max-height: calc(100vh - 120px);
+            max-height: 800px;
             overflow-y: auto;
+            scroll-behavior: smooth;
         }
 
-        .sidebar-section {
+        .video-block {
             background: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 20px;
+            border-radius: 12px;
+            padding: 10px;
+            margin-bottom: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
 
-        .sidebar-section h3 {
+        .video-block h3 {
             color: #2c3e50;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #ecf0f1;
-        }
-
-        .sidebar-section h3 i { color: #e74c3c; }
-
-        .quick-links { list-style: none; }
-
-        .quick-links li { margin-bottom: 12px; }
-
-        .quick-links a {
-            color: #555;
-            text-decoration: none;
+            font-size: 1rem;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             gap: 8px;
-            padding: 8px 12px;
-            border-radius: 6px;
-            transition: all 0.3s ease;
         }
 
-        .quick-links a:hover {
-            background: #f8f9fa;
-            color: #e74c3c;
-            transform: translateX(5px);
-        }
-
-        .quick-links i {
-            color: #e74c3c;
-            width: 20px;
-        }
-
-        .ticketing-sidebar {
-            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(41, 128, 185, 0.05));
-            border: 2px solid #3498db;
-        }
-
-        .ticketing-sidebar h3 {
-            color: #3498db;
-            border-bottom-color: #3498db;
-        }
-
-        .ticketing-sidebar h3 i { color: #3498db; }
-
-        .ticketing-sidebar p {
-            color: #555;
-            margin-bottom: 20px;
-            line-height: 1.6;
+        .video-block h3 i {
+            color: #eb6d21;
             font-size: 0.9rem;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+            margin-bottom: 10px;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-info {
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.5;
+            padding: 10px;
+            background: #f8f9fa;
+            border-left: 3px solid #eb6d21;
+            border-radius: 5px;
+        }
+
+        .video-info p {
+            margin: 0;
+        }
+
+        /* Support sidebar block */
+        .support-block {
+            background: linear-gradient(135deg, #eb6d21, #d85a12);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            color: white;
+        }
+
+        .support-block h3 {
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .support-block h3 i {
+            color: white;
+        }
+
+        .support-block p {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.6;
         }
 
         .ticket-btn {
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, #3498db, #2980b9);
-            color: white;
+            justify-content: center;
+            gap: 8px;
             padding: 12px 20px;
-            border-radius: 10px;
+            background: white;
+            color: #eb6d21;
             text-decoration: none;
+            border-radius: 8px;
             font-weight: 600;
             transition: all 0.3s ease;
-            font-size: 0.95rem;
-            width: 100%;
-            justify-content: center;
         }
 
         .ticket-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 25px rgba(52, 152, 219, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
-        main {
-            flex: 1;
-            padding: 60px 0;
+        /* Contenu principal */
+        .main-content {
             min-width: 0;
         }
 
-        .breadcrumbs {
-            color: #7f8c8d;
-            margin-bottom: 30px;
-            font-size: 0.9rem;
-        }
-
-        .breadcrumbs a {
-            color: #3498db;
-            text-decoration: none;
-        }
-
-        .page-header h2 {
-            font-size: 2.5rem;
-            color: #2c3e50;
-            margin-bottom: 50px;
-        }
-
-        .content-section {
+        /* Page header */
+        .page-header {
             background: white;
             border-radius: 15px;
-            padding: 40px;
-            margin-bottom: 30px;
+            padding: 10px;
+            margin-bottom: 25px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
 
-        .content-section h3 {
-            color: #e74c3c;
+        .page-title {
+            color: #2c3e50;
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .page-title i {
+            color: #eb6d21;
+        }
+
+        .page-subtitle {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            margin-bottom: 18px;
+        }
+
+        .page-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .tag-difficulty {
+            background: linear-gradient(135deg, #27ae60, #229954);
+            color: white;
+        }
+
+        .tag-time {
+            background: #e7f3ff;
+            color: #0066cc;
+        }
+
+        .tag-category {
+            background: linear-gradient(135deg, #eb6d21, #d85a12);
+            color: white;
+        }
+
+        /* Content sections */
+        .content-section {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .content-section h2 {
+            color: #2c3e50;
             font-size: 1.8rem;
             margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #eb6d21;
+        }
+
+        .content-section h3 {
+            color: #34495e;
+            font-size: 1.4rem;
+            margin: 25px 0 12px;
             display: flex;
             align-items: center;
             gap: 10px;
+        }
+
+        .content-section h3 i {
+            color: #eb6d21;
+            font-size: 1.1rem;
         }
 
         .content-section p {
             color: #555;
             line-height: 1.8;
-            margin-bottom: 15px;
+            margin-bottom: 16px;
+            text-align: justify;
         }
 
+        .content-section ul,
+        .content-section ol {
+            margin-left: 30px;
+            margin-bottom: 16px;
+        }
+
+        .content-section li {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+
+        .content-section li strong {
+            color: #2c3e50;
+        }
+
+        /* Info boxes */
+        .info-box {
+            background: linear-gradient(135deg, #fff4e6, #ffe8cc);
+            border-left: 5px solid #eb6d21;
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .info-box h4 {
+            color: #d85a12;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .info-box p {
+            color: #555;
+            margin: 0;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fff4e6, #ffe8cc);
+            border-left: 5px solid #f39c12;
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .warning-box h4 {
+            color: #e67e22;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .warning-box p {
+            color: #555;
+            margin: 0;
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, #e8f8f5, #d4efdf);
+            border-left: 5px solid #27ae60;
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .success-box h4 {
+            color: #229954;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .success-box p {
+            color: #555;
+            margin: 0;
+        }
+
+        /* Steps */
+        .steps-container {
+            margin: 25px 0;
+        }
+
+        .step {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 25px;
+            padding: 18px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            background: #ecf0f1;
+            transform: translateX(5px);
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #eb6d21, #d85a12);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .step-content h4 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .step-content p {
+            color: #555;
+            margin: 0;
+        }
+
+        /* Features grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #eb6d21;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .feature-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-card h4 i {
+            color: #eb6d21;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Navigation buttons */
+        .page-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding: 25px 0;
+            border-top: 2px solid #ecf0f1;
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 22px;
+            background: linear-gradient(135deg, #eb6d21, #d85a12);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(235, 109, 33, 0.4);
+        }
+
+        .nav-button.prev {
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+        }
+
+        .nav-button.prev:hover {
+            box-shadow: 0 6px 25px rgba(149, 165, 166, 0.4);
+        }
+
+        /* Footer */
         footer {
             background: #2c3e50;
             color: white;
             padding: 30px;
+            margin-top: 60px;
         }
 
         .copyright {
@@ -311,120 +525,394 @@
             color: #95a5a6;
         }
 
-        @media (max-width: 1024px) {
-            .main-wrapper { flex-direction: column; }
-            .sidebar {
-                width: 100%;
-                position: relative;
-                top: 0;
-                max-height: none;
-                margin-bottom: 30px;
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .page-container {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .video-aside {
+                position: static;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 15px;
+            }
+
+            .video-block {
+                margin-bottom: 0;
             }
         }
 
         @media (max-width: 768px) {
-            .mobile-toggle { display: block; }
-            .main-nav { display: none; }
-            .main-nav.active { display: block; }
-            .nav-menu { flex-direction: column; padding: 20px; }
-            .hero h1 { font-size: 2rem; }
+            .page-container {
+                padding: 0 20px;
+            }
+
+            .page-header,
+            .content-section {
+                padding: 25px;
+            }
+
+            .page-title {
+                font-size: 1.8rem;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .step {
+                flex-direction: column;
+            }
+
+            .page-navigation {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .video-aside {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="top-bar">
-            <div class="logo">
-                <a href="../index.html">
-                    <div class="logo-icon">D</div>
-                    <h1>ADT Dolibarr</h1>
-                </a>
-            </div>
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Rechercher...">
-            </div>
-            <button class="mobile-toggle" id="mobileToggle">
-                <i class="fas fa-bars"></i>
-            </button>
+        <div class="logo">
+            <a href="/index.html">
+                <img src="/img/adtutoriel.png" alt="ADT Tutoriels">
+            </a>
         </div>
-        <nav class="main-nav" id="mainNav">
-            <ul class="nav-menu">
-                <li><a href="../index.html"><i class="fas fa-home"></i> Accueil</a></li>
-                <li><a href="pre-opportunite.html"><i class="fas fa-bullhorn"></i> Pré-Opportunité</a></li>
-                <li><a href="tiers.html"><i class="fas fa-building"></i> Tiers</a></li>
-                <li><a href="projets.html"><i class="fas fa-project-diagram"></i> Projets</a></li>
-                <li><a href="commerce.html"><i class="fas fa-suitcase"></i> Commerce</a></li>
-                <li><a href="facturation.html"><i class="fas fa-file-invoice-dollar"></i> Facturation</a></li>
-                <li><a href="produits-services.html"><i class="fas fa-cube"></i> Services</a></li>
-                <li><a href="agenda.html"><i class="fas fa-calendar-alt"></i> Agenda</a></li>
-            </ul>
-        </nav>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Votre Agenda Dolibarr</h1>
-            <p>Planifiez et suivez vos événements</p>
+    <div class="breadcrumb">
+        <div class="breadcrumb-container">
+            <a href="../../index.html"><i class="fas fa-home"></i> Accueil</a>
+            <span class="breadcrumb-separator">/</span>
+            <a href="dolibarr.html">Dolibarr</a>
+            <span class="breadcrumb-separator">/</span>
+            <span class="breadcrumb-current">Agenda</span>
         </div>
-    </section>
+    </div>
 
-    <div class="main-wrapper">
-        <aside class="sidebar">
-            <div class="sidebar-section">
-                <h3><i class="fas fa-list"></i> Sur cette page</h3>
-                <ul class="quick-links">
-                    <li><a href="#introduction"><i class="fas fa-chevron-right"></i> Introduction</a></li>
-                    <li><a href="#configuration"><i class="fas fa-chevron-right"></i> Configuration</a></li>
-                    <li><a href="#utilisation"><i class="fas fa-chevron-right"></i> Utilisation</a></li>
-                </ul>
+    <div class="page-container">
+        <!-- Colonne gauche : Vidéos & Support (40%) -->
+        <aside class="video-aside">
+            <!-- Vidéo 1 (placeholder) -->
+            <div class="video-block">
+                <h3><i class="fas fa-play-circle"></i> Introduction à l'Agenda</h3>
+                <div class="video-container">
+                    <video controls>
+                        <source src="/video/agenda-introduction.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <p><strong>Durée : 8 min</strong> - Découvrez l'agenda Dolibarr et ses fonctionnalités principales.</p>
+                </div>
             </div>
 
-            <div class="sidebar-section ticketing-sidebar">
-                <h3><i class="fas fa-ticket-alt"></i> Besoin d'aide ?</h3>
-                <p>Créez un ticket de support pour obtenir une assistance personnalisée.</p>
+            <!-- Vidéo 2 (placeholder) -->
+            <div class="video-block">
+                <h3><i class="fas fa-play-circle"></i> Créer et gérer des événements</h3>
+                <div class="video-container">
+                    <video controls>
+                        <source src="/video/agenda-evenements.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <p><strong>Durée : 6 min</strong> - Créez et organisez vos rendez-vous et tâches dans l'agenda.</p>
+                </div>
+            </div>
+
+            <!-- Support Block -->
+            <div class="support-block">
+                <h3><i class="fas fa-ticket-alt"></i> Support</h3>
+                <p>Besoin d'aide ? Créez un ticket support et notre équipe vous répondra sous 24h.</p>
                 <a href="https://gestion.academie-tourisme.fr/" class="ticket-btn" target="_blank">
-                    <i class="fas fa-plus-circle"></i>
-                    Créer un ticket
+                    <i class="fas fa-plus-circle"></i> Créer un ticket
                 </a>
             </div>
         </aside>
 
-        <main>
-            <div class="breadcrumbs">
-                <a href="../index.html">Accueil</a> > Agenda
-            </div>
-
+        <!-- Colonne droite : Contenu principal (60%) -->
+        <main class="main-content">
+            <!-- Page Header -->
             <div class="page-header">
-                <h2>Agenda</h2>
+                <h1 class="page-title">
+                    <i class="fas fa-calendar-alt"></i>
+                    Module Agenda
+                </h1>
+                <p class="page-subtitle">Organisez et suivez vos rendez-vous et événements professionnels</p>
+                <div class="page-tags">
+                    <span class="tag tag-difficulty">
+                        <i class="fas fa-signal"></i> Facile
+                    </span>
+                    <span class="tag tag-time">
+                        <i class="far fa-clock"></i> 10 min
+                    </span>
+                    <span class="tag tag-category">
+                        <i class="fas fa-tag"></i> Dolibarr
+                    </span>
+                </div>
             </div>
 
-            <section class="content-section" id="introduction">
-                <h3><i class="fas fa-info-circle"></i> Introduction</h3>
-                <p>Contenu à venir pour le module Agenda...</p>
-            </section>
+            <!-- Introduction -->
+            <div class="content-section" id="introduction">
+                <h2>L'Agenda Dolibarr</h2>
+                
+                <p>L'<strong>Agenda</strong> est le module de gestion du temps dans Dolibarr. Il centralise tous vos événements professionnels : rendez-vous clients, réunions internes, tâches à effectuer, et actions commerciales. L'agenda vous permet de rester organisé et de ne jamais manquer une échéance importante.</p>
 
-            <section class="content-section" id="configuration">
-                <h3><i class="fas fa-cog"></i> Configuration</h3>
-                <p>Guide de configuration à venir...</p>
-            </section>
+                <div class="info-box">
+                    <h4><i class="fas fa-info-circle"></i> Agenda centralisé</h4>
+                    <p>L'agenda Dolibarr peut être synchronisé avec votre calendrier Outlook, Google Calendar ou Apple Calendar pour une vue unifiée de tous vos engagements professionnels.</p>
+                </div>
 
-            <section class="content-section" id="utilisation">
-                <h3><i class="fas fa-tasks"></i> Utilisation</h3>
-                <p>Guide d'utilisation à venir...</p>
-            </section>
+                <h3><i class="fas fa-list-check"></i> Types d'événements</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4><i class="fas fa-handshake"></i> Rendez-vous</h4>
+                        <p>Rencontres avec clients, prospects ou partenaires.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-users"></i> Réunions</h4>
+                        <p>Réunions d'équipe, points projets, comités.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-tasks"></i> Tâches</h4>
+                        <p>Actions à effectuer avec date d'échéance.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-phone"></i> Appels</h4>
+                        <p>Appels téléphoniques planifiés ou à rappeler.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Utilisation -->
+            <div class="content-section" id="utilisation">
+                <h2><i class="fas fa-plus-circle"></i> Créer un événement</h2>
+                
+                <h3><i class="fas fa-calendar-plus"></i> Étapes de création</h3>
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Accéder à l'agenda</h4>
+                            <p>Cliquez sur <strong>Agenda</strong> dans le menu principal ou utilisez le raccourci dans le tableau de bord.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Nouveau événement</h4>
+                            <p>Cliquez sur le bouton <strong>"+ Nouvel événement"</strong> ou directement sur une plage horaire dans le calendrier.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Renseigner les informations</h4>
+                            <p>Titre, type d'événement, date et heure de début/fin, description, lieu.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Lier à un tiers/projet</h4>
+                            <p>Associez l'événement à un client, prospect ou projet pour faciliter le suivi.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h4>Inviter des participants</h4>
+                            <p>Ajoutez les collègues ou contacts externes qui doivent participer.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">6</div>
+                        <div class="step-content">
+                            <h4>Configurer les rappels</h4>
+                            <p>Définissez des notifications email ou popup avant l'événement (15 min, 1h, 1 jour...).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-sliders-h"></i> Options avancées</h3>
+                <ul>
+                    <li><strong>Événement récurrent :</strong> Créez des événements qui se répètent (quotidien, hebdomadaire, mensuel)</li>
+                    <li><strong>Disponibilité :</strong> Marquez comme occupé, disponible, absent ou tentative</li>
+                    <li><strong>Visibilité :</strong> Public (visible par tous) ou privé (visible uniquement par vous)</li>
+                    <li><strong>Catégorie :</strong> Classez par type (commercial, administratif, formation...)</li>
+                    <li><strong>Priorité :</strong> Définissez l'importance (haute, normale, basse)</li>
+                    <li><strong>Documents joints :</strong> Attachez des fichiers pertinents (ordre du jour, présentation...)</li>
+                </ul>
+            </div>
+
+            <!-- Vues de l'agenda -->
+            <div class="content-section" id="vues">
+                <h2><i class="fas fa-eye"></i> Vues de l'agenda</h2>
+                
+                <p>L'agenda Dolibarr propose plusieurs modes d'affichage pour s'adapter à vos besoins :</p>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4><i class="fas fa-calendar-day"></i> Vue Jour</h4>
+                        <p>Planning détaillé heure par heure de la journée en cours.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-calendar-week"></i> Vue Semaine</h4>
+                        <p>Aperçu de toute la semaine avec tous vos événements.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-calendar"></i> Vue Mois</h4>
+                        <p>Vue mensuelle synthétique pour planifier sur le long terme.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-list"></i> Vue Liste</h4>
+                        <p>Liste chronologique de tous vos événements avec filtres.</p>
+                    </div>
+                </div>
+
+                <div class="success-box">
+                    <h4><i class="fas fa-lightbulb"></i> Astuce</h4>
+                    <p>Utilisez la vue <strong>Semaine</strong> pour avoir une vision claire de votre charge de travail et éviter les surcharges. La vue <strong>Mois</strong> est idéale pour anticiper les périodes creuses ou intenses.</p>
+                </div>
+            </div>
+
+            <!-- Synchronisation -->
+            <div class="content-section" id="synchronisation">
+                <h2><i class="fas fa-sync"></i> Synchronisation et partage</h2>
+                
+                <h3><i class="fas fa-cloud"></i> Synchronisation avec Outlook/Google</h3>
+                <p>Synchronisez votre agenda Dolibarr avec votre calendrier habituel :</p>
+
+                <ol>
+                    <li>Accédez aux <strong>Paramètres → Mon compte</strong></li>
+                    <li>Dans l'onglet <strong>"Agenda"</strong>, activez la synchronisation CalDAV/iCal</li>
+                    <li>Copiez l'URL de synchronisation fournie</li>
+                    <li>Dans Outlook/Google Calendar, ajoutez un calendrier par URL</li>
+                    <li>Collez l'URL et validez</li>
+                </ol>
+
+                <div class="info-box">
+                    <h4><i class="fas fa-info-circle"></i> Synchronisation bidirectionnelle</h4>
+                    <p>Les événements créés dans Dolibarr apparaîtront dans Outlook et vice-versa. La synchronisation se fait automatiquement toutes les 15 minutes.</p>
+                </div>
+
+                <h3><i class="fas fa-share-alt"></i> Partage d'agenda</h3>
+                <p>Partagez votre agenda avec vos collègues pour faciliter la coordination :</p>
+                <ul>
+                    <li><strong>Lecture seule :</strong> Vos collègues voient vos disponibilités sans pouvoir modifier</li>
+                    <li><strong>Modification :</strong> Permet à d'autres utilisateurs d'ajouter des événements dans votre agenda</li>
+                    <li><strong>Agendas d'équipe :</strong> Créez un agenda commun pour un projet ou un service</li>
+                </ul>
+            </div>
+
+            <!-- Gestion -->
+            <div class="content-section" id="gestion">
+                <h2><i class="fas fa-tasks"></i> Gestion des événements</h2>
+                
+                <h3><i class="fas fa-edit"></i> Modifier un événement</h3>
+                <p>Pour modifier un événement existant :</p>
+                <ol>
+                    <li>Cliquez sur l'événement dans l'agenda</li>
+                    <li>Cliquez sur le bouton <strong>"Modifier"</strong></li>
+                    <li>Apportez vos modifications</li>
+                    <li>Enregistrez les changements</li>
+                </ol>
+
+                <div class="warning-box">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Événements récurrents</h4>
+                    <p>Lors de la modification d'un événement récurrent, vous pouvez choisir de modifier uniquement cette occurrence ou toutes les occurrences futures.</p>
+                </div>
+
+                <h3><i class="fas fa-check-circle"></i> Marquer comme effectué</h3>
+                <p>Une fois un événement terminé, marquez-le comme effectué pour garder un historique propre :</p>
+                <ul>
+                    <li>Ouvrez la fiche de l'événement</li>
+                    <li>Changez le statut de "Planifié" à "Effectué"</li>
+                    <li>Ajoutez des notes sur le déroulement si nécessaire</li>
+                </ul>
+
+                <h3><i class="fas fa-trash"></i> Supprimer un événement</h3>
+                <p>Pour supprimer un événement :</p>
+                <ol>
+                    <li>Ouvrez l'événement</li>
+                    <li>Cliquez sur <strong>"Supprimer"</strong></li>
+                    <li>Confirmez la suppression</li>
+                </ol>
+            </div>
+
+            <!-- Bonnes pratiques -->
+            <div class="content-section" id="conseils">
+                <h2><i class="fas fa-star"></i> Bonnes pratiques</h2>
+                
+                <ul>
+                    <li><strong>Planifiez vos semaines :</strong> Chaque lundi, passez 15 minutes à organiser votre semaine dans l'agenda</li>
+                    <li><strong>Liez aux tiers :</strong> Associez toujours vos RDV clients à leur fiche tiers pour un historique complet</li>
+                    <li><strong>Utilisez les rappels :</strong> Configurez systématiquement des rappels pour ne rien oublier</li>
+                    <li><strong>Bloquez du temps :</strong> Réservez des créneaux pour le travail de fond et les tâches administratives</li>
+                    <li><strong>Colorez vos événements :</strong> Utilisez des catégories avec codes couleur pour identifier rapidement le type d'événement</li>
+                    <li><strong>Préparez vos RDV :</strong> Ajoutez dans la description les points à aborder et documents nécessaires</li>
+                    <li><strong>Compte-rendu :</strong> Après chaque RDV important, ajoutez une note résumant les décisions et actions</li>
+                    <li><strong>Synchronisez :</strong> Gardez votre agenda Dolibarr synchronisé avec Outlook pour avoir une vue complète</li>
+                    <li><strong>Respectez votre temps :</strong> Marquez des plages "Ne pas déranger" pour vous concentrer</li>
+                    <li><strong>Vérifiez régulièrement :</strong> Consultez votre agenda plusieurs fois par jour</li>
+                </ul>
+
+                <div class="success-box">
+                    <h4><i class="fas fa-trophy"></i> Astuce Pro</h4>
+                    <p>Créez des événements récurrents pour vos tâches régulières (reporting hebdomadaire, réunion d'équipe, suivi mensuel...). Cela structure votre semaine et vous assure de ne pas oublier ces rendez-vous importants.</p>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="page-navigation">
+                <a href="tiers.html" class="nav-button prev">
+                    <i class="fas fa-arrow-left"></i>
+                    Module précédent : Tiers
+                </a>
+                <a href="calendly.html" class="nav-button">
+                    Module suivant : Calendly
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
         </main>
     </div>
 
     <footer>
         <div class="copyright">
             <p>&copy; 2025 ADT - Académie du Tourisme. Tous droits réservés.</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">
+                <i class="fas fa-code"></i> Développé par la Cyber-Technique ADT
+            </p>
         </div>
     </footer>
 
     <script>
-        document.getElementById('mobileToggle').addEventListener('click', function() {
-            document.getElementById('mainNav').classList.toggle('active');
+        // Smooth scroll pour les liens d'ancrage
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
         });
     </script>
 </body>

@@ -61,7 +61,7 @@
         .logo img {
             height: 50px;
         }
-        
+
         .logo h1 {
             font-size: 1.3rem;
             font-weight: 600;
@@ -116,13 +116,16 @@
         .video-aside {
             position: sticky;
             top: 100px;
+            max-height: 1000px;
+            overflow-y: auto;
+            scroll-behavior: smooth;
         }
 
         .video-block {
             background: white;
             border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
+            padding: 10px;
+            margin-bottom: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
 
@@ -182,7 +185,7 @@
         .page-header {
             background: white;
             border-radius: 15px;
-            padding: 35px;
+            padding: 10px;
             margin-bottom: 25px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
@@ -242,7 +245,7 @@
         .content-section {
             background: white;
             border-radius: 15px;
-            padding: 35px;
+            padding: 15px;
             margin-bottom: 25px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
@@ -566,7 +569,6 @@
                     <i class="fas fa-rocket"></i>
                     Déploiement V1
                 </h1>
-                <p class="page-subtitle">Présentation de votre nouvel ERP/CRM Dolibarr</p>
                 <div class="page-tags">
                     <span class="tag tag-difficulty">
                         <i class="fas fa-signal"></i> Facile

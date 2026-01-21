@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facturation - ADT Dolibarr</title>
+    <title>Facturation - Dolibarr ADT</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
@@ -15,6 +19,7 @@
             background-color: #f8f9fa;
         }
 
+        /* Header */
         header {
             background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -30,280 +35,489 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        .logo a {
-            text-decoration: none;
+        .logo {
             display: flex;
             align-items: center;
             gap: 10px;
             color: white;
+            text-decoration: none;
         }
 
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background-color: #4a73ab;
-            border-radius: 8px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
+        .logo img {
+            height: 50px;
         }
 
-        .logo h1 {
-            font-size: 1.5rem;
-            font-weight: 600;
+        /* Breadcrumb */
+        .breadcrumb {
+            background: white;
+            padding: 15px 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
-        .search-box {
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 25px;
-            padding: 8px 16px;
-            min-width: 300px;
-        }
-
-        .search-box i {
-            color: #bdc3c7;
-            margin-right: 10px;
-        }
-
-        .search-box input {
-            background: none;
-            border: none;
-            outline: none;
-            color: white;
-            flex: 1;
-            font-size: 0.95rem;
-        }
-
-        .search-box input::placeholder { color: #bdc3c7; }
-
-        .mobile-toggle {
-            display: none;
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
-
-        .main-nav {
+        .breadcrumb-container {
             max-width: 1600px;
             margin: 0 auto;
-            padding: 0 30px;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 5px;
-            padding: 15px 0;
-        }
-
-        .nav-menu a {
             display: flex;
             align-items: center;
-            gap: 6px;
-            padding: 10px 18px;
-            color: #ecf0f1;
-            text-decoration: none;
+            gap: 10px;
             font-size: 0.9rem;
-            font-weight: 500;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            white-space: nowrap;
         }
 
-        .nav-menu a:hover,
-        .nav-menu a.active {
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            transform: translateY(-2px);
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
         }
 
-        .hero {
-            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
-            color: white;
-            padding: 60px 30px;
-            text-align: center;
+        .breadcrumb a:hover {
+            color: #2980b9;
         }
 
-        .hero h1 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-            font-weight: 300;
+        .breadcrumb-separator {
+            color: #95a5a6;
         }
 
-        .hero p {
-            font-size: 1.2rem;
-            opacity: 0.95;
+        .breadcrumb-current {
+            color: #7f8c8d;
         }
 
-        .main-wrapper {
-            display: flex;
-            max-width: 1800px;
-            margin: 0 auto;
-            gap: 30px;
+        /* Layout 2 colonnes : 40% vidéos / 60% contenu */
+        .page-container {
+            max-width: 1600px;
+            margin: 40px auto;
             padding: 0 30px;
+            display: grid;
+            grid-template-columns: 40% 60%;
+            gap: 30px;
+            align-items: start;
         }
 
-        .sidebar {
-            width: 300px;
-            flex-shrink: 0;
+        /* Aside vidéos - Sticky */
+        .video-aside {
             position: sticky;
             top: 100px;
-            height: fit-content;
-            max-height: calc(100vh - 120px);
+            max-height: 800px;
             overflow-y: auto;
+            scroll-behavior: smooth;
         }
 
-        .sidebar-section {
+        .video-block {
             background: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 20px;
+            border-radius: 12px;
+            padding: 10px;
+            margin-bottom: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
 
-        .sidebar-section h3 {
+        .video-block h3 {
             color: #2c3e50;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #ecf0f1;
-        }
-
-        .sidebar-section h3 i { color: #f39c12; }
-
-        .quick-links { list-style: none; }
-
-        .quick-links li { margin-bottom: 12px; }
-
-        .quick-links a {
-            color: #555;
-            text-decoration: none;
+            font-size: 1rem;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             gap: 8px;
-            padding: 8px 12px;
-            border-radius: 6px;
-            transition: all 0.3s ease;
         }
 
-        .quick-links a:hover {
-            background: #f8f9fa;
-            color: #f39c12;
-            transform: translateX(5px);
-        }
-
-        .quick-links i {
-            color: #f39c12;
-            width: 20px;
-        }
-
-        .ticketing-sidebar {
-            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(41, 128, 185, 0.05));
-            border: 2px solid #3498db;
-        }
-
-        .ticketing-sidebar h3 {
-            color: #3498db;
-            border-bottom-color: #3498db;
-        }
-
-        .ticketing-sidebar h3 i { color: #3498db; }
-
-        .ticketing-sidebar p {
-            color: #555;
-            margin-bottom: 20px;
-            line-height: 1.6;
+        .video-block h3 i {
+            color: #1abc9c;
             font-size: 0.9rem;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+            margin-bottom: 10px;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-info {
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.5;
+            padding: 10px;
+            background: #f8f9fa;
+            border-left: 3px solid #1abc9c;
+            border-radius: 5px;
+        }
+
+        .video-info p {
+            margin: 0;
+        }
+
+        /* Support sidebar block */
+        .support-block {
+            background: linear-gradient(135deg, #1abc9c, #16a085);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            color: white;
+        }
+
+        .support-block h3 {
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .support-block h3 i {
+            color: white;
+        }
+
+        .support-block p {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.6;
         }
 
         .ticket-btn {
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, #3498db, #2980b9);
-            color: white;
+            justify-content: center;
+            gap: 8px;
             padding: 12px 20px;
-            border-radius: 10px;
+            background: white;
+            color: #1abc9c;
             text-decoration: none;
+            border-radius: 8px;
             font-weight: 600;
             transition: all 0.3s ease;
-            font-size: 0.95rem;
-            width: 100%;
-            justify-content: center;
         }
 
         .ticket-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 25px rgba(52, 152, 219, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
-        main {
-            flex: 1;
-            padding: 60px 0;
+        /* Contenu principal */
+        .main-content {
             min-width: 0;
         }
 
-        .breadcrumbs {
-            color: #7f8c8d;
-            margin-bottom: 30px;
-            font-size: 0.9rem;
-        }
-
-        .breadcrumbs a {
-            color: #3498db;
-            text-decoration: none;
-        }
-
-        .page-header h2 {
-            font-size: 2.5rem;
-            color: #2c3e50;
-            margin-bottom: 50px;
-        }
-
-        .content-section {
+        /* Page header */
+        .page-header {
             background: white;
             border-radius: 15px;
-            padding: 40px;
-            margin-bottom: 30px;
+            padding: 10px;
+            margin-bottom: 25px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
 
-        .content-section h3 {
-            color: #f39c12;
+        .page-title {
+            color: #2c3e50;
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .page-title i {
+            color: #1abc9c;
+        }
+
+        .page-subtitle {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            margin-bottom: 18px;
+        }
+
+        .page-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .tag-difficulty {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+        }
+
+        .tag-time {
+            background: #e7f3ff;
+            color: #0066cc;
+        }
+
+        .tag-category {
+            background: linear-gradient(135deg, #1abc9c, #16a085);
+            color: white;
+        }
+
+        /* Content sections */
+        .content-section {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .content-section h2 {
+            color: #2c3e50;
             font-size: 1.8rem;
             margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #1abc9c;
+        }
+
+        .content-section h3 {
+            color: #34495e;
+            font-size: 1.4rem;
+            margin: 25px 0 12px;
             display: flex;
             align-items: center;
             gap: 10px;
+        }
+
+        .content-section h3 i {
+            color: #1abc9c;
+            font-size: 1.1rem;
         }
 
         .content-section p {
             color: #555;
             line-height: 1.8;
-            margin-bottom: 15px;
+            margin-bottom: 16px;
+            text-align: justify;
         }
 
+        .content-section ul,
+        .content-section ol {
+            margin-left: 30px;
+            margin-bottom: 16px;
+        }
+
+        .content-section li {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+
+        .content-section li strong {
+            color: #2c3e50;
+        }
+
+        /* Info boxes */
+        .info-box {
+            background: linear-gradient(135deg, #d5f4e6, #a8e6cf);
+            border-left: 5px solid #1abc9c;
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .info-box h4 {
+            color: #16a085;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .info-box p {
+            color: #555;
+            margin: 0;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fff4e6, #ffe8cc);
+            border-left: 5px solid #f39c12;
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .warning-box h4 {
+            color: #e67e22;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .warning-box p {
+            color: #555;
+            margin: 0;
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, #e8f8f5, #d4efdf);
+            border-left: 5px solid #27ae60;
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .success-box h4 {
+            color: #229954;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .success-box p {
+            color: #555;
+            margin: 0;
+        }
+
+        /* Steps */
+        .steps-container {
+            margin: 25px 0;
+        }
+
+        .step {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 25px;
+            padding: 18px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            background: #ecf0f1;
+            transform: translateX(5px);
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #1abc9c, #16a085);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .step-content h4 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .step-content p {
+            color: #555;
+            margin: 0;
+        }
+
+        /* Features grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #1abc9c;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .feature-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-card h4 i {
+            color: #1abc9c;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Navigation buttons */
+        .page-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding: 25px 0;
+            border-top: 2px solid #ecf0f1;
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 22px;
+            background: linear-gradient(135deg, #1abc9c, #16a085);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(26, 188, 156, 0.4);
+        }
+
+        .nav-button.prev {
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+        }
+
+        .nav-button.prev:hover {
+            box-shadow: 0 6px 25px rgba(149, 165, 166, 0.4);
+        }
+
+        /* Footer */
         footer {
             background: #2c3e50;
             color: white;
             padding: 30px;
+            margin-top: 60px;
         }
 
         .copyright {
@@ -311,120 +525,516 @@
             color: #95a5a6;
         }
 
-        @media (max-width: 1024px) {
-            .main-wrapper { flex-direction: column; }
-            .sidebar {
-                width: 100%;
-                position: relative;
-                top: 0;
-                max-height: none;
-                margin-bottom: 30px;
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .page-container {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .video-aside {
+                position: static;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 15px;
+            }
+
+            .video-block {
+                margin-bottom: 0;
             }
         }
 
         @media (max-width: 768px) {
-            .mobile-toggle { display: block; }
-            .main-nav { display: none; }
-            .main-nav.active { display: block; }
-            .nav-menu { flex-direction: column; padding: 20px; }
-            .hero h1 { font-size: 2rem; }
+            .page-container {
+                padding: 0 20px;
+            }
+
+            .page-header,
+            .content-section {
+                padding: 25px;
+            }
+
+            .page-title {
+                font-size: 1.8rem;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .step {
+                flex-direction: column;
+            }
+
+            .page-navigation {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .video-aside {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="top-bar">
-            <div class="logo">
-                <a href="../index.html">
-                    <div class="logo-icon">D</div>
-                    <h1>ADT Dolibarr</h1>
-                </a>
-            </div>
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Rechercher...">
-            </div>
-            <button class="mobile-toggle" id="mobileToggle">
-                <i class="fas fa-bars"></i>
-            </button>
+        <div class="logo">
+            <a href="/index.html">
+                <img src="/img/adtutoriel.png" alt="ADT Tutoriels">
+            </a>
         </div>
-        <nav class="main-nav" id="mainNav">
-            <ul class="nav-menu">
-                <li><a href="../index.html"><i class="fas fa-home"></i> Accueil</a></li>
-                <li><a href="pre-opportunite.html"><i class="fas fa-bullhorn"></i> Pré-Opportunité</a></li>
-                <li><a href="tiers.html"><i class="fas fa-building"></i> Tiers</a></li>
-                <li><a href="projets.html"><i class="fas fa-project-diagram"></i> Projets</a></li>
-                <li><a href="commerce.html"><i class="fas fa-suitcase"></i> Commerce</a></li>
-                <li><a href="facturation.html"><i class="fas fa-file-invoice-dollar"></i> Facturation</a></li>
-                <li><a href="produits-services.html"><i class="fas fa-cube"></i> Services</a></li>
-                <li><a href="agenda.html"><i class="fas fa-calendar-alt"></i> Agenda</a></li>
-            </ul>
-        </nav>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Module Facturation</h1>
-            <p>Créez et gérez vos factures clients</p>
+    <div class="breadcrumb">
+        <div class="breadcrumb-container">
+            <a href="../../index.html"><i class="fas fa-home"></i> Accueil</a>
+            <span class="breadcrumb-separator">/</span>
+            <a href="dolibarr.html">Dolibarr</a>
+            <span class="breadcrumb-separator">/</span>
+            <span class="breadcrumb-current">Facturation</span>
         </div>
-    </section>
+    </div>
 
-    <div class="main-wrapper">
-        <aside class="sidebar">
-            <div class="sidebar-section">
-                <h3><i class="fas fa-list"></i> Sur cette page</h3>
-                <ul class="quick-links">
-                    <li><a href="#introduction"><i class="fas fa-chevron-right"></i> Introduction</a></li>
-                    <li><a href="#configuration"><i class="fas fa-chevron-right"></i> Configuration</a></li>
-                    <li><a href="#utilisation"><i class="fas fa-chevron-right"></i> Utilisation</a></li>
-                </ul>
+    <div class="page-container">
+        <!-- Colonne gauche : Vidéos & Support (40%) -->
+        <aside class="video-aside">
+            <!-- Vidéo 1 (placeholder) -->
+            <div class="video-block">
+                <h3><i class="fas fa-play-circle"></i> Créer une facture</h3>
+                <div class="video-container">
+                    <video controls>
+                        <source src="/video/facturation-creation.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <p><strong>Durée : 10 min</strong> - Maîtrisez la création et l'envoi de factures professionnelles.</p>
+                </div>
             </div>
 
-            <div class="sidebar-section ticketing-sidebar">
-                <h3><i class="fas fa-ticket-alt"></i> Besoin d'aide ?</h3>
-                <p>Créez un ticket de support pour obtenir une assistance personnalisée.</p>
+            <!-- Vidéo 2 (placeholder) -->
+            <div class="video-block">
+                <h3><i class="fas fa-play-circle"></i> Paiements et relances</h3>
+                <div class="video-container">
+                    <video controls>
+                        <source src="/video/facturation-paiements.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <p><strong>Durée : 8 min</strong> - Gérez les encaissements et automatisez les relances.</p>
+                </div>
+            </div>
+
+            <!-- Support Block -->
+            <div class="support-block">
+                <h3><i class="fas fa-ticket-alt"></i> Support</h3>
+                <p>Besoin d'aide ? Créez un ticket support et notre équipe vous répondra sous 24h.</p>
                 <a href="https://gestion.academie-tourisme.fr/" class="ticket-btn" target="_blank">
-                    <i class="fas fa-plus-circle"></i>
-                    Créer un ticket
+                    <i class="fas fa-plus-circle"></i> Créer un ticket
                 </a>
             </div>
         </aside>
 
-        <main>
-            <div class="breadcrumbs">
-                <a href="../index.html">Accueil</a> > Facturation
-            </div>
-
+        <!-- Colonne droite : Contenu principal (60%) -->
+        <main class="main-content">
+            <!-- Page Header -->
             <div class="page-header">
-                <h2>Facturation</h2>
+                <h1 class="page-title">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    Module Facturation
+                </h1>
+                <p class="page-subtitle">Créez, envoyez et suivez vos factures avec efficacité et professionnalisme</p>
+                <div class="page-tags">
+                    <span class="tag tag-difficulty">
+                        <i class="fas fa-signal"></i> Moyen
+                    </span>
+                    <span class="tag tag-time">
+                        <i class="far fa-clock"></i> 25 min
+                    </span>
+                    <span class="tag tag-category">
+                        <i class="fas fa-tag"></i> Finance
+                    </span>
+                </div>
             </div>
 
-            <section class="content-section" id="introduction">
-                <h3><i class="fas fa-info-circle"></i> Introduction</h3>
-                <p>Contenu à venir pour le module Facturation...</p>
-            </section>
+            <!-- Introduction -->
+            <div class="content-section" id="introduction">
+                <h2>La facturation dans Dolibarr</h2>
+                
+                <p>Le module <strong>Facturation</strong> est au cœur de la gestion financière de l'ADT. Il permet de créer, gérer et suivre toutes vos factures clients, d'enregistrer les paiements et d'automatiser les relances. Une facturation rigoureuse garantit une trésorerie saine et une conformité comptable.</p>
 
-            <section class="content-section" id="configuration">
-                <h3><i class="fas fa-cog"></i> Configuration</h3>
-                <p>Guide de configuration à venir...</p>
-            </section>
+                <div class="info-box">
+                    <h4><i class="fas fa-info-circle"></i> Qu'est-ce qu'une facture ?</h4>
+                    <p>Une facture est un document comptable et juridique qui constate une vente et exige le paiement. Elle est obligatoire pour toute transaction commerciale entre professionnels et doit respecter des mentions légales strictes.</p>
+                </div>
 
-            <section class="content-section" id="utilisation">
-                <h3><i class="fas fa-tasks"></i> Utilisation</h3>
-                <p>Guide d'utilisation à venir...</p>
-            </section>
+                <h3><i class="fas fa-check-circle"></i> Fonctionnalités clés</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4><i class="fas fa-rocket"></i> Création rapide</h4>
+                        <p>Générez des factures depuis commandes ou propositions en un clic.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-envelope"></i> Envoi automatisé</h4>
+                        <p>Envoyez par email directement depuis Dolibarr.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-bell"></i> Relances automatiques</h4>
+                        <p>Programmez des rappels pour factures impayées.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-chart-line"></i> Suivi trésorerie</h4>
+                        <p>Visualisez en temps réel vos encaissements.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Création -->
+            <div class="content-section" id="creation">
+                <h2><i class="fas fa-plus-circle"></i> Créer une facture</h2>
+                
+                <h3><i class="fas fa-route"></i> Trois méthodes de création</h3>
+
+                <p><strong>Méthode 1 : Depuis une commande (recommandé)</strong></p>
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Ouvrir la commande</h4>
+                            <p>Accédez à la commande livrée que vous souhaitez facturer.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Créer la facture</h4>
+                            <p>Cliquez sur <strong>"Créer une facture"</strong> - toutes les lignes sont reprises.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Valider et envoyer</h4>
+                            <p>Validez la facture, générez le PDF et envoyez au client.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <p><strong>Méthode 2 : Depuis une proposition</strong></p>
+                <p>Si vous n'avez pas créé de commande intermédiaire, vous pouvez facturer directement depuis une proposition commerciale signée.</p>
+
+                <p><strong>Méthode 3 : Création manuelle</strong></p>
+                <ol>
+                    <li>Allez dans <strong>Facturation → Factures clients → Nouvelle facture</strong></li>
+                    <li>Sélectionnez le client</li>
+                    <li>Ajoutez les lignes de facturation</li>
+                    <li>Définissez les conditions de règlement</li>
+                    <li>Validez et envoyez</li>
+                </ol>
+
+                <div class="success-box">
+                    <h4><i class="fas fa-magic"></i> Automatisation</h4>
+                    <p>Pour les clients récurrents, créez des <strong>factures modèles</strong> ou des <strong>factures récurrentes</strong> qui se génèrent automatiquement chaque mois. Gain de temps considérable !</p>
+                </div>
+            </div>
+
+            <!-- Types de factures -->
+            <div class="content-section" id="types">
+                <h2><i class="fas fa-list-alt"></i> Types de factures</h2>
+                
+                <p>Dolibarr propose plusieurs types de factures pour s'adapter à tous les cas de figure :</p>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4><i class="fas fa-file-invoice"></i> Facture standard</h4>
+                        <p>Facture classique pour une vente ou prestation unique.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-redo"></i> Facture de remplacement</h4>
+                        <p>Remplace une facture erronée (annule l'ancienne).</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-undo"></i> Avoir</h4>
+                        <p>Facture négative pour rembourser ou annuler.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-coins"></i> Facture d'acompte</h4>
+                        <p>Paiement partiel avant livraison (30% à la commande).</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-percentage"></i> Facture de situation</h4>
+                        <p>Facturation progressive selon avancement (grands projets).</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-sync"></i> Facture récurrente</h4>
+                        <p>Génération automatique (abonnements, prestations mensuelles).</p>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-receipt"></i> Mentions légales obligatoires</h3>
+                <p>Toute facture doit comporter :</p>
+                <ul>
+                    <li><strong>Numéro unique et chronologique</strong> (géré automatiquement par Dolibarr)</li>
+                    <li><strong>Date d'émission</strong> et date d'échéance</li>
+                    <li><strong>Identité complète</strong> de l'émetteur et du client (nom, adresse, SIRET)</li>
+                    <li><strong>Numéro de TVA intracommunautaire</strong> (si applicable)</li>
+                    <li><strong>Description détaillée</strong> des produits/services</li>
+                    <li><strong>Prix unitaires HT</strong>, quantités, montants HT et TTC</li>
+                    <li><strong>Taux de TVA</strong> applicable (ou mention d'exonération)</li>
+                    <li><strong>Conditions de règlement</strong> et pénalités de retard</li>
+                </ul>
+
+                <div class="warning-box">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Conformité fiscale</h4>
+                    <p>Le modèle de facture ADT dans Dolibarr est préconfiguré avec toutes les mentions légales obligatoires. Ne modifiez pas le modèle sans validation de votre expert-comptable.</p>
+                </div>
+            </div>
+
+            <!-- Gestion des paiements -->
+            <div class="content-section" id="paiements">
+                <h2><i class="fas fa-credit-card"></i> Gestion des paiements</h2>
+                
+                <h3><i class="fas fa-money-check-alt"></i> Enregistrer un paiement</h3>
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Ouvrir la facture</h4>
+                            <p>Accédez à la facture concernée depuis le module Facturation.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Saisir le paiement</h4>
+                            <p>Cliquez sur <strong>"Saisir un paiement"</strong> et indiquez le montant.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Préciser le mode</h4>
+                            <p>Sélectionnez : virement, carte bancaire, chèque, espèces, prélèvement...</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Date et référence</h4>
+                            <p>Indiquez la date du paiement et la référence bancaire (n° chèque, virement...).</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h4>Valider</h4>
+                            <p>Enregistrez - la facture passe automatiquement au statut "Payée".</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-wallet"></i> Paiements partiels</h3>
+                <p>Si le client paie en plusieurs fois :</p>
+                <ul>
+                    <li>Enregistrez chaque paiement séparément</li>
+                    <li>Dolibarr calcule automatiquement le reste à payer</li>
+                    <li>Le statut passe à "Payée partiellement" puis "Payée" au solde</li>
+                    <li>Vous pouvez voir l'historique complet des paiements dans la facture</li>
+                </ul>
+
+                <div class="info-box">
+                    <h4><i class="fas fa-university"></i> Rapprochement bancaire</h4>
+                    <p>Le module Banques de Dolibarr permet de rapprocher automatiquement les paiements enregistrés avec vos relevés bancaires importés. Cela garantit la cohérence entre votre comptabilité et votre trésorerie réelle.</p>
+                </div>
+            </div>
+
+            <!-- Relances -->
+            <div class="content-section" id="relances">
+                <h2><i class="fas fa-bell"></i> Relances et impayés</h2>
+                
+                <h3><i class="fas fa-exclamation-circle"></i> Gestion des retards</h3>
+                <p>Dolibarr identifie automatiquement les factures en retard et facilite les relances :</p>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4><i class="fas fa-list"></i> Liste des impayés</h4>
+                        <p>Vue dédiée pour toutes les factures échues non payées.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-stopwatch"></i> Calcul des retards</h4>
+                        <p>Nombre de jours de dépassement automatiquement calculé.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-euro-sign"></i> Pénalités</h4>
+                        <p>Calcul automatique des pénalités de retard légales.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-envelope-open-text"></i> Emails de relance</h4>
+                        <p>Modèles d'emails prêts à l'emploi pour relancer.</p>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-layer-group"></i> Process de relance ADT</h3>
+                <ol>
+                    <li><strong>J+7 après échéance :</strong> Email de relance courtois (rappel amical)</li>
+                    <li><strong>J+15 :</strong> Email de relance ferme avec mention pénalités</li>
+                    <li><strong>J+30 :</strong> Appel téléphonique + email avec mise en demeure</li>
+                    <li><strong>J+45 :</strong> Courrier recommandé AR</li>
+                    <li><strong>J+60 :</strong> Transmission au service contentieux ou société de recouvrement</li>
+                </ol>
+
+                <div class="warning-box">
+                    <h4><i class="fas fa-gavel"></i> Cadre légal</h4>
+                    <p>Les pénalités de retard sont obligatoires et doivent figurer sur vos factures. Le taux est libre mais ne peut être inférieur au taux légal (3x le taux d'intérêt légal). Une indemnité forfaitaire de 40€ pour frais de recouvrement est également due.</p>
+                </div>
+
+                <h3><i class="fas fa-robot"></i> Automatisation des relances</h3>
+                <p>Configurez Dolibarr pour envoyer automatiquement :</p>
+                <ul>
+                    <li>Un email de rappel 7 jours avant l'échéance</li>
+                    <li>Un email de relance le jour de l'échéance</li>
+                    <li>Des relances progressives à J+7, J+15, J+30</li>
+                    <li>Des notifications internes pour l'équipe finance</li>
+                </ul>
+            </div>
+
+            <!-- Avoirs -->
+            <div class="content-section" id="avoirs">
+                <h2><i class="fas fa-undo-alt"></i> Avoirs et remboursements</h2>
+                
+                <p>Un <strong>avoir</strong> est une facture négative qui annule tout ou partie d'une facture précédente.</p>
+
+                <h3><i class="fas fa-question-circle"></i> Quand créer un avoir ?</h3>
+                <ul>
+                    <li><strong>Erreur de facturation :</strong> Prix erroné, quantité incorrecte</li>
+                    <li><strong>Annulation de commande :</strong> Prestation non réalisée</li>
+                    <li><strong>Retour de marchandise :</strong> Client insatisfait (rare pour les formations)</li>
+                    <li><strong>Remise commerciale :</strong> Geste client accordé après facturation</li>
+                    <li><strong>Erreur sur le client :</strong> Facture émise au mauvais tiers</li>
+                </ul>
+
+                <h3><i class="fas fa-file-alt"></i> Créer un avoir</h3>
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Depuis la facture</h4>
+                            <p>Ouvrez la facture à créditer et cliquez sur <strong>"Créer un avoir"</strong>.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Choisir le type</h4>
+                            <p>Avoir total (annule tout) ou partiel (seulement certaines lignes).</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Ajuster le montant</h4>
+                            <p>Si partiel, indiquez les lignes ou montants concernés.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Valider et envoyer</h4>
+                            <p>Validez l'avoir et envoyez au client pour information.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h4><i class="fas fa-link"></i> Liaison facture-avoir</h4>
+                    <p>Dolibarr conserve automatiquement le lien entre la facture d'origine et l'avoir. Depuis la facture, vous voyez immédiatement si un avoir a été émis. Depuis l'avoir, vous pouvez remonter à la facture initiale.</p>
+                </div>
+
+                <h3><i class="fas fa-money-bill-wave"></i> Traitement de l'avoir</h3>
+                <p>Après création de l'avoir, deux options :</p>
+                <ul>
+                    <li><strong>Compensation :</strong> Déduire du montant d'une prochaine facture</li>
+                    <li><strong>Remboursement :</strong> Rembourser le client (virement, chèque)</li>
+                </ul>
+            </div>
+
+            <!-- Bonnes pratiques -->
+            <div class="content-section" id="conseils">
+                <h2><i class="fas fa-star"></i> Bonnes pratiques</h2>
+                
+                <ul>
+                    <li><strong>Facturation immédiate :</strong> Facturez dans les 48h suivant la livraison/formation</li>
+                    <li><strong>Numérotation rigoureuse :</strong> Ne modifiez jamais manuellement les numéros de facture</li>
+                    <li><strong>Relecture systématique :</strong> Vérifiez TVA, coordonnées client, montants avant envoi</li>
+                    <li><strong>Archivage PDF :</strong> Conservez systématiquement les PDF envoyés (obligation légale 10 ans)</li>
+                    <li><strong>Suivi quotidien :</strong> Consultez chaque jour les paiements reçus et encaissez rapidement</li>
+                    <li><strong>Relances disciplinées :</strong> Respectez les délais de relance, ne laissez pas s'accumuler</li>
+                    <li><strong>Communication :</strong> Prévenez le client avant une mise en demeure, privilégiez le dialogue</li>
+                    <li><strong>Conditions claires :</strong> Mentionnez clairement les délais et pénalités sur chaque facture</li>
+                    <li><strong>Réconciliation mensuelle :</strong> Rapprochez vos factures de vos comptes bancaires chaque mois</li>
+                    <li><strong>Sauvegarde :</strong> Exportez régulièrement vos factures pour sécuriser vos données</li>
+                </ul>
+
+                <div class="success-box">
+                    <h4><i class="fas fa-chart-line"></i> Tableau de bord financier</h4>
+                    <p>Consultez quotidiennement les indicateurs clés : CA facturé du mois, taux de recouvrement, délai moyen de paiement, factures en retard. Ces KPIs vous donnent une vision claire de votre santé financière et vous alertent sur les points de vigilance.</p>
+                </div>
+
+                <div class="warning-box">
+                    <h4><i class="fas fa-shield-alt"></i> RGPD et données financières</h4>
+                    <p>Les factures contiennent des données personnelles sensibles. Limitez l'accès au module Facturation aux personnes habilitées (comptabilité, direction). Activez la traçabilité pour savoir qui consulte ou modifie les factures.</p>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="page-navigation">
+                <a href="dolibarr.html" class="nav-button prev">
+                    <i class="fas fa-arrow-left"></i>
+                    Retour aux tutoriels
+                </a>
+                <a href="dolibarr.html" class="nav-button">
+                    Vue d'ensemble Dolibarr
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
         </main>
     </div>
 
     <footer>
         <div class="copyright">
             <p>&copy; 2025 ADT - Académie du Tourisme. Tous droits réservés.</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">
+                <i class="fas fa-code"></i> Développé par la Cyber-Technique ADT
+            </p>
         </div>
     </footer>
 
     <script>
-        document.getElementById('mobileToggle').addEventListener('click', function() {
-            document.getElementById('mainNav').classList.toggle('active');
+        // Smooth scroll pour les liens d'ancrage
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
         });
     </script>
 </body>

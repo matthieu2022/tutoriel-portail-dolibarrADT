@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intégration GestMax - Dolibarr ADT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .top-bar {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 10px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: white;
+            padding: 15px 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .breadcrumb-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: #2980b9;
+        }
+
+        .breadcrumb-separator {
+            color: #95a5a6;
+        }
+
+        .breadcrumb-current {
+            color: #7f8c8d;
+        }
+
+        /* Layout 2 colonnes : 40% vidéos / 60% contenu */
+        .page-container {
+            max-width: 1600px;
+            margin: 40px auto;
+            padding: 0 30px;
+            display: grid;
+            grid-template-columns: 40% 60%;
+            gap: 30px;
+            align-items: start;
+        }
+
+        /* Aside vidéos - Sticky */
+        .video-aside {
+            position: sticky;
+            top: 100px;
+            max-height: 800px;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+
+        .video-block {
+            background: white;
+            border-radius: 12px;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .video-block h3 {
+            color: #2c3e50;
+            font-size: 1rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .video-block h3 i {
+            color: #2980b9;
+            font-size: 0.9rem;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+            margin-bottom: 10px;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-info {
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.5;
+            padding: 10px;
+            background: #f8f9fa;
+            border-left: 3px solid #2980b9;
+            border-radius: 5px;
+        }
+
+        .video-info p {
+            margin: 0;
+        }
+
+        /* Support sidebar block */
+        .support-block {
+            background: linear-gradient(135deg, #2980b9, #21618c);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            color: white;
+        }
+
+        .support-block h3 {
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .support-block h3 i {
+            color: white;
+        }
+
+        .support-block p {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .ticket-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: white;
+            color: #2980b9;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .ticket-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        /* Contenu principal */
+        .main-content {
+            min-width: 0;
+        }
+
+        /* Page header */
+        .page-header {
+            background: white;
+            border-radius: 15px;
+            padding: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .page-title {
+            color: #2c3e50;
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .page-title i {
+            color: #2980b9;
+        }
+
+        .page-subtitle {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            margin-bottom: 18px;
+        }
+
+        .page-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .tag-difficulty {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            color: white;
+        }
+
+        .tag-time {
+            background: #e7f3ff;
+            color: #0066cc;
+        }
+
+        .tag-category {
+            background: linear-gradient(135deg, #2980b9, #21618c);
+            color: white;
+        }
+
+        /* Content sections */
+        .content-section {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .content-section h2 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #2980b9;
+        }
+
+        .content-section h3 {
+            color: #34495e;
+            font-size: 1.4rem;
+            margin: 25px 0 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-section h3 i {
+            color: #2980b9;
+            font-size: 1.1rem;
+        }
+
+        .content-section p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 16px;
+            text-align: justify;
+        }
+
+        .content-section ul,
+        .content-section ol {
+            margin-left: 30px;
+            margin-bottom: 16px;
+        }
+
+        .content-section li {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+
+        .content-section li strong {
+            color: #2c3e50;
+        }
+
+        /* Info boxes */
+        .info-box {
+            background: linear-gradient(135deg, #d6eaf8, #aed6f1);
+            border-left: 5px solid #2980b9;
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .info-box h4 {
+            color: #21618c;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .info-box p {
+            color: #555;
+            margin: 0;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fff4e6, #ffe8cc);
+            border-left: 5px solid #f39c12;
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .warning-box h4 {
+            color: #e67e22;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .warning-box p {
+            color: #555;
+            margin: 0;
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, #e8f8f5, #d4efdf);
+            border-left: 5px solid #27ae60;
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .success-box h4 {
+            color: #229954;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .success-box p {
+            color: #555;
+            margin: 0;
+        }
+
+        /* Steps */
+        .steps-container {
+            margin: 25px 0;
+        }
+
+        .step {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 25px;
+            padding: 18px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            background: #ecf0f1;
+            transform: translateX(5px);
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #2980b9, #21618c);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .step-content h4 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .step-content p {
+            color: #555;
+            margin: 0;
+        }
+
+        /* Features grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #2980b9;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .feature-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-card h4 i {
+            color: #2980b9;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Navigation buttons */
+        .page-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding: 25px 0;
+            border-top: 2px solid #ecf0f1;
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 22px;
+            background: linear-gradient(135deg, #2980b9, #21618c);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(41, 128, 185, 0.4);
+        }
+
+        .nav-button.prev {
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+        }
+
+        .nav-button.prev:hover {
+            box-shadow: 0 6px 25px rgba(149, 165, 166, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 30px;
+            margin-top: 60px;
+        }
+
+        .copyright {
+            text-align: center;
+            color: #95a5a6;
+        }
+
+        /* Status badge */
+        .status-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .status-badge.in-progress {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .page-container {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .video-aside {
+                position: static;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 15px;
+            }
+
+            .video-block {
+                margin-bottom: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-container {
+                padding: 0 20px;
+            }
+
+            .page-header,
+            .content-section {
+                padding: 25px;
+            }
+
+            .page-title {
+                font-size: 1.8rem;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .step {
+                flex-direction: column;
+            }
+
+            .page-navigation {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .video-aside {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="/index.html">
+                <img src="/img/adtutoriel.png" alt="ADT Tutoriels">
+            </a>
+        </div>
+    </header>
+
+    <div class="breadcrumb">
+        <div class="breadcrumb-container">
+            <a href="../../index.html"><i class="fas fa-home"></i> Accueil</a>
+            <span class="breadcrumb-separator">/</span>
+            <a href="dolibarr.html">Dolibarr</a>
+            <span class="breadcrumb-separator">/</span>
+            <span class="breadcrumb-current">GestMax</span>
+        </div>
+    </div>
+
+    <div class="page-container">
+        <!-- Colonne gauche : Vidéos & Support (40%) -->
+        <aside class="video-aside">
+            <!-- Vidéo 1 (placeholder) -->
+            <div class="video-block">
+                <h3><i class="fas fa-play-circle"></i> Présentation GestMax</h3>
+                <div class="video-container">
+                    <video controls>
+                        <source src="/video/gestmax-presentation.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <p><strong>Durée : 12 min</strong> - Découvrez GestMax et son intégration avec Dolibarr pour la gestion administrative.</p>
+                </div>
+            </div>
+
+            <!-- Vidéo 2 (placeholder) -->
+            <div class="video-block">
+                <h3><i class="fas fa-play-circle"></i> Synchronisation des dossiers</h3>
+                <div class="video-container">
+                    <video controls>
+                        <source src="/video/gestmax-sync.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <p><strong>Durée : 10 min</strong> - Synchronisez automatiquement les dossiers entre GestMax et Dolibarr.</p>
+                </div>
+            </div>
+
+            <!-- Support Block -->
+            <div class="support-block">
+                <h3><i class="fas fa-ticket-alt"></i> Support</h3>
+                <p>Besoin d'aide ? Créez un ticket support et notre équipe vous répondra sous 24h.</p>
+                <a href="https://gestion.academie-tourisme.fr/" class="ticket-btn" target="_blank">
+                    <i class="fas fa-plus-circle"></i> Créer un ticket
+                </a>
+            </div>
+        </aside>
+
+        <!-- Colonne droite : Contenu principal (60%) -->
+        <main class="main-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="page-title">
+                    <i class="fas fa-database"></i>
+                    Intégration GestMax
+                    <span class="status-badge in-progress">
+                        <i class="fas fa-sync"></i> En cours - 70%
+                    </span>
+                </h1>
+                <p class="page-subtitle">Synchronisez vos dossiers de gestion administrative avec Dolibarr</p>
+                <div class="page-tags">
+                    <span class="tag tag-difficulty">
+                        <i class="fas fa-signal"></i> Difficile
+                    </span>
+                    <span class="tag tag-time">
+                        <i class="far fa-clock"></i> 25 min
+                    </span>
+                    <span class="tag tag-category">
+                        <i class="fas fa-tag"></i> Administration
+                    </span>
+                </div>
+            </div>
+
+            <!-- Introduction -->
+            <div class="content-section" id="introduction">
+                <h2>Qu'est-ce que GestMax ?</h2>
+                
+                <p><strong>GestMax</strong> est un logiciel de gestion administrative spécialisé dans le suivi des dossiers de formation, le traitement des financements (OPCO, CPF, Pôle Emploi) et la gestion réglementaire. L'intégration avec Dolibarr permet de centraliser les informations commerciales et administratives pour un suivi complet du parcours client.</p>
+
+                <div class="info-box">
+                    <h4><i class="fas fa-info-circle"></i> Pourquoi intégrer GestMax ?</h4>
+                    <p>GestMax et Dolibarr répondent à des besoins complémentaires : Dolibarr gère la relation client et le commercial, GestMax gère l'administratif et les financements. L'intégration évite la double saisie et garantit la cohérence des données.</p>
+                </div>
+
+                <h3><i class="fas fa-sync-alt"></i> Avantages de l'intégration</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4><i class="fas fa-arrow-right-arrow-left"></i> Synchronisation</h4>
+                        <p>Échange bidirectionnel des données entre les deux systèmes.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-keyboard"></i> Zéro double saisie</h4>
+                        <p>Les informations saisies une fois sont disponibles partout.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-file-alt"></i> Documents centralisés</h4>
+                        <p>Accès aux pièces jointes depuis les deux plateformes.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-check-circle"></i> Cohérence</h4>
+                        <p>Données toujours à jour et cohérentes entre systèmes.</p>
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <h4><i class="fas fa-tools"></i> Intégration en développement</h4>
+                    <p><strong>État actuel : 70% complété.</strong> Synchronisation des données principales opérationnelle. En cours de développement : rapatriement automatique des pièces jointes (devis signés, attestations, conventions). Disponibilité complète prévue pour Q2 2025.</p>
+                </div>
+            </div>
+
+            <!-- Données synchronisées -->
+            <div class="content-section" id="donnees">
+                <h2><i class="fas fa-exchange-alt"></i> Données synchronisées</h2>
+                
+                <h3><i class="fas fa-arrow-right"></i> De Dolibarr vers GestMax</h3>
+                <p>Les informations suivantes sont transmises automatiquement :</p>
+
+                <ul>
+                    <li><strong>Informations client :</strong> Coordonnées complètes du tiers et des contacts</li>
+                    <li><strong>Projets/Opportunités :</strong> Dossiers commerciaux validés nécessitant un suivi administratif</li>
+                    <li><strong>Devis acceptés :</strong> Base pour la création du dossier de formation dans GestMax</li>
+                    <li><strong>Produits/Services :</strong> Catalogue de formations avec durées et tarifs</li>
+                    <li><strong>Factures :</strong> Éléments de facturation pour rapprochement comptable</li>
+                </ul>
+
+                <h3><i class="fas fa-arrow-left"></i> De GestMax vers Dolibarr</h3>
+                <p>GestMax renvoie vers Dolibarr :</p>
+
+                <ul>
+                    <li><strong>Statuts administratifs :</strong> Dossier en cours, validé OPCO, refusé, en attente pièces...</li>
+                    <li><strong>Informations financements :</strong> Montants pris en charge, reste à charge stagiaire</li>
+                    <li><strong>Dates confirmées :</strong> Sessions de formation planifiées avec horaires</li>
+                    <li><strong>Documents générés :</strong> Conventions, attestations, feuilles d'émargement</li>
+                    <li><strong>Paiements OPCO :</strong> Montants reçus pour rapprochement bancaire (en développement)</li>
+                </ul>
+
+                <div class="success-box">
+                    <h4><i class="fas fa-check"></i> Fonctionnalités opérationnelles</h4>
+                    <p>La synchronisation des informations principales (clients, projets, statuts) est pleinement fonctionnelle. Vous pouvez dès maintenant bénéficier de la cohérence des données entre les deux systèmes.</p>
+                </div>
+            </div>
+
+            <!-- Configuration -->
+            <div class="content-section" id="configuration">
+                <h2><i class="fas fa-cog"></i> Configuration de l'intégration</h2>
+                
+                <div class="warning-box">
+                    <h4><i class="fas fa-user-shield"></i> Prérequis administrateur</h4>
+                    <p>La configuration de l'intégration GestMax nécessite des droits administrateur sur les deux systèmes. Cette opération doit être réalisée par la Cyber-Technique. Ne tentez pas de configurer vous-même l'API.</p>
+                </div>
+
+                <h3><i class="fas fa-plug"></i> Étapes de configuration (Cyber-Technique)</h3>
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Activation API GestMax</h4>
+                            <p>Activer le module API dans GestMax et générer les clés d'authentification.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Configuration Dolibarr</h4>
+                            <p>Installer et configurer le module d'intégration GestMax dans Dolibarr.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Mapping des champs</h4>
+                            <p>Associer les champs Dolibarr aux champs GestMax pour garantir la cohérence.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Règles de synchronisation</h4>
+                            <p>Définir quels types de dossiers sont synchronisés et à quelle fréquence.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h4>Tests et validation</h4>
+                            <p>Créer des dossiers tests pour vérifier le bon fonctionnement de la synchronisation.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">6</div>
+                        <div class="step-content">
+                            <h4>Formation utilisateurs</h4>
+                            <p>Former les équipes commerciales et administratives aux nouveaux workflows.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Utilisation -->
+            <div class="content-section" id="utilisation">
+                <h2><i class="fas fa-laptop"></i> Utilisation au quotidien</h2>
+                
+                <h3><i class="fas fa-user-tie"></i> Pour les commerciaux</h3>
+                <p>Votre workflow dans Dolibarr :</p>
+
+                <ol>
+                    <li><strong>Créez votre opportunité commerciale</strong> dans Dolibarr comme d'habitude</li>
+                    <li><strong>Générez et envoyez le devis</strong> au prospect</li>
+                    <li><strong>Une fois le devis accepté,</strong> marquez-le comme "Accepté" dans Dolibarr</li>
+                    <li><strong>Synchronisation automatique :</strong> Le dossier apparaît dans GestMax pour traitement administratif</li>
+                    <li><strong>Suivez l'avancement</strong> dans Dolibarr : le statut GestMax s'affiche automatiquement</li>
+                </ol>
+
+                <div class="info-box">
+                    <h4><i class="fas fa-eye"></i> Visibilité du statut</h4>
+                    <p>Dans la fiche projet Dolibarr, un badge indique le statut administratif GestMax : "En attente pièces", "Validé OPCO", "Dossier complet", etc. Vous savez toujours où en est le dossier administratif.</p>
+                </div>
+
+                <h3><i class="fas fa-users-cog"></i> Pour les équipes administratives</h3>
+                <p>Votre workflow dans GestMax :</p>
+
+                <ol>
+                    <li><strong>Récupérez les nouveaux dossiers</strong> synchronisés depuis Dolibarr</li>
+                    <li><strong>Complétez les informations administratives</strong> (OPCO, financement, dates...)</li>
+                    <li><strong>Générez les documents réglementaires</strong> (conventions, attestations)</li>
+                    <li><strong>Mettez à jour le statut</strong> : les changements remontent dans Dolibarr automatiquement</li>
+                    <li><strong>Suivez les paiements OPCO</strong> et validez la facturation</li>
+                </ol>
+
+                <h3><i class="fas fa-tasks"></i> Statuts et workflow</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4><i class="fas fa-hourglass-start"></i> Nouveau dossier</h4>
+                        <p>Dossier créé dans Dolibarr, en attente traitement GestMax.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-file-alt"></i> En constitution</h4>
+                        <p>Collecte des pièces justificatives en cours.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-paper-plane"></i> Envoyé OPCO</h4>
+                        <p>Dossier transmis à l'organisme financeur.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-check-double"></i> Validé</h4>
+                        <p>Financement accordé, formation peut démarrer.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fonctionnalités à venir -->
+            <div class="content-section" id="roadmap">
+                <h2><i class="fas fa-road"></i> Développements en cours</h2>
+                
+                <p>L'intégration GestMax est en constante amélioration. Voici les fonctionnalités en développement :</p>
+
+                <h3><i class="fas fa-paperclip"></i> Rapatriement des pièces jointes</h3>
+                <div class="info-box">
+                    <h4><i class="fas fa-spinner"></i> En cours - Livraison prévue Mars 2025</h4>
+                    <p>Synchronisation automatique de tous les documents : conventions signées, attestations de présence, feuilles d'émargement, justificatifs de financement. Ces documents seront consultables directement depuis la fiche projet Dolibarr.</p>
+                </div>
+
+                <h3><i class="fas fa-euro-sign"></i> Synchronisation des paiements OPCO</h3>
+                <p><strong>Prévue : Avril 2025</strong> - Les paiements reçus des OPCO seront automatiquement rapprochés des factures Dolibarr pour simplifier la comptabilité.</p>
+
+                <h3><i class="fas fa-chart-bar"></i> Tableaux de bord consolidés</h3>
+                <p><strong>Prévue : Mai 2025</strong> - Visualisation dans Dolibarr des statistiques GestMax : taux d'acceptation OPCO, délais de traitement, montants financés...</p>
+
+                <h3><i class="fas fa-bell"></i> Alertes automatiques</h3>
+                <p><strong>Prévue : Juin 2025</strong> - Notifications lorsqu'un dossier GestMax nécessite une action (pièce manquante, refus OPCO, paiement reçu...).</p>
+            </div>
+
+            <!-- Bonnes pratiques -->
+            <div class="content-section" id="conseils">
+                <h2><i class="fas fa-star"></i> Bonnes pratiques</h2>
+                
+                <ul>
+                    <li><strong>Saisie complète dans Dolibarr :</strong> Plus vos fiches sont complètes, moins il y aura de ressaisie dans GestMax</li>
+                    <li><strong>Marquez rapidement les devis acceptés :</strong> Cela déclenche la synchronisation vers GestMax</li>
+                    <li><strong>Consultez le statut GestMax :</strong> Vérifiez régulièrement l'avancement administratif dans Dolibarr</li>
+                    <li><strong>Ne dupliquez pas manuellement :</strong> Laissez l'intégration créer les dossiers automatiquement</li>
+                    <li><strong>Signalez les incohérences :</strong> Si vous constatez des données différentes entre les deux systèmes, créez un ticket</li>
+                    <li><strong>Respectez les workflows :</strong> Ne modifiez pas manuellement les statuts synchronisés</li>
+                    <li><strong>Formation continue :</strong> Participez aux sessions de formation sur les nouveautés de l'intégration</li>
+                    <li><strong>Remontez les besoins :</strong> Vos suggestions peuvent influencer les prochains développements</li>
+                </ul>
+
+                <div class="success-box">
+                    <h4><i class="fas fa-lightbulb"></i> Astuce</h4>
+                    <p>Utilisez les champs personnalisés de Dolibarr pour capturer les informations spécifiques à GestMax dès la phase commerciale (type de financement souhaité, OPCO pressenti...). Ces données seront transmises lors de la synchronisation.</p>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="page-navigation">
+                <a href="getmyleads.html" class="nav-button prev">
+                    <i class="fas fa-arrow-left"></i>
+                    Outil précédent : GetMyLeads
+                </a>
+                <a href="dolibarr.html" class="nav-button">
+                    Retour aux tutoriels
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="copyright">
+            <p>&copy; 2025 ADT - Académie du Tourisme. Tous droits réservés.</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">
+                <i class="fas fa-code"></i> Développé par la Cyber-Technique ADT
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll pour les liens d'ancrage
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

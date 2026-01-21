@@ -575,9 +575,9 @@
             <div class="page-header">
                 <h1 class="page-title">
                     <i class="fas fa-rocket"></i>
-                    Déploiement V1 - Premiers pas
+                    Déploiement V1
                 </h1>
-                <p class="page-subtitle">Guide complet pour découvrir et maîtriser les bases de votre nouvel ERP/CRM Dolibarr</p>
+                <p class="page-subtitle">Présentation de votre nouvel ERP/CRM Dolibarr</p>
                 <div class="page-tags">
                     <span class="tag tag-difficulty">
                         <i class="fas fa-signal"></i> Facile
@@ -594,72 +594,17 @@
             <!-- Introduction -->
             <div class="content-section">
                 <h2>Introduction au déploiement Dolibarr V1</h2>
-                
-                <p>Bienvenue dans ce guide complet dédié au déploiement de <strong>Dolibarr V1</strong> à l'Académie du Tourisme. Cette nouvelle version marque une étape importante dans la modernisation de nos outils de gestion et représente le fruit d'un travail collaboratif entre l'équipe Cyber-Technique et l'ensemble des services de l'ADT.</p>
 
-                <p>Dolibarr est bien plus qu'un simple logiciel : c'est une solution ERP/CRM complète qui va transformer notre façon de travailler au quotidien. Que vous soyez commercial, administratif, ou membre de l'équipe pédagogique, ce guide vous accompagnera dans vos premiers pas.</p>
+                <p>Ce document détaille le fonctionnement du logiciel Dolibarr pour la gestion de la relation client au sein de l'Académie du Tourisme.
+                 Il définit précisément le cycle de vie des contacts, distinguant les suspects, les prospects de différents degrés et les clients
+                  ayant déjà finalisé un contrat. Le guide explique également comment identifier les doublons par un code couleur spécifique
+                   afin de maintenir une base de données propre. Les utilisateurs y trouvent des instructions pour suivre l'avancement des projets BtoB, 
+                   depuis l'expression du besoin jusqu'à la signature finale. Enfin, l'outil propose des conseils pratiques sur l'utilisation des filtres de recherche,
+                    de l'historique des échanges et de la barre d'outils.</p>
 
                 <div class="info-box">
                     <h4><i class="fas fa-info-circle"></i> À propos de Dolibarr</h4>
                     <p>Dolibarr est un logiciel libre (open source) de gestion d'entreprise (ERP) et de gestion de la relation client (CRM). Il permet de gérer l'ensemble des processus métier : clients, prospects, factures, projets, stocks et bien plus encore.</p>
-                </div>
-
-                <h3><i class="fas fa-bullseye"></i> Objectifs de ce guide</h3>
-                <p>À la fin de ce tutoriel, vous serez capable de :</p>
-                <ul>
-                    <li>Vous connecter à Dolibarr et naviguer dans l'interface</li>
-                    <li>Comprendre l'organisation des menus et des modules</li>
-                    <li>Effectuer vos premières actions dans le système</li>
-                    <li>Personnaliser votre espace de travail</li>
-                    <li>Identifier les ressources d'aide disponibles</li>
-                </ul>
-            </div>
-
-            <!-- Contexte du déploiement -->
-            <div class="content-section">
-                <h2>Contexte du déploiement V1</h2>
-                
-                <h3><i class="fas fa-history"></i> Un peu d'histoire</h3>
-                <p>Le projet Dolibarr à l'ADT a débuté il y a plusieurs années avec différentes instances dédiées à des usages spécifiques (CRM, Facturation, Campus). La version V1 que nous déployons aujourd'hui représente la <strong>fusion et l'harmonisation</strong> de tous ces systèmes en une plateforme unique et unifiée.</p>
-
-                <div class="warning-box">
-                    <h4><i class="fas fa-exclamation-triangle"></i> Important à savoir</h4>
-                    <p>Si vous utilisiez déjà une instance Dolibarr auparavant, vos données ont été migrées vers la V1. Vous retrouverez vos informations mais dans une interface améliorée et enrichie de nouvelles fonctionnalités.</p>
-                </div>
-
-                <h3><i class="fas fa-calendar-alt"></i> Calendrier de déploiement</h3>
-                <div class="steps-container">
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h4>Phase de test (Terminée)</h4>
-                            <p>Tests approfondis avec les référents métier et résolution des bugs critiques.</p>
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h4>Formation des équipes (En cours)</h4>
-                            <p>Sessions de formation dédiées pour chaque service avec support personnalisé.</p>
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h4>Déploiement progressif</h4>
-                            <p>Mise en production par vagues avec accompagnement rapproché des utilisateurs.</p>
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div class="step-number">4</div>
-                        <div class="step-content">
-                            <h4>Support et optimisation</h4>
-                            <p>Équipe support dédiée et amélioration continue basée sur vos retours.</p>
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -701,30 +646,6 @@
                 <div class="info-box">
                     <h4><i class="fas fa-lightbulb"></i> Astuce de navigation</h4>
                     <p>Vous pouvez personnaliser votre tableau de bord en ajoutant ou supprimant des widgets. Cliquez sur l'icône de configuration (roue dentée) pour accéder aux options.</p>
-                </div>
-            </div>
-
-            <!-- Modules principaux -->
-            <div class="content-section">
-                <h2>Les modules principaux de Dolibarr V1</h2>
-                
-                <p>Dolibarr est organisé en <strong>modules</strong> qui correspondent à différents domaines de gestion. Voici un aperçu des principaux modules que vous utiliserez :</p>
-
-                <h3><i class="fas fa-users"></i> Gestion des Tiers</h3>
-                <p>Le module Tiers regroupe tous vos contacts professionnels : clients, prospects, fournisseurs. C'est le cœur de votre CRM.</p>
-
-                <h3><i class="fas fa-project-diagram"></i> Gestion de Projets</h3>
-                <p>Suivez vos projets, affectez des tâches, gérez les temps passés et suivez l'avancement en temps réel.</p>
-
-                <h3><i class="fas fa-file-invoice-dollar"></i> Module Commercial & Facturation</h3>
-                <p>Créez des devis, transformez-les en commandes puis en factures. Gérez tout le cycle de vente en quelques clics.</p>
-
-                <h3><i class="fas fa-cubes"></i> Produits & Services</h3>
-                <p>Gérez votre catalogue de formations, produits et services avec prix, descriptions et disponibilités.</p>
-
-                <div class="success-box">
-                    <h4><i class="fas fa-graduation-cap"></i> Envie d'en savoir plus ?</h4>
-                    <p>Chaque module dispose de son propre tutoriel détaillé. Consultez la section "Tutoriels Dolibarr" pour accéder aux guides complets.</p>
                 </div>
             </div>
 

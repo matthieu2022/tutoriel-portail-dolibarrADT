@@ -157,180 +157,93 @@
         }
 
         /* Layout principal avec aside */
-        .main-wrapper {
-            display: flex;
+        .main-container {
             max-width: 1800px;
             margin: 0 auto;
-            gap: 30px;
-            padding: 0 30px;
-            position: relative;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 40px;
+            padding: 40px 30px;
+            align-items: start;
         }
 
-        /* Aside gauche - Filtres et Ticketing */
-        .sidebar {
-            width: 300px;
-            flex-shrink: 0;
+        /* Aside à gauche - sticky */
+        .sidebar-left {
             position: sticky;
-            top: 100px;
-            height: fit-content;
-            max-height: calc(100vh - 120px);
-            overflow-y: auto;
+            top: 80px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
         }
 
         .sidebar-section {
-            background: white;
-            border-radius: 15px;
             padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .sidebar-section:last-child {
+            border-bottom: none;
         }
 
         .sidebar-section h3 {
             color: #2c3e50;
             font-size: 1.1rem;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #ecf0f1;
+            gap: 8px;
         }
 
         .sidebar-section h3 i {
             color: #3498db;
         }
 
-        /* Section Ticketing dans l'aside */
+        /* Section ticketing dans l'aside */
         .ticketing-sidebar {
-            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(41, 128, 185, 0.05));
-            border: 2px solid #3498db;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 30px 25px;
         }
 
         .ticketing-sidebar h3 {
-            color: #3498db;
-            border-bottom-color: #3498db;
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .ticketing-sidebar h3 i {
+            color: white;
         }
 
         .ticketing-sidebar p {
-            color: #555;
+            color: rgba(255,255,255,0.95);
             margin-bottom: 20px;
             line-height: 1.6;
             font-size: 0.9rem;
         }
 
-        /* Filtres dans l'aside */
-        .sidebar-filters {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .sidebar-filter-btn {
-            padding: 10px 15px;
-            border: 2px solid #ecf0f1;
-            background: white;
-            color: #555;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            text-align: left;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .sidebar-filter-btn:hover {
-            border-color: #3498db;
-            background: #f8f9fa;
-            transform: translateX(5px);
-        }
-
-        .sidebar-filter-btn.active {
-            background: #3498db;
-            color: white;
-            border-color: #3498db;
-            font-weight: 600;
-        }
-
-        .sidebar-filter-btn i {
-            font-size: 0.85rem;
-            width: 16px;
-        }
-
-        /* Couleurs pour les catégories dans l'aside */
-        .sidebar-filter-btn[data-category="dolibarr"].active {
-            background: #2c3e50;
-            border-color: #2c3e50;
-        }
-
-        .sidebar-filter-btn[data-category="keyyo"].active {
-            background: #e74c3c;
-            border-color: #e74c3c;
-        }
-
-        .sidebar-filter-btn[data-category="lms"].active {
-            background: #f39c12;
-            border-color: #f39c12;
-        }
-
-        .sidebar-filter-btn[data-category="office365"].active {
-            background: #e67e22;
-            border-color: #e67e22;
-        }
-
-        .sidebar-filter-btn[data-category="projets"].active {
-            background: #9b59b6;
-            border-color: #9b59b6;
-        }
-
-        .sidebar-filter-btn[data-category="pedagogie"].active {
-            background: #16a085;
-            border-color: #16a085;
-        }
-
-        .sidebar-filter-btn[data-category="ressources"].active {
-            background: #27ae60;
-            border-color: #27ae60;
-        }
-
-        .sidebar-filter-btn[data-category="marketing"].active {
-            background: #c0392b;
-            border-color: #c0392b;
-        }
-
-        .sidebar-filter-btn[data-category="cyber"].active {
-            background: #34495e;
-            border-color: #34495e;
-        }
-
         .ticket-btn {
-            display: inline-flex;
+            display: flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
-            background: linear-gradient(135deg, #3498db, #2980b9);
-            color: white;
+            background: white;
+            color: #3498db;
             padding: 12px 20px;
-            border-radius: 10px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s ease;
             font-size: 0.95rem;
-            width: 100%;
-            justify-content: center;
         }
 
         .ticket-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 25px rgba(52, 152, 219, 0.5);
-            background: linear-gradient(135deg, #2980b9, #3498db);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255,255,255,0.3);
         }
 
         /* Section principale */
         main {
-            flex: 1;
-            padding: 60px 0;
             min-width: 0;
         }
 
@@ -348,6 +261,87 @@
         .section-title p {
             font-size: 1.1rem;
             color: #7f8c8d;
+        }
+
+        /* Système de filtrage */
+        .filter-bar {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .filter-btn {
+            padding: 10px 15px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            color: #555;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            text-align: left;
+            width: 100%;
+        }
+
+        .filter-btn:hover {
+            background: #f8f9fa;
+            border-color: #3498db;
+            transform: translateX(5px);
+        }
+
+        .filter-btn.active {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+            transform: translateX(5px);
+            box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3);
+        }
+
+        /* Couleurs spécifiques pour les filtres de catégorie */
+        .category-filter[data-category="dolibarr"].active {
+            background: #2c3e50;
+            border-color: #2c3e50;
+        }
+
+        .category-filter[data-category="keyyo"].active {
+            background: #e74c3c;
+            border-color: #e74c3c;
+        }
+
+        .category-filter[data-category="lms"].active {
+            background: #f39c12;
+            border-color: #f39c12;
+        }
+
+        .category-filter[data-category="office365"].active {
+            background: #e67e22;
+            border-color: #e67e22;
+        }
+
+        .category-filter[data-category="projets"].active {
+            background: #9b59b6;
+            border-color: #9b59b6;
+        }
+
+        .category-filter[data-category="pedagogie"].active {
+            background: #16a085;
+            border-color: #16a085;
+        }
+
+        .category-filter[data-category="ressources"].active {
+            background: #27ae60;
+            border-color: #27ae60;
+        }
+
+        .category-filter[data-category="marketing"].active {
+            background: #c0392b;
+            border-color: #c0392b;
+        }
+
+        .category-filter[data-category="cyber"].active {
+            background: #34495e;
+            border-color: #34495e;
         }
 
         /* Cards des tutoriels - 5 par ligne sur grand écran, 4 sur moyen */
@@ -511,26 +505,99 @@
             gap: 8px;
         }
 
-        /* Footer simplifié */
+        /* Footer */
         footer {
             background: #2c3e50;
             color: white;
+            padding: 60px 30px 30px;
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h4 {
+            margin-bottom: 20px;
+            color: #3498db;
+            font-size: 1.1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        /* Section Ticketing */
+        .ticketing-section {
+            background: rgba(52, 152, 219, 0.1);
             padding: 30px;
+            border-radius: 12px;
+            border: 2px solid #3498db;
+        }
+
+        .ticketing-section h4 {
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+
+        .ticketing-section p {
+            color: #bdc3c7;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .ticket-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .ticket-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(52, 152, 219, 0.4);
         }
 
         .copyright {
+            border-top: 1px solid #34495e;
+            margin-top: 40px;
+            padding-top: 30px;
             text-align: center;
             color: #95a5a6;
         }
 
         /* Responsive Navigation */
-        @media (max-width: 1200px) {
-            .main-wrapper {
-                padding: 0 20px;
-            }
-
-            .sidebar {
-                width: 280px;
+        @media (max-width: 1400px) {
+            .main-container {
+                grid-template-columns: 280px 1fr;
+                gap: 30px;
             }
         }
 
@@ -548,24 +615,14 @@
                 font-size: 0.85rem;
             }
 
-            .main-wrapper {
-                flex-direction: column;
+            .main-container {
+                grid-template-columns: 1fr;
+                padding: 30px 20px;
             }
 
-            .sidebar {
-                width: 100%;
+            .sidebar-left {
                 position: relative;
                 top: 0;
-                max-height: none;
-                margin-bottom: 30px;
-            }
-
-            .sidebar-section {
-                margin-bottom: 15px;
-            }
-
-            main {
-                padding: 30px 0;
             }
         }
 
@@ -662,8 +719,8 @@
                 <li><a href="#" data-category="office365"><i class="fab fa-microsoft"></i> Office 365</a></li>
                 <li><a href="#" data-category="projets"><i class="fas fa-project-diagram"></i> Projets en cours</a></li>
                 <li><a href="#" data-category="pedagogie"><i class="fas fa-chalkboard-teacher"></i> Pédagogie digitale</a></li>
-                <li><a href="#" data-category="ressources"><i class="fas fa-download"></i> Ressources</a></li>
-                <li><a href="#" data-category="marketing"><i class="fas fa-bullhorn"></i> Marketing</a></li>
+                <li><a href="#" data-category="ressources"><i class="fas fa-download"></i> Ressources téléchargeables</a></li>
+                <li><a href="#" data-category="marketing"><i class="fas fa-bullhorn"></i> Marketing & Communication</a></li>
                 <li><a href="#" data-category="cyber"><i class="fas fa-laptop-code"></i> Cyber-Technique</a></li>
             </ul>
         </nav>
@@ -676,73 +733,45 @@
         </div>
     </section>
 
-    <div class="main-wrapper">
-        <!-- Aside gauche - Filtres et Ticketing -->
-        <aside class="sidebar">
-            <!-- Section Niveau de difficulté -->
-            <div class="sidebar-section">
-                <h3><i class="fas fa-signal"></i> Niveau de difficulté</h3>
-                <div class="sidebar-filters">
-                    <button class="sidebar-filter-btn difficulty-filter active" data-filter="all">
-                        <i class="fas fa-check-circle"></i> Tous les niveaux
-                    </button>
-                    <button class="sidebar-filter-btn difficulty-filter" data-filter="facile">
-                        <i class="fas fa-smile"></i> Facile
-                    </button>
-                    <button class="sidebar-filter-btn difficulty-filter" data-filter="moyen">
-                        <i class="fas fa-meh"></i> Moyen
-                    </button>
-                    <button class="sidebar-filter-btn difficulty-filter" data-filter="difficile">
-                        <i class="fas fa-fire"></i> Difficile
-                    </button>
-                </div>
-            </div>
-
-            <!-- Section Catégories -->
-            <div class="sidebar-section">
-                <h3><i class="fas fa-tags"></i> Catégories</h3>
-                <div class="sidebar-filters">
-                    <button class="sidebar-filter-btn category-filter active" data-category="all">
-                        <i class="fas fa-th"></i> Toutes les catégories
-                    </button>
-                    <button class="sidebar-filter-btn category-filter" data-category="dolibarr">
-                        <i class="fas fa-database"></i> Dolibarr
-                    </button>
-                    <button class="sidebar-filter-btn category-filter" data-category="keyyo">
-                        <i class="fas fa-phone"></i> Téléphonie
-                    </button>
-                    <button class="sidebar-filter-btn category-filter" data-category="lms">
-                        <i class="fas fa-graduation-cap"></i> LMS & Campus
-                    </button>
-                    <button class="sidebar-filter-btn category-filter" data-category="office365">
-                        <i class="fab fa-microsoft"></i> Office 365
-                    </button>
-                    <button class="sidebar-filter-btn category-filter" data-category="projets">
-                        <i class="fas fa-project-diagram"></i> Projets
-                    </button>
-                    <button class="sidebar-filter-btn category-filter" data-category="pedagogie">
-                        <i class="fas fa-chalkboard-teacher"></i> Pédagogie
-                    </button>
-                    <button class="sidebar-filter-btn category-filter" data-category="ressources">
-                        <i class="fas fa-download"></i> Ressources
-                    </button>
-                    <button class="sidebar-filter-btn category-filter" data-category="marketing">
-                        <i class="fas fa-bullhorn"></i> Marketing
-                    </button>
-                    <button class="sidebar-filter-btn category-filter" data-category="cyber">
-                        <i class="fas fa-laptop-code"></i> Cyber-Tech
-                    </button>
-                </div>
-            </div>
-
+    <div class="main-container">
+        <!-- Aside gauche avec ticketing et filtres -->
+        <aside class="sidebar-left">
             <!-- Section Ticketing -->
-            <div class="sidebar-section ticketing-sidebar">
+            <div class="ticketing-sidebar">
                 <h3><i class="fas fa-ticket-alt"></i> Besoin d'aide ?</h3>
-                <p>Créez un ticket de support pour obtenir une assistance personnalisée de l'équipe Cyber-Technique.</p>
+                <p>Créez un ticket de support pour obtenir une assistance personnalisée de notre équipe.</p>
                 <a href="https://gestion.academie-tourisme.fr/" class="ticket-btn" target="_blank">
                     <i class="fas fa-plus-circle"></i>
                     Créer un ticket
                 </a>
+            </div>
+
+            <!-- Section Filtres de difficulté -->
+            <div class="sidebar-section">
+                <h3><i class="fas fa-signal"></i> Niveau de difficulté</h3>
+                <div class="filter-bar">
+                    <button class="filter-btn difficulty-filter active" data-filter="all">Tous les niveaux</button>
+                    <button class="filter-btn difficulty-filter" data-filter="facile">Facile</button>
+                    <button class="filter-btn difficulty-filter" data-filter="moyen">Moyen</button>
+                    <button class="filter-btn difficulty-filter" data-filter="difficile">Difficile</button>
+                </div>
+            </div>
+
+            <!-- Section Filtres de catégorie -->
+            <div class="sidebar-section">
+                <h3><i class="fas fa-tags"></i> Catégories</h3>
+                <div class="filter-bar">
+                    <button class="filter-btn category-filter active" data-category="all">Toutes les catégories</button>
+                    <button class="filter-btn category-filter" data-category="dolibarr">Dolibarr</button>
+                    <button class="filter-btn category-filter" data-category="keyyo">Téléphonie</button>
+                    <button class="filter-btn category-filter" data-category="lms">LMS & Campus</button>
+                    <button class="filter-btn category-filter" data-category="office365">Office 365</button>
+                    <button class="filter-btn category-filter" data-category="projets">Projets</button>
+                    <button class="filter-btn category-filter" data-category="pedagogie">Pédagogie</button>
+                    <button class="filter-btn category-filter" data-category="ressources">Ressources</button>
+                    <button class="filter-btn category-filter" data-category="marketing">Marketing</button>
+                    <button class="filter-btn category-filter" data-category="cyber">Cyber-Tech</button>
+                </div>
             </div>
         </aside>
 
@@ -753,7 +782,7 @@
                 <p>Explorez notre bibliothèque complète de ressources pédagogiques</p>
             </section>
 
-            <div class="tutorial-grid" id="tutorialGrid">
+        <div class="tutorial-grid" id="tutorialGrid">
             <!-- Card Dolibarr V1 -->
             <article class="card" data-category="dolibarr" data-difficulty="moyen">
                 <div class="card-image">
@@ -937,33 +966,6 @@
                         <span class="tag tag-time"><i class="far fa-clock"></i> Variable</span>
                         <span class="tag tag-category">Ressources</span>
                     </div>
-                    <div class="card-footer">
-                        <a href="pages/pdf.html" class="card-link">Découvrir <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Card Cyber-Technique -->
-            <article class="card" data-category="cyber" data-difficulty="difficile">
-                <div class="card-image">
-                    <a href="pages/dolibarr.html">
-                        <img src="./img/dolibarr.webp" alt="Cyber">
-                    </a>
-                </div>
-                <div class="card-content">
-                    <h3 class="card-title">Cyber-Technique</h3>
-                    <p class="card-description">Ressources avancées et documentation technique pour les administrateurs.</p>
-                    <div class="card-tags">
-                        <span class="tag tag-difficulty difficile">Difficile</span>
-                        <span class="tag tag-time"><i class="far fa-clock"></i> Variable</span>
-                        <span class="tag tag-category">Admin</span>
-                    </div>
-                    <div class="card-footer">
-                        <a href="pages/dolibarr.html" class="card-link">Découvrir <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </article>
-            </div>
         </main>
     </div>
 

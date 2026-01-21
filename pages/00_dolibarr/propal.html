@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Commerce - ADT Dolibarr</title>
+    <title>Propositions Commerciales - Dolibarr ADT</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
@@ -15,6 +19,7 @@
             background-color: #f8f9fa;
         }
 
+        /* Header */
         header {
             background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -30,280 +35,489 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        .logo a {
-            text-decoration: none;
+        .logo {
             display: flex;
             align-items: center;
             gap: 10px;
             color: white;
+            text-decoration: none;
         }
 
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background-color: #4a73ab;
-            border-radius: 8px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
+        .logo img {
+            height: 50px;
         }
 
-        .logo h1 {
-            font-size: 1.5rem;
-            font-weight: 600;
+        /* Breadcrumb */
+        .breadcrumb {
+            background: white;
+            padding: 15px 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
-        .search-box {
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 25px;
-            padding: 8px 16px;
-            min-width: 300px;
-        }
-
-        .search-box i {
-            color: #bdc3c7;
-            margin-right: 10px;
-        }
-
-        .search-box input {
-            background: none;
-            border: none;
-            outline: none;
-            color: white;
-            flex: 1;
-            font-size: 0.95rem;
-        }
-
-        .search-box input::placeholder { color: #bdc3c7; }
-
-        .mobile-toggle {
-            display: none;
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
-
-        .main-nav {
+        .breadcrumb-container {
             max-width: 1600px;
             margin: 0 auto;
-            padding: 0 30px;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 5px;
-            padding: 15px 0;
-        }
-
-        .nav-menu a {
             display: flex;
             align-items: center;
-            gap: 6px;
-            padding: 10px 18px;
-            color: #ecf0f1;
-            text-decoration: none;
+            gap: 10px;
             font-size: 0.9rem;
-            font-weight: 500;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            white-space: nowrap;
         }
 
-        .nav-menu a:hover,
-        .nav-menu a.active {
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            transform: translateY(-2px);
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
         }
 
-        .hero {
-            background: linear-gradient(135deg, #16a085 0%, #1abc9c 100%);
-            color: white;
-            padding: 60px 30px;
-            text-align: center;
+        .breadcrumb a:hover {
+            color: #2980b9;
         }
 
-        .hero h1 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-            font-weight: 300;
+        .breadcrumb-separator {
+            color: #95a5a6;
         }
 
-        .hero p {
-            font-size: 1.2rem;
-            opacity: 0.95;
+        .breadcrumb-current {
+            color: #7f8c8d;
         }
 
-        .main-wrapper {
-            display: flex;
-            max-width: 1800px;
-            margin: 0 auto;
-            gap: 30px;
+        /* Layout 2 colonnes : 40% vidéos / 60% contenu */
+        .page-container {
+            max-width: 1600px;
+            margin: 40px auto;
             padding: 0 30px;
+            display: grid;
+            grid-template-columns: 40% 60%;
+            gap: 30px;
+            align-items: start;
         }
 
-        .sidebar {
-            width: 300px;
-            flex-shrink: 0;
+        /* Aside vidéos - Sticky */
+        .video-aside {
             position: sticky;
             top: 100px;
-            height: fit-content;
-            max-height: calc(100vh - 120px);
+            max-height: 800px;
             overflow-y: auto;
+            scroll-behavior: smooth;
         }
 
-        .sidebar-section {
+        .video-block {
             background: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 20px;
+            border-radius: 12px;
+            padding: 10px;
+            margin-bottom: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
 
-        .sidebar-section h3 {
+        .video-block h3 {
             color: #2c3e50;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #ecf0f1;
-        }
-
-        .sidebar-section h3 i { color: #16a085; }
-
-        .quick-links { list-style: none; }
-
-        .quick-links li { margin-bottom: 12px; }
-
-        .quick-links a {
-            color: #555;
-            text-decoration: none;
+            font-size: 1rem;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             gap: 8px;
-            padding: 8px 12px;
-            border-radius: 6px;
-            transition: all 0.3s ease;
         }
 
-        .quick-links a:hover {
-            background: #f8f9fa;
-            color: #16a085;
-            transform: translateX(5px);
-        }
-
-        .quick-links i {
-            color: #16a085;
-            width: 20px;
-        }
-
-        .ticketing-sidebar {
-            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(41, 128, 185, 0.05));
-            border: 2px solid #3498db;
-        }
-
-        .ticketing-sidebar h3 {
-            color: #3498db;
-            border-bottom-color: #3498db;
-        }
-
-        .ticketing-sidebar h3 i { color: #3498db; }
-
-        .ticketing-sidebar p {
-            color: #555;
-            margin-bottom: 20px;
-            line-height: 1.6;
+        .video-block h3 i {
+            color: #8e44ad;
             font-size: 0.9rem;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+            margin-bottom: 10px;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-info {
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.5;
+            padding: 10px;
+            background: #f8f9fa;
+            border-left: 3px solid #8e44ad;
+            border-radius: 5px;
+        }
+
+        .video-info p {
+            margin: 0;
+        }
+
+        /* Support sidebar block */
+        .support-block {
+            background: linear-gradient(135deg, #8e44ad, #7d3c98);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            color: white;
+        }
+
+        .support-block h3 {
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .support-block h3 i {
+            color: white;
+        }
+
+        .support-block p {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.6;
         }
 
         .ticket-btn {
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, #3498db, #2980b9);
-            color: white;
+            justify-content: center;
+            gap: 8px;
             padding: 12px 20px;
-            border-radius: 10px;
+            background: white;
+            color: #8e44ad;
             text-decoration: none;
+            border-radius: 8px;
             font-weight: 600;
             transition: all 0.3s ease;
-            font-size: 0.95rem;
-            width: 100%;
-            justify-content: center;
         }
 
         .ticket-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 25px rgba(52, 152, 219, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
-        main {
-            flex: 1;
-            padding: 60px 0;
+        /* Contenu principal */
+        .main-content {
             min-width: 0;
         }
 
-        .breadcrumbs {
-            color: #7f8c8d;
-            margin-bottom: 30px;
-            font-size: 0.9rem;
-        }
-
-        .breadcrumbs a {
-            color: #3498db;
-            text-decoration: none;
-        }
-
-        .page-header h2 {
-            font-size: 2.5rem;
-            color: #2c3e50;
-            margin-bottom: 50px;
-        }
-
-        .content-section {
+        /* Page header */
+        .page-header {
             background: white;
             border-radius: 15px;
-            padding: 40px;
-            margin-bottom: 30px;
+            padding: 10px;
+            margin-bottom: 25px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
 
-        .content-section h3 {
-            color: #16a085;
+        .page-title {
+            color: #2c3e50;
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .page-title i {
+            color: #8e44ad;
+        }
+
+        .page-subtitle {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            margin-bottom: 18px;
+        }
+
+        .page-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .tag-difficulty {
+            background: linear-gradient(135deg, #27ae60, #229954);
+            color: white;
+        }
+
+        .tag-time {
+            background: #e7f3ff;
+            color: #0066cc;
+        }
+
+        .tag-category {
+            background: linear-gradient(135deg, #8e44ad, #7d3c98);
+            color: white;
+        }
+
+        /* Content sections */
+        .content-section {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .content-section h2 {
+            color: #2c3e50;
             font-size: 1.8rem;
             margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #8e44ad;
+        }
+
+        .content-section h3 {
+            color: #34495e;
+            font-size: 1.4rem;
+            margin: 25px 0 12px;
             display: flex;
             align-items: center;
             gap: 10px;
+        }
+
+        .content-section h3 i {
+            color: #8e44ad;
+            font-size: 1.1rem;
         }
 
         .content-section p {
             color: #555;
             line-height: 1.8;
-            margin-bottom: 15px;
+            margin-bottom: 16px;
+            text-align: justify;
         }
 
+        .content-section ul,
+        .content-section ol {
+            margin-left: 30px;
+            margin-bottom: 16px;
+        }
+
+        .content-section li {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+
+        .content-section li strong {
+            color: #2c3e50;
+        }
+
+        /* Info boxes */
+        .info-box {
+            background: linear-gradient(135deg, #f4ecf7, #ebdef0);
+            border-left: 5px solid #8e44ad;
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .info-box h4 {
+            color: #7d3c98;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .info-box p {
+            color: #555;
+            margin: 0;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fff4e6, #ffe8cc);
+            border-left: 5px solid #f39c12;
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .warning-box h4 {
+            color: #e67e22;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .warning-box p {
+            color: #555;
+            margin: 0;
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, #e8f8f5, #d4efdf);
+            border-left: 5px solid #27ae60;
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .success-box h4 {
+            color: #229954;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .success-box p {
+            color: #555;
+            margin: 0;
+        }
+
+        /* Steps */
+        .steps-container {
+            margin: 25px 0;
+        }
+
+        .step {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 25px;
+            padding: 18px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            background: #ecf0f1;
+            transform: translateX(5px);
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #8e44ad, #7d3c98);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .step-content h4 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .step-content p {
+            color: #555;
+            margin: 0;
+        }
+
+        /* Features grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #8e44ad;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .feature-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-card h4 i {
+            color: #8e44ad;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Navigation buttons */
+        .page-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding: 25px 0;
+            border-top: 2px solid #ecf0f1;
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 22px;
+            background: linear-gradient(135deg, #8e44ad, #7d3c98);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(142, 68, 173, 0.4);
+        }
+
+        .nav-button.prev {
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+        }
+
+        .nav-button.prev:hover {
+            box-shadow: 0 6px 25px rgba(149, 165, 166, 0.4);
+        }
+
+        /* Footer */
         footer {
             background: #2c3e50;
             color: white;
             padding: 30px;
+            margin-top: 60px;
         }
 
         .copyright {
@@ -311,120 +525,463 @@
             color: #95a5a6;
         }
 
-        @media (max-width: 1024px) {
-            .main-wrapper { flex-direction: column; }
-            .sidebar {
-                width: 100%;
-                position: relative;
-                top: 0;
-                max-height: none;
-                margin-bottom: 30px;
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .page-container {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .video-aside {
+                position: static;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 15px;
+            }
+
+            .video-block {
+                margin-bottom: 0;
             }
         }
 
         @media (max-width: 768px) {
-            .mobile-toggle { display: block; }
-            .main-nav { display: none; }
-            .main-nav.active { display: block; }
-            .nav-menu { flex-direction: column; padding: 20px; }
-            .hero h1 { font-size: 2rem; }
+            .page-container {
+                padding: 0 20px;
+            }
+
+            .page-header,
+            .content-section {
+                padding: 25px;
+            }
+
+            .page-title {
+                font-size: 1.8rem;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .step {
+                flex-direction: column;
+            }
+
+            .page-navigation {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .video-aside {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="top-bar">
-            <div class="logo">
-                <a href="../index.html">
-                    <div class="logo-icon">D</div>
-                    <h1>ADT Dolibarr</h1>
-                </a>
-            </div>
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Rechercher...">
-            </div>
-            <button class="mobile-toggle" id="mobileToggle">
-                <i class="fas fa-bars"></i>
-            </button>
+        <div class="logo">
+            <a href="/index.html">
+                <img src="/img/adtutoriel.png" alt="ADT Tutoriels">
+            </a>
         </div>
-        <nav class="main-nav" id="mainNav">
-            <ul class="nav-menu">
-                <li><a href="../index.html"><i class="fas fa-home"></i> Accueil</a></li>
-                <li><a href="pre-opportunite.html"><i class="fas fa-bullhorn"></i> Pré-Opportunité</a></li>
-                <li><a href="tiers.html"><i class="fas fa-building"></i> Tiers</a></li>
-                <li><a href="projets.html"><i class="fas fa-project-diagram"></i> Projets</a></li>
-                <li><a href="commerce.html"><i class="fas fa-suitcase"></i> Commerce</a></li>
-                <li><a href="facturation.html"><i class="fas fa-file-invoice-dollar"></i> Facturation</a></li>
-                <li><a href="produits-services.html"><i class="fas fa-cube"></i> Services</a></li>
-                <li><a href="agenda.html"><i class="fas fa-calendar-alt"></i> Agenda</a></li>
-            </ul>
-        </nav>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Module Commercial</h1>
-            <p>Gérez vos propositions et commandes</p>
+    <div class="breadcrumb">
+        <div class="breadcrumb-container">
+            <a href="../../index.html"><i class="fas fa-home"></i> Accueil</a>
+            <span class="breadcrumb-separator">/</span>
+            <a href="dolibarr.html">Dolibarr</a>
+            <span class="breadcrumb-separator">/</span>
+            <span class="breadcrumb-current">Propositions Commerciales</span>
         </div>
-    </section>
+    </div>
 
-    <div class="main-wrapper">
-        <aside class="sidebar">
-            <div class="sidebar-section">
-                <h3><i class="fas fa-list"></i> Sur cette page</h3>
-                <ul class="quick-links">
-                    <li><a href="#introduction"><i class="fas fa-chevron-right"></i> Introduction</a></li>
-                    <li><a href="#configuration"><i class="fas fa-chevron-right"></i> Configuration</a></li>
-                    <li><a href="#utilisation"><i class="fas fa-chevron-right"></i> Utilisation</a></li>
-                </ul>
+    <div class="page-container">
+        <!-- Colonne gauche : Vidéos & Support (40%) -->
+        <aside class="video-aside">
+            <!-- Vidéo 1 (placeholder) -->
+            <div class="video-block">
+                <h3><i class="fas fa-play-circle"></i> Créer une proposition</h3>
+                <div class="video-container">
+                    <video controls>
+                        <source src="/video/propal-creation.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <p><strong>Durée : 12 min</strong> - Créez des propositions commerciales professionnelles rapidement.</p>
+                </div>
             </div>
 
-            <div class="sidebar-section ticketing-sidebar">
-                <h3><i class="fas fa-ticket-alt"></i> Besoin d'aide ?</h3>
-                <p>Créez un ticket de support pour obtenir une assistance personnalisée.</p>
+            <!-- Vidéo 2 (placeholder) -->
+            <div class="video-block">
+                <h3><i class="fas fa-play-circle"></i> Modèles et signature</h3>
+                <div class="video-container">
+                    <video controls>
+                        <source src="/video/propal-modeles.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <p><strong>Durée : 8 min</strong> - Utilisez les modèles et gérez la signature électronique.</p>
+                </div>
+            </div>
+
+            <!-- Support Block -->
+            <div class="support-block">
+                <h3><i class="fas fa-ticket-alt"></i> Support</h3>
+                <p>Besoin d'aide ? Créez un ticket support et notre équipe vous répondra sous 24h.</p>
                 <a href="https://gestion.academie-tourisme.fr/" class="ticket-btn" target="_blank">
-                    <i class="fas fa-plus-circle"></i>
-                    Créer un ticket
+                    <i class="fas fa-plus-circle"></i> Créer un ticket
                 </a>
             </div>
         </aside>
 
-        <main>
-            <div class="breadcrumbs">
-                <a href="../index.html">Accueil</a> > Commerce
-            </div>
-
+        <!-- Colonne droite : Contenu principal (60%) -->
+        <main class="main-content">
+            <!-- Page Header -->
             <div class="page-header">
-                <h2>Commerce</h2>
+                <h1 class="page-title">
+                    <i class="fas fa-file-signature"></i>
+                    Propositions Commerciales
+                </h1>
+                <p class="page-subtitle">Créez, envoyez et suivez vos devis professionnels avec Dolibarr</p>
+                <div class="page-tags">
+                    <span class="tag tag-difficulty">
+                        <i class="fas fa-signal"></i> Facile
+                    </span>
+                    <span class="tag tag-time">
+                        <i class="far fa-clock"></i> 20 min
+                    </span>
+                    <span class="tag tag-category">
+                        <i class="fas fa-tag"></i> Commercial
+                    </span>
+                </div>
             </div>
 
-            <section class="content-section" id="introduction">
-                <h3><i class="fas fa-info-circle"></i> Introduction</h3>
-                <p>Contenu à venir pour le module Commerce...</p>
-            </section>
+            <!-- Introduction -->
+            <div class="content-section" id="introduction">
+                <h2>Les propositions commerciales</h2>
+                
+                <p>Les <strong>propositions commerciales</strong> (ou devis) sont des documents essentiels dans le cycle de vente. Elles formalisent votre offre et engagent juridiquement votre organisation. Dans Dolibarr, le module Propositions Commerciales permet de créer, envoyer, suivre et convertir vos devis en commandes et factures.</p>
 
-            <section class="content-section" id="configuration">
-                <h3><i class="fas fa-cog"></i> Configuration</h3>
-                <p>Guide de configuration à venir...</p>
-            </section>
+                <div class="info-box">
+                    <h4><i class="fas fa-info-circle"></i> Qu'est-ce qu'une proposition commerciale ?</h4>
+                    <p>Une proposition commerciale est un document qui détaille votre offre (produits/services, quantités, prix, conditions) et constitue une promesse de vente à un prix donné pendant une durée limitée. Une fois signée par le client, elle devient un engagement contractuel.</p>
+                </div>
 
-            <section class="content-section" id="utilisation">
-                <h3><i class="fas fa-tasks"></i> Utilisation</h3>
-                <p>Guide d'utilisation à venir...</p>
-            </section>
+                <h3><i class="fas fa-check-circle"></i> Avantages du module</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4><i class="fas fa-rocket"></i> Rapidité</h4>
+                        <p>Créez des devis en quelques clics grâce au catalogue produits.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-palette"></i> Personnalisation</h4>
+                        <p>Modèles professionnels aux couleurs de l'ADT.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-paper-plane"></i> Envoi automatique</h4>
+                        <p>Envoyez vos propositions par email depuis Dolibarr.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-chart-line"></i> Suivi en temps réel</h4>
+                        <p>Sachez instantanément quand votre client ouvre le document.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Création -->
+            <div class="content-section" id="creation">
+                <h2><i class="fas fa-plus-circle"></i> Créer une proposition commerciale</h2>
+                
+                <h3><i class="fas fa-file-alt"></i> Étapes de création</h3>
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Accéder au module</h4>
+                            <p>Depuis le menu principal, cliquez sur <strong>Commercial → Propositions commerciales → Nouvelle proposition</strong>.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Sélectionner le client</h4>
+                            <p>Choisissez le tiers destinataire et le contact principal pour cette proposition.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Informations générales</h4>
+                            <p>Renseignez la date, la durée de validité (30, 60 ou 90 jours), la référence et le projet associé si applicable.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Ajouter les lignes</h4>
+                            <p>Ajoutez vos produits/services depuis le catalogue, ou créez des lignes libres. Ajustez quantités et prix si nécessaire.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h4>Conditions commerciales</h4>
+                            <p>Spécifiez les conditions de règlement, mode de paiement, délai de livraison et mentions spécifiques.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">6</div>
+                        <div class="step-content">
+                            <h4>Validation et envoi</h4>
+                            <p>Validez la proposition pour la rendre officielle, générez le PDF et envoyez-le par email au client.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="success-box">
+                    <h4><i class="fas fa-magic"></i> Astuce gain de temps</h4>
+                    <p>Utilisez la fonction <strong>"Dupliquer"</strong> pour créer rapidement une nouvelle proposition basée sur une ancienne. Idéal pour les clients récurrents ou les offres similaires !</p>
+                </div>
+            </div>
+
+            <!-- Contenu du devis -->
+            <div class="content-section" id="contenu">
+                <h2><i class="fas fa-list"></i> Structurer le contenu</h2>
+                
+                <h3><i class="fas fa-puzzle-piece"></i> Types de lignes</h3>
+                <p>Une proposition commerciale peut contenir différents types de lignes :</p>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4><i class="fas fa-cube"></i> Produit/Service</h4>
+                        <p>Ligne basée sur votre catalogue avec prix pré-remplis.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-pencil-alt"></i> Ligne libre</h4>
+                        <p>Texte libre sans référence au catalogue.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-heading"></i> Titre/Section</h4>
+                        <p>Ligne de titre pour organiser votre proposition.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-comment"></i> Commentaire</h4>
+                        <p>Texte descriptif sans montant associé.</p>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-calculator"></i> Tarification et remises</h3>
+                <p>Dolibarr offre une grande flexibilité tarifaire :</p>
+                <ul>
+                    <li><strong>Prix unitaire :</strong> Modifiable ligne par ligne si besoin</li>
+                    <li><strong>Remise en % :</strong> Appliquée sur chaque ligne (ex: -10%)</li>
+                    <li><strong>Remise globale :</strong> Remise sur le montant total du devis</li>
+                    <li><strong>Remise en montant :</strong> Valeur fixe déduite du total</li>
+                    <li><strong>TVA :</strong> Taux de TVA par ligne (20%, 10%, 5.5% ou 0%)</li>
+                    <li><strong>Frais de port :</strong> Ligne spécifique pour les frais d'expédition</li>
+                </ul>
+
+                <div class="warning-box">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Attention aux remises</h4>
+                    <p>Les remises importantes (>20%) nécessitent souvent une validation managériale. Assurez-vous que votre remise respecte la politique commerciale de l'ADT et ne compromet pas la marge minimale.</p>
+                </div>
+            </div>
+
+            <!-- Modèles -->
+            <div class="content-section" id="modeles">
+                <h2><i class="fas fa-file-invoice"></i> Modèles de documents</h2>
+                
+                <p>Dolibarr permet de créer des propositions avec une présentation professionnelle grâce aux modèles personnalisables.</p>
+
+                <h3><i class="fas fa-paint-brush"></i> Personnalisation du modèle ADT</h3>
+                <p>Votre modèle de proposition inclut automatiquement :</p>
+                <ul>
+                    <li><strong>Logo ADT :</strong> En haut à gauche du document</li>
+                    <li><strong>Coordonnées complètes :</strong> Adresse, téléphone, email, site web, SIRET</li>
+                    <li><strong>Informations client :</strong> Raison sociale, adresse, contact</li>
+                    <li><strong>Numérotation automatique :</strong> Référence unique (ex: PROP-2025-0042)</li>
+                    <li><strong>Dates :</strong> Date d'émission et date de validité</li>
+                    <li><strong>Conditions générales :</strong> Pied de page avec CGV et mentions légales</li>
+                    <li><strong>Signature :</strong> Zone dédiée pour la signature du client</li>
+                </ul>
+
+                <h3><i class="fas fa-file-pdf"></i> Génération du PDF</h3>
+                <p>Une fois validée, votre proposition peut être générée en PDF avec :</p>
+                <ol>
+                    <li>Mise en page professionnelle aux couleurs ADT</li>
+                    <li>Tableau détaillé avec toutes les lignes</li>
+                    <li>Totaux HT, TVA et TTC clairement affichés</li>
+                    <li>Conditions de règlement et délai de livraison</li>
+                    <li>Espace signature client avec mention "Bon pour accord"</li>
+                </ol>
+
+                <div class="info-box">
+                    <h4><i class="fas fa-pen-fancy"></i> Signature électronique</h4>
+                    <p>L'ADT utilise la signature électronique pour accélérer la validation des propositions. Le client reçoit un lien sécurisé pour signer en ligne, éliminant les délais postaux.</p>
+                </div>
+            </div>
+
+            <!-- Envoi et suivi -->
+            <div class="content-section" id="envoi">
+                <h2><i class="fas fa-paper-plane"></i> Envoi et suivi</h2>
+                
+                <h3><i class="fas fa-envelope"></i> Envoyer par email</h3>
+                <p>Depuis Dolibarr, envoyez directement votre proposition par email :</p>
+
+                <ol>
+                    <li>Cliquez sur <strong>"Envoyer par email"</strong> dans la fiche de la proposition</li>
+                    <li>Le destinataire est pré-rempli avec l'email du contact principal</li>
+                    <li>Personnalisez le message d'accompagnement (un modèle est proposé)</li>
+                    <li>Le PDF de la proposition est automatiquement joint</li>
+                    <li>Cliquez sur "Envoyer" - le client reçoit l'email instantanément</li>
+                </ol>
+
+                <h3><i class="fas fa-eye"></i> Suivi en temps réel</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4><i class="fas fa-envelope-open"></i> Email ouvert</h4>
+                        <p>Notification quand le client ouvre votre email.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-file-download"></i> PDF téléchargé</h4>
+                        <p>Sachez quand le client consulte le document.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-clock"></i> Relances automatiques</h4>
+                        <p>Programmez des rappels si le client ne répond pas.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-history"></i> Historique complet</h4>
+                        <p>Tous les échanges sont archivés dans Dolibarr.</p>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-traffic-light"></i> Statuts des propositions</h3>
+                <ul>
+                    <li><strong>Brouillon :</strong> En cours de rédaction, non envoyée</li>
+                    <li><strong>Validée :</strong> Finalisée et envoyée au client</li>
+                    <li><strong>Signée :</strong> Acceptée par le client (accord signé)</li>
+                    <li><strong>Refusée :</strong> Client a décliné l'offre</li>
+                    <li><strong>Périmée :</strong> Date de validité dépassée sans réponse</li>
+                    <li><strong>Facturée :</strong> Convertie en commande puis facture</li>
+                </ul>
+            </div>
+
+            <!-- Conversion -->
+            <div class="content-section" id="conversion">
+                <h2><i class="fas fa-exchange-alt"></i> Conversion en commande</h2>
+                
+                <p>Une fois votre proposition signée par le client, vous devez la convertir en commande :</p>
+
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Marquer comme signée</h4>
+                            <p>Dans la fiche de la proposition, changez le statut en "Signée" et indiquez la date de signature.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Créer la commande</h4>
+                            <p>Cliquez sur <strong>"Créer une commande"</strong> - toutes les lignes sont reprises automatiquement.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Validation de la commande</h4>
+                            <p>Validez la nouvelle commande client qui servira de base à la facturation.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Lancer le projet</h4>
+                            <p>Si nécessaire, créez un projet lié pour gérer la livraison de la prestation.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="success-box">
+                    <h4><i class="fas fa-link"></i> Traçabilité complète</h4>
+                    <p>Dolibarr maintient automatiquement les liens entre proposition → commande → facture. Vous pouvez naviguer entre ces documents en un clic pour un suivi complet du cycle commercial.</p>
+                </div>
+            </div>
+
+            <!-- Bonnes pratiques -->
+            <div class="content-section" id="conseils">
+                <h2><i class="fas fa-star"></i> Bonnes pratiques</h2>
+                
+                <ul>
+                    <li><strong>Réactivité :</strong> Envoyez vos propositions dans les 24h suivant la demande client</li>
+                    <li><strong>Clarté :</strong> Descriptions détaillées et compréhensibles pour chaque ligne</li>
+                    <li><strong>Personnalisation :</strong> Ajoutez un message personnalisé dans l'email d'envoi</li>
+                    <li><strong>Validité raisonnable :</strong> 30 jours pour les offres standard, 15 jours pour les promotions</li>
+                    <li><strong>Vérification :</strong> Relisez toujours avant d'envoyer (prix, orthographe, coordonnées)</li>
+                    <li><strong>Conditions claires :</strong> Précisez paiement, délai, livraison</li>
+                    <li><strong>Relance proactive :</strong> Relancez 7 jours après l'envoi si pas de réponse</li>
+                    <li><strong>Historique client :</strong> Consultez les anciennes propositions pour adapter votre approche</li>
+                    <li><strong>Taux de TVA :</strong> Vérifiez que le taux appliqué est correct (formations souvent en TVA 0%)</li>
+                    <li><strong>Conservation :</strong> Archivez tous les PDF signés dans la GED Dolibarr</li>
+                </ul>
+
+                <div class="warning-box">
+                    <h4><i class="fas fa-balance-scale"></i> Valeur juridique</h4>
+                    <p>Une proposition commerciale signée est un contrat juridiquement contraignant. Assurez-vous que tous les éléments (prix, prestations, délais) sont exacts et conformes à vos capacités de livraison.</p>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="page-navigation">
+                <a href="dolibarr.html" class="nav-button prev">
+                    <i class="fas fa-arrow-left"></i>
+                    Retour aux tutoriels
+                </a>
+                <a href="commande.html" class="nav-button">
+                    Module suivant : Commandes
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
         </main>
     </div>
 
     <footer>
         <div class="copyright">
             <p>&copy; 2025 ADT - Académie du Tourisme. Tous droits réservés.</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">
+                <i class="fas fa-code"></i> Développé par la Cyber-Technique ADT
+            </p>
         </div>
     </footer>
 
     <script>
-        document.getElementById('mobileToggle').addEventListener('click', function() {
-            document.getElementById('mainNav').classList.toggle('active');
+        // Smooth scroll pour les liens d'ancrage
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
         });
     </script>
 </body>

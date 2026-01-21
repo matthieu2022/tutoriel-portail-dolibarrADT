@@ -71,7 +71,7 @@
         }
 
         .breadcrumb-container {
-            max-width: 1200px;
+            max-width: 1600px;
             margin: 0 auto;
             display: flex;
             align-items: center;
@@ -97,29 +97,99 @@
             color: #7f8c8d;
         }
 
-        /* Layout */
-        .content-wrapper {
-            max-width: 1200px;
+        /* Layout 2 colonnes : 40% vidéos / 60% contenu */
+        .page-container {
+            max-width: 1600px;
             margin: 40px auto;
             padding: 0 30px;
+            display: grid;
+            grid-template-columns: 40% 60%;
+            gap: 30px;
+            align-items: start;
+        }
+
+        /* Aside vidéos - Sticky */
+        .video-aside {
+            position: sticky;
+            top: 100px;
+        }
+
+        .video-block {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .video-block h3 {
+            color: #2c3e50;
+            font-size: 1rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .video-block h3 i {
+            color: #e74c3c;
+            font-size: 0.9rem;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* Ratio 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+            margin-bottom: 10px;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-info {
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.5;
+            padding: 10px;
+            background: #f8f9fa;
+            border-left: 3px solid #667eea;
+            border-radius: 5px;
+        }
+
+        .video-info p {
+            margin: 0;
+        }
+
+        /* Contenu principal */
+        .main-content {
+            min-width: 0;
         }
 
         /* Page header */
         .page-header {
             background: white;
             border-radius: 15px;
-            padding: 40px;
-            margin-bottom: 30px;
+            padding: 35px;
+            margin-bottom: 25px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
 
         .page-title {
             color: #2c3e50;
-            font-size: 2.5rem;
-            margin-bottom: 15px;
+            font-size: 2.2rem;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
 
         .page-title i {
@@ -128,8 +198,8 @@
 
         .page-subtitle {
             color: #7f8c8d;
-            font-size: 1.2rem;
-            margin-bottom: 20px;
+            font-size: 1.1rem;
+            margin-bottom: 18px;
         }
 
         .page-tags {
@@ -139,14 +209,14 @@
         }
 
         .tag {
-            padding: 6px 14px;
+            padding: 5px 12px;
             border-radius: 15px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
             text-transform: uppercase;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
 
         .tag-difficulty {
@@ -164,80 +234,27 @@
             color: white;
         }
 
-        /* Video section */
-        .video-section {
-            background: white;
-            border-radius: 15px;
-            padding: 40px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        }
-
-        .video-section h2 {
-            color: #2c3e50;
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .video-section h2 i {
-            color: #e74c3c;
-        }
-
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* Ratio 16:9 */
-            height: 0;
-            overflow: hidden;
-            border-radius: 10px;
-            background: #000;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-        }
-
-        .video-container video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .video-description {
-            margin-top: 20px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-left: 4px solid #667eea;
-            border-radius: 8px;
-        }
-
-        .video-description p {
-            color: #555;
-            line-height: 1.8;
-        }
-
         /* Content sections */
         .content-section {
             background: white;
             border-radius: 15px;
-            padding: 40px;
-            margin-bottom: 30px;
+            padding: 35px;
+            margin-bottom: 25px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
 
         .content-section h2 {
             color: #2c3e50;
-            font-size: 2rem;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
             border-bottom: 3px solid #667eea;
         }
 
         .content-section h3 {
             color: #34495e;
-            font-size: 1.5rem;
-            margin: 30px 0 15px;
+            font-size: 1.4rem;
+            margin: 25px 0 12px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -245,26 +262,26 @@
 
         .content-section h3 i {
             color: #667eea;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
 
         .content-section p {
             color: #555;
             line-height: 1.8;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             text-align: justify;
         }
 
         .content-section ul,
         .content-section ol {
             margin-left: 30px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .content-section li {
             color: #555;
             line-height: 1.8;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .content-section li strong {
@@ -275,17 +292,18 @@
         .info-box {
             background: linear-gradient(135deg, #e8f4f8, #d4ebf2);
             border-left: 5px solid #3498db;
-            padding: 20px;
-            margin: 25px 0;
+            padding: 18px;
+            margin: 20px 0;
             border-radius: 8px;
         }
 
         .info-box h4 {
             color: #2980b9;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             gap: 8px;
+            font-size: 1rem;
         }
 
         .info-box p {
@@ -296,17 +314,18 @@
         .warning-box {
             background: linear-gradient(135deg, #fff4e6, #ffe8cc);
             border-left: 5px solid #f39c12;
-            padding: 20px;
-            margin: 25px 0;
+            padding: 18px;
+            margin: 20px 0;
             border-radius: 8px;
         }
 
         .warning-box h4 {
             color: #e67e22;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             gap: 8px;
+            font-size: 1rem;
         }
 
         .warning-box p {
@@ -317,17 +336,18 @@
         .success-box {
             background: linear-gradient(135deg, #e8f8f5, #d4efdf);
             border-left: 5px solid #27ae60;
-            padding: 20px;
-            margin: 25px 0;
+            padding: 18px;
+            margin: 20px 0;
             border-radius: 8px;
         }
 
         .success-box h4 {
             color: #229954;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             gap: 8px;
+            font-size: 1rem;
         }
 
         .success-box p {
@@ -337,14 +357,14 @@
 
         /* Steps */
         .steps-container {
-            margin: 30px 0;
+            margin: 25px 0;
         }
 
         .step {
             display: flex;
-            gap: 20px;
-            margin-bottom: 30px;
-            padding: 20px;
+            gap: 18px;
+            margin-bottom: 25px;
+            padding: 18px;
             background: #f8f9fa;
             border-radius: 10px;
             transition: all 0.3s ease;
@@ -357,21 +377,22 @@
 
         .step-number {
             flex-shrink: 0;
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: bold;
         }
 
         .step-content h4 {
             color: #2c3e50;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
         }
 
         .step-content p {
@@ -383,8 +404,8 @@
         .page-navigation {
             display: flex;
             justify-content: space-between;
-            margin-top: 40px;
-            padding: 30px 0;
+            margin-top: 30px;
+            padding: 25px 0;
             border-top: 2px solid #ecf0f1;
         }
 
@@ -392,13 +413,14 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 15px 25px;
+            padding: 12px 22px;
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             text-decoration: none;
             border-radius: 10px;
             font-weight: 600;
             transition: all 0.3s ease;
+            font-size: 0.95rem;
         }
 
         .nav-button:hover {
@@ -428,19 +450,36 @@
         }
 
         /* Responsive */
+        @media (max-width: 1200px) {
+            .page-container {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .video-aside {
+                position: static;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 15px;
+            }
+
+            .video-block {
+                margin-bottom: 0;
+            }
+        }
+
         @media (max-width: 768px) {
-            .content-wrapper {
+            .page-container {
                 padding: 0 20px;
             }
 
             .page-header,
-            .video-section,
             .content-section {
                 padding: 25px;
             }
 
             .page-title {
-                font-size: 2rem;
+                font-size: 1.8rem;
                 flex-direction: column;
                 align-items: flex-start;
             }
@@ -451,7 +490,11 @@
 
             .page-navigation {
                 flex-direction: column;
-                gap: 15px;
+                gap: 12px;
+            }
+
+            .video-aside {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -476,231 +519,265 @@
         </div>
     </div>
 
-    <div class="content-wrapper">
-        <!-- Page Header -->
-        <div class="page-header">
-            <h1 class="page-title">
-                <i class="fas fa-rocket"></i>
-                Déploiement V1 - Premiers pas avec Dolibarr
-            </h1>
-            <p class="page-subtitle">Guide complet pour découvrir et maîtriser les bases de votre nouvel ERP/CRM Dolibarr</p>
-            <div class="page-tags">
-                <span class="tag tag-difficulty">
-                    <i class="fas fa-signal"></i> Facile
-                </span>
-                <span class="tag tag-time">
-                    <i class="far fa-clock"></i> 15 min
-                </span>
-                <span class="tag tag-category">
-                    <i class="fas fa-tag"></i> Dolibarr V1
-                </span>
-            </div>
-        </div>
-
-        <!-- Video Section -->
-        <div class="video-section">
-            <h2><i class="fas fa-play-circle"></i> Vidéo de présentation</h2>
-            <div class="video-container">
-                <video controls>
-                    <source src="/video/DOLIBARR_V1__Notre_Nouveau_CRM.mp4" type="video/mp4">
-                    Votre navigateur ne supporte pas la lecture de vidéos HTML5.
-                </video>
-            </div>
-            <div class="video-description">
-                <p><strong>Dans cette vidéo :</strong> Découvrez une présentation complète du déploiement de Dolibarr V1 à l'ADT. Nous vous guidons à travers l'interface, les fonctionnalités principales et les premiers pas essentiels pour une prise en main rapide et efficace de votre nouvel outil de gestion.</p>
-            </div>
-        </div>
-
-        <!-- Introduction -->
-        <div class="content-section">
-            <h2>Introduction au déploiement Dolibarr V1</h2>
-            
-            <p>Bienvenue dans ce guide complet dédié au déploiement de <strong>Dolibarr V1</strong> à l'Académie du Tourisme. Cette nouvelle version marque une étape importante dans la modernisation de nos outils de gestion et représente le fruit d'un travail collaboratif entre l'équipe Cyber-Technique et l'ensemble des services de l'ADT.</p>
-
-            <p>Dolibarr est bien plus qu'un simple logiciel : c'est une solution ERP/CRM complète qui va transformer notre façon de travailler au quotidien. Que vous soyez commercial, administratif, ou membre de l'équipe pédagogique, ce guide vous accompagnera dans vos premiers pas.</p>
-
-            <div class="info-box">
-                <h4><i class="fas fa-info-circle"></i> À propos de Dolibarr</h4>
-                <p>Dolibarr est un logiciel libre (open source) de gestion d'entreprise (ERP) et de gestion de la relation client (CRM). Il permet de gérer l'ensemble des processus métier : clients, prospects, factures, projets, stocks et bien plus encore.</p>
-            </div>
-
-            <h3><i class="fas fa-bullseye"></i> Objectifs de ce guide</h3>
-            <p>À la fin de ce tutoriel, vous serez capable de :</p>
-            <ul>
-                <li>Vous connecter à Dolibarr et naviguer dans l'interface</li>
-                <li>Comprendre l'organisation des menus et des modules</li>
-                <li>Effectuer vos premières actions dans le système</li>
-                <li>Personnaliser votre espace de travail</li>
-                <li>Identifier les ressources d'aide disponibles</li>
-            </ul>
-        </div>
-
-        <!-- Contexte du déploiement -->
-        <div class="content-section">
-            <h2>Contexte du déploiement V1</h2>
-            
-            <h3><i class="fas fa-history"></i> Un peu d'histoire</h3>
-            <p>Le projet Dolibarr à l'ADT a débuté il y a plusieurs années avec différentes instances dédiées à des usages spécifiques (CRM, Facturation, Campus). La version V1 que nous déployons aujourd'hui représente la <strong>fusion et l'harmonisation</strong> de tous ces systèmes en une plateforme unique et unifiée.</p>
-
-            <div class="warning-box">
-                <h4><i class="fas fa-exclamation-triangle"></i> Important à savoir</h4>
-                <p>Si vous utilisiez déjà une instance Dolibarr auparavant, vos données ont été migrées vers la V1. Vous retrouverez vos informations mais dans une interface améliorée et enrichie de nouvelles fonctionnalités.</p>
-            </div>
-
-            <h3><i class="fas fa-calendar-alt"></i> Calendrier de déploiement</h3>
-            <div class="steps-container">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h4>Phase de test (Terminée)</h4>
-                        <p>Tests approfondis avec les référents métier et résolution des bugs critiques.</p>
-                    </div>
+    <div class="page-container">
+        <!-- Colonne gauche : Vidéos (40%) -->
+        <aside class="video-aside">
+            <!-- Vidéo 1 -->
+            <div class="video-block">
+                <h3><i class="fas fa-play-circle"></i> Présentation Dolibarr V1</h3>
+                <div class="video-container">
+                    <video controls>
+                        <source src="/video/DOLIBARR_V1__Notre_Nouveau_CRM.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                    </video>
                 </div>
-
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h4>Formation des équipes (En cours)</h4>
-                        <p>Sessions de formation dédiées pour chaque service avec support personnalisé.</p>
-                    </div>
-                </div>
-
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h4>Déploiement progressif</h4>
-                        <p>Mise en production par vagues avec accompagnement rapproché des utilisateurs.</p>
-                    </div>
-                </div>
-
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h4>Support et optimisation</h4>
-                        <p>Équipe support dédiée et amélioration continue basée sur vos retours.</p>
-                    </div>
+                <div class="video-info">
+                    <p><strong>Durée : 15 min</strong> - Vue d'ensemble complète du déploiement V1 et des fonctionnalités principales.</p>
                 </div>
             </div>
-        </div>
 
-        <!-- Premiers pas -->
-        <div class="content-section">
-            <h2>Vos premiers pas dans Dolibarr</h2>
-            
-            <h3><i class="fas fa-sign-in-alt"></i> Se connecter à Dolibarr</h3>
-            <p>Pour accéder à votre espace Dolibarr, rendez-vous sur l'URL suivante :</p>
-            
-            <div class="success-box">
-                <h4><i class="fas fa-link"></i> Lien de connexion</h4>
-                <p><strong>URL :</strong> <a href="https://gestion.academie-tourisme.fr/" target="_blank" style="color: #229954; text-decoration: underline;">https://gestion.academie-tourisme.fr/</a></p>
+            <!-- Vidéo 2 (placeholder) -->
+            <div class="video-block">
+                <h3><i class="fas fa-play-circle"></i> Connexion et navigation</h3>
+                <div class="video-container">
+                    <video controls>
+                        <source src="/video/connexion-navigation.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <p><strong>Durée : 8 min</strong> - Comment se connecter et naviguer efficacement dans l'interface.</p>
+                </div>
             </div>
 
-            <ol>
-                <li><strong>Identifiant :</strong> Votre adresse email professionnelle ADT</li>
-                <li><strong>Mot de passe :</strong> Le mot de passe qui vous a été communiqué par la Cyber-Technique</li>
-                <li>Cochez la case "Se souvenir de moi" si vous utilisez un ordinateur personnel</li>
-                <li>Cliquez sur "Connexion"</li>
-            </ol>
+            <!-- Vidéo 3 (placeholder) -->
+            <div class="video-block">
+                <h3><i class="fas fa-play-circle"></i> Configuration initiale</h3>
+                <div class="video-container">
+                    <video controls>
+                        <source src="/video/configuration-initiale.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <p><strong>Durée : 10 min</strong> - Personnalisez votre espace et configurez vos préférences.</p>
+                </div>
+            </div>
+        </aside>
 
-            <div class="warning-box">
-                <h4><i class="fas fa-key"></i> Mot de passe oublié ?</h4>
-                <p>Si vous avez oublié votre mot de passe, utilisez le lien "Mot de passe oublié" sur la page de connexion, ou contactez l'équipe Cyber-Technique via le système de ticketing.</p>
+        <!-- Colonne droite : Contenu principal (60%) -->
+        <main class="main-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="page-title">
+                    <i class="fas fa-rocket"></i>
+                    Déploiement V1 - Premiers pas
+                </h1>
+                <p class="page-subtitle">Guide complet pour découvrir et maîtriser les bases de votre nouvel ERP/CRM Dolibarr</p>
+                <div class="page-tags">
+                    <span class="tag tag-difficulty">
+                        <i class="fas fa-signal"></i> Facile
+                    </span>
+                    <span class="tag tag-time">
+                        <i class="far fa-clock"></i> 15 min
+                    </span>
+                    <span class="tag tag-category">
+                        <i class="fas fa-tag"></i> Dolibarr V1
+                    </span>
+                </div>
             </div>
 
-            <h3><i class="fas fa-compass"></i> Découvrir l'interface</h3>
-            <p>Une fois connecté, vous arrivez sur le <strong>tableau de bord</strong>. Prenez le temps de vous familiariser avec les différentes zones :</p>
+            <!-- Introduction -->
+            <div class="content-section">
+                <h2>Introduction au déploiement Dolibarr V1</h2>
+                
+                <p>Bienvenue dans ce guide complet dédié au déploiement de <strong>Dolibarr V1</strong> à l'Académie du Tourisme. Cette nouvelle version marque une étape importante dans la modernisation de nos outils de gestion et représente le fruit d'un travail collaboratif entre l'équipe Cyber-Technique et l'ensemble des services de l'ADT.</p>
 
-            <ul>
-                <li><strong>Barre de navigation supérieure :</strong> Accès rapide aux modules principaux (Tiers, Projets, Commerce, etc.)</li>
-                <li><strong>Menu latéral gauche :</strong> Navigation détaillée avec tous les sous-menus</li>
-                <li><strong>Zone centrale :</strong> Contenu principal et widgets de votre tableau de bord</li>
-                <li><strong>Barre de recherche :</strong> En haut à droite, pour rechercher rapidement clients, projets, factures...</li>
-                <li><strong>Menu utilisateur :</strong> En haut à droite, pour accéder à votre profil et aux paramètres</li>
-            </ul>
+                <p>Dolibarr est bien plus qu'un simple logiciel : c'est une solution ERP/CRM complète qui va transformer notre façon de travailler au quotidien. Que vous soyez commercial, administratif, ou membre de l'équipe pédagogique, ce guide vous accompagnera dans vos premiers pas.</p>
 
-            <div class="info-box">
-                <h4><i class="fas fa-lightbulb"></i> Astuce de navigation</h4>
-                <p>Vous pouvez personnaliser votre tableau de bord en ajoutant ou supprimant des widgets. Cliquez sur l'icône de configuration (roue dentée) pour accéder aux options.</p>
-            </div>
-        </div>
-
-        <!-- Modules principaux -->
-        <div class="content-section">
-            <h2>Les modules principaux de Dolibarr V1</h2>
-            
-            <p>Dolibarr est organisé en <strong>modules</strong> qui correspondent à différents domaines de gestion. Voici un aperçu des principaux modules que vous utiliserez :</p>
-
-            <h3><i class="fas fa-users"></i> Gestion des Tiers</h3>
-            <p>Le module Tiers regroupe tous vos contacts professionnels : clients, prospects, fournisseurs. C'est le cœur de votre CRM.</p>
-
-            <h3><i class="fas fa-project-diagram"></i> Gestion de Projets</h3>
-            <p>Suivez vos projets, affectez des tâches, gérez les temps passés et suivez l'avancement en temps réel.</p>
-
-            <h3><i class="fas fa-file-invoice-dollar"></i> Module Commercial & Facturation</h3>
-            <p>Créez des devis, transformez-les en commandes puis en factures. Gérez tout le cycle de vente en quelques clics.</p>
-
-            <h3><i class="fas fa-cubes"></i> Produits & Services</h3>
-            <p>Gérez votre catalogue de formations, produits et services avec prix, descriptions et disponibilités.</p>
-
-            <div class="success-box">
-                <h4><i class="fas fa-graduation-cap"></i> Envie d'en savoir plus ?</h4>
-                <p>Chaque module dispose de son propre tutoriel détaillé. Consultez la section "Tutoriels Dolibarr" pour accéder aux guides complets.</p>
-            </div>
-        </div>
-
-        <!-- Support et ressources -->
-        <div class="content-section">
-            <h2>Support et ressources d'aide</h2>
-            
-            <h3><i class="fas fa-life-ring"></i> Obtenir de l'aide</h3>
-            <p>L'équipe Cyber-Technique est là pour vous accompagner dans votre utilisation de Dolibarr. Plusieurs options s'offrent à vous :</p>
-
-            <div class="steps-container">
-                <div class="step">
-                    <div class="step-number"><i class="fas fa-ticket-alt"></i></div>
-                    <div class="step-content">
-                        <h4>Système de ticketing</h4>
-                        <p>Créez un ticket depuis Dolibarr ou via le portail de support pour toute question ou problème technique. L'équipe vous répondra sous 24h.</p>
-                    </div>
+                <div class="info-box">
+                    <h4><i class="fas fa-info-circle"></i> À propos de Dolibarr</h4>
+                    <p>Dolibarr est un logiciel libre (open source) de gestion d'entreprise (ERP) et de gestion de la relation client (CRM). Il permet de gérer l'ensemble des processus métier : clients, prospects, factures, projets, stocks et bien plus encore.</p>
                 </div>
 
-                <div class="step">
-                    <div class="step-number"><i class="fas fa-book"></i></div>
-                    <div class="step-content">
-                        <h4>Portail de tutoriels</h4>
-                        <p>Consultez ce portail pour accéder à tous les guides, tutoriels vidéo et documentations disponibles.</p>
-                    </div>
+                <h3><i class="fas fa-bullseye"></i> Objectifs de ce guide</h3>
+                <p>À la fin de ce tutoriel, vous serez capable de :</p>
+                <ul>
+                    <li>Vous connecter à Dolibarr et naviguer dans l'interface</li>
+                    <li>Comprendre l'organisation des menus et des modules</li>
+                    <li>Effectuer vos premières actions dans le système</li>
+                    <li>Personnaliser votre espace de travail</li>
+                    <li>Identifier les ressources d'aide disponibles</li>
+                </ul>
+            </div>
+
+            <!-- Contexte du déploiement -->
+            <div class="content-section">
+                <h2>Contexte du déploiement V1</h2>
+                
+                <h3><i class="fas fa-history"></i> Un peu d'histoire</h3>
+                <p>Le projet Dolibarr à l'ADT a débuté il y a plusieurs années avec différentes instances dédiées à des usages spécifiques (CRM, Facturation, Campus). La version V1 que nous déployons aujourd'hui représente la <strong>fusion et l'harmonisation</strong> de tous ces systèmes en une plateforme unique et unifiée.</p>
+
+                <div class="warning-box">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Important à savoir</h4>
+                    <p>Si vous utilisiez déjà une instance Dolibarr auparavant, vos données ont été migrées vers la V1. Vous retrouverez vos informations mais dans une interface améliorée et enrichie de nouvelles fonctionnalités.</p>
                 </div>
 
-                <div class="step">
-                    <div class="step-number"><i class="fas fa-users"></i></div>
-                    <div class="step-content">
-                        <h4>Référents métier</h4>
-                        <p>Chaque service dispose d'un référent formé qui peut vous aider au quotidien.</p>
+                <h3><i class="fas fa-calendar-alt"></i> Calendrier de déploiement</h3>
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Phase de test (Terminée)</h4>
+                            <p>Tests approfondis avec les référents métier et résolution des bugs critiques.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Formation des équipes (En cours)</h4>
+                            <p>Sessions de formation dédiées pour chaque service avec support personnalisé.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Déploiement progressif</h4>
+                            <p>Mise en production par vagues avec accompagnement rapproché des utilisateurs.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Support et optimisation</h4>
+                            <p>Équipe support dédiée et amélioration continue basée sur vos retours.</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <h3><i class="fas fa-star"></i> Bonnes pratiques</h3>
-            <ul>
-                <li>Prenez le temps de vous former progressivement, module par module</li>
-                <li>N'hésitez pas à tester dans votre environnement de formation</li>
-                <li>Partagez vos retours et suggestions d'amélioration</li>
-                <li>Consultez régulièrement les nouveautés et mises à jour</li>
-            </ul>
-        </div>
+            <!-- Premiers pas -->
+            <div class="content-section">
+                <h2>Vos premiers pas dans Dolibarr</h2>
+                
+                <h3><i class="fas fa-sign-in-alt"></i> Se connecter à Dolibarr</h3>
+                <p>Pour accéder à votre espace Dolibarr, rendez-vous sur l'URL suivante :</p>
+                
+                <div class="success-box">
+                    <h4><i class="fas fa-link"></i> Lien de connexion</h4>
+                    <p><strong>URL :</strong> <a href="https://gestion.academie-tourisme.fr/" target="_blank" style="color: #229954; text-decoration: underline;">https://gestion.academie-tourisme.fr/</a></p>
+                </div>
 
-        <!-- Navigation -->
-        <div class="page-navigation">
-            <a href="dolibarr.html" class="nav-button prev">
-                <i class="fas fa-arrow-left"></i>
-                Retour aux tutoriels
-            </a>
-            <a href="pre-opportunite.html" class="nav-button">
-                Module suivant : Pré-Opportunité
-                <i class="fas fa-arrow-right"></i>
-            </a>
-        </div>
+                <ol>
+                    <li><strong>Identifiant :</strong> Votre adresse email professionnelle ADT</li>
+                    <li><strong>Mot de passe :</strong> Le mot de passe qui vous a été communiqué par la Cyber-Technique</li>
+                    <li>Cochez la case "Se souvenir de moi" si vous utilisez un ordinateur personnel</li>
+                    <li>Cliquez sur "Connexion"</li>
+                </ol>
+
+                <div class="warning-box">
+                    <h4><i class="fas fa-key"></i> Mot de passe oublié ?</h4>
+                    <p>Si vous avez oublié votre mot de passe, utilisez le lien "Mot de passe oublié" sur la page de connexion, ou contactez l'équipe Cyber-Technique via le système de ticketing.</p>
+                </div>
+
+                <h3><i class="fas fa-compass"></i> Découvrir l'interface</h3>
+                <p>Une fois connecté, vous arrivez sur le <strong>tableau de bord</strong>. Prenez le temps de vous familiariser avec les différentes zones :</p>
+
+                <ul>
+                    <li><strong>Barre de navigation supérieure :</strong> Accès rapide aux modules principaux (Tiers, Projets, Commerce, etc.)</li>
+                    <li><strong>Menu latéral gauche :</strong> Navigation détaillée avec tous les sous-menus</li>
+                    <li><strong>Zone centrale :</strong> Contenu principal et widgets de votre tableau de bord</li>
+                    <li><strong>Barre de recherche :</strong> En haut à droite, pour rechercher rapidement clients, projets, factures...</li>
+                    <li><strong>Menu utilisateur :</strong> En haut à droite, pour accéder à votre profil et aux paramètres</li>
+                </ul>
+
+                <div class="info-box">
+                    <h4><i class="fas fa-lightbulb"></i> Astuce de navigation</h4>
+                    <p>Vous pouvez personnaliser votre tableau de bord en ajoutant ou supprimant des widgets. Cliquez sur l'icône de configuration (roue dentée) pour accéder aux options.</p>
+                </div>
+            </div>
+
+            <!-- Modules principaux -->
+            <div class="content-section">
+                <h2>Les modules principaux de Dolibarr V1</h2>
+                
+                <p>Dolibarr est organisé en <strong>modules</strong> qui correspondent à différents domaines de gestion. Voici un aperçu des principaux modules que vous utiliserez :</p>
+
+                <h3><i class="fas fa-users"></i> Gestion des Tiers</h3>
+                <p>Le module Tiers regroupe tous vos contacts professionnels : clients, prospects, fournisseurs. C'est le cœur de votre CRM.</p>
+
+                <h3><i class="fas fa-project-diagram"></i> Gestion de Projets</h3>
+                <p>Suivez vos projets, affectez des tâches, gérez les temps passés et suivez l'avancement en temps réel.</p>
+
+                <h3><i class="fas fa-file-invoice-dollar"></i> Module Commercial & Facturation</h3>
+                <p>Créez des devis, transformez-les en commandes puis en factures. Gérez tout le cycle de vente en quelques clics.</p>
+
+                <h3><i class="fas fa-cubes"></i> Produits & Services</h3>
+                <p>Gérez votre catalogue de formations, produits et services avec prix, descriptions et disponibilités.</p>
+
+                <div class="success-box">
+                    <h4><i class="fas fa-graduation-cap"></i> Envie d'en savoir plus ?</h4>
+                    <p>Chaque module dispose de son propre tutoriel détaillé. Consultez la section "Tutoriels Dolibarr" pour accéder aux guides complets.</p>
+                </div>
+            </div>
+
+            <!-- Support et ressources -->
+            <div class="content-section">
+                <h2>Support et ressources d'aide</h2>
+                
+                <h3><i class="fas fa-life-ring"></i> Obtenir de l'aide</h3>
+                <p>L'équipe Cyber-Technique est là pour vous accompagner dans votre utilisation de Dolibarr. Plusieurs options s'offrent à vous :</p>
+
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number"><i class="fas fa-ticket-alt"></i></div>
+                        <div class="step-content">
+                            <h4>Système de ticketing</h4>
+                            <p>Créez un ticket depuis Dolibarr ou via le portail de support pour toute question ou problème technique. L'équipe vous répondra sous 24h.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number"><i class="fas fa-book"></i></div>
+                        <div class="step-content">
+                            <h4>Portail de tutoriels</h4>
+                            <p>Consultez ce portail pour accéder à tous les guides, tutoriels vidéo et documentations disponibles.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number"><i class="fas fa-users"></i></div>
+                        <div class="step-content">
+                            <h4>Référents métier</h4>
+                            <p>Chaque service dispose d'un référent formé qui peut vous aider au quotidien.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-star"></i> Bonnes pratiques</h3>
+                <ul>
+                    <li>Prenez le temps de vous former progressivement, module par module</li>
+                    <li>N'hésitez pas à tester dans votre environnement de formation</li>
+                    <li>Partagez vos retours et suggestions d'amélioration</li>
+                    <li>Consultez régulièrement les nouveautés et mises à jour</li>
+                </ul>
+            </div>
+
+            <!-- Navigation -->
+            <div class="page-navigation">
+                <a href="dolibarr.html" class="nav-button prev">
+                    <i class="fas fa-arrow-left"></i>
+                    Retour aux tutoriels
+                </a>
+                <a href="pre-opportunite.html" class="nav-button">
+                    Module suivant : Pré-Opportunité
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </main>
     </div>
 
     <footer>

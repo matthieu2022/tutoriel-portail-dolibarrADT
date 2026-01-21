@@ -380,41 +380,87 @@
             color: #7f8c8d;
             font-size: 0.9rem;
             line-height: 1.6;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+        }
+
+        /* Système de tags */
+        .tutorial-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            padding: 5px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        /* Tags de difficulté */
+        .tag-difficulty {
+            color: white;
+        }
+
+        .tag-difficulty.facile {
+            background: linear-gradient(135deg, #27ae60, #229954);
+        }
+
+        .tag-difficulty.moyen {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+        }
+
+        .tag-difficulty.difficile {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+        /* Tag temps */
+        .tag-time {
+            background: #e7f3ff;
+            color: #0066cc;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Tags de catégorie */
+        .tag-category {
+            color: white;
+        }
+
+        .tag-category.dolibarr {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+        }
+
+        .tag-category.erp {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .tag-category.crm {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+        }
+
+        .tag-category.facturation {
+            background: linear-gradient(135deg, #27ae60, #229954);
+        }
+
+        .tag-category.projet {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+        }
+
+        .tag-category.commercial {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
         }
 
         .tutorial-meta {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
             padding-top: 15px;
             border-top: 1px solid #ecf0f1;
-        }
-
-        .tutorial-time {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            color: #95a5a6;
-            font-size: 0.85rem;
-        }
-
-        .tutorial-level {
-            background: #667eea;
-            color: white;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .tutorial-level.beginner {
-            background: #27ae60;
-        }
-
-        .tutorial-level.intermediate {
-            background: #f39c12;
         }
 
         /* Footer */
@@ -526,8 +572,8 @@
 
         <nav class="main-nav" id="mainNav">
             <ul class="nav-menu">
-                <li><a href="/pages/09_accueil/accueil.html" data-category="accueil"><i class="fas fa-home"></i> Accueil Nouveau collaborateur
-                <li><a href="//dolibarr.html" data-category="dolibarr"><i class="fas fa-database"></i> Dolibarr V1</a></li>
+                <li><a href="/pages/09_accueil/accueil.html" data-category="accueil"><i class="fas fa-home"></i> Accueil Nouveau collaborateur</a></li>
+                <li><a href="/pages/00_dolibarr/dolibarr.html" data-category="dolibarr" class="active"><i class="fas fa-database"></i> Dolibarr V1</a></li>
                 <li><a href="/pages/01_keyyo/keyyo.html" data-category="keyyo"><i class="fas fa-phone"></i> Téléphonie KEYYO</a></li>
                 <li><a href="/pages/04_projetsencours/icademie.html" data-category="projets"><i class="fas fa-project-diagram"></i> Projets</a></li>
                 <li><a href="/pages/05_pedagogie/pedagogie.html" data-category="pedagogie"><i class="fas fa-chalkboard-teacher"></i> Pédagogie digitale</a></li>
@@ -554,9 +600,9 @@
             <div class="sidebar-section">
                 <h3><i class="fas fa-rocket"></i> Projets Cyber</h3>
                 <ul class="quick-links">
-                    <li><a href="/dolibarr.html"><i class="fas fa-chart-line"></i> Suivi Dolibarr</a></li>
+                    <li><a href="pages/00_dolibarr/dolibarr.html"><i class="fas fa-chart-line"></i> Suivi Dolibarr</a></li>
                     <li><a href="pages/04_projetsencours/gantt.html"><i class="fas fa-chart-gantt"></i> Gantt & Historique</a></li>
-                    <li><a href="/listing-modification.html"><i class="fas fa-list-check"></i> Modifications</a></li>
+                    <li><a href="pages/00_dolibarr/listing-modification.html"><i class="fas fa-list-check"></i> Modifications</a></li>
                 </ul>
             </div>
 
@@ -580,16 +626,17 @@
                 <!-- Premiers pas -->
                 <article class="tutorial-card">
                     <div class="tutorial-image">
-                        <a href="premier-pas.html">
+                        <a href="pages/00_dolibarr/premier-pas.html">
                             <img src="/img/dolibarr/premier-pas.png" alt="Premiers pas">
                         </a>
                     </div>
                     <div class="tutorial-content">
                         <h4 class="tutorial-title">Deploiement V1 - Premiers pas</h4>
                         <p class="tutorial-description">Guide complet pour démarrer avec Dolibarr : connexion, navigation et configuration initiale.</p>
-                        <div class="tutorial-meta">
-                            <span class="tutorial-time"><i class="far fa-clock"></i> 15 min</span>
-                            <span class="tutorial-level beginner">Débutant</span>
+                        <div class="tutorial-tags">
+                            <span class="tag tag-difficulty facile">Facile</span>
+                            <span class="tag tag-time"><i class="far fa-clock"></i> 15 min</span>
+                            <span class="tag tag-category dolibarr">Dolibarr</span>
                         </div>
                     </div>
                 </article>
@@ -597,16 +644,17 @@
                 <!-- Pré-Opportunité -->
                 <article class="tutorial-card">
                     <div class="tutorial-image">
-                        <a href="pre-opportunite.html">
+                        <a href="pages/00_dolibarr/pre-opportunite.html">
                             <img src="/img/dolibarr/pre-opp.png" alt="Pré-Opportunité">
                         </a>
                     </div>
                     <div class="tutorial-content">
                         <h4 class="tutorial-title">Module Pré-Opportunité</h4>
                         <p class="tutorial-description">Gérer vos leads et pré-opportunités commerciales avant qualification.</p>
-                        <div class="tutorial-meta">
-                            <span class="tutorial-time"><i class="far fa-clock"></i> 25 min</span>
-                            <span class="tutorial-level intermediate">Moyen</span>
+                        <div class="tutorial-tags">
+                            <span class="tag tag-difficulty moyen">Moyen</span>
+                            <span class="tag tag-time"><i class="far fa-clock"></i> 25 min</span>
+                            <span class="tag tag-category crm">CRM</span>
                         </div>
                     </div>
                 </article>
@@ -614,16 +662,17 @@
                 <!-- Tiers -->
                 <article class="tutorial-card">
                     <div class="tutorial-image">
-                        <a href="tiers.html">
+                        <a href="pages/00_dolibarr/tiers.html">
                             <img src="/img/dolibarr/tiers.png" alt="Tiers">
                         </a>
                     </div>
                     <div class="tutorial-content">
                         <h4 class="tutorial-title">Gestion des Tiers & Contacts</h4>
                         <p class="tutorial-description">Créer et gérer vos clients, prospects et fournisseurs efficacement.</p>
-                        <div class="tutorial-meta">
-                            <span class="tutorial-time"><i class="far fa-clock"></i> 20 min</span>
-                            <span class="tutorial-level intermediate">Intermédiaire</span>
+                        <div class="tutorial-tags">
+                            <span class="tag tag-difficulty moyen">Moyen</span>
+                            <span class="tag tag-time"><i class="far fa-clock"></i> 20 min</span>
+                            <span class="tag tag-category crm">CRM</span>
                         </div>
                     </div>
                 </article>
@@ -631,16 +680,17 @@
                 <!-- Projets -->
                 <article class="tutorial-card">
                     <div class="tutorial-image">
-                        <a href="projets.html">
+                        <a href="pages/00_dolibarr/projets.html">
                             <img src="/img/dolibarr/projet.png" alt="Projets">
                         </a>
                     </div>
                     <div class="tutorial-content">
                         <h4 class="tutorial-title">Le Mode Projet</h4>
                         <p class="tutorial-description">Maîtrisez la gestion de projets et le suivi de leur avancement.</p>
-                        <div class="tutorial-meta">
-                            <span class="tutorial-time"><i class="far fa-clock"></i> 25 min</span>
-                            <span class="tutorial-level intermediate">Intermédiaire</span>
+                        <div class="tutorial-tags">
+                            <span class="tag tag-difficulty moyen">Moyen</span>
+                            <span class="tag tag-time"><i class="far fa-clock"></i> 25 min</span>
+                            <span class="tag tag-category projet">Projet</span>
                         </div>
                     </div>
                 </article>
@@ -648,16 +698,17 @@
                 <!-- Commerce -->
                 <article class="tutorial-card">
                     <div class="tutorial-image">
-                        <a href="commerce.html">
+                        <a href="pages/00_dolibarr/commerce.html">
                             <img src="/img/dolibarr/commerce.png" alt="Commerce">
                         </a>
                     </div>
                     <div class="tutorial-content">
                         <h4 class="tutorial-title">Module Commercial</h4>
                         <p class="tutorial-description">Gérez vos propositions commerciales et commandes clients.</p>
-                        <div class="tutorial-meta">
-                            <span class="tutorial-time"><i class="far fa-clock"></i> 30 min</span>
-                            <span class="tutorial-level intermediate">Intermédiaire</span>
+                        <div class="tutorial-tags">
+                            <span class="tag tag-difficulty moyen">Moyen</span>
+                            <span class="tag tag-time"><i class="far fa-clock"></i> 30 min</span>
+                            <span class="tag tag-category commercial">Commercial</span>
                         </div>
                     </div>
                 </article>
@@ -665,16 +716,17 @@
                 <!-- Facturation -->
                 <article class="tutorial-card">
                     <div class="tutorial-image">
-                        <a href="facturation.html">
+                        <a href="pages/00_dolibarr/facturation.html">
                             <img src="/img/dolibarr/facturation.png" alt="Facturation">
                         </a>
                     </div>
                     <div class="tutorial-content">
                         <h4 class="tutorial-title">Module Facturation</h4>
                         <p class="tutorial-description">Créez et gérez vos factures clients simplement.</p>
-                        <div class="tutorial-meta">
-                            <span class="tutorial-time"><i class="far fa-clock"></i> 20 min</span>
-                            <span class="tutorial-level intermediate">Intermédiaire</span>
+                        <div class="tutorial-tags">
+                            <span class="tag tag-difficulty moyen">Moyen</span>
+                            <span class="tag tag-time"><i class="far fa-clock"></i> 20 min</span>
+                            <span class="tag tag-category facturation">Facturation</span>
                         </div>
                     </div>
                 </article>
@@ -682,16 +734,17 @@
                 <!-- Services -->
                 <article class="tutorial-card">
                     <div class="tutorial-image">
-                        <a href="produits-services.html">
+                        <a href="pages/00_dolibarr/produits-services.html">
                             <img src="/img/dolibarr/services.png" alt="Services">
                         </a>
                     </div>
                     <div class="tutorial-content">
                         <h4 class="tutorial-title">Les Services</h4>
                         <p class="tutorial-description">Configurez votre catalogue de formations et services.</p>
-                        <div class="tutorial-meta">
-                            <span class="tutorial-time"><i class="far fa-clock"></i> 15 min</span>
-                            <span class="tutorial-level intermediate">Intermédiaire</span>
+                        <div class="tutorial-tags">
+                            <span class="tag tag-difficulty moyen">Moyen</span>
+                            <span class="tag tag-time"><i class="far fa-clock"></i> 15 min</span>
+                            <span class="tag tag-category erp">ERP</span>
                         </div>
                     </div>
                 </article>
@@ -699,16 +752,17 @@
                 <!-- Agenda -->
                 <article class="tutorial-card">
                     <div class="tutorial-image">
-                        <a href="agenda.html">
-                            <img src="/img/dolibarr/agenda.png" alt="Agenda">
+                        <a href="pages/agenda.html">
+                            <img src="img/agenda.png" alt="Agenda">
                         </a>
                     </div>
                     <div class="tutorial-content">
                         <h4 class="tutorial-title">Votre Agenda</h4>
                         <p class="tutorial-description">Planifiez et suivez vos événements et rendez-vous.</p>
-                        <div class="tutorial-meta">
-                            <span class="tutorial-time"><i class="far fa-clock"></i> 10 min</span>
-                            <span class="tutorial-level beginner">Débutant</span>
+                        <div class="tutorial-tags">
+                            <span class="tag tag-difficulty facile">Facile</span>
+                            <span class="tag tag-time"><i class="far fa-clock"></i> 10 min</span>
+                            <span class="tag tag-category dolibarr">Dolibarr</span>
                         </div>
                     </div>
                 </article>
@@ -716,16 +770,17 @@
                 <!-- Calendly -->
                 <article class="tutorial-card">
                     <div class="tutorial-image">
-                        <a href="calendly.html">
+                        <a href="pages/00_dolibarr/calendly.html">
                             <img src="/img/dolibarr/calendly.png" alt="Calendly">
                         </a>
                     </div>
                     <div class="tutorial-content">
                         <h4 class="tutorial-title">Module Calendly</h4>
                         <p class="tutorial-description">Synchronisez vos rendez-vous Calendly dans Dolibarr.</p>
-                        <div class="tutorial-meta">
-                            <span class="tutorial-time"><i class="far fa-clock"></i> 10 min</span>
-                            <span class="tutorial-level beginner">Débutant</span>
+                        <div class="tutorial-tags">
+                            <span class="tag tag-difficulty facile">Facile</span>
+                            <span class="tag tag-time"><i class="far fa-clock"></i> 10 min</span>
+                            <span class="tag tag-category dolibarr">Dolibarr</span>
                         </div>
                     </div>
                 </article>

@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documents PDF Projets - ADT Tutoriels</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .top-bar {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 10px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+            padding: 8px 16px;
+            min-width: 300px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus-within {
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 15px rgba(255,255,255,0.2);
+        }
+
+        .search-box i {
+            color: #bdc3c7;
+            margin-right: 10px;
+        }
+
+        .search-box input {
+            background: none;
+            border: none;
+            outline: none;
+            color: white;
+            flex: 1;
+            font-size: 0.95rem;
+        }
+
+        .search-box input::placeholder {
+            color: #bdc3c7;
+        }
+
+        .main-nav {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 5px;
+            padding: 15px 0;
+        }
+
+        .nav-menu a {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            color: #ecf0f1;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .nav-menu a i {
+            font-size: 0.85rem;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #16a085 0%, #1abc9c 100%);
+            color: white;
+            padding: 60px 30px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .main-wrapper {
+            display: flex;
+            max-width: 1800px;
+            margin: 0 auto;
+            gap: 30px;
+            padding: 0 30px;
+            position: relative;
+        }
+
+        .sidebar {
+            width: 300px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+
+        .sidebar-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .sidebar-section h3 {
+            color: #2c3e50;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        .sidebar-section h3 i {
+            color: #16a085;
+        }
+
+        .ticketing-sidebar {
+            background: linear-gradient(135deg, rgba(22, 160, 133, 0.1), rgba(26, 188, 156, 0.05));
+            border: 2px solid #16a085;
+        }
+
+        .ticketing-sidebar h3 {
+            color: #16a085;
+            border-bottom-color: #16a085;
+        }
+
+        .ticketing-sidebar p {
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+
+        .ticket-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #16a085, #1abc9c);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .ticket-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(22, 160, 133, 0.5);
+        }
+
+        .category-filter {
+            list-style: none;
+        }
+
+        .category-filter li {
+            margin-bottom: 12px;
+        }
+
+        .category-filter button {
+            width: 100%;
+            text-align: left;
+            padding: 10px 15px;
+            background: white;
+            border: 2px solid #ecf0f1;
+            border-radius: 8px;
+            color: #555;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .category-filter button:hover {
+            border-color: #16a085;
+            background: #f0fffc;
+            transform: translateX(5px);
+        }
+
+        .category-filter button.active {
+            background: #16a085;
+            color: white;
+            border-color: #16a085;
+        }
+
+        .category-filter i {
+            width: 20px;
+        }
+
+        main {
+            flex: 1;
+            padding: 60px 0;
+            min-width: 0;
+        }
+
+        .page-header {
+            margin-bottom: 50px;
+        }
+
+        .page-header h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+        }
+
+        .pdf-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .pdf-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .pdf-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+            border-color: #16a085;
+        }
+
+        .pdf-icon-header {
+            background: linear-gradient(135deg, #16a085 0%, #1abc9c 100%);
+            padding: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pdf-icon-header i {
+            font-size: 4rem;
+            color: white;
+        }
+
+        .pdf-content {
+            padding: 25px;
+        }
+
+        .pdf-category {
+            display: inline-block;
+            background: #16a085;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .pdf-title {
+            color: #2c3e50;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .pdf-description {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .pdf-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #ecf0f1;
+            font-size: 0.85rem;
+            color: #95a5a6;
+        }
+
+        .pdf-meta i {
+            margin-right: 5px;
+        }
+
+        .pdf-size {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .pdf-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #16a085;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        .pdf-download:hover {
+            background: #1abc9c;
+            transform: translateX(5px);
+        }
+
+        .info-box {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .info-box h3 {
+            color: #16a085;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-box p {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .stats-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #16a085;
+            display: block;
+        }
+
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 30px;
+        }
+
+        .copyright {
+            text-align: center;
+            color: #95a5a6;
+        }
+
+        @media (max-width: 1200px) {
+            .main-wrapper {
+                padding: 0 20px;
+            }
+
+            .sidebar {
+                width: 280px;
+            }
+
+            .pdf-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .main-wrapper {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                position: relative;
+                top: 0;
+                max-height: none;
+                margin-bottom: 30px;
+            }
+
+            main {
+                padding: 30px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            .top-bar {
+                padding: 10px 20px;
+            }
+
+            .search-box {
+                min-width: auto;
+                flex: 1;
+                max-width: 250px;
+            }
+
+            .main-nav {
+                display: none;
+                padding: 0;
+            }
+
+            .main-nav.active {
+                display: block;
+            }
+
+            .nav-menu {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .nav-menu a {
+                padding: 12px 20px;
+                justify-content: flex-start;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .pdf-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-bar {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="top-bar">
+            <div class="logo">
+                <a href="../../index.html">
+                    <img src="../../img/adtutoriel.png" alt="ADT Tutoriels">
+                </a>
+            </div>
+
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Rechercher un PDF...">
+            </div>
+
+            <button class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <nav class="main-nav" id="mainNav">
+            <ul class="nav-menu">
+                <li><a href="../../index.html"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="../00_dolibarr/dolibarr.html"><i class="fas fa-database"></i> Dolibarr V1</a></li>
+                <li><a href="icademie.html"><i class="fas fa-project-diagram"></i> Projets iCademie</a></li>
+                <li><a href="gantt.html"><i class="fas fa-tasks"></i> Planning</a></li>
+                <li><a href="videos.html"><i class="fas fa-video"></i> Videos</a></li>
+                <li><a href="pdf.html" class="active"><i class="fas fa-download"></i> PDF</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Documents PDF Projets</h1>
+            <p>Telechargez les specifications, plannings et documentations des projets</p>
+        </div>
+    </section>
+
+    <div class="main-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3><i class="fas fa-filter"></i> Filtrer par type</h3>
+                <ul class="category-filter">
+                    <li><button class="active" data-category="all"><i class="fas fa-th"></i> Tous les PDF</button></li>
+                    <li><button data-category="specs"><i class="fas fa-file-alt"></i> Specifications</button></li>
+                    <li><button data-category="planning"><i class="fas fa-calendar-alt"></i> Planning</button></li>
+                    <li><button data-category="guide"><i class="fas fa-book"></i> Guides</button></li>
+                    <li><button data-category="rapport"><i class="fas fa-chart-bar"></i> Rapports</button></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section ticketing-sidebar">
+                <h3><i class="fas fa-ticket-alt"></i> Besoin d'aide ?</h3>
+                <p>Creez un ticket de support pour obtenir une assistance personnalisee de l'equipe Cyber-Technique.</p>
+                <a href="https://gestion.academie-tourisme.fr/" class="ticket-btn" target="_blank">
+                    <i class="fas fa-plus-circle"></i>
+                    Creer un ticket
+                </a>
+            </div>
+        </aside>
+
+        <main>
+            <div class="page-header">
+                <h2>Documentation des Projets</h2>
+                <p>Accedez aux documents officiels de nos projets en cours</p>
+            </div>
+
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <span class="stat-number">12</span>
+                    <div class="stat-label">Documents disponibles</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">4</span>
+                    <div class="stat-label">Projets actifs</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">350+</span>
+                    <div class="stat-label">Telechargements</div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h3><i class="fas fa-info-circle"></i> Documentation projet</h3>
+                <p>Ces documents sont regulierement mis a jour en fonction de l'avancement des projets. Consultez le planning Gantt pour suivre les jalons et les livrables.</p>
+            </div>
+
+            <div class="pdf-grid" id="pdfGrid">
+                <!-- Specs iCademie -->
+                <div class="pdf-card" data-category="specs">
+                    <div class="pdf-icon-header">
+                        <i class="far fa-file-pdf"></i>
+                    </div>
+                    <div class="pdf-content">
+                        <span class="pdf-category">Specifications</span>
+                        <h3 class="pdf-title">Cahier des Charges iCademie</h3>
+                        <p class="pdf-description">Specifications fonctionnelles et techniques du projet de migration iCademie.</p>
+                        <div class="pdf-meta">
+                            <span class="pdf-size"><i class="fas fa-file"></i> 4.2 MB</span>
+                            <span><i class="far fa-calendar"></i> 18 Jan 2025</span>
+                        </div>
+                        <a href="#" class="pdf-download">
+                            <i class="fas fa-download"></i>
+                            Telecharger
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Planning Dolibarr -->
+                <div class="pdf-card" data-category="planning">
+                    <div class="pdf-icon-header">
+                        <i class="far fa-file-pdf"></i>
+                    </div>
+                    <div class="pdf-content">
+                        <span class="pdf-category">Planning</span>
+                        <h3 class="pdf-title">Planning Deploiement Dolibarr V1</h3>
+                        <p class="pdf-description">Macro-planning du deploiement Dolibarr avec les jalons principaux.</p>
+                        <div class="pdf-meta">
+                            <span class="pdf-size"><i class="fas fa-file"></i> 1.8 MB</span>
+                            <span><i class="far fa-calendar"></i> 15 Jan 2025</span>
+                        </div>
+                        <a href="#" class="pdf-download">
+                            <i class="fas fa-download"></i>
+                            Telecharger
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Guide ProLearn -->
+                <div class="pdf-card" data-category="guide">
+                    <div class="pdf-icon-header">
+                        <i class="far fa-file-pdf"></i>
+                    </div>
+                    <div class="pdf-content">
+                        <span class="pdf-category">Guide</span>
+                        <h3 class="pdf-title">Guide Utilisateur ProLearn</h3>
+                        <p class="pdf-description">Manuel complet d'utilisation de la plateforme ProLearn pour les formateurs.</p>
+                        <div class="pdf-meta">
+                            <span class="pdf-size"><i class="fas fa-file"></i> 5.6 MB</span>
+                            <span><i class="far fa-calendar"></i> 12 Jan 2025</span>
+                        </div>
+                        <a href="#" class="pdf-download">
+                            <i class="fas fa-download"></i>
+                            Telecharger
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Rapport avancement -->
+                <div class="pdf-card" data-category="rapport">
+                    <div class="pdf-icon-header">
+                        <i class="far fa-file-pdf"></i>
+                    </div>
+                    <div class="pdf-content">
+                        <span class="pdf-category">Rapport</span>
+                        <h3 class="pdf-title">Rapport d'Avancement T1 2025</h3>
+                        <p class="pdf-description">Bilan trimestriel de l'avancement des projets iCademie et ProLearn.</p>
+                        <div class="pdf-meta">
+                            <span class="pdf-size"><i class="fas fa-file"></i> 2.3 MB</span>
+                            <span><i class="far fa-calendar"></i> 10 Jan 2025</span>
+                        </div>
+                        <a href="#" class="pdf-download">
+                            <i class="fas fa-download"></i>
+                            Telecharger
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Specs Integration -->
+                <div class="pdf-card" data-category="specs">
+                    <div class="pdf-icon-header">
+                        <i class="far fa-file-pdf"></i>
+                    </div>
+                    <div class="pdf-content">
+                        <span class="pdf-category">Specifications</span>
+                        <h3 class="pdf-title">Specifications API Integration</h3>
+                        <p class="pdf-description">Documentation technique des API d'integration entre Dolibarr et iCademie.</p>
+                        <div class="pdf-meta">
+                            <span class="pdf-size"><i class="fas fa-file"></i> 3.1 MB</span>
+                            <span><i class="far fa-calendar"></i> 8 Jan 2025</span>
+                        </div>
+                        <a href="#" class="pdf-download">
+                            <i class="fas fa-download"></i>
+                            Telecharger
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Planning Integration -->
+                <div class="pdf-card" data-category="planning">
+                    <div class="pdf-icon-header">
+                        <i class="far fa-file-pdf"></i>
+                    </div>
+                    <div class="pdf-content">
+                        <span class="pdf-category">Planning</span>
+                        <h3 class="pdf-title">Roadmap Integration 2025</h3>
+                        <p class="pdf-description">Feuille de route des integrations prevues entre les differentes plateformes.</p>
+                        <div class="pdf-meta">
+                            <span class="pdf-size"><i class="fas fa-file"></i> 1.5 MB</span>
+                            <span><i class="far fa-calendar"></i> 5 Jan 2025</span>
+                        </div>
+                        <a href="#" class="pdf-download">
+                            <i class="fas fa-download"></i>
+                            Telecharger
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Guide Migration -->
+                <div class="pdf-card" data-category="guide">
+                    <div class="pdf-icon-header">
+                        <i class="far fa-file-pdf"></i>
+                    </div>
+                    <div class="pdf-content">
+                        <span class="pdf-category">Guide</span>
+                        <h3 class="pdf-title">Guide de Migration Donnees</h3>
+                        <p class="pdf-description">Procedures de migration des donnees vers les nouvelles plateformes.</p>
+                        <div class="pdf-meta">
+                            <span class="pdf-size"><i class="fas fa-file"></i> 2.8 MB</span>
+                            <span><i class="far fa-calendar"></i> 3 Jan 2025</span>
+                        </div>
+                        <a href="#" class="pdf-download">
+                            <i class="fas fa-download"></i>
+                            Telecharger
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Rapport Tests -->
+                <div class="pdf-card" data-category="rapport">
+                    <div class="pdf-icon-header">
+                        <i class="far fa-file-pdf"></i>
+                    </div>
+                    <div class="pdf-content">
+                        <span class="pdf-category">Rapport</span>
+                        <h3 class="pdf-title">Rapport de Tests UAT</h3>
+                        <p class="pdf-description">Resultats des tests d'acceptance utilisateur sur la plateforme iCademie.</p>
+                        <div class="pdf-meta">
+                            <span class="pdf-size"><i class="fas fa-file"></i> 1.9 MB</span>
+                            <span><i class="far fa-calendar"></i> 28 Dec 2024</span>
+                        </div>
+                        <a href="#" class="pdf-download">
+                            <i class="fas fa-download"></i>
+                            Telecharger
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="copyright">
+            <p>&copy; 2025 ADT - Academie du Tourisme. Tous droits reserves.</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">
+                <i class="fas fa-code"></i> Developpe par la Cyber-Technique ADT
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Menu mobile
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+        });
+
+        // Filtrage par categorie
+        document.querySelectorAll('.category-filter button').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.category-filter button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+
+                this.classList.add('active');
+
+                const category = this.getAttribute('data-category');
+                const cards = document.querySelectorAll('.pdf-card');
+
+                cards.forEach(card => {
+                    if (category === 'all' || card.getAttribute('data-category') === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Recherche
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const cards = document.querySelectorAll('.pdf-card');
+
+            cards.forEach(card => {
+                const title = card.querySelector('.pdf-title').textContent.toLowerCase();
+                const description = card.querySelector('.pdf-description').textContent.toLowerCase();
+
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

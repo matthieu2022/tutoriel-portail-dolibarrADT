@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADT KEYYO - Telephonie</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .top-bar {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 10px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+            padding: 8px 16px;
+            min-width: 300px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus-within {
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 15px rgba(255,255,255,0.2);
+        }
+
+        .search-box i {
+            color: #bdc3c7;
+            margin-right: 10px;
+        }
+
+        .search-box input {
+            background: none;
+            border: none;
+            outline: none;
+            color: white;
+            flex: 1;
+            font-size: 0.95rem;
+        }
+
+        .search-box input::placeholder {
+            color: #bdc3c7;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .main-nav {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 5px;
+            padding: 15px 0;
+        }
+
+        .nav-menu a {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 16px;
+            color: #ecf0f1;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .nav-menu a i {
+            font-size: 0.85rem;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            color: #00b894;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Layout */
+        .main-wrapper {
+            display: flex;
+            max-width: 1800px;
+            margin: 0 auto;
+            gap: 30px;
+            padding: 0 30px;
+            position: relative;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 300px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+
+        .sidebar-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .sidebar-section h3 {
+            color: #2c3e50;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        .sidebar-section h3 i {
+            color: #00b894;
+        }
+
+        .category-list {
+            list-style: none;
+        }
+
+        .category-list li {
+            margin-bottom: 8px;
+        }
+
+        .category-list a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            color: #555;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .category-list a:hover {
+            background: linear-gradient(135deg, rgba(0, 184, 148, 0.1), rgba(0, 206, 201, 0.05));
+            color: #00b894;
+            transform: translateX(5px);
+        }
+
+        .category-list a.active {
+            background: linear-gradient(135deg, #00b894, #00cec9);
+            color: white;
+        }
+
+        .category-list i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .ticketing-sidebar {
+            background: linear-gradient(135deg, rgba(0, 184, 148, 0.1), rgba(0, 206, 201, 0.05));
+            border: 2px solid #00b894;
+        }
+
+        .ticketing-sidebar h3 {
+            color: #00b894;
+            border-bottom-color: #00b894;
+        }
+
+        .ticketing-sidebar p {
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+
+        .ticket-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #00b894, #00cec9);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .ticket-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(0, 184, 148, 0.5);
+        }
+
+        /* Main content */
+        main {
+            flex: 1;
+            padding: 60px 0;
+            min-width: 0;
+        }
+
+        .page-header {
+            margin-bottom: 40px;
+        }
+
+        .page-header h2 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .page-header p {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+            border-color: #00b894;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .card-header i {
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .card-header-text h3 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .card-header-text span {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.85rem;
+        }
+
+        .card-body {
+            padding: 25px;
+        }
+
+        .card-body p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .tag-easy {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .tag-medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .tag-hard {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .tag-time {
+            background: #e7f3ff;
+            color: #0066cc;
+        }
+
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #00b894;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .card-link:hover {
+            gap: 12px;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-left: 5px solid #00b894;
+        }
+
+        .info-box h3 {
+            color: #00b894;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-box p {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .info-box ul {
+            margin-top: 15px;
+            margin-left: 20px;
+        }
+
+        .info-box li {
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        /* External Link Banner */
+        .external-banner {
+            background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .external-banner-content {
+            color: white;
+        }
+
+        .external-banner-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        .external-banner-content p {
+            opacity: 0.9;
+        }
+
+        .external-banner .btn {
+            background: white;
+            color: #00b894;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 30px;
+            margin-top: 60px;
+        }
+
+        .copyright {
+            text-align: center;
+            color: #95a5a6;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .main-wrapper {
+                padding: 0 20px;
+            }
+
+            .sidebar {
+                width: 280px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .main-wrapper {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                position: relative;
+                top: 0;
+                max-height: none;
+                margin-bottom: 30px;
+            }
+
+            main {
+                padding: 30px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            .top-bar {
+                padding: 10px 20px;
+            }
+
+            .search-box {
+                min-width: auto;
+                flex: 1;
+                max-width: 250px;
+            }
+
+            .main-nav {
+                display: none;
+                padding: 0;
+            }
+
+            .main-nav.active {
+                display: block;
+            }
+
+            .nav-menu {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .nav-menu a {
+                padding: 12px 20px;
+                justify-content: flex-start;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .external-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="top-bar">
+            <div class="logo">
+                <a href="../../index.html">
+                    <img src="../../img/adtutoriel.png" alt="ADT Tutoriels">
+                </a>
+            </div>
+
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Rechercher un tutoriel...">
+            </div>
+
+            <button class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <nav class="main-nav" id="mainNav">
+            <ul class="nav-menu">
+                <li><a href="../../index.html"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="/pages/09_accueil/accueil.html"><i class="fas fa-door-open"></i> Nouveau collaborateur</a></li>
+                <li><a href="/pages/00_dolibarr/dolibarr.html"><i class="fas fa-database"></i> Dolibarr V1</a></li>
+                <li><a href="keyyo.html" class="active"><i class="fas fa-phone"></i> Telephonie KEYYO</a></li>
+                <li><a href="/pages/02_lms/lms.html"><i class="fas fa-graduation-cap"></i> LMS & Campus</a></li>
+                <li><a href="/pages/04_projetsencours/icademie.html"><i class="fas fa-project-diagram"></i> Projets</a></li>
+                <li><a href="/pages/05_peda/pedagogie.html"><i class="fas fa-chalkboard-teacher"></i> Pedagogie</a></li>
+                <li><a href="/pages/06_ressources/ressources.html"><i class="fas fa-folder-open"></i> Ressources</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2><i class="fas fa-phone-alt"></i> Telephonie KEYYO</h2>
+            <p>Guides et tutoriels pour maitriser votre systeme de telephonie professionnelle</p>
+            <a href="https://tourism-school.academy/mediatheque_campus/tutoriel-keyyophone/co/guide.html" class="btn" target="_blank">
+                <i class="fas fa-external-link-alt"></i>
+                Acceder au guide complet
+            </a>
+        </div>
+    </section>
+
+    <div class="main-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3><i class="fas fa-list"></i> Categories</h3>
+                <ul class="category-list">
+                    <li><a href="#" class="active"><i class="fas fa-th"></i> Tous les tutoriels</a></li>
+                    <li><a href="#"><i class="fas fa-cog"></i> Configuration</a></li>
+                    <li><a href="#"><i class="fas fa-phone-volume"></i> Appels</a></li>
+                    <li><a href="#"><i class="fas fa-voicemail"></i> Messagerie</a></li>
+                    <li><a href="#"><i class="fas fa-users"></i> Conference</a></li>
+                    <li><a href="#"><i class="fas fa-mobile-alt"></i> Application mobile</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section ticketing-sidebar">
+                <h3><i class="fas fa-ticket-alt"></i> Besoin d'aide ?</h3>
+                <p>Creez un ticket de support pour obtenir une assistance personnalisee de l'equipe Cyber-Technique.</p>
+                <a href="https://gestion.academie-tourisme.fr/" class="ticket-btn" target="_blank">
+                    <i class="fas fa-plus-circle"></i>
+                    Creer un ticket
+                </a>
+            </div>
+        </aside>
+
+        <main>
+            <div class="page-header">
+                <h2>Tutoriels Telephonie KEYYO</h2>
+                <p>Apprenez a utiliser efficacement votre systeme de telephonie professionnelle</p>
+            </div>
+
+            <div class="external-banner">
+                <div class="external-banner-content">
+                    <h3><i class="fas fa-book-open"></i> Guide Interactif Complet</h3>
+                    <p>Acces au tutoriel interactif KEYYO sur notre mediatheque campus</p>
+                </div>
+                <a href="https://tourism-school.academy/mediatheque_campus/tutoriel-keyyophone/co/guide.html" class="btn" target="_blank">
+                    <i class="fas fa-external-link-alt"></i>
+                    Ouvrir le guide
+                </a>
+            </div>
+
+            <div class="info-box">
+                <h3><i class="fas fa-info-circle"></i> A propos de KEYYO</h3>
+                <p>KEYYO est notre solution de telephonie professionnelle qui permet de gerer tous vos appels depuis votre poste fixe, votre ordinateur ou votre smartphone. Le systeme offre de nombreuses fonctionnalites :</p>
+                <ul>
+                    <li><strong>Appels entrants/sortants</strong> - Gestion complete de vos communications</li>
+                    <li><strong>Messagerie vocale</strong> - Consultez vos messages ou et quand vous voulez</li>
+                    <li><strong>Transfert d'appels</strong> - Redirigez les appels vers vos collegues</li>
+                    <li><strong>Conference telephonique</strong> - Organisez des reunions a plusieurs</li>
+                    <li><strong>Application mobile</strong> - Restez joignable en deplacement</li>
+                </ul>
+            </div>
+
+            <div class="cards-grid">
+                <!-- Configuration initiale -->
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-cog"></i>
+                        <div class="card-header-text">
+                            <h3>Configuration initiale</h3>
+                            <span>Premiers pas</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Configurez votre poste telephonique KEYYO pour la premiere fois : connexion, parametres de base et personnalisation.</p>
+                        <div class="card-tags">
+                            <span class="tag tag-easy">Facile</span>
+                            <span class="tag tag-time"><i class="far fa-clock"></i> 10 min</span>
+                        </div>
+                        <a href="https://tourism-school.academy/mediatheque_campus/tutoriel-keyyophone/co/guide.html" class="card-link" target="_blank">
+                            Voir le tutoriel <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Gestion des appels -->
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-phone-volume"></i>
+                        <div class="card-header-text">
+                            <h3>Gestion des appels</h3>
+                            <span>Fonctions essentielles</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Maitrisez les fonctions d'appel : mise en attente, transfert, conference et gestion des appels multiples.</p>
+                        <div class="card-tags">
+                            <span class="tag tag-medium">Moyen</span>
+                            <span class="tag tag-time"><i class="far fa-clock"></i> 15 min</span>
+                        </div>
+                        <a href="https://tourism-school.academy/mediatheque_campus/tutoriel-keyyophone/co/guide.html" class="card-link" target="_blank">
+                            Voir le tutoriel <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Messagerie vocale -->
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-voicemail"></i>
+                        <div class="card-header-text">
+                            <h3>Messagerie vocale</h3>
+                            <span>Messages et annonces</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Configurez votre messagerie vocale, personnalisez votre annonce et consultez vos messages.</p>
+                        <div class="card-tags">
+                            <span class="tag tag-easy">Facile</span>
+                            <span class="tag tag-time"><i class="far fa-clock"></i> 8 min</span>
+                        </div>
+                        <a href="https://tourism-school.academy/mediatheque_campus/tutoriel-keyyophone/co/guide.html" class="card-link" target="_blank">
+                            Voir le tutoriel <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Transfert d'appels -->
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-exchange-alt"></i>
+                        <div class="card-header-text">
+                            <h3>Transfert d'appels</h3>
+                            <span>Redirection</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Apprenez a transferer les appels vers vos collegues ou vers un numero externe de maniere fluide.</p>
+                        <div class="card-tags">
+                            <span class="tag tag-easy">Facile</span>
+                            <span class="tag tag-time"><i class="far fa-clock"></i> 5 min</span>
+                        </div>
+                        <a href="https://tourism-school.academy/mediatheque_campus/tutoriel-keyyophone/co/guide.html" class="card-link" target="_blank">
+                            Voir le tutoriel <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Conference telephonique -->
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-users"></i>
+                        <div class="card-header-text">
+                            <h3>Conference telephonique</h3>
+                            <span>Reunions audio</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Organisez des conferences telephoniques a plusieurs participants directement depuis votre poste.</p>
+                        <div class="card-tags">
+                            <span class="tag tag-medium">Moyen</span>
+                            <span class="tag tag-time"><i class="far fa-clock"></i> 12 min</span>
+                        </div>
+                        <a href="https://tourism-school.academy/mediatheque_campus/tutoriel-keyyophone/co/guide.html" class="card-link" target="_blank">
+                            Voir le tutoriel <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Application mobile -->
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-mobile-alt"></i>
+                        <div class="card-header-text">
+                            <h3>Application mobile</h3>
+                            <span>KEYYO sur smartphone</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Installez et configurez l'application mobile KEYYO pour rester joignable en deplacement.</p>
+                        <div class="card-tags">
+                            <span class="tag tag-medium">Moyen</span>
+                            <span class="tag tag-time"><i class="far fa-clock"></i> 15 min</span>
+                        </div>
+                        <a href="https://tourism-school.academy/mediatheque_campus/tutoriel-keyyophone/co/guide.html" class="card-link" target="_blank">
+                            Voir le tutoriel <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Annuaire -->
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-address-book"></i>
+                        <div class="card-header-text">
+                            <h3>Annuaire entreprise</h3>
+                            <span>Contacts internes</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Utilisez l'annuaire integre pour trouver et appeler rapidement vos collegues.</p>
+                        <div class="card-tags">
+                            <span class="tag tag-easy">Facile</span>
+                            <span class="tag tag-time"><i class="far fa-clock"></i> 5 min</span>
+                        </div>
+                        <a href="https://tourism-school.academy/mediatheque_campus/tutoriel-keyyophone/co/guide.html" class="card-link" target="_blank">
+                            Voir le tutoriel <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Raccourcis -->
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-keyboard"></i>
+                        <div class="card-header-text">
+                            <h3>Raccourcis clavier</h3>
+                            <span>Productivite</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Decouvrez les raccourcis et codes speciaux pour gagner du temps au quotidien.</p>
+                        <div class="card-tags">
+                            <span class="tag tag-easy">Facile</span>
+                            <span class="tag tag-time"><i class="far fa-clock"></i> 5 min</span>
+                        </div>
+                        <a href="https://tourism-school.academy/mediatheque_campus/tutoriel-keyyophone/co/guide.html" class="card-link" target="_blank">
+                            Voir le tutoriel <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="copyright">
+            <p>&copy; 2025 ADT - Academie du Tourisme. Tous droits reserves.</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">
+                <i class="fas fa-code"></i> Developpe par la Cyber-Technique ADT
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Menu mobile
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+        });
+
+        // Recherche
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const cards = document.querySelectorAll('.card');
+
+            cards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const description = card.querySelector('.card-body p').textContent.toLowerCase();
+
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

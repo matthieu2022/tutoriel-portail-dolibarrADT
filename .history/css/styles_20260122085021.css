@@ -699,25 +699,3 @@
     .card:nth-child(5) {
         animation-delay: 0.5s;
     }
-
-    .success-box {
-    background: linear-gradient(135deg, #e8f8f5, #d4efdf);
-    border-left: 5px solid #27ae60;
-    padding: 18px;
-    margin: 20px 0;
-    border-radius: 8px;
-    }
-
-    .success-box h4 {
-    color: #229954;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 1rem;
-    }
-
-    .success-box p {
-    color: #555;
-    margin: 0;
-    }

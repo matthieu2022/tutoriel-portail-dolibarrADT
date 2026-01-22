@@ -3,61 +3,399 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diagrammes de Gantt - Projets Dolibarr</title>
+    <title>Diagrammes de Gantt - Projets ADT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/css/styles_gantt.css">
+    <style>
+        /* Reset pour la navigation */
+        .site-header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .top-bar {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 10px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+            padding: 8px 16px;
+            min-width: 300px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus-within {
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 15px rgba(255,255,255,0.2);
+        }
+
+        .search-box i {
+            color: #bdc3c7;
+            margin-right: 10px;
+        }
+
+        .search-box input {
+            background: none;
+            border: none;
+            outline: none;
+            color: white;
+            flex: 1;
+            font-size: 0.95rem;
+        }
+
+        .search-box input::placeholder {
+            color: #bdc3c7;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .main-nav {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 5px;
+            padding: 15px 0;
+            margin: 0;
+        }
+
+        .nav-menu li {
+            list-style: none;
+        }
+
+        .nav-menu a {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 16px;
+            color: #ecf0f1;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .nav-menu a i {
+            font-size: 0.85rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        /* Sub Navigation for Gantt */
+        .gantt-subnav {
+            background: white;
+            padding: 15px 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .gantt-subnav ul {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .gantt-subnav a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            color: #555;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid #ecf0f1;
+        }
+
+        .gantt-subnav a:hover {
+            background: #e67e22;
+            color: white;
+            border-color: #e67e22;
+        }
+
+        .gantt-subnav a i {
+            color: #e67e22;
+        }
+
+        .gantt-subnav a:hover i {
+            color: white;
+        }
+
+        /* Gantt Container Adjustments */
+        .gantt-wrapper {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        .gantt-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .gantt-section h2 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #e67e22;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .gantt-section h2 i {
+            color: #e67e22;
+        }
+
+        /* Site Footer */
+        .site-footer {
+            background: #2c3e50;
+            color: white;
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        .copyright {
+            text-align: center;
+            color: #95a5a6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            .top-bar {
+                padding: 10px 20px;
+            }
+
+            .search-box {
+                min-width: auto;
+                flex: 1;
+                max-width: 200px;
+            }
+
+            .main-nav {
+                display: none;
+                padding: 0;
+            }
+
+            .main-nav.active {
+                display: block;
+            }
+
+            .nav-menu {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .nav-menu a {
+                padding: 12px 20px;
+                justify-content: flex-start;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .gantt-subnav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .gantt-wrapper {
+                padding: 15px;
+            }
+
+            .gantt-section {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Projets Dolibarr</h1>
-            <nav class="gantt-nav">
-                <ul>
-                    <li><a href="#historic-gantt">Historique des projets</a></li>
-                    <li><a href="#future-gantt">Déploiement & Développement</a></li>
-                </ul>
-            </nav>
-        </header>
-        
+    <!-- Site Header -->
+    <header class="site-header">
+        <div class="top-bar">
+            <div class="logo">
+                <a href="../../index.html">
+                    <img src="../../img/adtutoriel.png" alt="ADT Tutoriels">
+                </a>
+            </div>
+
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Rechercher...">
+            </div>
+
+            <button class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <nav class="main-nav" id="mainNav">
+            <ul class="nav-menu">
+                <li><a href="../../index.html"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="../00_dolibarr/dolibarr.html"><i class="fas fa-database"></i> Dolibarr V1</a></li>
+                <li><a href="../01_keyyo/keyyo.html"><i class="fas fa-phone"></i> Telephonie KEYYO</a></li>
+                <li><a href="icademie.html"><i class="fas fa-project-diagram"></i> Projets</a></li>
+                <li><a href="gantt.html" class="active"><i class="fas fa-tasks"></i> Planning Gantt</a></li>
+                <li><a href="videos.html"><i class="fas fa-video"></i> Videos</a></li>
+                <li><a href="pdf.html"><i class="fas fa-download"></i> PDF</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1><i class="fas fa-project-diagram"></i> Diagrammes de Gantt</h1>
+            <p>Visualisez l'avancement et le planning des projets Dolibarr et iCademie</p>
+        </div>
+    </section>
+
+    <!-- Sub Navigation -->
+    <nav class="gantt-subnav">
+        <ul>
+            <li><a href="#historic-section"><i class="fas fa-history"></i> Historique des projets</a></li>
+            <li><a href="#future-section"><i class="fas fa-rocket"></i> Deploiement & Developpement</a></li>
+        </ul>
+    </nav>
+
+    <!-- Gantt Content -->
+    <div class="gantt-wrapper">
         <section class="gantt-section">
-            <h2 id="historic-section">Historique des projets</h2>
+            <h2 id="historic-section"><i class="fas fa-history"></i> Historique des projets</h2>
             <div id="historic-gantt" class="gantt-container">
                 <!-- Timeline -->
                 <div class="timeline">
-                    <!-- Les trimestres seront générés ici par JS -->
+                    <!-- Les trimestres seront generes ici par JS -->
                 </div>
-                
+
                 <!-- Sections de projets -->
                 <div class="sections-container">
-                    <!-- Les sections et projets seront générés ici par JS -->
+                    <!-- Les sections et projets seront generes ici par JS -->
                 </div>
             </div>
         </section>
-        
+
         <section class="gantt-section">
-            <h2 id="future-section">Déploiement & Développement</h2>
+            <h2 id="future-section"><i class="fas fa-rocket"></i> Deploiement & Developpement</h2>
             <div id="future-gantt" class="gantt-container">
                 <!-- Timeline -->
                 <div class="timeline">
-                    <!-- Les trimestres seront générés ici par JS -->
+                    <!-- Les trimestres seront generes ici par JS -->
                 </div>
-                
+
                 <!-- Sections de projets -->
                 <div class="sections-container">
-                    <!-- Les sections et projets seront générés ici par JS -->
+                    <!-- Les sections et projets seront generes ici par JS -->
                 </div>
             </div>
         </section>
-        
-        <!-- Info-bulle pour les détails au survol -->
-        <div id="tooltip" class="tooltip hidden">
-            <!-- Contenu dynamique -->
-        </div>
-        
-        <footer>
-            <p>©2025 - Gantt ADT - CRM & ERP - made by Cyber</p>
-        </footer>
     </div>
 
+    <!-- Info-bulle pour les details au survol -->
+    <div id="tooltip" class="tooltip hidden">
+        <!-- Contenu dynamique -->
+    </div>
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+        <div class="copyright">
+            <p>&copy; 2025 ADT - Academie du Tourisme. Tous droits reserves.</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">
+                <i class="fas fa-code"></i> Developpe par la Cyber-Technique ADT
+            </p>
+        </div>
+    </footer>
+
     <script src="/js/script_gantt.js"></script>
+    <script>
+        // Menu mobile
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+        });
+    </script>
 </body>
 </html>

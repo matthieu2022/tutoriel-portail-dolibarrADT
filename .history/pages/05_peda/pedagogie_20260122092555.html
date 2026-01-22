@@ -299,29 +299,49 @@
         }
 
         /* Couleurs spécifiques pour les filtres de catégorie */
-        .category-filter[data-category="ressources"].active {
+        .category-filter[data-category="dolibarr"].active {
             background: #2c3e50;
             border-color: #2c3e50;
         }
 
-        .category-filter[data-category="pedagogie"].active {
+        .category-filter[data-category="keyyo"].active {
             background: #e74c3c;
             border-color: #e74c3c;
         }
 
-        .category-filter[data-category="video"].active {
+        .category-filter[data-category="lms"].active {
             background: #f39c12;
             border-color: #f39c12;
         }
 
-        .category-filter[data-category="accompagnement"].active {
+        .category-filter[data-category="office365"].active {
             background: #e67e22;
             border-color: #e67e22;
         }
 
-        .category-filter[data-category="gestion des contenus"].active {
+        .category-filter[data-category="projets"].active {
             background: #9b59b6;
             border-color: #9b59b6;
+        }
+
+        .category-filter[data-category="pedagogie"].active {
+            background: #16a085;
+            border-color: #16a085;
+        }
+
+        .category-filter[data-category="ressources"].active {
+            background: #27ae60;
+            border-color: #27ae60;
+        }
+
+        .category-filter[data-category="marketing"].active {
+            background: #c0392b;
+            border-color: #c0392b;
+        }
+
+        .category-filter[data-category="cyber"].active {
+            background: #34495e;
+            border-color: #34495e;
         }
 
         /* Cards des tutoriels - 5 par ligne sur grand écran, 4 sur moyen */
@@ -697,7 +717,7 @@
                 <li><a href="/pages/00_dolibarr/dolibarr.html" data-category="dolibarr"><i class="fas fa-database"></i> Dolibarr V1</a></li>
                 <li><a href="/pages/01_keyyo/keyyo.html" data-category="keyyo"><i class="fas fa-phone"></i> Téléphonie KEYYO</a></li>
                 <li><a href="/pages/04_projetsencours/icademie.html" data-category="projets"><i class="fas fa-project-diagram"></i> Projets</a></li>
-                <li><a href="/pages/05_peda/pedagogie.html" data-category="pedagogie" class="active"><i class="fas fa-chalkboard-teacher"></i> Pédagogie digitale</a></li>
+                <li><a href="/pages/05_peda/pedagogie.html" data-category="pedagogie"><i class="fas fa-chalkboard-teacher"></i> Pédagogie digitale</a></li>
                 <li><a href="/pages/06_ressources/ressources.html" data-category="ressources"><i class="fas fa-download"></i> Ressources</a></li>
                 <li><a href="/pages/10_web/siteweb.html" data-category="web"><i class="fas fa-graduation-cap"></i> Nos sites web</a></li>
                 <li><a href="https://gestion.academie-tourisme.fr/" data-category="support"><i class="fas fa-ticket-alt"></i> Support & Ticketing</a></li>    
@@ -707,7 +727,7 @@
 
     <section class="hero">
         <div class="hero-content">
-            <h1>Portail  des Tutoriels pédagogiques de l'Académie du Tourisme</h1>
+            <h1>Portail des Tutoriels de l'Académie du Tourisme</h1>
             <p>Retrouvez tous nos guides et procédures par catégories</p>
         </div>
     </section>
@@ -757,13 +777,13 @@
         <!-- Contenu principal -->
         <main>
             <section class="section-title">
-                <h2>Tous nos tutoriels pédagogiques</h2>
+                <h2>Tous nos tutoriels</h2>
                 <p>Explorez notre bibliothèque complète de ressources pédagogiques</p>
             </section>
 
         <div class="tutorial-grid" id="tutorialGrid">
-            <!-- Accompagnement -->
-            <article class="card" data-category="pedagogie" data-difficulty="moyen">
+            <!-- Card Dolibarr V1 -->
+            <article class="card" data-category="dolibarr V1" data-difficulty="moyen">
                 <div class="card-image">
                     <a href="pages/00_dolibarr/dolibarr.html">
                         <img src="./img/dolibarr.webp" alt="Dolibarr V1">
@@ -783,8 +803,8 @@
                 </div>
             </article>
 
-            <!-- BTS Tourisme -->
-            <article class="card" data-category="pedagogie" data-difficulty="facile">
+            <!-- Card KEYYO -->
+            <article class="card" data-category="keyyo" data-difficulty="facile">
                 <div class="card-image">
                     <a href="/pages/01_keyyo/keyyo.html">
                         <img src="./img/keyyo/keyyo.webp" alt="KEYYO">
@@ -805,7 +825,7 @@
             </article>
 
             <!-- Card LMS -->
-            <article class="card" data-category="pedagogie" data-difficulty="moyen">
+            <article class="card" data-category="lms" data-difficulty="moyen">
                 <div class="card-image">
                     <a href="pages/02_lms/lms.html">
                         <img src="./img/moodle.webp" alt="LMS">
@@ -826,7 +846,7 @@
             </article>
 
             <!-- Card Campus -->
-            <article class="card" data-category="pedagogie" data-difficulty="moyen">
+            <article class="card" data-category="lms" data-difficulty="moyen">
                 <div class="card-image">
                     <a href="pages/02_lms/lmscampus.html">
                         <img src="./img/campus.png" alt="Campus">
@@ -847,7 +867,7 @@
             </article>
 
             <!-- Card Office 365 -->
-            <article class="card" data-category="pedagogie" data-difficulty="moyen">
+            <article class="card" data-category="office365" data-difficulty="moyen">
                 <div class="card-image">
                     <a href="pages/03_office/office.html">
                         <img src="./img/office.webp" alt="Office 365">
@@ -868,7 +888,7 @@
             </article>
 
             <!-- Card Projets -->
-            <article class="card" data-category="pedagogie" data-difficulty="moyen">
+            <article class="card" data-category="projets" data-difficulty="moyen">
                 <div class="card-image">
                     <a href="pages/04_projetsencours/icademie.html">
                         <img src="./img/icademie.webp" alt="Projets">
@@ -889,7 +909,7 @@
             </article>
 
             <!-- Card Gantt Planning -->
-            <article class="card" data-category="pedagogie" data-difficulty="facile">
+            <article class="card" data-category="projets" data-difficulty="facile">
                 <div class="card-image">
                     <a href="pages/04_projetsencours/gantt.html">
                         <img src="./img/dolibarr.webp" alt="Planning">
@@ -910,7 +930,7 @@
             </article>
 
             <!-- Card Vidéos -->
-            <article class="card" data-category="pedagogie" data-difficulty="facile">
+            <article class="card" data-category="ressources" data-difficulty="facile">
                 <div class="card-image">
                     <a href="pages/06_ressources/videos.html">
                         <img src="./img/moodle.webp" alt="Vidéos">
@@ -931,7 +951,7 @@
             </article>
 
             <!-- Card PDF -->
-            <article class="card" data-category="pedagogie" data-difficulty="facile">
+            <article class="card" data-category="ressources" data-difficulty="facile">
                 <div class="card-image">
                     <a href="pages/06_ressources/pdf.html">
                         <img src="./img/office.webp" alt="PDF">
@@ -947,12 +967,6 @@
                     </div>
                 </div>
             </article>
-
-
-
-
-
-
 
         </div>
 
